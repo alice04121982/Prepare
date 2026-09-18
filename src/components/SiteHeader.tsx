@@ -37,7 +37,7 @@ export default function SiteHeader() {
           </Link>
         </nav>
       </div>
-      <ul className="wrap flex gap-x-5 px-4 pb-3 text-sm text-muted sm:hidden">
+      <ul className="wrap flex flex-wrap gap-x-5 gap-y-1 px-4 pb-3 text-sm text-muted sm:hidden">
         {nav.map((item) => (
           <li key={item.href}>
             <Link href={item.href} className="underline-offset-4 hover:text-heading hover:underline">
