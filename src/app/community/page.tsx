@@ -53,7 +53,7 @@ const skills = [
 
 export default function CommunityPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
       <PageIntro
         eyebrow="Community and mutual aid"
         title="The most effective form of preparation is other people"
@@ -154,16 +154,16 @@ export default function CommunityPage() {
         </p>
       </section>
 
-      <div className="mt-12 flex flex-wrap gap-4 border-t border-line pt-8 text-sm">
+      <div className="mt-12 flex flex-wrap gap-4 pt-8 text-sm">
         <Link
           href="/checklist"
-          className="rounded-md bg-accent px-5 py-3 font-medium text-accent-ink hover:opacity-90"
+          className="btn btn-primary"
         >
           The essentials checklist
         </Link>
         <Link
           href="/faq"
-          className="rounded-md border border-line px-5 py-3 font-medium hover:bg-soft"
+          className="btn btn-secondary"
         >
           Common questions and myths
         </Link>

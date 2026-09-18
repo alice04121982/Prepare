@@ -19,12 +19,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Fontshare pairing: General Sans (headings) + Switzer (body) */}
         <link
           rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=switzer@400,500,600&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=switzer@400,500,600&display=swap"
         />
       </head>
       <body className="flex min-h-full flex-col">
         <SiteHeader />
-        {children}
+        <div className="mx-auto w-full max-w-6xl flex-1 px-3 sm:px-4">{children}</div>
         <SiteFooter />
       </body>
     </html>

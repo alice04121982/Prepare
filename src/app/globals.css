@@ -1,17 +1,27 @@
 @import "tailwindcss";
 
 /*
-  Palette mirrors public/offline/index.html so the site and the offline
-  guide read as one thing: calm, plain, trustworthy.
+  Palette sampled from the "Prepare App" Figma file (Noble Finance base):
+  mint hero, pale-mint cards, forest-green buttons/footer, off-white page.
+  The offline guide keeps its own simpler palette on purpose (it must print).
 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --muted: #525252;
-  --line: #e5e5e5;
-  --accent: #1f5f4a;
+  --background: #f9f9f9;
+  --foreground: #1c231a;
+  --muted: #5b665a;
+  --line: #e2e7e2;
+  --heading: #2e4f21;
+  --accent: #2e4f21;
   --accent-ink: #ffffff;
-  --soft: #f6f5f1;
+  --soft: #d2f8dc;
+  --mint: #a0f1bd;
+  --mint-pale: #d2f8dc;
+  --mint-light: #d7ffe6;
+  --forest: #2e4f21;
+  --on-forest: #ffffff;
+  --sage: #506349;
+  --sage-light: #d5e4d0;
+  --surface: #ffffff;
   --font-heading: "General Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Switzer", ui-sans-serif, system-ui, sans-serif;
 }
@@ -21,22 +31,41 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-heading: var(--heading);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-soft: var(--soft);
+  --color-mint: var(--mint);
+  --color-mint-pale: var(--mint-pale);
+  --color-mint-light: var(--mint-light);
+  --color-forest: var(--forest);
+  --color-on-forest: var(--on-forest);
+  --color-sage: var(--sage);
+  --color-sage-light: var(--sage-light);
+  --color-surface: var(--surface);
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading);
+  --radius-card: 1.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0f0f0f;
-    --foreground: #ededed;
-    --muted: #a3a3a3;
-    --line: #2a2a2a;
-    --accent: #6fb79c;
-    --accent-ink: #0f0f0f;
-    --soft: #181817;
+    --background: #0f140e;
+    --foreground: #e6ebe4;
+    --muted: #a3ad9f;
+    --line: #26301f;
+    --heading: #cfeed8;
+    --accent: #a0f1bd;
+    --accent-ink: #0f140e;
+    --soft: #182615;
+    --mint: #1f3d1d;
+    --mint-pale: #182615;
+    --mint-light: #1b2c18;
+    --forest: #1a2c14;
+    --on-forest: #e6ebe4;
+    --sage: #7d9276;
+    --sage-light: #26361f;
+    --surface: #151c13;
   }
 }
 
@@ -48,10 +77,44 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  letter-spacing: -0.01em;
+  color: var(--heading);
+  letter-spacing: -0.015em;
 }
 
 /* Long-form prose defaults: keep pages readable without a plugin. */
 .prose-plain p + p { margin-top: 1em; }
 .prose-plain a { text-decoration: underline; text-underline-offset: 3px; }
 .prose-plain a:hover { color: var(--accent); }
+
+/* Pill buttons and tags, as used throughout the design. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.375rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+.btn-primary { background: var(--forest); color: var(--on-forest); }
+.btn-primary:hover { background: var(--sage); }
+.btn-secondary {
+  background: var(--surface);
+  color: var(--heading);
+  border: 1px solid var(--line);
+}
+.btn-secondary:hover { border-color: var(--sage); }
+.btn-on-dark { background: var(--surface); color: #2e4f21; }
+.btn-on-dark:hover { background: var(--mint-pale); }
+
+.tag {
+  display: inline-block;
+  border-radius: 9999px;
+  background: var(--surface);
+  padding: 0.35rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--heading);
+}

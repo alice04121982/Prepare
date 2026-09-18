@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function FaqPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
       <PageIntro
         eyebrow="Myth-busting and questions"
         title="Sensible preparation, not panic"
@@ -60,16 +60,16 @@ export default function FaqPage() {
         </section>
       ))}
 
-      <div className="mt-14 flex flex-wrap gap-4 border-t border-line pt-8 text-sm">
+      <div className="mt-14 flex flex-wrap gap-4 pt-8 text-sm">
         <Link
           href="/checklist"
-          className="rounded-md bg-accent px-5 py-3 font-medium text-accent-ink hover:opacity-90"
+          className="btn btn-primary"
         >
           Start with the checklist
         </Link>
         <Link
           href="/community"
-          className="rounded-md border border-line px-5 py-3 font-medium hover:bg-soft"
+          className="btn btn-secondary"
         >
           Community and mutual aid
         </Link>

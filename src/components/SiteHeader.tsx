@@ -5,34 +5,45 @@ const nav = [
   { href: "/checklist", label: "Checklist" },
   { href: "/community", label: "Community" },
   { href: "/faq", label: "FAQ" },
-  { href: "/build-your-kit", label: "Build your kit" },
 ];
 
 export default function SiteHeader() {
   return (
-    <header className="border-b border-line">
-      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-5">
+    <header>
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-5 sm:px-8">
         <Link
           href="/"
-          className="font-heading text-xl font-semibold tracking-tight text-foreground"
+          className="font-heading text-xl font-semibold tracking-tight text-heading"
         >
           Prepare
         </Link>
-        <nav aria-label="Main">
-          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+        <nav aria-label="Main" className="flex items-center gap-5">
+          <ul className="hidden gap-x-5 text-sm text-muted sm:flex">
             {nav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="hover:text-foreground underline-offset-4 hover:underline"
+                  className="underline-offset-4 hover:text-heading hover:underline"
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
+          <Link href="/build-your-kit" className="btn btn-primary">
+            Build your kit
+          </Link>
         </nav>
       </div>
+      <ul className="mx-auto flex max-w-6xl gap-x-5 px-5 pb-3 text-sm text-muted sm:hidden">
+        {nav.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href} className="underline-offset-4 hover:text-heading hover:underline">
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </header>
   );
 }

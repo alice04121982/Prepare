@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ChecklistPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
       <PageIntro
         eyebrow="The essentials"
         title="What to keep on hand"
@@ -29,7 +29,7 @@ export default function ChecklistPage() {
           {startingPoint.map((i, idx) => (
             <li
               key={i.item}
-              className="flex gap-3 rounded-md border border-line px-4 py-3"
+              className="flex gap-3 rounded-2xl bg-mint-pale px-4 py-3"
             >
               <span className="font-heading text-xs text-muted">
                 {String(idx + 1).padStart(2, "0")}
@@ -59,7 +59,7 @@ export default function ChecklistPage() {
             <li key={c.slug}>
               <a
                 href={`#${c.slug}`}
-                className="inline-block rounded-full border border-line px-3 py-1 hover:border-accent hover:bg-soft"
+                className="tag hover:bg-mint"
               >
                 {c.title}
               </a>
@@ -89,7 +89,7 @@ export default function ChecklistPage() {
                       <td className="py-3 pr-4 font-medium">
                         {i.item}
                         {i.priority ? (
-                          <span className="ml-2 inline-block rounded-full bg-soft px-2 py-0.5 text-[0.7rem] font-medium uppercase tracking-wider text-accent">
+                          <span className="ml-2 inline-block rounded-full bg-mint px-2 py-0.5 text-[0.7rem] font-medium uppercase tracking-wider text-forest">
                             First
                           </span>
                         ) : null}
@@ -105,17 +105,17 @@ export default function ChecklistPage() {
         ))}
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-4 border-t border-line pt-8 text-sm">
+      <div className="mt-8 flex flex-wrap gap-4 pt-8 text-sm">
         <Link
           href="/scenarios"
-          className="rounded-md bg-accent px-5 py-3 font-medium text-accent-ink hover:opacity-90"
+          className="btn btn-primary"
         >
           See which scenario each item is for
         </Link>
         <a
           href="/offline/index.html"
           download="prepare-offline-guide.html"
-          className="rounded-md border border-line px-5 py-3 font-medium hover:bg-soft"
+          className="btn btn-secondary"
         >
           Download the offline guide
         </a>

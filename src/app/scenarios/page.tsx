@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ScenariosPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
       <PageIntro
         eyebrow="Understand the scenarios"
         title="What disruption actually looks like"
@@ -25,7 +25,7 @@ export default function ScenariosPage() {
             <li key={s.slug}>
               <a
                 href={`#${s.slug}`}
-                className="flex items-baseline gap-3 rounded-md border border-line px-4 py-3 text-sm hover:border-accent hover:bg-soft"
+                className="flex items-baseline gap-3 rounded-2xl bg-mint-pale px-4 py-3 text-sm hover:bg-mint"
               >
                 <span className="font-heading text-xs text-muted">
                   {String(i + 1).padStart(2, "0")}
@@ -91,7 +91,7 @@ export default function ScenariosPage() {
               ))}
             </ul>
 
-            <div className="mt-8 rounded-md bg-soft px-5 py-4">
+            <div className="mt-8 rounded-card bg-mint-pale px-6 py-5">
               <p className="mb-1 text-xs font-medium uppercase tracking-wider text-accent">
                 Neighbours and community
               </p>
@@ -101,16 +101,16 @@ export default function ScenariosPage() {
         ))}
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-4 border-t border-line pt-8 text-sm">
+      <div className="mt-8 flex flex-wrap gap-4 pt-8 text-sm">
         <Link
           href="/checklist"
-          className="rounded-md bg-accent px-5 py-3 font-medium text-accent-ink hover:opacity-90"
+          className="btn btn-primary"
         >
           See the essentials checklist
         </Link>
         <Link
           href="/community"
-          className="rounded-md border border-line px-5 py-3 font-medium hover:bg-soft"
+          className="btn btn-secondary"
         >
           Why community matters most
         </Link>

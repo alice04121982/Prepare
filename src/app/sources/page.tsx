@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function SourcesPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
       <PageIntro
         eyebrow="Sources and methodology"
         title="Where the numbers come from"

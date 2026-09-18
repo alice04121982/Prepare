@@ -5,11 +5,11 @@ type Props = {
   children: ReactNode;
 };
 
-/** Soft-background aside, matching the .notice block in the offline guide. */
+/** Pale-mint rounded aside, the site's equivalent of the offline guide's notice block. */
 export default function Callout({ title, children }: Props) {
   return (
-    <aside className="my-8 rounded-md border-l-4 border-accent bg-soft px-5 py-4 text-[0.95rem] leading-relaxed">
-      {title ? <p className="mb-1 font-semibold">{title}</p> : null}
+    <aside className="my-8 rounded-card bg-mint-pale px-6 py-5 text-[0.95rem] leading-relaxed">
+      {title ? <p className="mb-1 font-heading font-medium text-heading">{title}</p> : null}
       <div className="prose-plain text-foreground/90">{children}</div>
     </aside>
   );

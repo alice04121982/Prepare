@@ -1,107 +1,191 @@
 import Link from "next/link";
+import Illustration from "@/components/Illustration";
 import { scenarios } from "@/data/scenarios";
 
-const entryPoints = [
+const sections = [
   {
     href: "/checklist",
-    label: "Start here",
+    eyebrow: "Start here",
     title: "The essentials checklist",
-    body: "What to keep on hand, in realistic quantities, and the short list to get first if you have nothing.",
+    body: "What to keep on hand, in realistic quantities, and the short list to get first if you have nothing. Built up slowly from things you already buy.",
+    tags: ["Water", "Food", "Light", "Medication", "Cash"],
+    illustration: "checklist",
   },
   {
     href: "/scenarios",
-    label: "Understand",
+    eyebrow: "Understand",
     title: "The scenarios",
-    body: "Five realistic disruptions, how long each usually lasts, and what actually helps in each.",
+    body: "Realistic disruptions, how long each usually lasts, and the handful of things that make a real difference in each one.",
+    tags: scenarios.map((s) => s.title),
+    illustration: "scenarios",
   },
   {
     href: "/community",
-    label: "The important part",
+    eyebrow: "The important part",
     title: "Community and mutual aid",
-    body: "Why the people around you are the most effective preparation there is, and how to start.",
+    body: "Why the people around you are the most effective preparation there is, and four no-cost things to do this week.",
+    tags: ["Neighbours", "Check-ins", "Skills", "Local groups"],
+    illustration: "community",
+  },
+];
+
+const audiences = [
+  {
+    title: "Just read the news",
+    sub: "A sensible starting point",
+    body: "You saw a story about a storm, a shortage, or a grid warning and want a short, calm answer rather than a rabbit hole.",
+  },
+  {
+    title: "Busy households",
+    sub: "Limited time and budget",
+    body: "You want a prioritised list that costs a few pounds a week, not a weekend and a full car boot.",
+  },
+  {
+    title: "Wanting honest numbers",
+    sub: "Real durations, not worst cases",
+    body: "You want to know how long a 72-hour kit actually lasts a family of four, and what most disruptions really look like.",
   },
 ];
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16 sm:py-24">
-      <section>
-        <p className="mb-3 text-xs font-medium uppercase tracking-wider text-accent">
-          A calm, practical guide
+    <main className="pb-8">
+      {/* Hero */}
+      <section className="rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-16">
+        <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
+          <div>
+            <p className="mb-4 text-xs font-medium uppercase tracking-wider text-forest/80">
+              A calm, practical guide
+            </p>
+            <h1 className="text-4xl font-normal leading-[1.05] text-forest sm:text-6xl">
+              Ready for a difficult week, without the fear.
+            </h1>
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-forest/85 sm:text-lg">
+              What to keep on hand for power cuts, water notices, thin
+              shelves, and bad weather, and honestly how long it lasts. Most
+              disruptions are short, local, and got through together.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/checklist" className="btn btn-primary">
+                See the checklist
+              </Link>
+              <a
+                href="/offline/index.html"
+                download="prepare-offline-guide.html"
+                className="btn btn-secondary"
+              >
+                Download the offline guide
+              </a>
+            </div>
+          </div>
+          <div className="mx-auto w-full max-w-sm md:max-w-none">
+            <Illustration name="hero" alt="" />
+          </div>
+        </div>
+      </section>
+
+      {/* Section header */}
+      <section className="mx-auto max-w-2xl px-4 pb-10 pt-20 text-center">
+        <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted">
+          What this site covers
         </p>
-        <h1 className="max-w-2xl text-4xl font-semibold leading-tight sm:text-5xl">
-          What to keep on hand for a difficult week, and how long it really
-          lasts.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-          Power cuts, water notices, thin shelves, bad weather. Most
-          disruptions are short, local, and got through together. This site
-          covers the modest preparation that helps, with honest durations and
-          quantities, and treats neighbours as the first line of resilience,
-          not the last.
+        <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
+          A few days of cover, built slowly, and neighbours you know by name.
+        </h2>
+        <p className="mt-4 text-muted">
+          Three pages do most of the work. Read them in any order.
         </p>
       </section>
 
-      <section className="mt-14 grid gap-4 sm:grid-cols-3">
-        {entryPoints.map((e) => (
+      {/* Alternating cards */}
+      <section className="space-y-6">
+        {sections.map((s, i) => (
           <Link
-            key={e.href}
-            href={e.href}
-            className="group flex flex-col rounded-md border border-line p-5 hover:border-accent hover:bg-soft"
+            key={s.href}
+            href={s.href}
+            className={`group grid items-center gap-8 rounded-card bg-mint-pale p-6 sm:p-10 md:grid-cols-2 ${
+              i % 2 === 1 ? "md:ml-24" : "md:mr-24"
+            }`}
           >
-            <span className="mb-2 text-xs font-medium uppercase tracking-wider text-muted group-hover:text-accent">
-              {e.label}
-            </span>
-            <span className="font-heading text-lg font-semibold">{e.title}</span>
-            <span className="mt-2 text-sm leading-relaxed text-muted">{e.body}</span>
+            <div className={`mx-auto w-full max-w-xs ${i % 2 === 1 ? "md:order-2" : ""}`}>
+              <Illustration name={s.illustration} />
+            </div>
+            <div>
+              <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted">
+                {s.eyebrow}
+              </p>
+              <h3 className="text-2xl font-medium sm:text-3xl">{s.title}</h3>
+              <p className="mt-3 max-w-md leading-relaxed text-foreground/85">{s.body}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {s.tags.map((t) => (
+                  <li key={t} className="tag">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <span className="mt-6 inline-block text-sm font-medium text-heading underline-offset-4 group-hover:underline">
+                Read more
+              </span>
+            </div>
           </Link>
         ))}
       </section>
 
-      <section className="mt-16 rounded-md bg-soft px-6 py-6">
-        <h2 className="text-lg font-semibold">Why this exists, and why it is not alarmist</h2>
-        <p className="mt-3 leading-relaxed">
-          This is not a survival site, and it is not about fending for
-          yourself. Decades of evidence say people pull together in a crisis,
-          and that the households who struggle most are the ones nobody
-          checked on. So the advice here is deliberately boring: a few days
-          of water, food, light, and medication, built up slowly from things
-          you already buy, and two neighbours you know by name. Nothing here
-          asks you to prepare for the end of the world, because that is not
-          what happens.
-        </p>
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-lg font-semibold">The scenarios at a glance</h2>
-        <ul className="mt-4 divide-y divide-line border-y border-line">
-          {scenarios.map((s) => (
-            <li key={s.slug}>
-              <Link
-                href={`/scenarios#${s.slug}`}
-                className="flex flex-col gap-1 py-3 hover:text-accent sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
-              >
-                <span className="font-medium">{s.title}</span>
-                <span className="text-sm text-muted">{s.typicalDuration}</span>
-              </Link>
-            </li>
+      {/* Who it's for */}
+      <section className="px-4 pt-24">
+        <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] md:items-start">
+          <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
+            Written for people who want a sensible answer, not a hobby.
+          </h2>
+          <p className="leading-relaxed text-muted md:pt-2">
+            This is not a survival site, and it is not about fending for
+            yourself. Decades of evidence say people pull together in a
+            crisis, and that the households who struggle most are the ones
+            nobody checked on. So the advice is deliberately boring, and the
+            community page is the most important one.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-8 sm:grid-cols-3">
+          {audiences.map((a) => (
+            <div key={a.title} className="border-l-2 border-sage-light pl-5">
+              <h3 className="text-xl font-medium">{a.title}</h3>
+              <p className="mt-1 text-sm text-sage">{a.sub}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{a.body}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
-      <section className="mt-16 border-t border-line pt-8">
-        <a
-          href="/offline/index.html"
-          download="prepare-offline-guide.html"
-          className="inline-block rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-ink hover:opacity-90"
-        >
-          Download the offline guide
-        </a>
-        <p className="mt-3 max-w-xl text-sm text-muted">
-          A single self-contained HTML file with no external requests. Save
-          it, print it, or share it before you need it. It opens with no
-          internet connection at all.
-        </p>
+      {/* Two-card CTA */}
+      <section className="mt-24 grid gap-6 md:grid-cols-2">
+        <div className="rounded-card bg-forest p-8 text-on-forest sm:p-10">
+          <h2 className="text-3xl font-normal leading-tight text-on-forest">
+            The most effective preparation is other people
+          </h2>
+          <p className="mt-4 max-w-md leading-relaxed opacity-90">
+            A stocked cupboard helps one household for a few days. A street
+            that knows itself helps everyone on it, for as long as it takes.
+          </p>
+          <Link href="/community" className="btn btn-on-dark mt-8">
+            Community and mutual aid
+          </Link>
+        </div>
+        <div className="flex items-center justify-center rounded-card bg-mint-light p-8">
+          <div className="w-full max-w-xs">
+            <Illustration name="neighbours" />
+          </div>
+        </div>
+      </section>
+
+      {/* Statement */}
+      <section className="mx-auto max-w-3xl px-4 py-24 text-center">
+        <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
+          Preparation is something you do with your neighbours, not against
+          them. Start with three days and two names.
+        </h2>
+        <Link href="/checklist" className="btn btn-primary mt-8">
+          Start with the checklist
+        </Link>
       </section>
     </main>
   );

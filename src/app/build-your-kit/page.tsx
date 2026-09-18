@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function BuildYourKitPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
       <PageIntro
         eyebrow="Interactive planner"
         title="Build your kit"
@@ -27,7 +27,7 @@ export default function BuildYourKitPage() {
       </Callout>
       <Link
         href="/checklist"
-        className="inline-block rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-ink hover:opacity-90"
+        className="btn btn-primary"
       >
         Go to the essentials checklist
       </Link>
