@@ -224,6 +224,12 @@ Mostly robots, AI, space, labs. Candidates: Eco Friendly Tech 117:1665 /
 117:1675 / 117:1666 / 117:1668, Researchers 117:1686 (Sources),
 Computer World Map Location 117:1636, Drone Operator 117:1680.
 
+### 110:57  Cryptocurrency  (32 items)
+Not relevant to this site. Logged for completeness only.
+
+### 110:56  Development  (49 items)
+Not relevant to this site. Logged for completeness only.
+
 ## Still wanted
 A weather and nature page and an emergency or safety page, if the file
 has them. Otherwise the list above is enough to re-pick every slot.
