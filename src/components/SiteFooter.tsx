@@ -16,7 +16,9 @@ export default function SiteFooter() {
       <div className="rounded-card bg-forest px-6 py-8 text-on-forest sm:px-10 sm:py-10">
         <div className="wrap">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <span className="font-heading text-xl font-semibold">Stay Prepared</span>
+          <span className="font-heading text-xl">
+            <span className="font-bold">Stay</span> <span className="font-normal">Prepared</span>
+          </span>
           <div className="flex flex-wrap items-center gap-4">
             <ul className="flex flex-wrap gap-x-4 text-sm opacity-90">
               {links.map((l) => (
