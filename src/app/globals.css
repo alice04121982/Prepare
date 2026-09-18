@@ -133,3 +133,7 @@
 }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Full-bleed backgrounds, capped content. 1440px keeps grids from stretching on wide screens. */
+.wrap { margin-inline: auto; width: 100%; max-width: 1440px; }
+.measure { max-width: 68ch; }

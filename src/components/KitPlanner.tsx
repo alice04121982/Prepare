@@ -114,7 +114,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const people = h.adults + h.children + h.babies;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[19rem_1fr]">
+    <div className="wrap grid gap-8 lg:grid-cols-[19rem_1fr]">
       {/* Inputs */}
       <aside className="space-y-3 rounded-card bg-mint-pale p-5 print:hidden lg:sticky lg:top-6 lg:self-start">
         <h2 className="text-lg font-semibold">Your household</h2>

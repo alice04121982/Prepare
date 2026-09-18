@@ -33,7 +33,7 @@ export default function OfficialGuidancePage() {
 
       <Photo slot="guidance" className="mb-12" />
 
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-3xl">
 
       <p className="mb-10 text-sm text-muted">
         Last checked {formatDate(guidanceLastChecked)}. If a link has stopped

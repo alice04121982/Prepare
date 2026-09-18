@@ -13,6 +13,7 @@ export default function SiteFooter() {
   return (
     <footer className="mt-auto px-4 pb-4 pt-16 sm:px-10 sm:pb-10">
       <div className="rounded-card bg-forest px-6 py-8 text-on-forest sm:px-10 sm:py-10">
+        <div className="wrap">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <span className="font-heading text-xl font-semibold">Stay Prepared</span>
           <div className="flex flex-wrap items-center gap-4">
@@ -54,6 +55,7 @@ export default function SiteFooter() {
             </a>
             .
           </p>
+        </div>
         </div>
       </div>
     </footer>

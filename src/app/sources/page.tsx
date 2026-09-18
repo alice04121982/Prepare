@@ -20,7 +20,7 @@ export default function SourcesPage() {
         aside={<Illustration name="intro-sources" className="max-w-[260px]" />}
       />
 
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-3xl">
       <section className="prose-plain leading-relaxed">
         <p>
           Guidance draws on publicly available information from national and

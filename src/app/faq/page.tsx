@@ -20,7 +20,7 @@ export default function FaqPage() {
         aside={<Illustration name="intro-faq" className="max-w-[260px]" />}
       />
 
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-3xl">
 
       <nav aria-label="Questions on this page" className="mb-12">
         {faq.map((group) => (

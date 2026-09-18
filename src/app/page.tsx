@@ -63,12 +63,12 @@ export default function Home() {
     <main className="pb-8">
       {/* Hero */}
       <section className="rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-16">
-        <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
+        <div className="wrap grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
           <div>
             <p className="mb-4 text-xs font-medium uppercase tracking-wider text-white/70">
               Simple steps for a difficult few days
             </p>
-            <h1 className="text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
+            <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
               If the power, water or shops stopped for three days, would you be
               all right?
             </h1>
@@ -98,11 +98,11 @@ export default function Home() {
 
       {/* What might actually stop */}
       <section className="px-4 pt-20">
-        <div className="grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-start">
+        <div className="wrap grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-start">
           <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
             What might actually stop
           </h2>
-          <div>
+          <div className="measure">
             <p className="leading-relaxed text-muted">
               An emergency can mean the things we rely on stop working for a
               while. Severe weather, a fault in the grid, a cyber attack on a
@@ -138,7 +138,7 @@ export default function Home() {
       </section>
 
       {/* Alternating cards */}
-      <section className="space-y-6">
+      <section className="wrap space-y-6">
         {sections.map((s, i) => (
           <Link
             key={s.href}
@@ -170,12 +170,12 @@ export default function Home() {
       </section>
 
       {/* Who it's for */}
-      <section className="px-4 pt-24">
+      <section className="wrap px-4 pt-24">
         <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] md:items-start">
           <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
             Written for people who want a sensible answer, not a hobby.
           </h2>
-          <p className="leading-relaxed text-muted md:pt-2">
+          <p className="measure leading-relaxed text-muted md:pt-2">
             No bunkers, no bravado, no one selling you a hundred things. A
             short list, honest numbers, and the people on your street. For
             the very worst cases there is little any household can do, and
@@ -197,12 +197,12 @@ export default function Home() {
       </section>
 
       {/* Household first, then everyone else */}
-      <section className="mt-24 grid gap-6 md:grid-cols-2">
+      <section className="wrap mt-24 grid gap-6 md:grid-cols-2">
         <div className="rounded-card bg-forest p-8 text-on-forest sm:p-10">
           <h2 className="text-3xl font-normal leading-tight text-on-forest">
             First you and yours. Then everyone else.
           </h2>
-          <p className="mt-4 max-w-md leading-relaxed opacity-90">
+          <p className="mt-4 max-w-prose leading-relaxed opacity-90">
             In any emergency, help goes first to the people who need it most.
             Everyone else is expected to manage for a while. So sort your own
             household out: water, food, light, warmth, medication, a way to

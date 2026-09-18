@@ -65,7 +65,7 @@ export default function CommunityPage() {
 
       <Photo slot="community" className="mb-12" />
 
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-3xl">
 
       <section className="prose-plain leading-relaxed">
         <h2 className="text-2xl font-semibold">What actually happens in a disruption</h2>

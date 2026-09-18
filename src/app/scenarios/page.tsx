@@ -30,7 +30,7 @@ export default function ScenariosPage() {
         aside={<Illustration name="intro-scenarios" className="max-w-[260px]" />}
       />
 
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-3xl">
 
       <nav aria-label="Scenarios on this page" className="mb-12">
         <ol className="grid gap-2 sm:grid-cols-2">

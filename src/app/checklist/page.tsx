@@ -24,7 +24,7 @@ export default function ChecklistPage() {
 
       <Photo slot="checklist" className="mb-12" />
 
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-3xl">
 
       <section className="mb-14">
         <h2 className="text-2xl font-semibold">If you are starting from nothing</h2>

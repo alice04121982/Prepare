@@ -46,8 +46,8 @@ export default function Photo({
   const c = all.find((x) => x.slot === slot && x.rank === rank) ?? all.find((x) => x.slot === slot);
   if (!c) return null;
   return (
-    <figure className={className}>
-      <div className={`relative overflow-hidden rounded-card ${aspect}`}>
+    <figure className={`wrap ${className}`}>
+      <div className={`relative max-h-[560px] overflow-hidden rounded-card ${aspect}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`/photos/${c.file}`}
