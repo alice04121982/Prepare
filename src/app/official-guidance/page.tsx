@@ -3,6 +3,8 @@ import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 import Illustration from "@/components/Illustration";
+import ListRow from "@/components/ListRow";
+import SectionLabel from "@/components/SectionLabel";
 import Photo from "@/components/Photo";
 import { officialGuidance, guidanceLastChecked } from "@/data/official-guidance";
 
@@ -53,30 +55,24 @@ export default function OfficialGuidancePage() {
       <div className="divide-y divide-line">
         {officialGuidance.map((group) => (
           <section key={group.title} className="py-10">
+            <SectionLabel>Official</SectionLabel>
             <h2 className="text-2xl font-semibold">{group.title}</h2>
             <p className="mt-2 max-w-2xl leading-relaxed text-muted">{group.intro}</p>
-            <ul className="mt-6 space-y-4">
-              {group.links.map((l) => (
-                <li key={l.url + l.title} className="rounded-2xl bg-mint-pale px-5 py-4">
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                    <a
-                      href={l.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-heading text-lg font-medium text-heading underline-offset-4 hover:underline"
-                    >
-                      {l.title}
-                    </a>
-                    <span className="text-xs uppercase tracking-wider text-muted">{l.publisher}</span>
-                  </div>
-                  <p className="mt-2 leading-relaxed text-foreground/90">{l.summary}</p>
-                  <p className="mt-2 text-xs text-muted">
-                    {l.published ? `Published ${formatDate(l.published)}. ` : ""}
-                    Checked {formatDate(l.lastChecked)}.
-                  </p>
-                </li>
+            <ol className="mt-4 divide-y divide-line">
+              {group.links.map((l, i) => (
+                <ListRow
+                  key={l.url + l.title}
+                  index={i + 1}
+                  meta={`${l.published ? `Published ${formatDate(l.published)} · ` : ""}Checked ${formatDate(l.lastChecked)}`}
+                  title={l.title}
+                  href={l.url}
+                  external
+                  tag={l.publisher}
+                >
+                  <p>{l.summary}</p>
+                </ListRow>
               ))}
-            </ul>
+            </ol>
           </section>
         ))}
       </div>

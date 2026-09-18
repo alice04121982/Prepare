@@ -183,7 +183,8 @@ export default function Home() {
           <SectionLabel>What this site covers</SectionLabel>
         </div>
         <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
-          A few days of supplies, built slowly. That is most of it.
+          <span className="block text-left">A few days of supplies, built slowly.</span>
+          <span className="block text-right">That is most of it.</span>
         </h2>
         <p className="mt-4 text-muted">Three pages do the work. Read them in this order.</p>
       </section>

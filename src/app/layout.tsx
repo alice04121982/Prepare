@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import AnnounceBar from "@/components/AnnounceBar";
 
 export const metadata: Metadata = {
   title: {
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <div className="w-full flex-1 px-4 sm:px-10">{children}</div>
         <SiteFooter />
+        <AnnounceBar />
       </body>
     </html>
   );

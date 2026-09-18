@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
+import SectionLabel from "@/components/SectionLabel";
 import Illustration from "@/components/Illustration";
 import { photoCredits } from "@/components/Photo";
 import Callout from "@/components/Callout";
@@ -39,6 +40,7 @@ export default function SourcesPage() {
         </p>
       </Callout>
       <section className="prose-plain mt-8 leading-relaxed">
+        <SectionLabel>Illustrations and design</SectionLabel>
         <h2 className="text-2xl font-semibold">Illustrations and design</h2>
         <p className="mt-3">
           Illustrations are from the free set by{" "}

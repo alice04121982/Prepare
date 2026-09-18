@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
+import Steps from "@/components/Steps";
+import SectionLabel from "@/components/SectionLabel";
 import Photo from "@/components/Photo";
 import Callout from "@/components/Callout";
 import { checklist, startingPoint } from "@/data/checklist";
@@ -27,6 +29,18 @@ export default function ChecklistPage() {
       <div className="mx-auto max-w-3xl">
 
       <section className="mb-14">
+        <SectionLabel>How this works</SectionLabel>
+        <Steps
+          steps={[
+            { title: "Count", body: "Most cupboards already hold a few days. Check the tins, the torch drawer and the medicine cabinet before you buy anything." },
+            { title: "Get the nine things", body: "Water, a tin opener, torches, batteries, a power bank, a radio, a contacts card, a first aid kit, a small amount of cash. One or two a week." },
+            { title: "Build the rest slowly", body: "One extra of something you already eat each shop. Rotate the oldest first. A few pounds a week, and it never goes to waste." },
+          ]}
+        />
+      </section>
+
+      <section className="mb-14">
+        <SectionLabel>Start here</SectionLabel>
         <h2 className="text-2xl font-semibold">If you are starting from nothing</h2>
         <p className="mt-3 leading-relaxed text-muted">
           These few items cover most of the benefit for most of the scenarios.
@@ -89,6 +103,7 @@ export default function ChecklistPage() {
       <div className="divide-y divide-line">
         {checklist.map((c) => (
           <section key={c.slug} id={c.slug} className="scroll-mt-24 py-10">
+            <SectionLabel>{c.title}</SectionLabel>
             <h2 className="text-2xl font-semibold">{c.title}</h2>
             <p className="mt-2 max-w-2xl leading-relaxed text-muted">{c.intro}</p>
 

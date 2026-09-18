@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import SectionLabel from "@/components/SectionLabel";
 import Illustration from "@/components/Illustration";
 import Photo from "@/components/Photo";
 import Callout from "@/components/Callout";
@@ -68,6 +69,7 @@ export default function CommunityPage() {
       <div className="mx-auto max-w-3xl">
 
       <section className="prose-plain leading-relaxed">
+        <SectionLabel>What actually happens in a disruption</SectionLabel>
         <h2 className="text-2xl font-semibold">What actually happens in a disruption</h2>
         <p className="mt-4">
           The popular picture of a crisis is panic, looting, and every
@@ -108,6 +110,7 @@ export default function CommunityPage() {
       </Callout>
 
       <section className="mt-14">
+        <SectionLabel>Four things to do first</SectionLabel>
         <h2 className="text-2xl font-semibold">Four things to do first</h2>
         <p className="mt-3 leading-relaxed text-muted">
           None of these cost money, and the first two take an afternoon.
@@ -130,6 +133,7 @@ export default function CommunityPage() {
       <Photo slot="together-conflict" aspect="aspect-[16/8]" caption className="mt-16" />
 
       <section className="mt-16">
+        <SectionLabel>Skills spread further than stockpiles</SectionLabel>
         <h2 className="text-2xl font-semibold">Skills spread further than stockpiles</h2>
         <p className="mt-3 max-w-2xl leading-relaxed text-muted">
           A skill can be used any number of times and shared with anyone. A
@@ -147,6 +151,7 @@ export default function CommunityPage() {
       </section>
 
       <section className="mt-16 prose-plain leading-relaxed">
+        <SectionLabel>How to be useful without overdoing it</SectionLabel>
         <h2 className="text-2xl font-semibold">How to be useful without overdoing it</h2>
         <p className="mt-4">
           Networks that last are light. A street group chat that only gets

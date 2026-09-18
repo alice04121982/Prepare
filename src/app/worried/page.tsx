@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import SectionLabel from "@/components/SectionLabel";
 import Callout from "@/components/Callout";
 import Illustration from "@/components/Illustration";
 import Photo from "@/components/Photo";
@@ -98,6 +99,7 @@ export default function WorriedPage() {
 
       <div className="mx-auto max-w-3xl">
         <section className="prose-plain leading-relaxed">
+          <SectionLabel>First, this is not weakness</SectionLabel>
           <h2 className="text-2xl font-semibold">First, this is not weakness</h2>
           <p className="mt-4">
             Sweden&rsquo;s civil defence agency opens its national booklet with
@@ -177,6 +179,7 @@ export default function WorriedPage() {
         <Photo slot="together-covid" aspect="aspect-[16/8]" caption className="mt-10" />
 
         <section className="mt-14">
+          <SectionLabel>The safest time there has ever been</SectionLabel>
           <h2 className="text-2xl font-semibold">The safest time there has ever been</h2>
           <p className="mt-4 leading-relaxed">
             This is the part that is hard to feel and easy to check. By almost
@@ -236,6 +239,7 @@ export default function WorriedPage() {
         </Callout>
 
         <section className="mt-12">
+          <SectionLabel>What counsellors and psychologists suggest</SectionLabel>
           <h2 className="text-2xl font-semibold">What counsellors and psychologists suggest</h2>
           <p className="mt-3 leading-relaxed text-muted">
             Collected from NHS, Mental Health Foundation and clinical advice
@@ -257,6 +261,7 @@ export default function WorriedPage() {
         </section>
 
         <section className="mt-14">
+          <SectionLabel>If you have children who are frightened</SectionLabel>
           <h2 className="text-2xl font-semibold">If you have children who are frightened</h2>
           <ul className="mt-5 space-y-3 leading-relaxed">
             {children.map((c) => (
@@ -269,6 +274,7 @@ export default function WorriedPage() {
         </section>
 
         <section className="mt-14 rounded-card bg-mint-pale px-6 py-6">
+          <SectionLabel>If it is more than worry</SectionLabel>
           <h2 className="text-2xl font-semibold">If it is more than worry</h2>
           <p className="mt-3 leading-relaxed">
             If the fear is stopping you sleeping, working or leaving the
@@ -294,6 +300,7 @@ export default function WorriedPage() {
         </section>
 
         <section className="mt-14 prose-plain leading-relaxed">
+          <SectionLabel>Then, when you are ready</SectionLabel>
           <h2 className="text-2xl font-semibold">Then, when you are ready</h2>
           <p className="mt-4">
             Not today, necessarily. But the calmest thing you can do about a

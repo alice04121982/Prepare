@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import SectionLabel from "@/components/SectionLabel";
 import Illustration from "@/components/Illustration";
 import { faq } from "@/data/faq";
 
@@ -24,18 +25,14 @@ export default function FaqPage() {
 
       <nav aria-label="Questions on this page" className="mb-12">
         {faq.map((group) => (
-          <div key={group.title} className="mb-6">
-            <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted">
-              {group.title}
-            </p>
-            <ul className="space-y-1.5 text-[0.95rem]">
+          <div key={group.title} className="mb-10">
+            <SectionLabel>{group.title}</SectionLabel>
+            <ul className="grid gap-3 sm:grid-cols-2">
               {group.entries.map((e) => (
                 <li key={e.slug}>
-                  <a
-                    href={`#${e.slug}`}
-                    className="underline-offset-4 hover:text-accent hover:underline"
-                  >
-                    {e.question}
+                  <a href={`#${e.slug}`} className="block h-full rounded-2xl border border-line bg-surface p-4 transition-colors hover:border-accent">
+                    <span className="block font-heading font-medium text-heading">{e.question}</span>
+                    <span className="mt-1 block text-sm text-muted">{e.answer[0].split(". ")[0]}.</span>
                   </a>
                 </li>
               ))}
