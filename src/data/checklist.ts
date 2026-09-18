@@ -1,3 +1,12 @@
+export type ProductLink = {
+  /** Product or maker name as shown to the reader. */
+  name: string;
+  /** Link to the maker's own site, never a retailer or affiliate link. */
+  url: string;
+  /** Why it is listed: what it does, who it suits. */
+  note: string;
+};
+
 export type ChecklistItem = {
   item: string;
   /** Realistic quantity for a household, phrased as a planning figure. */
@@ -6,6 +15,12 @@ export type ChecklistItem = {
   notes: string;
   /** True for the handful of items to get first if starting from nothing. */
   priority?: boolean;
+  /**
+   * Optional examples of specific products. Rules: link to the maker's own
+   * site, no retailer or affiliate links, and only things that have actually
+   * been used. Absence of a link never means an item is unimportant.
+   */
+  products?: ProductLink[];
 };
 
 export type ChecklistCategory = {
@@ -111,6 +126,24 @@ export const checklist: ChecklistCategory[] = [
         amount: "One for a shared room",
         notes:
           "Safer and far brighter than candles, which cause house fires every year during outages.",
+      },
+      {
+        item: "Portable power station and solar panel",
+        amount: "Optional: one small station, one folding panel",
+        notes:
+          "A step up from a power bank for anyone who needs to run a router, a CPAP machine, a fridge for medication, or keep several phones going through a long cut. A folding panel recharges it over a day or two of daylight. These became the standard household answer to rolling power cuts in Ukraine.",
+        products: [
+          {
+            name: "Jackery Explorer (portable power station)",
+            url: "https://uk.jackery.com/collections/portable-power-station",
+            note: "A lithium battery with mains sockets and USB ports. The smaller models run a phone and router for days, or a small fridge for a day.",
+          },
+          {
+            name: "Jackery SolarSaga (folding solar panel)",
+            url: "https://uk.jackery.com/collections/solar-panel",
+            note: "Folds flat and plugs into the station. Slow in a British winter, but it means the station is never truly empty.",
+          },
+        ],
       },
     ],
   },

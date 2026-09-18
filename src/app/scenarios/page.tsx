@@ -16,7 +16,7 @@ export default function ScenariosPage() {
       <PageIntro
         eyebrow="Understand the scenarios"
         title="What disruption actually looks like"
-        lede="Five realistic situations, each with the duration you can reasonably plan for and the handful of things that make a real difference. Nothing here is about the end of the world. It is about a difficult day or week, and getting through it well."
+        lede="Six realistic situations, each with the duration you can reasonably plan for and the handful of things that make a real difference. Five of them are about a difficult day or week. The sixth, armed conflict, is longer and rarer, and is included because people ask, and because Ukraine has shown what it actually looks like for ordinary households."
       />
 
       <nav aria-label="Scenarios on this page" className="mb-12">
@@ -40,12 +40,13 @@ export default function ScenariosPage() {
         </ol>
       </nav>
 
-      <Callout title="One kit covers all five">
+      <Callout title="One kit covers all of them">
         <p>
           The scenarios overlap heavily. A few days of water, food, light,
-          medication, and a way to hear the news covers every one of them.
-          The differences are in the details, which is what each section
-          below is for.
+          medication, and a way to hear the news covers the first five, and
+          is the foundation for the sixth. Armed conflict extends the same
+          kit rather than replacing it. The differences are in the details,
+          which is what each section below is for.
         </p>
       </Callout>
 

@@ -53,6 +53,17 @@ export default function ChecklistPage() {
         </p>
       </Callout>
 
+      <Callout title="About the product links">
+        <p>
+          A few items below link to a specific product. Those links go to
+          the maker&rsquo;s own site, never to a retailer, and they are not
+          affiliate links. They are there because it is useful to see what
+          &ldquo;a portable power station&rdquo; actually looks like and
+          roughly costs, not because you need that brand. Anything similar
+          does the same job.
+        </p>
+      </Callout>
+
       <nav aria-label="Categories" className="mb-10 mt-12">
         <ul className="flex flex-wrap gap-2 text-sm">
           {checklist.map((c) => (
@@ -95,7 +106,26 @@ export default function ChecklistPage() {
                         ) : null}
                       </td>
                       <td className="py-3 pr-4">{i.amount}</td>
-                      <td className="py-3 text-muted">{i.notes}</td>
+                      <td className="py-3 text-muted">
+                        {i.notes}
+                        {i.products ? (
+                          <ul className="mt-2 space-y-1.5 border-l-2 border-sage-light pl-3 text-sm">
+                            {i.products.map((p) => (
+                              <li key={p.url}>
+                                <a
+                                  href={p.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-medium text-heading underline underline-offset-4 hover:text-sage"
+                                >
+                                  {p.name}
+                                </a>{" "}
+                                <span>{p.note}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
