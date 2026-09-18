@@ -9,7 +9,7 @@ type Props = {
 /** Consistent page opener on a mint panel: small label, light display heading, lede. */
 export default function PageIntro({ eyebrow, title, lede, aside }: Props) {
   return (
-    <div className="mb-12 rounded-card bg-mint px-6 py-10 sm:px-10 sm:py-14">
+    <div className="mb-12 rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-16">
       <div className="grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
         <div>
           {eyebrow ? (
@@ -17,14 +17,14 @@ export default function PageIntro({ eyebrow, title, lede, aside }: Props) {
               {eyebrow}
             </p>
           ) : null}
-          <h1 className="text-4xl font-normal leading-[1.08] text-forest sm:text-5xl">
+          <h1 className="text-4xl font-normal leading-[1.05] text-forest sm:text-6xl">
             {title}
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-forest/85 sm:text-lg">
             {lede}
           </p>
         </div>
-        {aside ? <div className="justify-self-center md:justify-self-end">{aside}</div> : null}
+        {aside ? <div className="justify-self-center md:justify-self-end md:pr-6">{aside}</div> : null}
       </div>
     </div>
   );

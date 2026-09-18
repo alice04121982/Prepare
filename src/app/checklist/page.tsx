@@ -13,13 +13,15 @@ export const metadata: Metadata = {
 
 export default function ChecklistPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
+    <main className="w-full py-4 sm:py-8">
       <PageIntro
         eyebrow="The essentials"
         title="What to keep on hand"
         lede="Realistic quantities for a household to build up gradually. Not bought all at once, and never more than you can rotate and actually use. Every figure here is a planning number drawn from public emergency guidance, not a worst case."
         aside={<Illustration name="intro-checklist" className="max-w-[260px]" />}
       />
+
+      <div className="mx-auto max-w-3xl">
 
       <section className="mb-14">
         <h2 className="text-2xl font-semibold">If you are starting from nothing</h2>
@@ -151,6 +153,7 @@ export default function ChecklistPage() {
         >
           Download the offline guide
         </a>
+      </div>
       </div>
     </main>
   );

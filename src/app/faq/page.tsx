@@ -12,13 +12,15 @@ export const metadata: Metadata = {
 
 export default function FaqPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
+    <main className="w-full py-4 sm:py-8">
       <PageIntro
         eyebrow="Myth-busting and questions"
         title="Sensible preparation, not panic"
         lede="The questions people actually ask, and the misconceptions that stop them starting. Short answers where a short answer is honest, longer ones where it is not."
         aside={<Illustration name="intro-faq" className="max-w-[260px]" />}
       />
+
+      <div className="mx-auto max-w-3xl">
 
       <nav aria-label="Questions on this page" className="mb-12">
         {faq.map((group) => (
@@ -75,6 +77,7 @@ export default function FaqPage() {
         >
           Community and mutual aid
         </Link>
+      </div>
       </div>
     </main>
   );

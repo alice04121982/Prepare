@@ -17,8 +17,8 @@ export default async function BuildYourKitPage({
 }) {
   const initial = householdFromParams(await searchParams) ?? undefined;
   return (
-    <main className="mx-auto w-full max-w-6xl py-4 sm:py-8">
-      <div className="mx-auto max-w-3xl">
+    <main className="w-full py-4 sm:py-8">
+      <div>
         <PageIntro
           eyebrow="Build your kit"
           title="Who lives with you, and for how long?"

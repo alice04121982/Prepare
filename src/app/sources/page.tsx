@@ -11,13 +11,15 @@ export const metadata: Metadata = {
 
 export default function SourcesPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
+    <main className="w-full py-4 sm:py-8">
       <PageIntro
         eyebrow="Sources and methodology"
         title="Where the numbers come from"
         lede="Every duration and quantity on this site is a conservative planning figure drawn from public emergency-preparedness guidance. The full citation list is still being compiled."
         aside={<Illustration name="intro-sources" className="max-w-[260px]" />}
       />
+
+      <div className="mx-auto max-w-3xl">
       <section className="prose-plain leading-relaxed">
         <p>
           Guidance draws on publicly available information from national and
@@ -47,6 +49,7 @@ export default function SourcesPage() {
           no affiliate links.
         </p>
       </section>
+      </div>
     </main>
   );
 }

@@ -13,13 +13,15 @@ export const metadata: Metadata = {
 
 export default function ScenariosPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
+    <main className="w-full py-4 sm:py-8">
       <PageIntro
         eyebrow="Understand the scenarios"
         title="What disruption actually looks like"
         lede="Six realistic situations, each with the duration you can reasonably plan for and the handful of things that make a real difference. Five of them are about a difficult day or week. The sixth, armed conflict, is longer and rarer, and is included because people ask, and because Ukraine has shown what it actually looks like for ordinary households."
         aside={<Illustration name="intro-scenarios" className="max-w-[260px]" />}
       />
+
+      <div className="mx-auto max-w-3xl">
 
       <nav aria-label="Scenarios on this page" className="mb-12">
         <ol className="grid gap-2 sm:grid-cols-2">
@@ -117,6 +119,7 @@ export default function ScenariosPage() {
         >
           Why community matters most
         </Link>
+      </div>
       </div>
     </main>
   );

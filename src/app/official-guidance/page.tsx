@@ -22,13 +22,15 @@ function formatDate(iso: string) {
 
 export default function OfficialGuidancePage() {
   return (
-    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
+    <main className="w-full py-4 sm:py-8">
       <PageIntro
         eyebrow="Official guidance"
         title="What the government currently says"
         lede="Live links to the official sources, each one opened and checked on the date shown. Other sites hand you survival PDFs from the last century. This page points you at what is actually in force now."
         aside={<Illustration name="intro-guidance" className="max-w-[260px]" />}
       />
+
+      <div className="mx-auto max-w-3xl">
 
       <p className="mb-10 text-sm text-muted">
         Last checked {formatDate(guidanceLastChecked)}. If a link has stopped
@@ -87,6 +89,7 @@ export default function OfficialGuidancePage() {
         >
           Download the offline guide
         </a>
+      </div>
       </div>
     </main>
   );

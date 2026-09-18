@@ -54,13 +54,15 @@ const skills = [
 
 export default function CommunityPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
+    <main className="w-full py-4 sm:py-8">
       <PageIntro
         eyebrow="Community and mutual aid"
         title="The most effective form of preparation is other people"
         lede="This is the part of the site that everything else builds outward from. A well-stocked cupboard helps a household for a few days. A street that knows itself helps everyone on it, for as long as it takes."
         aside={<Illustration name="intro-community" className="max-w-[260px]" />}
       />
+
+      <div className="mx-auto max-w-3xl">
 
       <section className="prose-plain leading-relaxed">
         <h2 className="text-2xl font-semibold">What actually happens in a disruption</h2>
@@ -169,6 +171,7 @@ export default function CommunityPage() {
         >
           Common questions and myths
         </Link>
+      </div>
       </div>
     </main>
   );
