@@ -78,31 +78,38 @@ Editorial rules that shape every page:
 
 ## 5. Build phases
 
-**Phase 0 — Foundations (this week)**
+**Phase 0 — Foundations**
 - [x] Project folder + git repo created
 - [x] Next.js/TypeScript/Tailwind scaffold
-- [ ] Push to GitHub
+- [x] Push to GitHub
 - [ ] Confirm final name + tagline
 - [ ] Draft content tone/voice guide (1 page)
 
 **Phase 1 — Content skeleton**
-- [ ] Write Scenarios copy (5 scenario types, realistic durations, sources)
-- [ ] Write Essentials checklist data (categories, items, quantities,
-      shelf life)
-- [ ] Draft Community & Mutual Aid page
-- [ ] Draft Myth-busting/FAQ
+- [x] Write Scenarios copy (5 scenario types, realistic durations) —
+      `src/data/scenarios.ts`; inline sources still to be added
+- [x] Write Essentials checklist data (categories, items, quantities,
+      shelf life) — `src/data/checklist.ts`
+- [x] Draft Community & Mutual Aid page
+- [x] Draft Myth-busting/FAQ — `src/data/faq.ts`
 
 **Phase 2 — Core pages**
-- [ ] Home page
-- [ ] Start Here flow (static first, no logic)
-- [ ] Scenarios pages
-- [ ] Essentials Checklist page
-- [ ] Community page
-- [ ] FAQ page
-- [ ] Sources page
+- [x] Home page (framing statement, three entry points, non-alarmist note,
+      scenarios at a glance, offline download)
+- [ ] Start Here flow (static first, no logic) — not yet created; home
+      page currently points "Start here" at the Checklist
+- [x] Scenarios page
+- [x] Essentials Checklist page
+- [x] Community page
+- [x] FAQ page
+- [ ] Sources page — **still placeholder** (styled, short methodology
+      note, citation list to be written)
+- [x] Shared layout: header nav, footer, design tokens, PageIntro/Callout
+      components (`src/components/`)
 
 **Phase 3 — Interactive planner**
-- [ ] Build Your Kit tool (household size + duration → shopping list)
+- [ ] Build Your Kit tool — **still placeholder** (styled page pointing
+      to the Checklist until the planner exists)
 - [ ] Cost-band estimates
 - [ ] Printable/exportable list (PDF or plain text)
 
@@ -112,6 +119,12 @@ Editorial rules that shape every page:
 - [ ] Source citations linked inline
 - [ ] Deploy to hosting, connect custom domain if desired
 - [ ] Light analytics (optional, privacy-respecting)
+
+**Content notes (2026-09-18)**
+- Scenarios, checklist, and the first three FAQ entries mirror the
+  offline guide. When either side changes, update the other.
+- Guidance is UK-first (105 power-cut number, Priority Services Register,
+  Met Office, gov.uk flood warnings). Regionalisation is an open question.
 
 ## 6. Open questions for Alice
 
