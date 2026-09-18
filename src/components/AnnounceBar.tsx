@@ -1,24 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 
 const KEY = "sp-announce-dismissed";
+const listeners = new Set<() => void>();
+const subscribe = (cb: () => void) => {
+  listeners.add(cb);
+  return () => listeners.delete(cb);
+};
+const getSnapshot = () => {
+  try {
+    return localStorage.getItem(KEY) !== "1";
+  } catch {
+    return true;
+  }
+};
+const getServerSnapshot = () => false;
 
 /** Anveril-style floating bar at the foot of the page: one line, one action, dismissable. */
 export default function AnnounceBar() {
   const path = usePathname();
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    try {
-      if (!localStorage.getItem(KEY)) setShown(true);
-    } catch {
-      setShown(true);
-    }
-  }, []);
+  const shown = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   if (!shown || path === "/worried") return null;
 
@@ -28,7 +33,7 @@ export default function AnnounceBar() {
     } catch {
       /* ignore */
     }
-    setShown(false);
+    listeners.forEach((l) => l());
   };
 
   return (
