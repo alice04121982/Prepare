@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Prepare",
-  description: "Practical, non-alarmist guidance on preparing for social disruption.",
+  title: {
+    default: "Prepare",
+    template: "%s | Prepare",
+  },
+  description:
+    "A practical, non-alarmist guide to what to keep on hand for social disruption, and realistically how long it lasts.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -16,7 +22,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=switzer@400,500,600&display=swap"
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }
