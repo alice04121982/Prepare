@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Illustration from "@/components/Illustration";
-import Photo from "@/components/Photo";
+import Photo, { photoCredits } from "@/components/Photo";
+import SectionLabel from "@/components/SectionLabel";
+import DownloadRow from "@/components/DownloadRow";
 import {
   Banknote,
   Bus,
@@ -68,16 +70,33 @@ const audiences = [
   },
 ];
 
+const keyNumbers = [
+  { value: "3 days", label: "the minimum the government asks every household to cover" },
+  { value: "3 litres", label: "of drinking water per person per day, the gov.uk figure" },
+  { value: "9 things", label: "to get first, over a few weeks, from your normal shop" },
+  { value: "2 names", label: "of neighbours you know, and who know you" },
+];
+
 export default function Home() {
+  const hero = photoCredits().find((c) => c.slot === "home-hero" && c.rank === 1);
   return (
     <main className="pb-8">
       {/* Hero */}
-      <section className="rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-16">
-        <div className="wrap grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
+      <section className="relative overflow-hidden rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-20">
+        {hero ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={`/photos/${hero.file}`}
+            alt=""
+            width={hero.w}
+            height={hero.h}
+            className="absolute inset-0 h-full w-full object-cover opacity-40 saturate-[.6]"
+          />
+        ) : null}
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-mint via-mint/85 to-mint/40" />
+        <div className="wrap relative grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
           <div>
-            <p className="mb-4 text-xs font-medium uppercase tracking-wider text-white/70">
-              Simple steps for a difficult few days
-            </p>
+            <SectionLabel onDark>Simple steps for a difficult few days</SectionLabel>
             <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
               If the power, water or shops stopped for three days, would you be
               all right?
@@ -110,14 +129,25 @@ export default function Home() {
         </div>
       </section>
 
-      <Photo slot="home-hero" priority className="mt-6" />
+      {/* Key numbers */}
+      <section className="wrap mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+        {keyNumbers.map((k) => (
+          <div key={k.label} className="rounded-2xl border border-line bg-surface px-5 py-5">
+            <p className="font-heading text-3xl font-medium text-heading sm:text-4xl">{k.value}</p>
+            <p className="mt-1 text-sm text-muted">{k.label}</p>
+          </div>
+        ))}
+      </section>
 
       {/* What might actually stop */}
       <section className="px-4 pt-20">
         <div className="wrap grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-start">
-          <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
-            What might actually stop
-          </h2>
+          <div>
+            <SectionLabel>What might stop</SectionLabel>
+            <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
+              What might actually stop
+            </h2>
+          </div>
           <div className="measure">
             <p className="leading-relaxed text-muted">
               An emergency can mean the things we rely on stop working for a
@@ -149,9 +179,9 @@ export default function Home() {
 
       {/* Section header */}
       <section className="mx-auto max-w-2xl px-4 pb-10 pt-20 text-center">
-        <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted">
-          What this site covers
-        </p>
+        <div className="flex justify-center">
+          <SectionLabel>What this site covers</SectionLabel>
+        </div>
         <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
           A few days of supplies, built slowly. That is most of it.
         </h2>
@@ -172,7 +202,10 @@ export default function Home() {
               <Illustration name={s.illustration} />
             </div>
             <div>
-              <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted">{s.eyebrow}</p>
+              <div className="mb-2 flex items-center justify-between">
+                <SectionLabel>{s.eyebrow}</SectionLabel>
+                <span className="font-heading mb-4 text-sm text-muted">{String(i + 1).padStart(2, "0")}</span>
+              </div>
               <h3 className="text-2xl font-medium sm:text-3xl">{s.title}</h3>
               <p className="mt-3 max-w-md leading-relaxed text-foreground/85">{s.body}</p>
               <ul className="mt-5 flex flex-wrap gap-2">
@@ -193,9 +226,12 @@ export default function Home() {
       {/* Who it's for */}
       <section className="wrap px-4 pt-24">
         <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] md:items-start">
-          <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
-            Written for people who want a sensible answer, not a hobby.
-          </h2>
+          <div>
+            <SectionLabel>Who it is for</SectionLabel>
+            <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
+              Written for people who want a sensible answer, not a hobby.
+            </h2>
+          </div>
           <p className="measure leading-relaxed text-muted md:pt-2">
             No bunkers, no bravado, no one selling you a hundred things. A
             short list, honest numbers, and the people on your street. For
@@ -220,6 +256,7 @@ export default function Home() {
       {/* Household first, then everyone else */}
       <section className="wrap mt-24 grid gap-6 md:grid-cols-2">
         <div className="rounded-card bg-forest p-8 text-on-forest sm:p-10">
+          <SectionLabel onDark>The order of things</SectionLabel>
           <h2 className="text-3xl font-normal leading-tight text-on-forest">
             First you and yours. Then everyone else.
           </h2>
@@ -243,6 +280,7 @@ export default function Home() {
 
       {/* Why now */}
       <section id="why-now" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-24">
+        <SectionLabel>Why now</SectionLabel>
         <h2 className="text-3xl font-normal leading-tight sm:text-4xl">Why now</h2>
         <div className="prose-plain mt-5 leading-relaxed">
           <p>
@@ -264,6 +302,15 @@ export default function Home() {
             What the government currently says
           </Link>
         </div>
+      </section>
+
+      <section className="wrap mt-16">
+        <DownloadRow
+          href="/offline/index.html"
+          download="stay-prepared-offline-guide.html"
+          title="Download the offline guide"
+          detail="One file, no internet needed. Save it, print it, share it before you need it."
+        />
       </section>
 
       {/* Closing */}
