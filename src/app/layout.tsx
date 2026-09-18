@@ -24,7 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-full flex-col">
         <SiteHeader />
-        <div className="mx-auto w-full max-w-6xl flex-1 px-3 sm:px-4">{children}</div>
+        <div className="w-full flex-1 px-4 sm:px-10">{children}</div>
         <SiteFooter />
       </body>
     </html>

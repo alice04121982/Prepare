@@ -11,7 +11,7 @@ const nav = [
 export default function SiteHeader() {
   return (
     <header>
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-5 sm:px-8">
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-5 sm:px-10">
         <Link
           href="/"
           className="font-heading text-xl font-semibold tracking-tight text-heading"
@@ -36,7 +36,7 @@ export default function SiteHeader() {
           </Link>
         </nav>
       </div>
-      <ul className="mx-auto flex max-w-6xl gap-x-5 px-5 pb-3 text-sm text-muted sm:hidden">
+      <ul className="flex gap-x-5 px-4 pb-3 text-sm text-muted sm:hidden">
         {nav.map((item) => (
           <li key={item.href}>
             <Link href={item.href} className="underline-offset-4 hover:text-heading hover:underline">
