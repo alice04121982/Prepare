@@ -1,16 +1,26 @@
 import Link from "next/link";
 import Illustration from "@/components/Illustration";
 import Photo from "@/components/Photo";
+import {
+  Banknote,
+  Bus,
+  Droplet,
+  Pill,
+  ShoppingCart,
+  Thermometer,
+  WifiOff,
+  type LucideIcon,
+} from "lucide-react";
 import { scenarios } from "@/data/scenarios";
 
-const whatStops = [
-  "The heating goes off.",
-  "The shops run short, or cannot take cards.",
-  "Nothing comes out of the taps.",
-  "Cash machines and card readers stop.",
-  "Mobile networks and the internet go down.",
-  "Buses and trains stop.",
-  "Prescriptions are hard to get.",
+const whatStops: { text: string; icon: LucideIcon }[] = [
+  { text: "The heating goes off.", icon: Thermometer },
+  { text: "The shops run short, or cannot take cards.", icon: ShoppingCart },
+  { text: "Nothing comes out of the taps.", icon: Droplet },
+  { text: "Cash machines and card readers stop.", icon: Banknote },
+  { text: "Mobile networks and the internet go down.", icon: WifiOff },
+  { text: "Buses and trains stop.", icon: Bus },
+  { text: "Prescriptions are hard to get.", icon: Pill },
 ];
 
 const sections = [
@@ -87,6 +97,12 @@ export default function Home() {
                 Why three days?
               </a>
             </div>
+            <p className="mt-6 text-sm text-white/75">
+              Frightened by the news?{" "}
+              <Link href="/worried" className="underline underline-offset-4 hover:text-white">
+                Start here instead.
+              </Link>
+            </p>
           </div>
           <div className="mx-auto w-full max-w-[380px]">
             <Illustration name="hero" alt="" className="invert" />
@@ -110,10 +126,15 @@ export default function Home() {
               can all have the same effect at home:
             </p>
             <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-              {whatStops.map((line) => (
-                <li key={line} className="flex gap-3 rounded-2xl bg-mint-pale px-4 py-3 text-sm">
-                  <span aria-hidden className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-forest" />
-                  {line}
+              {whatStops.map(({ text, icon: Icon }) => (
+                <li key={text} className="flex items-center gap-4 rounded-2xl bg-mint-pale px-4 py-3 text-sm">
+                  <span
+                    aria-hidden
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface text-accent"
+                  >
+                    <Icon size={20} strokeWidth={1.75} />
+                  </span>
+                  {text}
                 </li>
               ))}
             </ul>

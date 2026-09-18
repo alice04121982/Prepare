@@ -69,7 +69,11 @@ Editorial rules that shape every page:
    National Risk Register). Every link carries a "last checked" date. The
    contrast with prepper sites that hand out decades-old survival PDFs is
    deliberate. Data in `src/data/official-guidance.ts`.
-9. **Sources & Methodology** — full citation list and an explanation of how
+9. **If the news is frightening you** — perspective and practical help
+   for people who feel helpless: why it feels worse than it is, we have
+   been here before (WWII, vCJD, Covid), what counsellors suggest, children,
+   and where to get help. Sourced. Page at /worried.
+10. **Sources & Methodology** — full citation list and an explanation of how
    duration/quantity estimates were derived, so the site is auditable and
    trustworthy.
 

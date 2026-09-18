@@ -6,6 +6,7 @@ const nav = [
   { href: "/community", label: "Community" },
   { href: "/faq", label: "FAQ" },
   { href: "/official-guidance", label: "Official guidance" },
+  { href: "/worried", label: "Worried?" },
 ];
 
 export default function SiteHeader() {
