@@ -219,7 +219,7 @@ export default function WorriedPage() {
             />
             <TrendChart
               title="Life expectancy at birth"
-              subtitle="World, years, 1770 to 2023"
+              subtitle="World, years, 1770 to 2023. Twenty-nine does not mean people died at thirty: the average is dragged down by the four in ten children who died before five. An adult in 1770 could expect their fifties or sixties."
               data={lifeExpectancy}
               kind="line"
               unit="years"
