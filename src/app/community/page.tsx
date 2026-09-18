@@ -95,6 +95,8 @@ export default function CommunityPage() {
         </p>
       </section>
 
+      <Photo slot="together-everyday" aspect="aspect-[16/8]" caption className="mt-10" />
+
       <Callout title="A note on the word &ldquo;mutual&rdquo;">
         <p>
           Mutual aid is not charity, and it is not a service. It is neighbours
@@ -124,6 +126,8 @@ export default function CommunityPage() {
           ))}
         </ol>
       </section>
+
+      <Photo slot="together-conflict" aspect="aspect-[16/8]" caption className="mt-16" />
 
       <section className="mt-16">
         <h2 className="text-2xl font-semibold">Skills spread further than stockpiles</h2>

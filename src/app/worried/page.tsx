@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 import Illustration from "@/components/Illustration";
+import Photo from "@/components/Photo";
 
 export const metadata: Metadata = {
   title: "If the news is frightening you",
@@ -163,6 +164,8 @@ export default function WorriedPage() {
             prepare for.
           </p>
         </section>
+
+        <Photo slot="together-covid" aspect="aspect-[16/8]" caption className="mt-10" />
 
         <Callout title="The one idea to keep">
           <p>
