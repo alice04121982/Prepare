@@ -125,13 +125,18 @@ Editorial rules that shape every page:
       (figma.com/design/oSzUwrqcukRt4CUQnbSKyx): mint hero #a0f1bd,
       pale-mint cards #d2f8dc, forest-green buttons/footer #2e4f21,
       off-white page #f9f9f9, pill buttons and tags, rounded-card panels.
-- [x] Illustrations from unDraw (open licence), recoloured to forest green,
-      in `public/illustrations/`. Rendered by `src/components/Illustration.tsx`,
-      which falls back to a soft placeholder shape for any missing name.
-- [ ] The Streamline "Minimal" community set Alice liked is free with
-      attribution only and the duplicated file holds ~45 off-topic samples.
-      Revisit if a licensed set or attribution is wanted.
-- [ ] Dark-mode pass on the SVGs (their dark greys sit on dark panels).
+- [x] Illustrations from Streamline's free "Minimal" set via the Figma
+      community file (Alice's choice), in `public/illustrations/` with a
+      node map in its README. Free tier is 400px PNG, so they are shown at
+      380px or less. Attribution to streamlinehq.com is a licence
+      condition and sits in the footer and on Sources. Rendered by
+      `src/components/Illustration.tsx`, which falls back to a soft
+      placeholder for any missing name.
+- [ ] Better matches for Checklist, Build Your Kit, and Sources intros:
+      the Figma MCP only sees pages open in the desktop app, so open the
+      Home, Health, Shopping, or Weather category pages and re-pick.
+- [ ] Dark-mode pass: black line art on dark panels needs inverting or a
+      light backing shape.
 
 **Content notes (2026-09-18)**
 - Six scenarios now, including armed conflict drawn from Ukraine since

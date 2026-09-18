@@ -38,13 +38,13 @@ export default function SourcesPage() {
       <section className="prose-plain mt-8 leading-relaxed">
         <h2 className="text-2xl font-semibold">Illustrations and design</h2>
         <p className="mt-3">
-          Illustrations are from{" "}
-          <a href="https://undraw.co" target="_blank" rel="noopener noreferrer">
-            unDraw
+          Illustrations are from the free set by{" "}
+          <a href="https://streamlinehq.com" target="_blank" rel="noopener noreferrer">
+            Streamline
           </a>
-          , an open-licence collection, recoloured to match the site. Type is
-          General Sans and Switzer from Fontshare. No stock photography, no
-          tracking, no affiliate links.
+          , used under their free licence with attribution. Type is General
+          Sans and Switzer from Fontshare. No stock photography, no tracking,
+          no affiliate links.
         </p>
       </section>
     </main>

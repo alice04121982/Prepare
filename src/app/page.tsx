@@ -78,7 +78,7 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="mx-auto w-full max-w-sm md:max-w-none">
+          <div className="mx-auto w-full max-w-[380px]">
             <Illustration name="hero" alt="" />
           </div>
         </div>
