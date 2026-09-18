@@ -2,6 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
+import Photo from "@/components/Photo";
+
+const photoSlot: Record<string, string> = {
+  "power-outage": "scen-power",
+  "water-disruption": "scen-water",
+  "supply-delays": "scen-supply",
+  "extreme-weather": "scen-weather",
+  "armed-conflict": "scen-conflict",
+};
 import Callout from "@/components/Callout";
 import { scenarios } from "@/data/scenarios";
 
@@ -69,6 +78,7 @@ export default function ScenariosPage() {
               {s.typicalDuration}
             </p>
             <p className="prose-plain mt-5 leading-relaxed">{s.description}</p>
+            {photoSlot[s.slug] ? <Photo slot={photoSlot[s.slug]} aspect="aspect-[16/7]" className="mt-6" /> : null}
 
             <h3 className="mt-8 text-lg font-semibold">What helps</h3>
             <ul className="mt-3 space-y-2 leading-relaxed">

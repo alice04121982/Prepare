@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 import Illustration from "@/components/Illustration";
+import Photo from "@/components/Photo";
 import { officialGuidance, guidanceLastChecked } from "@/data/official-guidance";
 
 export const metadata: Metadata = {
@@ -29,6 +30,8 @@ export default function OfficialGuidancePage() {
         lede="Live links to the official sources, each one opened and checked on the date shown. Other sites hand you survival PDFs from the last century. This page points you at what is actually in force now."
         aside={<Illustration name="intro-guidance" className="max-w-[260px]" />}
       />
+
+      <Photo slot="guidance" className="mb-12" />
 
       <div className="mx-auto max-w-3xl">
 

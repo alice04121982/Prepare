@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
+import Photo from "@/components/Photo";
 import Callout from "@/components/Callout";
 
 export const metadata: Metadata = {
@@ -61,6 +62,8 @@ export default function CommunityPage() {
         lede="This is the part of the site that everything else builds outward from. A well-stocked cupboard helps a household for a few days. A street that knows itself helps everyone on it, for as long as it takes."
         aside={<Illustration name="intro-community" className="max-w-[260px]" />}
       />
+
+      <Photo slot="community" className="mb-12" />
 
       <div className="mx-auto max-w-3xl">
 

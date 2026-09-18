@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
+import { photoCredits } from "@/components/Photo";
 import Callout from "@/components/Callout";
 
 export const metadata: Metadata = {
@@ -44,10 +45,27 @@ export default function SourcesPage() {
           <a href="https://streamlinehq.com" target="_blank" rel="noopener noreferrer">
             Streamline
           </a>
-          , used under their free licence with attribution. Type is General
-          Sans and Switzer from Fontshare. No stock photography, no tracking,
-          no affiliate links.
+          , used under their free licence with attribution. Photographs are
+          from Unsplash under the Unsplash Licence, free for commercial use
+          with no attribution required; we credit the photographers below
+          anyway. Type is General Sans and Switzer from Fontshare. No
+          tracking. Some product links may earn a small commission; the
+          checklist says so where it applies.
         </p>
+        <h3 className="mt-8 text-lg font-semibold">Photographers</h3>
+        <ul className="mt-3 columns-2 gap-6 text-sm leading-relaxed">
+          {[...new Map(photoCredits().map((c) => [c.photographer, c])).values()].map((c) => (
+            <li key={c.photographer}>
+              <a
+                href={`${c.profile}?utm_source=stay_prepared&utm_medium=referral`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {c.photographer}
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
       </div>
     </main>

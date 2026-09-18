@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
+import Photo from "@/components/Photo";
 import KitPlanner from "@/components/KitPlanner";
 import { householdFromParams } from "@/data/kit-rules";
 
@@ -26,6 +27,7 @@ export default async function BuildYourKitPage({
           aside={<Illustration name="intro-kit" className="max-w-[260px]" />}
         />
       </div>
+      <Photo slot="kit" className="mb-12" />
       <KitPlanner initial={initial} />
     </main>
   );

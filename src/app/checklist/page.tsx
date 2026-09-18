@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
+import Photo from "@/components/Photo";
 import Callout from "@/components/Callout";
 import { checklist, startingPoint } from "@/data/checklist";
 
@@ -20,6 +21,8 @@ export default function ChecklistPage() {
         lede="Realistic quantities for a household to build up gradually. Not bought all at once, and never more than you can rotate and actually use. Every figure here is a planning number drawn from public emergency guidance, not a worst case."
         aside={<Illustration name="intro-checklist" className="max-w-[260px]" />}
       />
+
+      <Photo slot="checklist" className="mb-12" />
 
       <div className="mx-auto max-w-3xl">
 

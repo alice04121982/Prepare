@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Illustration from "@/components/Illustration";
+import Photo from "@/components/Photo";
 import { scenarios } from "@/data/scenarios";
 
 const whatStops = [
@@ -92,6 +93,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Photo slot="home-hero" priority className="mt-6" />
 
       {/* What might actually stop */}
       <section className="px-4 pt-20">
@@ -212,12 +215,10 @@ export default function Home() {
             Neighbours and local groups
           </Link>
         </div>
-        <div className="flex items-center justify-center rounded-card bg-mint-light p-8">
-          <div className="w-full max-w-xs">
-            <Illustration name="neighbours" />
-          </div>
-        </div>
+        <Photo slot="home-household" aspect="aspect-[4/3] md:aspect-auto md:h-full" />
       </section>
+
+      <Photo slot="home-community" className="mt-6" />
 
       {/* Why now */}
       <section id="why-now" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-24">
