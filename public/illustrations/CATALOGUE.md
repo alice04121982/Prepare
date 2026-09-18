@@ -114,7 +114,117 @@ Supermarket 117:1038 (supply delays), Pharmacy 117:1041 (medication
 buffer), Library 117:1033 (finding local groups), City Hall 117:1039
 (official local sources), School 117:1029 (warming and charging points).
 
+### 110:66  Communication  (76 items)
+Candidates: Phone Charging 117:397 / 117:402 (power bank, charge when
+power returns), Signal Connectivity Issue 117:369 / 117:349 (networks
+down, FAQ "will my phone work"), Phone Call 117:361 / 117:335 and Sending
+Receiving Texts Messages 117:404 (check-in plan, texts get through),
+Contact 1-8 117:380 / 117:376 / 117:377 / 117:366 / 117:367 / 117:372 /
+117:371 / 117:396 (paper list of contacts), POST IT 117:360 / 117:355 and
+TO DO NOTES 117:373 (Build Your Kit intro, written plan), Flip Phone
+117:353 (simple phone that lasts), Spam 117:352 (rumour and
+disinformation), Phone Hotspot 117:364 (sharing internet), Bluetooth
+117:338. Rest are video calls, translate, social media, selfies, earbuds.
+
+### 110:65  Users / People  (177 items)
+Candidates: Grandparents Elderly 117:897 (check on older neighbours),
+Family 117:832 and Families All Types 117:845 / 117:837 / 117:839
+(household), Walk Together 117:794 / 117:802 / 117:803 (neighbours),
+Hello 117:886 (say hello first), High Five 117:854 / 117:868 / 117:875,
+Protect Someone 117:871 / 117:856 / 117:858 (looking out for others),
+Users Network 117:908 and User Network 117:917 / 117:927 / 117:918
+(mutual aid network), Hanging Out With Friends Indoors 117:840 (evenings
+without power), Feeling Lonely 117:826 / 117:812 / 117:814 (people who
+get missed), Rest 117:913 / 117:924 / 117:921 (sleep and routine), Refill
+Energy 117:820 / 117:833 / 117:821, Alarm Ringing 117:933 / 117:944 /
+117:946 (alerts), Find The Way 117:932 / 117:943 / 117:949 (evacuation
+route), Escape From A Danger 117:887 / 117:902 / 117:894 (use with care,
+tone), Fur Parent 117:925 and Walking A Dog 117:947 / 117:937 / 117:934
+(pets), Baby 117:928, Motherhood 117:830, Fatherhood 117:939, Siblings
+117:806, Twins 117:870, Going Onwards With Optimism 117:941 / 117:929 /
+117:940 / 117:907 / 117:916 (calm framing), Smart People 117:898,
+Discussion Whiteboard 117:900 (planning together), People 1-7 117:800 /
+117:790 / 117:796 / 117:775 / 117:780 / 117:787 / 117:784.
+
+### 110:64  Finance  (116 items)
+Candidates: Cash Payments 117:662 (small amount of cash), Emergency
+Savings 117:677 and Emergency Funds 117:709 (buffer, not stockpile),
+Atm 117:712 and Cardless Withdrawal 117:733 (cash machines down),
+Card Payments 117:742 (card systems), Personal Home Finance 117:670 /
+117:673 and Bills Payment 117:663 (budget, few pounds a week), Savings
+Calendar 117:704 and Saving For The Future 117:721 (build it slowly),
+Safe 117:681 / 117:693 (documents and cash kept together), Calculator
+117:727 (Build Your Kit planner), Checkbook 117:741 (paper records).
+
+### 110:63  Product  (110 items)
+Candidates: Page Under Construction 117:1406 / 117:1413 / 117:1409 /
+117:1425 (Build Your Kit and Sources placeholders), Lets Start 117:1404 /
+117:1410 / 117:1411 / 117:1423 / 117:1424 (Start here), Done 117:1371 /
+117:1364 / 117:1367 / 117:1345 (checklist complete), Unboxing 117:1348 /
+117:1359 / 117:1356 / 117:1374 (kit arriving), Recieve Notification
+117:1432 / 117:1438 / 117:1453 / 117:1444 (official alerts), We Got A
+Problem 117:1390 / 117:1383 / 117:1379 / 117:1395 (use with care, tone),
+Bring Solutions To Problem 117:1451 / 117:1445 / 117:1450 / 117:1427,
+Project Timeline 117:1347 / 117:1357 / 117:1358 / 117:1373 (build it
+over weeks), Milestone 117:1442 / 117:1435 / 117:1429 / 117:1448.
+
+### 110:62  Marketing  (31 items)
+Mostly ads, SEO, A/B testing, keynotes. Candidates: Clickbait 117:1337 /
+117:1335 / 117:1336 (rumour and disinformation, FAQ), Filling Survey
+117:1341 / 117:1339 / 117:1340 / 117:1342 (Start Here questionnaire).
+
+### 110:61  Social Media  (56 items)
+Mostly likes, shares, selfies, influencers. Candidates: Checking Phone
+117:1594 / 117:1591 / 117:1592 (checking official updates), Emptystates
+No Notifications 117:1567 and No Messages 117:1593 (networks down),
+Social Medial Discussion 117:1578 / 117:1580 / 117:1581 (street group
+chat), Emptystate Empty Contact No Contacts Added 117:1605.
+
+### 110:60  Shopping  (105 items)
+Candidates: Shop Open 117:1490 / 117:1508 / 117:1511 / 117:1515 (shops
+reopen within days), Market Fair 117:1505 / 117:1513 / 117:1520 (local
+market, community), Empty Cart 117:1477 / 117:1471 / 117:1466 and
+Abandoned Cart 117:1534 / 117:1522 / 117:1532 (buy normally, not
+panic-buying), Customer Having Too Many Choices 117:1469 / 117:1476 /
+117:1475 (FAQ), Order Groceries Online 117:1548 / 117:1555 / 117:1556
+and Payment Processed Groceries 117:1553 / 117:1540 / 117:1501 (weekly
+shop, one extra item), Credit Card Declined 117:1494 / 117:1500 /
+117:1496 / 117:1519 (card systems down, keep cash), Shipping 117:1487 /
+117:1481 / 117:1484 / 117:1465 and Order Delivered 117:1543 / 117:1551 /
+117:1559 / 117:1535 (supply delays), Discount Coupon Groceries 117:1478.
+
+### 110:59  E Commerce  (18 items)
+Candidates: Sorting Center 117:631 and International Shipping 117:633
+(supply chain), Same Day Delivery 117:624 and Free Shipping 117:630
+(just-in-time delivery), Emptystate Empty Wallet 117:629 (cash),
+Emptystate No Product 117:632 (thin shelves), Vaccinated 117:616.
+
+### 110:54  Interface  (151 items)
+Candidates: Emptystate Connectivity No Connection 117:1050 and No
+Connection 117:1093 / 117:1087 / 117:1086 / 117:1071 and Emptystate
+Connectivity No Internet 117:1172 (networks down, offline guide), All
+Good 117:1057 / 117:1053 / 117:1052 (most disruptions resolve),
+Maintenance 117:1049 (planned works), Be Patient 117:1104 / 117:1120 /
+117:1116 / 117:1145 / 117:1140 (short outages), Waiting 117:1066 /
+117:1075 / 117:1081 / 117:1090, I Have Question 117:1076 / 117:1067 /
+117:1073 / 117:1083 / 117:1151 (FAQ intro), Help 117:1118 (mutual aid),
+To Do List No Tasks 117:1069 and Zero Tasks 117:1084 / 117:1091 /
+117:1095 (Build Your Kit), Completed 117:1111 and Success 117:1175 /
+117:1189 / 117:1188 / 117:1164 / 117:1163, Ebook Download 117:1167 /
+117:1156 / 117:1153 / 117:1178 and Downloading 117:1130 / 117:1144 /
+117:1143 / 117:1119 / 117:1117 / 117:1102 (download the offline guide),
+Secured 117:1094, File Sharing 117:1194 (share the guide), Searching
+117:1152 / 117:1159 / 117:1168 / 117:1185 / 117:1196 / 117:1180 /
+117:1170 (Sources), Emptystates Lets Get Started 117:1079 and Welcome
+117:1142 / 117:1129 / 117:1131 / 117:1101 / 117:1105 (Start here).
+
+### 110:58  Technology  (72 items)
+Mostly robots, AI, space, labs. Candidates: Eco Friendly Tech 117:1665 /
+117:1673 / 117:1678 (solar panel and power station), Smart Home Control
+117:1675 / 117:1666 / 117:1668, Researchers 117:1686 (Sources),
+Computer World Map Location 117:1636, Drone Operator 117:1680.
+
 ## Still wanted
-Pages covering family and home life, communication and technology, weather
-and nature, and emergencies or safety would round this out. Re-pick once
-Alice says the list is complete.
+A weather and nature page and an emergency or safety page, if the file
+has them. Otherwise the list above is enough to re-pick every slot.
+Re-pick once Alice says the list is complete.
