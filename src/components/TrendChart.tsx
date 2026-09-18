@@ -25,8 +25,12 @@ function niceTicks(max: number, count = 4): number[] {
   const raw = max / count;
   const mag = Math.pow(10, Math.floor(Math.log10(raw)));
   const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= raw) ?? raw;
+  // Always run to the first tick at or above the maximum so no mark is clipped.
   const ticks: number[] = [];
-  for (let v = 0; v <= max + step * 0.001; v += step) ticks.push(Number(v.toFixed(6)));
+  for (let v = 0; ; v += step) {
+    ticks.push(Number(v.toFixed(6)));
+    if (v >= max) break;
+  }
   return ticks;
 }
 
