@@ -1,8 +1,125 @@
-export default function Page() {
+import type { Metadata } from "next";
+import Link from "next/link";
+import PageIntro from "@/components/PageIntro";
+import Callout from "@/components/Callout";
+import { checklist, startingPoint } from "@/data/checklist";
+
+export const metadata: Metadata = {
+  title: "Essentials checklist",
+  description:
+    "A categorised checklist of what to keep on hand, with realistic quantities and how long each item lasts.",
+};
+
+export default function ChecklistPage() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="text-3xl font-semibold mb-4">checklist</h1>
-      <p className="text-neutral-600">Placeholder page — content to be written per PLAN.md.</p>
+    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+      <PageIntro
+        eyebrow="The essentials"
+        title="What to keep on hand"
+        lede="Realistic quantities for a household to build up gradually. Not bought all at once, and never more than you can rotate and actually use. Every figure here is a planning number drawn from public emergency guidance, not a worst case."
+      />
+
+      <section className="mb-14">
+        <h2 className="text-2xl font-semibold">If you are starting from nothing</h2>
+        <p className="mt-3 leading-relaxed text-muted">
+          These few items cover most of the benefit for most of the scenarios.
+          Get these first, over a few weeks, and the rest can follow.
+        </p>
+        <ol className="mt-6 grid gap-3 sm:grid-cols-2">
+          {startingPoint.map((i, idx) => (
+            <li
+              key={i.item}
+              className="flex gap-3 rounded-md border border-line px-4 py-3"
+            >
+              <span className="font-heading text-xs text-muted">
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+              <span>
+                <span className="block font-medium">{i.item}</span>
+                <span className="block text-sm text-muted">{i.amount}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <Callout title="Build it slowly">
+        <p>
+          The point of this list is that it costs a few pounds a week, not a
+          weekend and a full car boot. Buying one extra of something you
+          already eat each time you shop gets a household to a week&rsquo;s
+          cover in a couple of months, and takes nothing off the shelf for
+          anyone else.
+        </p>
+      </Callout>
+
+      <nav aria-label="Categories" className="mb-10 mt-12">
+        <ul className="flex flex-wrap gap-2 text-sm">
+          {checklist.map((c) => (
+            <li key={c.slug}>
+              <a
+                href={`#${c.slug}`}
+                className="inline-block rounded-full border border-line px-3 py-1 hover:border-accent hover:bg-soft"
+              >
+                {c.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div className="divide-y divide-line">
+        {checklist.map((c) => (
+          <section key={c.slug} id={c.slug} className="scroll-mt-24 py-10">
+            <h2 className="text-2xl font-semibold">{c.title}</h2>
+            <p className="mt-2 max-w-2xl leading-relaxed text-muted">{c.intro}</p>
+
+            <div className="mt-6 overflow-x-auto">
+              <table className="w-full text-[0.95rem]">
+                <thead>
+                  <tr className="text-left text-xs uppercase tracking-wider text-muted">
+                    <th className="w-[30%] py-2 pr-4 font-semibold">Item</th>
+                    <th className="w-[30%] py-2 pr-4 font-semibold">Realistic amount</th>
+                    <th className="py-2 font-semibold">Shelf life and notes</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-line">
+                  {c.items.map((i) => (
+                    <tr key={i.item} className="align-top">
+                      <td className="py-3 pr-4 font-medium">
+                        {i.item}
+                        {i.priority ? (
+                          <span className="ml-2 inline-block rounded-full bg-soft px-2 py-0.5 text-[0.7rem] font-medium uppercase tracking-wider text-accent">
+                            First
+                          </span>
+                        ) : null}
+                      </td>
+                      <td className="py-3 pr-4">{i.amount}</td>
+                      <td className="py-3 text-muted">{i.notes}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <div className="mt-8 flex flex-wrap gap-4 border-t border-line pt-8 text-sm">
+        <Link
+          href="/scenarios"
+          className="rounded-md bg-accent px-5 py-3 font-medium text-accent-ink hover:opacity-90"
+        >
+          See which scenario each item is for
+        </Link>
+        <a
+          href="/offline/index.html"
+          download="prepare-offline-guide.html"
+          className="rounded-md border border-line px-5 py-3 font-medium hover:bg-soft"
+        >
+          Download the offline guide
+        </a>
+      </div>
     </main>
   );
 }
