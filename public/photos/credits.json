@@ -600,5 +600,21 @@
   "triggered": true,
   "w": 6123,
   "h": 4082
+ },
+ {
+  "slot": "clap-nhs",
+  "rank": 1,
+  "file": "clap-nhs.webp",
+  "id": "commons-clap-2020-04-30",
+  "alt": "Neighbours standing in a village street clapping for the NHS on a Thursday evening in April 2020",
+  "photographer": "Clint Budd",
+  "profile": "https://commons.wikimedia.org/wiki/File:2020-04-30_%E2%80%94_Thursday,_so_Communal_Clapping_for_the_NHS.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:2020-04-30_%E2%80%94_Thursday,_so_Communal_Clapping_for_the_NHS.jpg",
+  "download_location": "",
+  "triggered": true,
+  "w": 1600,
+  "h": 1067,
+  "source": "Wikimedia Commons",
+  "licence": "CC BY 2.0"
  }
 ]

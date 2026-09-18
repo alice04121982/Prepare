@@ -130,7 +130,7 @@ export default function CommunityPage() {
         </ol>
       </section>
 
-      <Photo slot="together-conflict" aspect="aspect-[16/8]" caption className="mt-16" />
+      <Photo slot="clap-nhs" aspect="aspect-[16/8]" caption className="mt-16" />
 
       <section className="mt-16">
         <SectionLabel>Skills spread further than stockpiles</SectionLabel>

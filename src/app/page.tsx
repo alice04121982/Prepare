@@ -123,8 +123,8 @@ export default function Home() {
               </Link>
             </p>
           </div>
-          <div className="mx-auto w-full max-w-[380px]">
-            <Illustration name="hero" alt="" className="invert" />
+          <div className="mx-auto w-full max-w-[400px] rounded-card bg-surface p-8 md:justify-self-end">
+            <Illustration name="hero" alt="" />
           </div>
         </div>
       </section>

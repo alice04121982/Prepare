@@ -10,6 +10,8 @@ type Credit = {
   page: string;
   w: number;
   h: number;
+  source?: string;
+  licence?: string;
 };
 
 const all = credits as Credit[];
@@ -63,14 +65,14 @@ export default function Photo({
         <figcaption className="mt-2 text-xs text-muted">
           Photo by{" "}
           <a
-            href={`${c.profile}?utm_source=stay_prepared&utm_medium=referral`}
+            href={c.source ? c.page : `${c.profile}?utm_source=stay_prepared&utm_medium=referral`}
             target="_blank"
             rel="noopener noreferrer"
             className="underline underline-offset-4 hover:text-sage"
           >
             {c.photographer}
-          </a>{" "}
-          on Unsplash
+          </a>
+          {c.source ? `, ${c.licence}, via ${c.source}` : " on Unsplash"}
         </figcaption>
       ) : null}
     </figure>
