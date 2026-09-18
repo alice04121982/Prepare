@@ -193,7 +193,7 @@ export default function WorriedPage() {
               { label: "Children dying before five", from: "43 in 100", to: "under 4 in 100", span: "1800 to today" },
               { label: "Life expectancy at birth", from: "29 years", to: "73 years", span: "1770 to today" },
               { label: "People in extreme poverty", from: "9 in 10", to: "1 in 10", span: "1820 to today" },
-              { label: "Deaths a year from disasters", from: "over 500,000", to: "about 40,000", span: "1920s to 2010s, with four times the population" },
+              { label: "Deaths a year from disasters", from: "over 500,000", to: "about 45,000", span: "1920s to 2010s, with four times the population" },
             ].map((t) => (
               <div key={t.label} className="rounded-2xl bg-surface px-4 py-4">
                 <p className="text-xs uppercase tracking-wider text-muted">{t.label}</p>

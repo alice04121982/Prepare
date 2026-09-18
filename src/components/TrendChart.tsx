@@ -154,11 +154,24 @@ export default function TrendChart({ title, subtitle, data, kind, unit = "", val
                 {[first, last].map(([x, y]) => (
                   <circle key={x} cx={sx(x)} cy={sy(y)} r={4} fill="var(--accent)" stroke="var(--surface)" strokeWidth={2} />
                 ))}
-                <text x={sx(first[0]) + 8} y={sy(first[1]) - 8} fontSize={12} fill="var(--foreground)" fontWeight={500}>
+                <text
+                  x={sx(first[0]) + 8}
+                  y={sy(first[1]) < PAD.top + 16 ? sy(first[1]) + 18 : sy(first[1]) - 8}
+                  fontSize={12}
+                  fill="var(--foreground)"
+                  fontWeight={500}
+                >
                   {format(first[1])}
                   {unit ? ` ${unit}` : ""}
                 </text>
-                <text x={sx(last[0]) - 6} y={sy(last[1]) - 10} textAnchor="end" fontSize={12} fill="var(--foreground)" fontWeight={500}>
+                <text
+                  x={sx(last[0]) - 6}
+                  y={sy(last[1]) < PAD.top + 16 ? sy(last[1]) + 18 : sy(last[1]) - 10}
+                  textAnchor="end"
+                  fontSize={12}
+                  fill="var(--foreground)"
+                  fontWeight={500}
+                >
                   {format(last[1])}
                   {unit ? ` ${unit}` : ""}
                 </text>
