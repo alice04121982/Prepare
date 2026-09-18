@@ -12,7 +12,7 @@ const nav = [
 export default function SiteHeader() {
   return (
     <header>
-      <div className="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-5 sm:px-10">
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-5 sm:px-10">
         <Link
           href="/"
           className="font-heading text-xl font-semibold tracking-tight text-heading"
@@ -37,7 +37,7 @@ export default function SiteHeader() {
           </Link>
         </nav>
       </div>
-      <ul className="wrap flex flex-wrap gap-x-5 gap-y-1 px-4 pb-3 text-sm text-muted sm:hidden">
+      <ul className="flex flex-wrap gap-x-5 gap-y-1 px-4 pb-3 text-sm text-muted sm:hidden">
         {nav.map((item) => (
           <li key={item.href}>
             <Link href={item.href} className="underline-offset-4 hover:text-heading hover:underline">
