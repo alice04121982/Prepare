@@ -4,6 +4,14 @@ import PageIntro from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 import Illustration from "@/components/Illustration";
 import Photo from "@/components/Photo";
+import TrendChart from "@/components/TrendChart";
+import {
+  childMortality,
+  disasterDeathsPerDecade,
+  extremePoverty,
+  famineDeathsPerDecade,
+  lifeExpectancy,
+} from "@/data/safer-world";
 
 export const metadata: Metadata = {
   title: "If the news is frightening you",
@@ -75,6 +83,7 @@ const sources = [
   { label: "Mass Observation Archive, Mass-Observation and civilian morale", url: "https://massobs.org.uk/wp-content/uploads/2024/10/no8_beavan.pdf" },
   { label: "National CJD Research and Surveillance Unit figures, summarised by History.com and the CIDRAP archive", url: "https://www.cidrap.umn.edu/bse/study-predicts-increase-british-vcjd-cases" },
   { label: "Action for Children, Talking to your child about upsetting news stories", url: "https://parents.actionforchildren.org.uk/feelings-behaviour/talking-about-feelings/talk-to-child-news/" },
+  { label: "Our World in Data: child mortality, life expectancy, extreme poverty, natural disasters and famines (World series, fetched 19 September 2026)", url: "https://ourworldindata.org/" },
 ];
 
 export default function WorriedPage() {
@@ -166,6 +175,98 @@ export default function WorriedPage() {
         </section>
 
         <Photo slot="together-covid" aspect="aspect-[16/8]" caption className="mt-10" />
+
+        <section className="mt-14">
+          <h2 className="text-2xl font-semibold">The safest time there has ever been</h2>
+          <p className="mt-4 leading-relaxed">
+            This is the part that is hard to feel and easy to check. By almost
+            every measure that decides whether a person lives, and how long,
+            the world is safer now than at any point in history. The numbers
+            below are for the whole world, from Our World in Data, which
+            gathers them from the UN, the World Bank and the disaster
+            database EM-DAT. Hover for any year; there is a table view for
+            each.
+          </p>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: "Children dying before five", from: "43 in 100", to: "under 4 in 100", span: "1800 to today" },
+              { label: "Life expectancy at birth", from: "29 years", to: "73 years", span: "1770 to today" },
+              { label: "People in extreme poverty", from: "9 in 10", to: "1 in 10", span: "1820 to today" },
+              { label: "Deaths a year from disasters", from: "over 500,000", to: "about 40,000", span: "1920s to 2010s, with four times the population" },
+            ].map((t) => (
+              <div key={t.label} className="rounded-2xl bg-surface px-4 py-4">
+                <p className="text-xs uppercase tracking-wider text-muted">{t.label}</p>
+                <p className="mt-2 font-heading text-2xl font-medium text-heading">
+                  <span className="text-muted line-through decoration-1">{t.from}</span>
+                  <br />
+                  {t.to}
+                </p>
+                <p className="mt-1 text-xs text-muted">{t.span}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-2">
+            <TrendChart
+              title="Share of children dying before age five"
+              subtitle="World, per cent, 1800 to 2024"
+              data={childMortality}
+              kind="line"
+              unit="%"
+              valueFormat="decimal"
+              source={{ label: "Our World in Data, Gapminder and UN IGME", url: "https://ourworldindata.org/grapher/global-child-mortality-timeseries" }}
+            />
+            <TrendChart
+              title="Life expectancy at birth"
+              subtitle="World, years, 1770 to 2023"
+              data={lifeExpectancy}
+              kind="line"
+              unit="years"
+              valueFormat="int"
+              source={{ label: "Our World in Data, UN WPP and Riley", url: "https://ourworldindata.org/grapher/life-expectancy" }}
+            />
+            <TrendChart
+              title="Share of people in extreme poverty"
+              subtitle="World, per cent, 1820 to 2015"
+              data={extremePoverty}
+              kind="line"
+              unit="%"
+              valueFormat="int"
+              source={{ label: "Our World in Data, World Bank and Bourguignon and Morrisson", url: "https://ourworldindata.org/grapher/world-population-in-extreme-poverty-absolute" }}
+            />
+            <TrendChart
+              title="Deaths a year from natural disasters"
+              subtitle="World, average per year in each decade, 1900s to 2010s"
+              data={disasterDeathsPerDecade.filter(([y]) => y < 2020)}
+              kind="bar"
+              xFormat="decade"
+              source={{ label: "Our World in Data, EM-DAT", url: "https://ourworldindata.org/grapher/decadal-deaths-disasters-type" }}
+            />
+          </div>
+          <div className="mt-6">
+            <TrendChart
+              title="Deaths from famine"
+              subtitle="World, total per decade, 1870s to 2010s"
+              data={famineDeathsPerDecade.filter(([y]) => y < 2020)}
+              kind="bar"
+              xFormat="decade"
+              source={{ label: "Our World in Data, famine deaths by decade", url: "https://ourworldindata.org/grapher/deaths-from-famines-by-decade" }}
+            />
+          </div>
+          <p className="mt-6 leading-relaxed">
+            Two honest caveats. Deaths from disasters and famine fell because
+            of warnings, engineering, medicine and aid, not because the
+            hazards went away, and some of those hazards are now growing
+            again with the climate. And the last few years have seen war
+            deaths rise for the first time in decades. Neither changes the
+            shape of the charts. A child born today in almost any country is
+            far more likely to reach old age than any child before them, and
+            the disasters that used to kill hundreds of thousands now kill
+            tens of thousands in a world with four times the people. The
+            danger is real. The scale of it is smaller than it has ever been.
+          </p>
+        </section>
 
         <Callout title="The one idea to keep">
           <p>
