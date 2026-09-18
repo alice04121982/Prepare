@@ -4,7 +4,7 @@ import PageIntro from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 import Illustration from "@/components/Illustration";
 import Photo from "@/components/Photo";
-import TrendChart from "@/components/TrendChart";
+import SaferWorldCharts from "@/components/SaferWorldCharts";
 import {
   childMortality,
   disasterDeathsPerDecade,
@@ -184,7 +184,8 @@ export default function WorriedPage() {
             the world is safer now than at any point in history. The numbers
             below are for the whole world, from Our World in Data, which
             gathers them from the UN, the World Bank and the disaster
-            database EM-DAT. Hover for any year; there is a table view for
+            database EM-DAT. Pick your own country below if a global average
+            feels too far away. Hover for any year; there is a table view for
             each.
           </p>
 
@@ -207,53 +208,10 @@ export default function WorriedPage() {
             ))}
           </div>
 
-          <div className="mt-6 grid gap-6 lg:grid-cols-2">
-            <TrendChart
-              title="Share of children dying before age five"
-              subtitle="World, per cent, 1800 to 2024"
-              data={childMortality}
-              kind="line"
-              unit="%"
-              valueFormat="decimal"
-              source={{ label: "Our World in Data, Gapminder and UN IGME", url: "https://ourworldindata.org/grapher/global-child-mortality-timeseries" }}
-            />
-            <TrendChart
-              title="Life expectancy at birth"
-              subtitle="World, years, 1770 to 2023. Twenty-nine does not mean people died at thirty: the average is dragged down by the four in ten children who died before five. An adult in 1770 could expect their fifties or sixties."
-              data={lifeExpectancy}
-              kind="line"
-              unit="years"
-              valueFormat="int"
-              source={{ label: "Our World in Data, UN WPP and Riley", url: "https://ourworldindata.org/grapher/life-expectancy" }}
-            />
-            <TrendChart
-              title="Share of people in extreme poverty"
-              subtitle="World, per cent, 1820 to 2015"
-              data={extremePoverty}
-              kind="line"
-              unit="%"
-              valueFormat="int"
-              source={{ label: "Our World in Data, World Bank and Bourguignon and Morrisson", url: "https://ourworldindata.org/grapher/world-population-in-extreme-poverty-absolute" }}
-            />
-            <TrendChart
-              title="Deaths a year from natural disasters"
-              subtitle="World, average per year in each decade, 1900s to 2010s"
-              data={disasterDeathsPerDecade.filter(([y]) => y < 2020)}
-              kind="bar"
-              xFormat="decade"
-              source={{ label: "Our World in Data, EM-DAT", url: "https://ourworldindata.org/grapher/decadal-deaths-disasters-type" }}
-            />
-          </div>
-          <div className="mt-6">
-            <TrendChart
-              title="Deaths from famine"
-              subtitle="World, total per decade, 1870s to 2010s"
-              data={famineDeathsPerDecade.filter(([y]) => y < 2020)}
-              kind="bar"
-              xFormat="decade"
-              source={{ label: "Our World in Data, famine deaths by decade", url: "https://ourworldindata.org/grapher/deaths-from-famines-by-decade" }}
-            />
-          </div>
+          <SaferWorldCharts
+            world={{ code: "OWID_WRL", name: "World", child: childMortality, life: lifeExpectancy, poverty: extremePoverty, disasters: disasterDeathsPerDecade.filter(([y]) => y < 2020) }}
+            famine={famineDeathsPerDecade.filter(([y]) => y < 2020)}
+          />
           <p className="mt-6 leading-relaxed">
             Two honest caveats. Deaths from disasters and famine fell because
             of warnings, engineering, medicine and aid, not because the
