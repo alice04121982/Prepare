@@ -480,20 +480,12 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
 }
 
 /**
- * Builds an Amazon UK add-to-basket URL for every line that has a verified
- * ASIN. Returns null when nothing has an ASIN yet.
+ * Builds an Amazon UK add-to-basket URL for a set of ASINs and quantities.
+ * Returns null when the list is empty.
  */
-export function amazonBasketUrl(lines: KitLine[], have: Set<string>, tag?: string): string | null {
-  const params: string[] = [];
-  let n = 1;
-  for (const line of lines) {
-    if (have.has(line.id)) continue;
-    const p = line.products?.find((x) => x.asin);
-    if (!p?.asin) continue;
-    params.push(`ASIN.${n}=${encodeURIComponent(p.asin)}&Quantity.${n}=${Math.max(1, line.quantity)}`);
-    n++;
-  }
-  if (params.length === 0) return null;
+export function amazonBasketUrl(items: { asin: string; quantity: number }[], tag?: string): string | null {
+  if (items.length === 0) return null;
+  const params = items.map((it, i) => `ASIN.${i + 1}=${encodeURIComponent(it.asin)}&Quantity.${i + 1}=${Math.max(1, it.quantity)}`);
   const tagParam = tag ? `&AssociateTag=${encodeURIComponent(tag)}` : "";
   return `https://www.amazon.co.uk/gp/aws/cart/add.html?${params.join("&")}${tagParam}`;
 }

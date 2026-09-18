@@ -9,7 +9,8 @@ import {
   type Household,
   type Retailer,
 } from "@/data/kit-rules";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ShoppingBasket } from "lucide-react";
+import { amazonProductUrl, productsFor } from "@/data/products";
 
 const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
 
@@ -81,8 +82,19 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const { lines, tasks } = useMemo(() => buildKit(h), [h]);
   const categories = useMemo(() => [...new Set(lines.map((l) => l.category))], [lines]);
   const toBuy = lines.filter((l) => !have.has(l.id));
-  const basket = amazonBasketUrl(lines, have, TAG);
-  const asinCount = lines.filter((l) => !have.has(l.id) && l.products?.some((p) => p.asin)).length;
+  const picks = toBuy
+    .map((l) => ({ line: l, product: productsFor(l.id)[0] }))
+    .map(({ line, product }) => ({
+      line,
+      product,
+      buyQty: product ? Math.max(1, Math.ceil(line.quantity / (product.unitsPerProduct ?? 1))) : 0,
+    }));
+  const withProduct = picks.filter((p) => p.product);
+  const basket = amazonBasketUrl(
+    withProduct.map((p) => ({ asin: p.product!.asin, quantity: p.buyQty })),
+    TAG,
+  );
+  const asinCount = withProduct.length;
 
   const set = <K extends keyof Household>(k: K, v: Household[K]) => setH((prev) => ({ ...prev, [k]: v }));
   const toggleHave = (id: string) =>
@@ -202,9 +214,14 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
           </div>
         </div>
 
-        <section className="mb-8 rounded-card border border-line bg-surface p-5 print:hidden">
-          <p className="text-sm font-medium">Buy it from</p>
-          <div className="mt-3 flex flex-wrap gap-2">
+        <section className="mb-10 rounded-card border border-line bg-surface p-5 print:hidden sm:p-6">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wider text-muted">Buy it</p>
+              <h3 className="mt-1 text-xl font-semibold">Pick a shop, see the products, one button to the basket</h3>
+            </div>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
             {retailers.map((r) => (
               <button
                 key={r.id}
@@ -218,19 +235,92 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             ))}
           </div>
           <p className="mt-3 text-sm text-muted">{retailer.note}</p>
+
           {shop === "amazon" ? (
-            basket ? (
-              <p className="mt-2 text-xs text-muted">
-                The basket button fills an Amazon basket with the {asinCount} {asinCount === 1 ? "item" : "items"} that
-                have a verified product code, in the quantities shown, and earns this site a small commission. Nothing
-                is bought until you choose to.
+            <>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {picks.map(({ line, product, buyQty }) => (
+                  <li key={line.id} className="flex flex-col rounded-2xl bg-mint-pale p-4">
+                    <p className="text-xs uppercase tracking-wider text-muted">{line.item}</p>
+                    {product ? (
+                      <>
+                        <p className="mt-1 font-medium leading-snug">{product.name}</p>
+                        <p className="mt-1 text-sm text-muted">
+                          {buyQty} × · {product.priceBand}
+                          {product.verified ? " · checked by hand" : ""}
+                        </p>
+                        <a
+                          href={amazonProductUrl(product.asin, TAG)}
+                          target="_blank"
+                          rel="noopener noreferrer sponsored"
+                          className="mt-auto inline-flex items-center gap-1 pt-3 text-sm text-heading underline underline-offset-4 hover:text-accent"
+                        >
+                          View on Amazon <ExternalLink size={12} />
+                        </a>
+                      </>
+                    ) : (
+                      <>
+                        <p className="mt-1 text-sm text-muted">
+                          {line.quantity} {line.unit}. Best bought at a supermarket, or search Amazon.
+                        </p>
+                        {line.search ? (
+                          <a
+                            href={retailer.search(line.search)}
+                            target="_blank"
+                            rel="noopener noreferrer sponsored"
+                            className="mt-auto inline-flex items-center gap-1 pt-3 text-sm text-heading underline underline-offset-4 hover:text-accent"
+                          >
+                            Search Amazon <ExternalLink size={12} />
+                          </a>
+                        ) : null}
+                      </>
+                    )}
+                  </li>
+                ))}
+              </ul>
+              {basket ? (
+                <div className="mt-5 flex flex-wrap items-center gap-4">
+                  <a href={basket} target="_blank" rel="noopener noreferrer sponsored" className="btn btn-primary !px-6 !py-3.5 !text-base">
+                    <ShoppingBasket size={18} />
+                    Add {asinCount} {asinCount === 1 ? "item" : "items"} to my Amazon basket
+                  </a>
+                  <p className="max-w-md text-xs text-muted">
+                    Opens Amazon with these {asinCount} products in your basket, in the quantities shown. You check the
+                    basket and pay there. Nothing is bought until you choose to. Groceries are on the list below; buy those
+                    at a supermarket.
+                  </p>
+                </div>
+              ) : null}
+            </>
+          ) : (
+            <>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {picks
+                  .filter(({ line }) => line.search)
+                  .map(({ line }) => (
+                    <li key={line.id} className="flex flex-col rounded-2xl bg-mint-pale p-4">
+                      <p className="text-xs uppercase tracking-wider text-muted">{line.item}</p>
+                      <p className="mt-1 text-sm text-muted">
+                        {line.quantity} {line.unit}
+                      </p>
+                      <a
+                        href={retailer.search(line.search!)}
+                        target="_blank"
+                        rel="noopener noreferrer sponsored"
+                        className="mt-auto inline-flex items-center gap-1 pt-3 text-sm text-heading underline underline-offset-4 hover:text-accent"
+                      >
+                        Find at {retailer.name} <ExternalLink size={12} />
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+              <p className="mt-4 max-w-2xl text-xs text-muted">
+                {retailer.name} has no way for a website to fill your basket, so it is one click per item: each link opens
+                the search for that item, you add it there. A single basket button for supermarkets needs a partnership
+                with Samsung Food, the service behind BBC Good Food&rsquo;s shoppable recipes, which is on the plan.
               </p>
-            ) : (
-              <p className="mt-2 text-xs text-muted">
-                Verified product codes are being added item by item; until then each line links to the Amazon search.
-              </p>
-            )
-          ) : null}
+            </>
+          )}
         </section>
 
         <div className="space-y-8">
@@ -264,17 +354,6 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                             <p className="mt-1 text-sm">
                               <span className="font-medium text-heading">Free option:</span> {l.freeOption}
                             </p>
-                          ) : null}
-                          {l.search && !got ? (
-                            <a
-                              href={retailer.search(l.search)}
-                              target="_blank"
-                              rel="noopener noreferrer sponsored"
-                              className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-xs font-medium text-accent-ink hover:brightness-110 print:hidden"
-                            >
-                              Find at {retailer.name}
-                              <ExternalLink size={12} />
-                            </a>
                           ) : null}
                           {l.products?.length ? (
                             <ul className="mt-2 flex flex-wrap gap-2 print:hidden">
