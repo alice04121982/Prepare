@@ -439,3 +439,28 @@ export function amazonBasketUrl(lines: KitLine[], have: Set<string>, tag?: strin
   const tagParam = tag ? `&AssociateTag=${encodeURIComponent(tag)}` : "";
   return `https://www.amazon.co.uk/gp/aws/cart/add.html?${params.join("&")}${tagParam}`;
 }
+
+/** Parses planner state from URL search params (server or client). */
+export function householdFromParams(q: Record<string, string | string[] | undefined>): Household | null {
+  if (!Object.keys(q).length) return null;
+  const get = (k: string) => {
+    const v = q[k];
+    return Array.isArray(v) ? v[0] : v;
+  };
+  const n = (k: string, d: number) => {
+    const v = parseInt(get(k) ?? "", 10);
+    return Number.isFinite(v) ? Math.max(0, Math.min(12, v)) : d;
+  };
+  const days = n("d", 3);
+  return {
+    adults: Math.max(1, n("a", 2)),
+    children: n("c", 0),
+    babies: n("b", 0),
+    over65: n("e", 0),
+    dogs: n("dogs", 0),
+    cats: n("cats", 0),
+    medicalNeeds: get("med") === "1",
+    homeType: get("home") === "flat" ? "flat" : "house",
+    days: days === 7 || days === 14 ? days : 3,
+  };
+}

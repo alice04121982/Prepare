@@ -49,28 +49,6 @@ function Counter({
   );
 }
 
-function fromQuery(): Household | null {
-  if (typeof window === "undefined") return null;
-  const q = new URLSearchParams(window.location.search);
-  if (![...q.keys()].length) return null;
-  const n = (k: string, d: number) => {
-    const v = parseInt(q.get(k) ?? "", 10);
-    return Number.isFinite(v) ? v : d;
-  };
-  const days = n("d", 3);
-  return {
-    adults: n("a", 2),
-    children: n("c", 0),
-    babies: n("b", 0),
-    over65: n("e", 0),
-    dogs: n("dogs", 0),
-    cats: n("cats", 0),
-    medicalNeeds: q.get("med") === "1",
-    homeType: q.get("home") === "flat" ? "flat" : "house",
-    days: days === 7 || days === 14 ? days : 3,
-  };
-}
-
 function toQuery(h: Household) {
   const q = new URLSearchParams({
     a: String(h.adults),
@@ -86,15 +64,10 @@ function toQuery(h: Household) {
   return `?${q.toString()}`;
 }
 
-export default function KitPlanner() {
-  const [h, setH] = useState<Household>(defaultHousehold);
+export default function KitPlanner({ initial }: { initial?: Household }) {
+  const [h, setH] = useState<Household>(initial ?? defaultHousehold);
   const [have, setHave] = useState<Set<string>>(new Set());
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    const q = fromQuery();
-    if (q) setH(q);
-  }, []);
 
   useEffect(() => {
     window.history.replaceState(null, "", toQuery(h));

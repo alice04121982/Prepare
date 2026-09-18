@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
 import KitPlanner from "@/components/KitPlanner";
+import { householdFromParams } from "@/data/kit-rules";
 
 export const metadata: Metadata = {
   title: "Build your kit",
@@ -9,7 +10,12 @@ export const metadata: Metadata = {
     "Tell us who lives with you and how many days to cover. Get a shopping list with realistic quantities, a free option for every line, and a print or copy button.",
 };
 
-export default function BuildYourKitPage() {
+export default async function BuildYourKitPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const initial = householdFromParams(await searchParams) ?? undefined;
   return (
     <main className="mx-auto w-full max-w-6xl py-4 sm:py-8">
       <div className="mx-auto max-w-3xl">
@@ -20,7 +26,7 @@ export default function BuildYourKitPage() {
           aside={<Illustration name="intro-kit" className="max-w-[260px]" />}
         />
       </div>
-      <KitPlanner />
+      <KitPlanner initial={initial} />
     </main>
   );
 }
