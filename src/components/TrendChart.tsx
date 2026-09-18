@@ -36,7 +36,11 @@ function niceTicks(max: number, count = 4): number[] {
 
 const formats = {
   compact: (v: number) =>
-    v >= 1_000_000 ? `${(v / 1_000_000).toFixed(1)}M` : v >= 1000 ? `${Math.round(v / 1000)}k` : `${Math.round(v * 10) / 10}`,
+    v >= 1_000_000
+      ? `${Number((v / 1_000_000).toFixed(1))}M`
+      : v >= 1000
+        ? `${Math.round(v / 1000)}k`
+        : `${Math.round(v * 10) / 10}`,
   decimal: (v: number) => `${Math.round(v * 10) / 10}`,
   int: (v: number) => `${Math.round(v)}`,
 };
