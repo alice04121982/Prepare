@@ -131,7 +131,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             type="checkbox"
             checked={h.medicalNeeds}
             onChange={(e) => set("medicalNeeds", e.target.checked)}
-            className="h-5 w-5 accent-forest"
+            className="h-5 w-5 accent-accent"
           />
         </label>
 
@@ -143,7 +143,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                 key={t}
                 type="button"
                 onClick={() => set("homeType", t)}
-                className={`flex-1 rounded-full px-3 py-1.5 text-sm ${h.homeType === t ? "bg-forest text-on-forest" : "border border-line hover:bg-mint-pale"}`}
+                className={`flex-1 rounded-full px-3 py-1.5 text-sm ${h.homeType === t ? "bg-accent text-accent-ink" : "border border-line hover:bg-mint-pale"}`}
               >
                 {t === "flat" ? "Flat" : "House"}
               </button>
@@ -159,7 +159,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                 key={n}
                 type="button"
                 onClick={() => set("days", n)}
-                className={`flex-1 rounded-full px-3 py-1.5 text-sm ${h.days === n ? "bg-forest text-on-forest" : "border border-line hover:bg-mint-pale"}`}
+                className={`flex-1 rounded-full px-3 py-1.5 text-sm ${h.days === n ? "bg-accent text-accent-ink" : "border border-line hover:bg-mint-pale"}`}
               >
                 {n} days
               </button>
@@ -225,7 +225,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                           aria-label={`Already have ${l.item}`}
                           checked={got}
                           onChange={() => toggleHave(l.id)}
-                          className="mt-1.5 h-5 w-5 shrink-0 accent-forest print:hidden"
+                          className="mt-1.5 h-5 w-5 shrink-0 accent-accent print:hidden"
                         />
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -233,7 +233,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                             <span className="font-heading text-heading">
                               {l.quantity ? l.quantity : ""} {l.unit}
                             </span>
-                            {l.priority ? <span className="tag bg-mint text-[0.65rem]">Get first</span> : null}
+                            {l.priority ? <span className="tag text-[0.65rem]">Get first</span> : null}
                           </div>
                           <p className="mt-1 text-sm text-muted">{l.basis}</p>
                           {l.freeOption ? (

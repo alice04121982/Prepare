@@ -77,7 +77,7 @@ export default function ChecklistPage() {
             <li key={c.slug}>
               <a
                 href={`#${c.slug}`}
-                className="tag hover:bg-mint"
+                className="tag hover:bg-tag"
               >
                 {c.title}
               </a>
@@ -107,7 +107,7 @@ export default function ChecklistPage() {
                       <td className="py-3 pr-4 font-medium">
                         {i.item}
                         {i.priority ? (
-                          <span className="ml-2 inline-block rounded-full bg-mint px-2 py-0.5 text-[0.7rem] font-medium uppercase tracking-wider text-forest">
+                          <span className="ml-2 inline-block rounded-full bg-tag px-2 py-0.5 text-[0.7rem] font-medium uppercase tracking-wider text-heading">
                             First
                           </span>
                         ) : null}

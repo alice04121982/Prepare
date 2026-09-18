@@ -13,18 +13,18 @@ export default function PageIntro({ eyebrow, title, lede, aside }: Props) {
       <div className="grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
         <div>
           {eyebrow ? (
-            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-forest/80">
+            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-white/70">
               {eyebrow}
             </p>
           ) : null}
-          <h1 className="text-4xl font-normal leading-[1.05] text-forest sm:text-6xl">
+          <h1 className="text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
             {title}
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-forest/85 sm:text-lg">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
             {lede}
           </p>
         </div>
-        {aside ? <div className="justify-self-center md:justify-self-end md:pr-6">{aside}</div> : null}
+        {aside ? <div className="justify-self-center invert md:justify-self-end md:pr-6">{aside}</div> : null}
       </div>
     </div>
   );

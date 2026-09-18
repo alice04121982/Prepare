@@ -38,7 +38,7 @@ export default function ScenariosPage() {
             <li key={s.slug}>
               <a
                 href={`#${s.slug}`}
-                className="flex items-baseline gap-3 rounded-2xl bg-mint-pale px-4 py-3 text-sm hover:bg-mint"
+                className="flex items-baseline gap-3 rounded-2xl bg-mint-pale px-4 py-3 text-sm hover:bg-tag"
               >
                 <span className="font-heading text-xs text-muted">
                   {String(i + 1).padStart(2, "0")}

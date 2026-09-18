@@ -65,14 +65,14 @@ export default function Home() {
       <section className="rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-16">
         <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
           <div>
-            <p className="mb-4 text-xs font-medium uppercase tracking-wider text-forest/80">
+            <p className="mb-4 text-xs font-medium uppercase tracking-wider text-white/70">
               Simple steps for a difficult few days
             </p>
-            <h1 className="text-4xl font-normal leading-[1.05] text-forest sm:text-6xl">
+            <h1 className="text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
               If the power, water or shops stopped for three days, would you be
               all right?
             </h1>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-forest/85 sm:text-lg">
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
               The government now asks every UK household to be able to cope on
               its own for seventy-two hours. It would not ask if it did not
               think it might be needed. This site takes that advice and makes
@@ -83,13 +83,13 @@ export default function Home() {
               <Link href="/checklist" className="btn btn-primary">
                 Start with the checklist
               </Link>
-              <a href="#why-now" className="btn btn-secondary">
+              <a href="#why-now" className="btn btn-on-dark">
                 Why three days?
               </a>
             </div>
           </div>
           <div className="mx-auto w-full max-w-[380px]">
-            <Illustration name="hero" alt="" />
+            <Illustration name="hero" alt="" className="invert" />
           </div>
         </div>
       </section>
