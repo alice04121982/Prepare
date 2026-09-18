@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
+import Illustration from "@/components/Illustration";
 import Callout from "@/components/Callout";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function SourcesPage() {
         eyebrow="Sources and methodology"
         title="Where the numbers come from"
         lede="Every duration and quantity on this site is a conservative planning figure drawn from public emergency-preparedness guidance. The full citation list is still being compiled."
+        aside={<Illustration name="intro-sources" className="max-w-[260px]" />}
       />
       <section className="prose-plain leading-relaxed">
         <p>
@@ -33,6 +35,18 @@ export default function SourcesPage() {
           line.
         </p>
       </Callout>
+      <section className="prose-plain mt-8 leading-relaxed">
+        <h2 className="text-2xl font-semibold">Illustrations and design</h2>
+        <p className="mt-3">
+          Illustrations are from{" "}
+          <a href="https://undraw.co" target="_blank" rel="noopener noreferrer">
+            unDraw
+          </a>
+          , an open-licence collection, recoloured to match the site. Type is
+          General Sans and Switzer from Fontshare. No stock photography, no
+          tracking, no affiliate links.
+        </p>
+      </section>
     </main>
   );
 }

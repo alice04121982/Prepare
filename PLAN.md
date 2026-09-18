@@ -120,7 +120,26 @@ Editorial rules that shape every page:
 - [ ] Deploy to hosting, connect custom domain if desired
 - [ ] Light analytics (optional, privacy-respecting)
 
+**Design and imagery (2026-09-18)**
+- [x] Visual system taken from the "Prepare App" Figma file
+      (figma.com/design/oSzUwrqcukRt4CUQnbSKyx): mint hero #a0f1bd,
+      pale-mint cards #d2f8dc, forest-green buttons/footer #2e4f21,
+      off-white page #f9f9f9, pill buttons and tags, rounded-card panels.
+- [x] Illustrations from unDraw (open licence), recoloured to forest green,
+      in `public/illustrations/`. Rendered by `src/components/Illustration.tsx`,
+      which falls back to a soft placeholder shape for any missing name.
+- [ ] The Streamline "Minimal" community set Alice liked is free with
+      attribution only and the duplicated file holds ~45 off-topic samples.
+      Revisit if a licensed set or attribution is wanted.
+- [ ] Dark-mode pass on the SVGs (their dark greys sit on dark panels).
+
 **Content notes (2026-09-18)**
+- Six scenarios now, including armed conflict drawn from Ukraine since
+  2022. It stretches the "short, common disruption" framing on purpose and
+  says so in its own copy.
+- Product links: maker's own site only, never a retailer, no affiliate
+  links, only things actually used. Jackery power station and solar panel
+  are the first examples. Disclosure callout sits on the Checklist page.
 - Scenarios, checklist, and the first three FAQ entries mirror the
   offline guide. When either side changes, update the other.
 - Guidance is UK-first (105 power-cut number, Priority Services Register,

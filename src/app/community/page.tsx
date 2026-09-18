@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import Illustration from "@/components/Illustration";
 import Callout from "@/components/Callout";
 
 export const metadata: Metadata = {
@@ -58,6 +59,7 @@ export default function CommunityPage() {
         eyebrow="Community and mutual aid"
         title="The most effective form of preparation is other people"
         lede="This is the part of the site that everything else builds outward from. A well-stocked cupboard helps a household for a few days. A street that knows itself helps everyone on it, for as long as it takes."
+        aside={<Illustration name="intro-community" className="max-w-[260px]" />}
       />
 
       <section className="prose-plain leading-relaxed">

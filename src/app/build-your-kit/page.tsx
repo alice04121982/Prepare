@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import Illustration from "@/components/Illustration";
 import Callout from "@/components/Callout";
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function BuildYourKitPage() {
         eyebrow="Interactive planner"
         title="Build your kit"
         lede="Pick your household size and a duration target, and get a shopping list scaled to you with a rough cost band. This tool is still being built."
+        aside={<Illustration name="intro-kit" className="max-w-[260px]" />}
       />
       <Callout title="Not ready yet">
         <p>

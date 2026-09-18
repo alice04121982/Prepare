@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import Illustration from "@/components/Illustration";
 import { faq } from "@/data/faq";
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function FaqPage() {
         eyebrow="Myth-busting and questions"
         title="Sensible preparation, not panic"
         lede="The questions people actually ask, and the misconceptions that stop them starting. Short answers where a short answer is honest, longer ones where it is not."
+        aside={<Illustration name="intro-faq" className="max-w-[260px]" />}
       />
 
       <nav aria-label="Questions on this page" className="mb-12">

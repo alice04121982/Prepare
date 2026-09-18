@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import Illustration from "@/components/Illustration";
 import Callout from "@/components/Callout";
 import { scenarios } from "@/data/scenarios";
 
@@ -17,6 +18,7 @@ export default function ScenariosPage() {
         eyebrow="Understand the scenarios"
         title="What disruption actually looks like"
         lede="Six realistic situations, each with the duration you can reasonably plan for and the handful of things that make a real difference. Five of them are about a difficult day or week. The sixth, armed conflict, is longer and rarer, and is included because people ask, and because Ukraine has shown what it actually looks like for ordinary households."
+        aside={<Illustration name="intro-scenarios" className="max-w-[260px]" />}
       />
 
       <nav aria-label="Scenarios on this page" className="mb-12">
