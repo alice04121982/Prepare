@@ -130,3 +130,14 @@ Font pairing (from Fontshare, both free): **General Sans** for headings,
 reads as calm, modern, and trustworthy rather than either corporate-cold or
 survivalist. Loaded via Fontshare's CSS API in `src/app/layout.tsx`, with
 CSS variables `--font-heading` / `--font-body` set in `globals.css`.
+
+## 8. Offline access
+
+Added `public/offline/index.html`: a single self-contained HTML file (no
+external fonts, scripts, or requests) covering scenarios, the essentials
+checklist, community/mutual aid, and myth-busting. It's linked from the
+home page as "Download the offline guide" so people can save, print, or
+share it before a disruption happens, and it will still open and read
+correctly with zero internet connection. Content should be reviewed and
+expanded alongside the main site pages as those are built out — the two
+should stay in sync.
