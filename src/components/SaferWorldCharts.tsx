@@ -19,8 +19,7 @@ type Props = {
 export default function SaferWorldCharts({ world, famine }: Props) {
   const [countries, setCountries] = useState<Country[]>([]);
   const [code, setCode] = useState("OWID_WRL");
-  const [series, setSeries] = useState<Series>(world);
-  const [loading, setLoading] = useState(false);
+  const [fetched, setFetched] = useState<Series | null>(null);
 
   useEffect(() => {
     fetch("/data/safer/index.json")
@@ -30,27 +29,22 @@ export default function SaferWorldCharts({ world, famine }: Props) {
   }, []);
 
   useEffect(() => {
-    if (code === "OWID_WRL") {
-      setSeries(world);
-      return;
-    }
+    if (code === "OWID_WRL") return;
     let cancelled = false;
-    setLoading(true);
     fetch(`/data/safer/${code}.json`)
       .then((r) => r.json())
       .then((s: Series) => {
-        if (!cancelled) setSeries(s);
+        if (!cancelled) setFetched(s);
       })
-      .catch(() => {
-        if (!cancelled) setSeries(world);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
+      .catch(() => {});
     return () => {
       cancelled = true;
     };
-  }, [code, world]);
+  }, [code]);
+
+  // Derived, not stored: the world when selected, the fetched series once it matches the selection.
+  const series: Series = code === "OWID_WRL" ? world : fetched && fetched.code === code ? fetched : world;
+  const loading = code !== "OWID_WRL" && (!fetched || fetched.code !== code);
 
   const name = series.name === "World" ? "World" : series.name;
   const span = (pts: Point[]) => (pts.length ? `${pts[0][0]} to ${pts[pts.length - 1][0]}` : "");
