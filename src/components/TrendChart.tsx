@@ -47,7 +47,7 @@ const formats = {
 
 export default function TrendChart({ title, subtitle, data, kind, unit = "", valueFormat = "compact", xFormat = "year", source }: Props) {
   const format = formats[valueFormat];
-  const formatX = (x: number) => (xFormat === "decade" ? `${x}s` : String(x));
+  const formatX = (x: number) => (xFormat === "decade" ? (x >= 2020 ? `${x}s so far` : `${x}s`) : String(x));
   const id = useId();
   const [hover, setHover] = useState<number | null>(null);
   const [table, setTable] = useState(false);

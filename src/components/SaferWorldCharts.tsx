@@ -115,7 +115,7 @@ export default function SaferWorldCharts({ world, famine }: Props) {
         {series.disasters.length > 2 ? (
           <TrendChart
             title={`Deaths a year from natural disasters: ${name}`}
-            subtitle="Average per year in each decade, 1900s to 2010s"
+            subtitle="Average per year in each decade, 1900s to the 2020s so far"
             data={series.disasters}
             kind="bar"
             xFormat="decade"
@@ -126,7 +126,7 @@ export default function SaferWorldCharts({ world, famine }: Props) {
       <div className="mt-6">
         <TrendChart
           title="Deaths from famine: the world"
-          subtitle="Total per decade, 1870s to 2010s. Famine figures are only published for the world as a whole."
+          subtitle="Total per decade, 1870s to the 2020s so far. Famine figures are only published for the world as a whole."
           data={famine}
           kind="bar"
           xFormat="decade"

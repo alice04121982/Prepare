@@ -82,7 +82,7 @@ export const lifeExpectancy: Point[] = [
   [2023, 73.2],
 ];
 
-/** Share of the world population in extreme poverty, per cent. OWID "world-population-in-extreme-poverty-absolute" (World Bank; Bourguignon and Morrisson). */
+/** Share of the world population in extreme poverty, per cent. 1820 to 1980 from OWID "world-population-in-extreme-poverty-absolute" (Bourguignon and Morrisson); 1990 onward from OWID "share-of-population-in-extreme-poverty" (World Bank, $3.00 a day, 2021 prices), which runs to the latest projection. */
 export const extremePoverty: Point[] = [
   [1820, 89.2],
   [1850, 87.0],
@@ -93,9 +93,15 @@ export const extremePoverty: Point[] = [
   [1960, 54.1],
   [1970, 47.9],
   [1980, 43.2],
-  [1990, 35.8],
-  [2010, 15.7],
-  [2015, 10.0],
+  [1990, 43.4],
+  [1995, 39.4],
+  [2000, 36.2],
+  [2005, 28.3],
+  [2010, 21.0],
+  [2015, 13.4],
+  [2020, 11.4],
+  [2025, 10.2],
+  [2026, 10.0],
 ];
 
 /** Average deaths per year from natural disasters, by decade. OWID "decadal-deaths-disasters-type" (EM-DAT). Year is the decade start. */
