@@ -120,10 +120,21 @@ Editorial rules that shape every page:
       components (`src/components/`)
 
 **Phase 3 — Interactive planner**
-- [ ] Build Your Kit tool — **still placeholder** (styled page pointing
-      to the Checklist until the planner exists)
-- [ ] Cost-band estimates
-- [ ] Printable/exportable list (PDF or plain text)
+- [x] Build Your Kit tool: household inputs (adults, children, under-3s,
+      over-65s, dogs, cats, medical needs, flat or house, 3/7/14 days) →
+      quantified list with a free option per line and a "get first" flag.
+      Rules in `src/data/kit-rules.ts`, UI in `src/components/KitPlanner.tsx`.
+      State lives in the URL so a list can be shared.
+- [x] Cost bands per product (budget and standard)
+- [x] Copy as plain text and print
+- [ ] Amazon "add everything to basket" button: mechanism built
+      (`amazonBasketUrl`, needs `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`); appears
+      once products carry verified ASINs. Populate ASINs by hand, never guess.
+- [ ] Supermarket baskets (Tesco, Sainsbury's, Asda, Ocado): no public
+      add-to-basket links exist. Route is a Samsung Food (Whisk) shoppable
+      partnership, as BBC Good Food uses. Phase-two conversation.
+- [ ] Kit pages by household type (flat, family of four, older relative,
+      with a baby, with a dog), pre-filled planner links with commentary
 
 **Phase 4 — Polish & launch**
 - [ ] Accessibility pass (contrast, keyboard nav, screen reader labels)

@@ -1,38 +1,26 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
-import Callout from "@/components/Callout";
+import KitPlanner from "@/components/KitPlanner";
 
 export const metadata: Metadata = {
   title: "Build your kit",
   description:
-    "An interactive planner: household size and duration target in, a realistic shopping list out. Coming in a later phase.",
+    "Tell us who lives with you and how many days to cover. Get a shopping list with realistic quantities, a free option for every line, and a print or copy button.",
 };
 
 export default function BuildYourKitPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl py-4 sm:py-8">
-      <PageIntro
-        eyebrow="Interactive planner"
-        title="Build your kit"
-        lede="Pick your household size and a duration target, and get a shopping list scaled to you with a rough cost band. This tool is still being built."
-        aside={<Illustration name="intro-kit" className="max-w-[260px]" />}
-      />
-      <Callout title="Not ready yet">
-        <p>
-          Until the planner is live, the checklist gives the same quantities
-          as planning figures per person per day, which you can multiply by
-          hand. The &ldquo;starting from nothing&rdquo; shortlist at the top
-          of that page is the best place to begin.
-        </p>
-      </Callout>
-      <Link
-        href="/checklist"
-        className="btn btn-primary"
-      >
-        Go to the essentials checklist
-      </Link>
+    <main className="mx-auto w-full max-w-6xl py-4 sm:py-8">
+      <div className="mx-auto max-w-3xl">
+        <PageIntro
+          eyebrow="Build your kit"
+          title="Who lives with you, and for how long?"
+          lede="Answer a few questions and get a shopping list with the quantities worked out. Tick what you already have. Copy it, print it, or send it straight to a basket."
+          aside={<Illustration name="intro-kit" className="max-w-[260px]" />}
+        />
+      </div>
+      <KitPlanner />
     </main>
   );
 }

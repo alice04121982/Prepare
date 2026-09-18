@@ -121,3 +121,8 @@
   font-weight: 500;
   color: var(--heading);
 }
+
+@media print {
+  header, footer { display: none; }
+  body { background: #fff; }
+}
