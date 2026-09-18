@@ -122,3 +122,11 @@ Editorial rules that shape every page:
 - Any budget for a domain/hosting, or keep it fully free-tier to start?
 - Do we want a donation/no-monetisation stance stated explicitly on the
   site (fits the non-alarmist, non-exploitative tone)?
+
+## 7. Typography
+
+Font pairing (from Fontshare, both free): **General Sans** for headings,
+**Switzer** for body text. Both are clean geometric-humanist sans fonts —
+reads as calm, modern, and trustworthy rather than either corporate-cold or
+survivalist. Loaded via Fontshare's CSS API in `src/app/layout.tsx`, with
+CSS variables `--font-heading` / `--font-body` set in `globals.css`.
