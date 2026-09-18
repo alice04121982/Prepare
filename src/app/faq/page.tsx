@@ -1,8 +1,79 @@
-export default function Page() {
+import type { Metadata } from "next";
+import Link from "next/link";
+import PageIntro from "@/components/PageIntro";
+import { faq } from "@/data/faq";
+
+export const metadata: Metadata = {
+  title: "Myths and questions",
+  description:
+    "Common misconceptions about preparing for disruption, and what sensible preparation looks like instead of panic-buying.",
+};
+
+export default function FaqPage() {
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="text-3xl font-semibold mb-4">faq</h1>
-      <p className="text-neutral-600">Placeholder page — content to be written per PLAN.md.</p>
+    <main className="mx-auto w-full max-w-3xl px-6 py-16">
+      <PageIntro
+        eyebrow="Myth-busting and questions"
+        title="Sensible preparation, not panic"
+        lede="The questions people actually ask, and the misconceptions that stop them starting. Short answers where a short answer is honest, longer ones where it is not."
+      />
+
+      <nav aria-label="Questions on this page" className="mb-12">
+        {faq.map((group) => (
+          <div key={group.title} className="mb-6">
+            <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted">
+              {group.title}
+            </p>
+            <ul className="space-y-1.5 text-[0.95rem]">
+              {group.entries.map((e) => (
+                <li key={e.slug}>
+                  <a
+                    href={`#${e.slug}`}
+                    className="underline-offset-4 hover:text-accent hover:underline"
+                  >
+                    {e.question}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+
+      {faq.map((group) => (
+        <section key={group.title} className="mt-14 first-of-type:mt-0">
+          <h2 className="mb-6 border-b border-line pb-3 text-2xl font-semibold">
+            {group.title}
+          </h2>
+          <div className="space-y-10">
+            {group.entries.map((e) => (
+              <article key={e.slug} id={e.slug} className="scroll-mt-24">
+                <h3 className="text-lg font-semibold">{e.question}</h3>
+                <div className="prose-plain mt-3 leading-relaxed">
+                  {e.answer.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <div className="mt-14 flex flex-wrap gap-4 border-t border-line pt-8 text-sm">
+        <Link
+          href="/checklist"
+          className="rounded-md bg-accent px-5 py-3 font-medium text-accent-ink hover:opacity-90"
+        >
+          Start with the checklist
+        </Link>
+        <Link
+          href="/community"
+          className="rounded-md border border-line px-5 py-3 font-medium hover:bg-soft"
+        >
+          Community and mutual aid
+        </Link>
+      </div>
     </main>
   );
 }
