@@ -69,16 +69,19 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body);
-}
+/* Base styles live in the base layer so Tailwind utilities can override them. */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  color: var(--heading);
-  letter-spacing: -0.015em;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--heading);
+    letter-spacing: -0.015em;
+  }
 }
 
 /* Long-form prose defaults: keep pages readable without a plugin. */
