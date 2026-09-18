@@ -21,6 +21,11 @@ Editorial rules that shape every page:
 - Realistic durations and quantities, cited where possible (government
   emergency-preparedness guidance, Red Cross/Red Crescent, FEMA, UK
   gov.uk, etc.), not worst-case numbers.
+- Acknowledge the news honestly. Readers arrive feeling helpless about war,
+  authoritarian politics, climate, and inequality. Name those plainly, say
+  what preparation cannot do (the worst cases), then give people the part
+  that is theirs. Agency without alarm. Never the macho register of
+  prepper sites: no bug-out, OPSEC, firearms, or veteran posturing.
 
 ## 2. Who it's for
 
@@ -159,6 +164,8 @@ Editorial rules that shape every page:
 - Any budget for a domain/hosting, or keep it fully free-tier to start?
 - Do we want a donation/no-monetisation stance stated explicitly on the
   site (fits the non-alarmist, non-exploitative tone)?
+  See docs/competitor-review.md for how TruePrepper and The Prepared
+  monetise (affiliate, courses, kits) and the options table.
 
 ## 7. Typography
 

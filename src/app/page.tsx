@@ -31,9 +31,9 @@ const sections = [
 
 const audiences = [
   {
-    title: "Just read the news",
+    title: "Just watched the news",
     sub: "A sensible starting point",
-    body: "You saw a story about a storm, a shortage, or a grid warning and want a short, calm answer rather than a rabbit hole.",
+    body: "A war, a warning, a heatwave, a shortage. You want a short, calm answer to \"what can I actually do\", not a rabbit hole.",
   },
   {
     title: "Busy households",
@@ -58,12 +58,15 @@ export default function Home() {
               A calm, practical guide
             </p>
             <h1 className="text-4xl font-normal leading-[1.05] text-forest sm:text-6xl">
-              Ready for a difficult week, without the fear.
+              The news is worse. Here is what is actually in your hands.
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-forest/85 sm:text-lg">
-              What to keep on hand for power cuts, water notices, thin
-              shelves, and bad weather, and honestly how long it lasts. Most
-              disruptions are short, local, and got through together.
+              War in Europe, authoritarian politics, a climate that no longer
+              behaves, and a widening gap between people who can afford to
+              adapt and people who cannot. Most of that is beyond any one
+              household. A surprising amount of the rest is not. This site is
+              about that part: what to keep on hand, how long it lasts, and
+              who you know.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/checklist" className="btn btn-primary">
@@ -135,15 +138,32 @@ export default function Home() {
       <section className="px-4 pt-24">
         <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] md:items-start">
           <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
-            Written for people who want a sensible answer, not a hobby.
+            Written for people who feel helpless watching the news, and would
+            rather not.
           </h2>
-          <p className="leading-relaxed text-muted md:pt-2">
-            This is not a survival site, and it is not about fending for
-            yourself. Decades of evidence say people pull together in a
-            crisis, and that the households who struggle most are the ones
-            nobody checked on. So the advice is deliberately boring, and the
-            community page is the most important one.
-          </p>
+          <div className="prose-plain leading-relaxed text-muted md:pt-2">
+            <p>
+              Turn on the news and it is hard not to feel that everything is
+              out of your hands. Some of it genuinely is. For the very worst
+              cases there is little any household can do, and this site will
+              not sell you the idea that a cupboard full of tins changes that.
+            </p>
+            <p>
+              But almost everything short of that, which is almost everything
+              that actually happens, is different. Power cuts, water notices,
+              thin shelves, a bad storm, a long winter of rolling outages like
+              the one Ukraine has lived through. Those are got through, and
+              they are got through by ordinary people who had a few things
+              ready and knew their neighbours. Doing the small, sensible
+              things is not a fantasy of control. It is control, over the
+              part that is yours.
+            </p>
+            <p>
+              That is the part we cover. No bunkers, no bravado, no one
+              selling you a hundred things. A short list, honest numbers, and
+              the people on your street.
+            </p>
+          </div>
         </div>
         <div className="mt-12 grid gap-8 sm:grid-cols-3">
           {audiences.map((a) => (
