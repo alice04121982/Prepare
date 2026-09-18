@@ -230,6 +230,16 @@ Not relevant to this site. Logged for completeness only.
 ### 110:56  Development  (49 items)
 Not relevant to this site. Logged for completeness only.
 
+### 110:53  Design  (30 items)
+Not relevant to this site. Logged for completeness only.
+
+### 110:55  Business  (62 items)
+Mostly strategy, startups, presentations, deals. Candidates: Business
+Deal 117:330 / 117:324 (handshake, neighbours agreeing a plan),
+Conversation Businessman Customer 117:301 / 117:303 / 117:302 / 117:304
+(talking to a neighbour), Business Graph Collapsing 117:326 / 117:318 /
+117:323 / 117:305 (use with care, tone).
+
 ## Still wanted
 A weather and nature page and an emergency or safety page, if the file
 has them. Otherwise the list above is enough to re-pick every slot.
