@@ -5,8 +5,11 @@ import {
   amazonBasketUrl,
   buildKit,
   defaultHousehold,
+  retailers,
   type Household,
+  type Retailer,
 } from "@/data/kit-rules";
+import { ExternalLink } from "lucide-react";
 
 const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
 
@@ -68,6 +71,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const [h, setH] = useState<Household>(initial ?? defaultHousehold);
   const [have, setHave] = useState<Set<string>>(new Set());
   const [copied, setCopied] = useState(false);
+  const [shop, setShop] = useState<Retailer["id"]>("amazon");
+  const retailer = retailers.find((r) => r.id === shop)!;
 
   useEffect(() => {
     window.history.replaceState(null, "", toQuery(h));
@@ -197,17 +202,36 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
           </div>
         </div>
 
-        {basket ? (
-          <p className="mb-6 text-xs text-muted print:hidden">
-            The Amazon button fills a basket with the items above that have a verified product code, in the
-            quantities shown, and earns this site a small commission. Nothing is bought until you choose to.
-          </p>
-        ) : (
-          <p className="mb-6 text-xs text-muted print:hidden">
-            Product links are being added item by item. Until then, copy the list into any supermarket&rsquo;s
-            site or take it to the shop.
-          </p>
-        )}
+        <section className="mb-8 rounded-card border border-line bg-surface p-5 print:hidden">
+          <p className="text-sm font-medium">Buy it from</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {retailers.map((r) => (
+              <button
+                key={r.id}
+                type="button"
+                onClick={() => setShop(r.id)}
+                aria-pressed={shop === r.id}
+                className={`rounded-full px-4 py-1.5 text-sm ${shop === r.id ? "bg-accent text-accent-ink" : "border border-line hover:bg-mint-pale"}`}
+              >
+                {r.name}
+              </button>
+            ))}
+          </div>
+          <p className="mt-3 text-sm text-muted">{retailer.note}</p>
+          {shop === "amazon" ? (
+            basket ? (
+              <p className="mt-2 text-xs text-muted">
+                The basket button fills an Amazon basket with the {asinCount} {asinCount === 1 ? "item" : "items"} that
+                have a verified product code, in the quantities shown, and earns this site a small commission. Nothing
+                is bought until you choose to.
+              </p>
+            ) : (
+              <p className="mt-2 text-xs text-muted">
+                Verified product codes are being added item by item; until then each line links to the Amazon search.
+              </p>
+            )
+          ) : null}
+        </section>
 
         <div className="space-y-8">
           {categories.map((c) => {
@@ -241,6 +265,17 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                               <span className="font-medium text-heading">Free option:</span> {l.freeOption}
                             </p>
                           ) : null}
+                          {l.search && !got ? (
+                            <a
+                              href={retailer.search(l.search)}
+                              target="_blank"
+                              rel="noopener noreferrer sponsored"
+                              className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-xs font-medium text-accent-ink hover:brightness-110 print:hidden"
+                            >
+                              Find at {retailer.name}
+                              <ExternalLink size={12} />
+                            </a>
+                          ) : null}
                           {l.products?.length ? (
                             <ul className="mt-2 flex flex-wrap gap-2 print:hidden">
                               {[...l.products]
@@ -267,6 +302,14 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
               </div>
             );
           })}
+
+          <div className="rounded-card bg-forest px-6 py-5 text-on-forest">
+            <p className="font-heading text-lg font-medium">When the list is ticked, that is the job done.</p>
+            <p className="mt-1 text-sm opacity-90">
+              Put it in one place, put the date on the calendar to check the batteries in six months, and get on with
+              your life.
+            </p>
+          </div>
 
           <div>
             <h3 className="mb-3 text-xs font-medium uppercase tracking-wider text-muted">To do, no shopping needed</h3>

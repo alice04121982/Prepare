@@ -49,6 +49,8 @@ export type KitLine = {
   products?: ProductOption[];
   /** True for the nine things to get first. */
   priority?: boolean;
+  /** What to type into a supermarket search to find this. */
+  search?: string;
 };
 
 export type KitTask = {
@@ -82,6 +84,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
   const lines: KitLine[] = [
     {
       id: "water",
+      search: "still water 1.5l 6 pack",
       category: "Water",
       item: "Bottled drinking water",
       quantity: waterPacks,
@@ -96,6 +99,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "water-extra",
+      search: "water container with tap",
       category: "Water",
       item: "Containers for washing and flushing water",
       quantity: h.homeType === "flat" ? 1 : 2,
@@ -105,6 +109,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "purify",
+      search: "water purification tablets",
       category: "Water",
       item: "Water purification tablets",
       quantity: 1,
@@ -115,6 +120,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "tins",
+      search: "tinned beans soup tuna",
       category: "Food",
       item: "Tinned or jarred meals and vegetables",
       quantity: 2 * peopleWhoDrink * d,
@@ -126,6 +132,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "carbs",
+      search: "pasta 500g",
       category: "Food",
       item: "Pasta, rice or instant mash",
       quantity: ceil((0.1 * peopleWhoDrink * d) / 0.5),
@@ -135,6 +142,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "nocook",
+      search: "crackers peanut butter cereal bars",
       category: "Food",
       item: "Food that needs no cooking",
       quantity: Math.min(d, 3),
@@ -144,6 +152,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "milk",
+      search: "long life milk 1 litre",
       category: "Food",
       item: "Long-life milk or plant milk",
       quantity: ceil((0.25 * peopleWhoDrink * d)),
@@ -153,6 +162,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "oats",
+      search: "porridge oats 1kg",
       category: "Food",
       item: "Porridge oats or cereal",
       quantity: ceil(0.06 * peopleWhoDrink * d),
@@ -161,6 +171,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "tin-opener",
+      search: "tin opener",
       category: "Food",
       item: "Manual tin opener",
       quantity: 1,
@@ -172,6 +183,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "torch",
+      search: "led torch",
       category: "Power and light",
       item: "Torches or head torches",
       quantity: people - h.babies,
@@ -186,6 +198,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "batteries",
+      search: "aa batteries",
       category: "Power and light",
       item: "Spare batteries (AA and AAA)",
       quantity: people - h.babies + 1,
@@ -196,6 +209,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "lantern",
+      search: "led lantern",
       category: "Power and light",
       item: "Battery lantern",
       quantity: h.homeType === "flat" ? 1 : 2,
@@ -205,6 +219,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "powerbank",
+      search: "power bank 10000mah",
       category: "Power and light",
       item: "Power bank",
       quantity: Math.max(1, ceil((h.adults + h.children) / 2)),
@@ -221,6 +236,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       ? [
           {
             id: "powerstation",
+      search: "portable power station",
             category: "Power and light",
             item: "Portable power station and folding solar panel",
             quantity: 1,
@@ -237,6 +253,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       : []),
     {
       id: "radio",
+      search: "wind up radio",
       category: "Communication",
       item: "Battery or wind-up radio",
       quantity: 1,
@@ -260,6 +277,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "firstaid",
+      search: "first aid kit",
       category: "First aid and medication",
       item: "First aid kit",
       quantity: 1,
@@ -271,6 +289,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "otc",
+      search: "paracetamol",
       category: "First aid and medication",
       item: "Paracetamol, ibuprofen, rehydration sachets",
       quantity: ceil(people / 2),
@@ -289,7 +308,18 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       priority: true,
     },
     {
+      id: "lenses",
+      category: "First aid and medication",
+      item: "Spare glasses, or contact lenses and solution",
+      quantity: 1,
+      unit: "spare pair, plus a week of lenses and a bottle of solution if you wear them",
+      basis: "Lenses need clean hands and clean water. When either is short, glasses are the safer option, and an old prescription beats none.",
+      freeOption: "Your last pair of glasses, kept with the kit.",
+      search: "contact lens solution",
+    },
+    {
       id: "loo",
+      search: "toilet roll",
       category: "Sanitation",
       item: "Toilet roll",
       quantity: ceil((people * d) / 3),
@@ -298,6 +328,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "wipes",
+      search: "wet wipes",
       category: "Sanitation",
       item: "Wet wipes and hand sanitiser",
       quantity: ceil(d / 3),
@@ -306,7 +337,28 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       products: [{ name: "Own-brand wipes and sanitiser", tier: "budget", priceBand: "£1 to £3 each" }],
     },
     {
+      id: "gel",
+      category: "Sanitation",
+      item: "Alcohol hand gel",
+      quantity: Math.max(1, ceil(people / 2)),
+      unit: "bottles, at least 60% alcohol",
+      basis: "For when the water is off, and for anything infectious going round. One per two people.",
+      products: [{ name: "Own-brand hand gel, 60% alcohol or more", tier: "budget", priceBand: "£1 to £3" }],
+      search: "hand sanitiser gel",
+    },
+    {
+      id: "masks",
+      category: "Sanitation",
+      item: "Face masks (FFP2)",
+      quantity: Math.max(1, ceil((people * Math.min(d, 7)) / 10)),
+      unit: "packs of 10",
+      basis: "Covid taught most households why. Useful in a smoke or dust event too, and if someone at home is ill and the pharmacy is shut. FFP2 filters far better than a cloth or surgical mask.",
+      products: [{ name: "FFP2 masks, box of 10 or 20", tier: "budget", priceBand: "£5 to £12" }],
+      search: "ffp2 face masks",
+    },
+    {
       id: "binbags",
+      search: "bin bags",
       category: "Sanitation",
       item: "Strong bin bags",
       quantity: 1,
@@ -315,6 +367,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     },
     {
       id: "warmth",
+      search: "fleece blanket",
       category: "Warmth",
       item: "Blankets or sleeping bags",
       quantity: people,
@@ -344,6 +397,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       ? [
           {
             id: "nappies",
+      search: "nappies",
             category: "Babies",
             item: "Nappies",
             quantity: 6 * h.babies * d,
@@ -353,6 +407,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
           } satisfies KitLine,
           {
             id: "formula",
+      search: "ready to feed formula",
             category: "Babies",
             item: "Ready-to-feed formula (if bottle feeding)",
             quantity: 4 * h.babies * d,
@@ -361,6 +416,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
           } satisfies KitLine,
           {
             id: "babywipes",
+      search: "baby wipes",
             category: "Babies",
             item: "Baby wipes",
             quantity: ceil(d / 2) * h.babies,
@@ -386,6 +442,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       ? [
           {
             id: "petfood",
+      search: "dog food",
             category: "Pets",
             item: "Pet food",
             quantity: d,
@@ -398,6 +455,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       ? [
           {
             id: "hearing",
+      search: "hearing aid batteries",
             category: "Older household members",
             item: "Spare hearing-aid batteries and mobility-aid chargers",
             quantity: 1,
@@ -464,3 +522,25 @@ export function householdFromParams(q: Record<string, string | string[] | undefi
     days: days === 7 || days === 14 ? days : 3,
   };
 }
+
+export type Retailer = {
+  id: "amazon" | "tesco" | "sainsburys" | "asda" | "morrisons" | "ocado" | "waitrose" | "aldi";
+  name: string;
+  /** Builds a search URL for one item. */
+  search: (q: string) => string;
+  /** Plain note on what the link can and cannot do. */
+  note: string;
+};
+
+const enc = (q: string) => encodeURIComponent(q);
+
+export const retailers: Retailer[] = [
+  { id: "amazon", name: "Amazon", search: (q) => `https://www.amazon.co.uk/s?k=${enc(q)}`, note: "Everything on the list is here. One button can also fill a basket with the items that have a verified product code." },
+  { id: "tesco", name: "Tesco", search: (q) => `https://www.tesco.com/groceries/en-GB/search?query=${enc(q)}`, note: "Groceries, batteries, torches and first aid. No power banks or radios. Each link opens the search for that item; add to your basket there." },
+  { id: "sainsburys", name: "Sainsbury's", search: (q) => `https://www.sainsburys.co.uk/gol-ui/SearchResults/${enc(q)}`, note: "Groceries, batteries and first aid. Each link opens the search for that item." },
+  { id: "asda", name: "Asda", search: (q) => `https://groceries.asda.com/search/${enc(q)}`, note: "Groceries, batteries, torches and some electricals. Each link opens the search for that item." },
+  { id: "morrisons", name: "Morrisons", search: (q) => `https://groceries.morrisons.com/search?entry=${enc(q)}`, note: "Groceries, batteries and first aid. Each link opens the search for that item." },
+  { id: "ocado", name: "Ocado", search: (q) => `https://www.ocado.com/search?entry=${enc(q)}`, note: "Groceries and household. Each link opens the search for that item." },
+  { id: "waitrose", name: "Waitrose", search: (q) => `https://www.waitrose.com/ecom/shop/search?&searchTerm=${enc(q)}`, note: "Groceries and household. Each link opens the search for that item." },
+  { id: "aldi", name: "Aldi", search: (q) => `https://www.aldi.co.uk/search?text=${enc(q)}`, note: "Aldi does not deliver groceries in the UK. Use this list in store, or check Specialbuys for torches and power banks." },
+];
