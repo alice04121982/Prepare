@@ -21,11 +21,12 @@ Editorial rules that shape every page:
 - Realistic durations and quantities, cited where possible (government
   emergency-preparedness guidance, Red Cross/Red Crescent, FEMA, UK
   gov.uk, etc.), not worst-case numbers.
-- Acknowledge the news honestly. Readers arrive feeling helpless about war,
-  authoritarian politics, climate, and inequality. Name those plainly, say
-  what preparation cannot do (the worst cases), then give people the part
-  that is theirs. Agency without alarm. Never the macho register of
-  prepper sites: no bug-out, OPSEC, firearms, or veteran posturing.
+- Tone follows docs/tone-of-voice.md (approved 18 September 2026): the
+  gov.uk Prepare register and Sweden's "If Crisis or War Comes" booklet.
+  Open with a question the reader can answer, name hazards once (weather,
+  power, water, cyber, conflict in Europe) not ideologies, household first
+  then community, sensible safeguards never stockpiling, British and dry.
+  Never the macho register of prepper sites.
 
 ## 2. Who it's for
 
@@ -94,7 +95,7 @@ Editorial rules that shape every page:
 - [x] Next.js/TypeScript/Tailwind scaffold
 - [x] Push to GitHub
 - [x] Confirm final name (Stay Prepared); tagline still open
-- [ ] Draft content tone/voice guide (1 page)
+- [x] Tone of voice guide: docs/tone-of-voice.md
 
 **Phase 1 — Content skeleton**
 - [x] Write Scenarios copy (5 scenario types, realistic durations) —
