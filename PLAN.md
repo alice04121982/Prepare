@@ -62,7 +62,13 @@ Editorial rules that shape every page:
 7. **Myth-busting / FAQ** — addresses common misconceptions, distinguishes
    sensible preparation from panic-buying, and explains why hoarding is
    counterproductive.
-8. **Sources & Methodology** — full citation list and an explanation of how
+8. **Official Guidance** — live, dated links to what the UK government and
+   public bodies currently say (Prepare campaign, Emergency Alerts, Met
+   Office, flood warnings, 105 and the Priority Services Register, NHS,
+   National Risk Register). Every link carries a "last checked" date. The
+   contrast with prepper sites that hand out decades-old survival PDFs is
+   deliberate. Data in `src/data/official-guidance.ts`.
+9. **Sources & Methodology** — full citation list and an explanation of how
    duration/quantity estimates were derived, so the site is auditable and
    trustworthy.
 
@@ -107,6 +113,7 @@ Editorial rules that shape every page:
 - [x] Essentials Checklist page
 - [x] Community page
 - [x] FAQ page
+- [x] Official Guidance page (links verified 2026-09-18; re-check quarterly)
 - [ ] Sources page — **still placeholder** (styled, short methodology
       note, citation list to be written)
 - [x] Shared layout: header nav, footer, design tokens, PageIntro/Callout

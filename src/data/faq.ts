@@ -64,15 +64,15 @@ export const faq: FaqGroup[] = [
         slug: "how-long-does-a-kit-last",
         question: "How long does a \"72-hour kit\" actually last a family?",
         answer: [
-          "Exactly as long as it says, if you have scaled it to the household. The trap is a kit sized for one person quietly sitting in a cupboard while four people live in the house. Water is the clearest example: 2 litres per person per day means a family of four needs 24 litres for three days, not the six-litre pack that fitted under the sink.",
+          "Exactly as long as it says, if you have scaled it to the household. The trap is a kit sized for one person quietly sitting in a cupboard while four people live in the house. Water is the clearest example: 3 litres per person per day means a family of four needs 36 litres for three days, not the six-litre pack that fitted under the sink.",
           "In practice most households already have more than three days of food. The gaps are usually water, light, a way to charge a phone, and a buffer of prescription medication. Those are the things to check.",
         ],
       },
       {
         slug: "how-much-water",
-        question: "Two litres of water per person per day sounds like a lot to store",
+        question: "Three litres of water per person per day sounds like a lot to store",
         answer: [
-          "It is the drinking figure, and it is the one worth meeting. For a household of two, a three-day stock is twelve litres, which is two standard six-packs of bottled water. It takes up about the same room as a bag of potatoes.",
+          "It is the drinking figure, taken from gov.uk and the World Health Organisation, and it is the one worth meeting. For a household of two, a three-day stock is eighteen litres, which is three standard six-packs of bottled water. It takes up about the same room as a couple of bags of potatoes.",
           "Cooking and washing water is extra and optional. In a planned cut, a filled bath or a couple of buckets covers flushing without touching the drinking stock.",
         ],
       },
@@ -101,7 +101,7 @@ export const faq: FaqGroup[] = [
         slug: "flat-no-storage",
         question: "I live in a small flat with no storage space",
         answer: [
-          "The three-day minimum for one person is six litres of water, a few tins, a torch, a power bank, and a folder of documents. That fits in a single box or the bottom of a wardrobe. You do not need a garage.",
+          "The three-day minimum for one person is nine litres of water, a few tins, a torch, a power bank, and a folder of documents. That fits in a single box or the bottom of a wardrobe. You do not need a garage.",
           "Flats also have an advantage: neighbours are close. A building group chat is one of the easiest networks to set up and one of the most useful during a power cut.",
         ],
       },

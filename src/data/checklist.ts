@@ -43,16 +43,16 @@ export const checklist: ChecklistCategory[] = [
     items: [
       {
         item: "Drinking water",
-        amount: "About 2 litres per person per day; 3 days as a minimum",
+        amount: "2.5 to 3 litres per person per day to drink; 3 days as a minimum",
         notes:
-          "Sealed bottled water keeps for years. Rotate every 6 to 12 months. Roughly 6 litres per person covers the 3-day minimum.",
+          "The figure gov.uk now uses, from the World Health Organisation. Roughly 9 litres per person covers the 3-day minimum. Sealed bottled water keeps for years; rotate every 6 to 12 months.",
         priority: true,
       },
       {
         item: "Water for pets, cooking, and washing",
-        amount: "An extra litre or two per person per day if space allows",
+        amount: "Up to 10 litres per person per day in total if space allows",
         notes:
-          "Optional. A filled bath or bucket before a planned cut covers flushing without using drinking stock.",
+          "Optional. Ten litres a day is the gov.uk figure for drinking plus basic cooking and hygiene. A filled bath or bucket before a planned cut covers flushing without using drinking stock.",
       },
       {
         item: "A way to make water safe",

@@ -53,7 +53,7 @@ export const scenarios: Scenario[] = [
     description:
       "Water disruptions come in two forms: no water at all (a burst main, a pumping failure, frozen pipes) and a 'do not drink' or 'boil water' notice after a contamination scare. Both are usually resolved within a day or two. Water companies are obliged to provide alternative supplies, typically bottled water at collection points or bowsers, for longer interruptions.",
     whatHelps: [
-      "Stored drinking water: about 2 litres per person per day, with 3 days as a sensible minimum. That is roughly a 6-litre stock per person.",
+      "Stored drinking water: 2.5 to 3 litres per person per day, the figure gov.uk now uses, with 3 days as a sensible minimum. That is roughly a 9-litre stock per person, or one and a half six-packs.",
       "Extra water for pets, and for cooking and basic washing if you have room for it.",
       "A way to make water safe if needed: a rolling boil for one minute, or purification tablets or a filter.",
       "Knowing your water company's emergency number and where they publish updates.",

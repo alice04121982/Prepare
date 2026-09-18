@@ -5,6 +5,7 @@ const nav = [
   { href: "/checklist", label: "Checklist" },
   { href: "/community", label: "Community" },
   { href: "/faq", label: "FAQ" },
+  { href: "/official-guidance", label: "Official guidance" },
 ];
 
 export default function SiteHeader() {

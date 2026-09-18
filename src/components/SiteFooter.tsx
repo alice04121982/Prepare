@@ -5,6 +5,7 @@ const links = [
   { href: "/checklist", label: "Checklist" },
   { href: "/community", label: "Community" },
   { href: "/faq", label: "FAQ" },
+  { href: "/official-guidance", label: "Official guidance" },
   { href: "/sources", label: "Sources" },
 ];
 
