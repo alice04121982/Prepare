@@ -13,7 +13,7 @@ export default function SiteFooter() {
     <footer className="mt-auto px-3 pb-3 pt-16 sm:px-4 sm:pb-4">
       <div className="mx-auto max-w-6xl rounded-card bg-forest px-6 py-8 text-on-forest sm:px-10 sm:py-10">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <span className="font-heading text-xl font-semibold">Prepare</span>
+          <span className="font-heading text-xl font-semibold">Stay Prepared</span>
           <div className="flex flex-wrap items-center gap-4">
             <ul className="flex flex-wrap gap-x-4 text-sm opacity-90">
               {links.map((l) => (
@@ -26,7 +26,7 @@ export default function SiteFooter() {
             </ul>
             <a
               href="/offline/index.html"
-              download="prepare-offline-guide.html"
+              download="stay-prepared-offline-guide.html"
               className="btn btn-on-dark"
             >
               Download the offline guide

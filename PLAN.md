@@ -1,6 +1,6 @@
-# Prepare — Project Plan
+# Stay Prepared: Project Plan
 
-Working title: **Prepare** (placeholder — see naming options below)
+Name: **Stay Prepared**. Domain stayprepared.co.uk registered 18 September 2026 (the .com, .uk and .co were also free at the time and are worth picking up). Working title was "Prepare"; the repo folder keeps that name.
 
 ## 1. Purpose and tone
 
@@ -82,7 +82,7 @@ Editorial rules that shape every page:
 - [x] Project folder + git repo created
 - [x] Next.js/TypeScript/Tailwind scaffold
 - [x] Push to GitHub
-- [ ] Confirm final name + tagline
+- [x] Confirm final name (Stay Prepared); tagline still open
 - [ ] Draft content tone/voice guide (1 page)
 
 **Phase 1 — Content skeleton**
@@ -152,7 +152,7 @@ Editorial rules that shape every page:
 
 ## 6. Open questions for Alice
 
-- Final name/domain for the site?
+- ~~Final name/domain for the site?~~ Stay Prepared, stayprepared.co.uk.
 - Which region(s) to prioritise first for guidance (UK-specific advice
   reads differently from US/FEMA-style advice) — start UK-first given
   Cambridge base?

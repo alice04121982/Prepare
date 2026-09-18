@@ -146,7 +146,7 @@ export default function ChecklistPage() {
         </Link>
         <a
           href="/offline/index.html"
-          download="prepare-offline-guide.html"
+          download="stay-prepared-offline-guide.html"
           className="btn btn-secondary"
         >
           Download the offline guide

@@ -5,8 +5,8 @@ import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: {
-    default: "Prepare",
-    template: "%s | Prepare",
+    default: "Stay Prepared",
+    template: "%s | Stay Prepared",
   },
   description:
     "A practical, non-alarmist guide to what to keep on hand for social disruption, and realistically how long it lasts.",

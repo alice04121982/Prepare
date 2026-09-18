@@ -15,7 +15,7 @@ export default function SiteHeader() {
           href="/"
           className="font-heading text-xl font-semibold tracking-tight text-heading"
         >
-          Prepare
+          Stay Prepared
         </Link>
         <nav aria-label="Main" className="flex items-center gap-5">
           <ul className="hidden gap-x-5 text-sm text-muted sm:flex">
