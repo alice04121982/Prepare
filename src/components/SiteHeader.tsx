@@ -54,9 +54,9 @@ export default function SiteHeader() {
           <Link
             href="/"
             className="font-heading text-lg font-semibold tracking-tight"
-            aria-label="Prepare home"
+            aria-label="Stay Prepared home"
           >
-            Prepare
+            Stay Prepared
           </Link>
 
           {/* Desktop navigation */}
