@@ -259,7 +259,7 @@ export default function Home() {
         <Photo slot="home-household" aspect="aspect-[4/3] md:aspect-auto md:h-full" />
       </section>
 
-      <Photo slot="home-community" className="mt-6" />
+      <Photo slot="home-community" aspect="aspect-[16/8]" className="mt-6" />
 
       {/* Why now */}
       <section id="why-now" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-24">

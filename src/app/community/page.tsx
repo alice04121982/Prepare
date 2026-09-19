@@ -64,7 +64,7 @@ export default function CommunityPage() {
         aside={<Illustration name="intro-community" className="w-full" />}
       />
 
-      <Photo slot="community" className="mb-12" />
+      <Photo slot="community" aspect="aspect-[16/8]" className="mb-12" />
 
       <div className="mx-auto max-w-3xl">
 
