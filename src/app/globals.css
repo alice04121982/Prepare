@@ -1,8 +1,30 @@
 @import "tailwindcss";
 
+/*
+  Palette: "institutional utility". Off-white canvas, charcoal text, slate
+  navy hero and footer, ultra-light slate cards, International Safety Blue
+  for every action and active state. Token names kept from the earlier
+  mint palette so components did not need renaming: --mint is the hero
+  panel, --mint-pale is a card, --forest is the dark panel.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8f9fa;
+  --foreground: #1e293b;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --heading: #1c2a38;
+  --accent: #005a9c;
+  --accent-ink: #ffffff;
+  --soft: #f0f4f8;
+  --mint: #1c2a38;
+  --mint-pale: #f0f4f8;
+  --mint-light: #f0f4f8;
+  --forest: #1c2a38;
+  --on-forest: #ffffff;
+  --sage: #475569;
+  --sage-light: #cbd5e1;
+  --surface: #ffffff;
+  --tag: #dde6f0;
   --font-heading: "General Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Switzer", ui-sans-serif, system-ui, sans-serif;
 }
@@ -10,23 +32,108 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-heading: var(--heading);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-soft: var(--soft);
+  --color-mint: var(--mint);
+  --color-mint-pale: var(--mint-pale);
+  --color-mint-light: var(--mint-light);
+  --color-forest: var(--forest);
+  --color-on-forest: var(--on-forest);
+  --color-sage: var(--sage);
+  --color-sage-light: var(--sage-light);
+  --color-surface: var(--surface);
+  --color-tag: var(--tag);
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading);
+  --radius-card: 1.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #e2e8f0;
+    --muted: #94a3b8;
+    --line: #334155;
+    --heading: #e2e8f0;
+    --accent: #3b82f6;
+    --accent-ink: #ffffff;
+    --soft: #1e293b;
+    --mint: #1c2a38;
+    --mint-pale: #1e293b;
+    --mint-light: #1e293b;
+    --forest: #111c27;
+    --on-forest: #e2e8f0;
+    --sage: #94a3b8;
+    --sage-light: #334155;
+    --surface: #16202b;
+    --tag: #334155;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body);
+/* Base styles live in the base layer so Tailwind utilities can override them. */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--heading);
+    letter-spacing: -0.015em;
+  }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+/* Long-form prose defaults: keep pages readable without a plugin. */
+.prose-plain p + p { margin-top: 1em; }
+.prose-plain a { text-decoration: underline; text-underline-offset: 3px; }
+.prose-plain a:hover { color: var(--accent); }
+
+/* Pill buttons and tags, as used throughout the design. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.375rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
 }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { filter: brightness(1.12); }
+.btn-secondary {
+  background: var(--surface);
+  color: var(--heading);
+  border: 1px solid var(--line);
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.btn-on-dark { background: var(--surface); color: var(--heading); }
+.btn-on-dark:hover { background: var(--tag); }
+
+.tag {
+  display: inline-block;
+  border-radius: 9999px;
+  background: var(--tag);
+  padding: 0.35rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--heading);
+}
+
+@media print {
+  header, footer { display: none; }
+  body { background: #fff; }
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Full-bleed backgrounds, capped content. 1440px keeps grids from stretching on wide screens. */
+.wrap { margin-inline: auto; width: 100%; max-width: 1440px; }
+.measure { max-width: 68ch; }

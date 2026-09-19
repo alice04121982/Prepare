@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import AnnounceBar from "@/components/AnnounceBar";
 
 export const metadata: Metadata = {
-  title: "Prepare",
+  title: {
+    default: "Stay Prepared",
+    template: "%s | Stay Prepared",
+  },
   description:
-    "Practical, non-alarmist guidance on preparing for social disruption.",
+    "A practical, non-alarmist guide to what to keep on hand for social disruption, and realistically how long it lasts.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -15,12 +20,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Fontshare pairing: General Sans (headings) + Switzer (body) */}
         <link
           rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=switzer@400,500,600&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=switzer@400,500,600&display=swap"
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col">
         <SiteHeader />
-        {children}
+        <div className="w-full flex-1 px-4 sm:px-10">{children}</div>
+        <SiteFooter />
+        <AnnounceBar />
       </body>
     </html>
   );
