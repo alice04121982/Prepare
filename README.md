@@ -1,4 +1,7 @@
-# Prepare
+# Stay Prepared
+
+Live at stayprepared.co.uk (registered September 2026). The repo keeps its
+original working name, prepare-website.
 
 A practical, non-alarmist website that helps people understand what to keep
 on hand for social disruption (power/water/supply disruptions, extreme

@@ -1,6 +1,6 @@
-# Prepare — Project Plan
+# Stay Prepared: Project Plan
 
-Working title: **Prepare** (placeholder — see naming options below)
+Name: **Stay Prepared**. Domain stayprepared.co.uk registered 18 September 2026 (the .com, .uk and .co were also free at the time and are worth picking up). Working title was "Prepare"; the repo folder keeps that name.
 
 ## 1. Purpose and tone
 
@@ -21,6 +21,12 @@ Editorial rules that shape every page:
 - Realistic durations and quantities, cited where possible (government
   emergency-preparedness guidance, Red Cross/Red Crescent, FEMA, UK
   gov.uk, etc.), not worst-case numbers.
+- Tone follows docs/tone-of-voice.md (approved 18 September 2026): the
+  gov.uk Prepare register and Sweden's "If Crisis or War Comes" booklet.
+  Open with a question the reader can answer, name hazards once (weather,
+  power, water, cyber, conflict in Europe) not ideologies, household first
+  then community, sensible safeguards never stockpiling, British and dry.
+  Never the macho register of prepper sites.
 
 ## 2. Who it's for
 
@@ -57,7 +63,17 @@ Editorial rules that shape every page:
 7. **Myth-busting / FAQ** — addresses common misconceptions, distinguishes
    sensible preparation from panic-buying, and explains why hoarding is
    counterproductive.
-8. **Sources & Methodology** — full citation list and an explanation of how
+8. **Official Guidance** — live, dated links to what the UK government and
+   public bodies currently say (Prepare campaign, Emergency Alerts, Met
+   Office, flood warnings, 105 and the Priority Services Register, NHS,
+   National Risk Register). Every link carries a "last checked" date. The
+   contrast with prepper sites that hand out decades-old survival PDFs is
+   deliberate. Data in `src/data/official-guidance.ts`.
+9. **If the news is frightening you** — perspective and practical help
+   for people who feel helpless: why it feels worse than it is, we have
+   been here before (WWII, vCJD, Covid), what counsellors suggest, children,
+   and where to get help. Sourced. Page at /worried.
+10. **Sources & Methodology** — full citation list and an explanation of how
    duration/quantity estimates were derived, so the site is auditable and
    trustworthy.
 
@@ -78,33 +94,52 @@ Editorial rules that shape every page:
 
 ## 5. Build phases
 
-**Phase 0 — Foundations (this week)**
+**Phase 0 — Foundations**
 - [x] Project folder + git repo created
 - [x] Next.js/TypeScript/Tailwind scaffold
-- [ ] Push to GitHub
-- [ ] Confirm final name + tagline
-- [ ] Draft content tone/voice guide (1 page)
+- [x] Push to GitHub
+- [x] Confirm final name (Stay Prepared); tagline still open
+- [x] Tone of voice guide: docs/tone-of-voice.md
 
 **Phase 1 — Content skeleton**
-- [ ] Write Scenarios copy (5 scenario types, realistic durations, sources)
-- [ ] Write Essentials checklist data (categories, items, quantities,
-      shelf life)
-- [ ] Draft Community & Mutual Aid page
-- [ ] Draft Myth-busting/FAQ
+- [x] Write Scenarios copy (5 scenario types, realistic durations) —
+      `src/data/scenarios.ts`; inline sources still to be added
+- [x] Write Essentials checklist data (categories, items, quantities,
+      shelf life) — `src/data/checklist.ts`
+- [x] Draft Community & Mutual Aid page
+- [x] Draft Myth-busting/FAQ — `src/data/faq.ts`
 
 **Phase 2 — Core pages**
-- [ ] Home page
-- [ ] Start Here flow (static first, no logic)
-- [ ] Scenarios pages
-- [ ] Essentials Checklist page
-- [ ] Community page
-- [ ] FAQ page
-- [ ] Sources page
+- [x] Home page (framing statement, three entry points, non-alarmist note,
+      scenarios at a glance, offline download)
+- [ ] Start Here flow (static first, no logic) — not yet created; home
+      page currently points "Start here" at the Checklist
+- [x] Scenarios page
+- [x] Essentials Checklist page
+- [x] Community page
+- [x] FAQ page
+- [x] Official Guidance page (links verified 2026-09-18; re-check quarterly)
+- [ ] Sources page — **still placeholder** (styled, short methodology
+      note, citation list to be written)
+- [x] Shared layout: header nav, footer, design tokens, PageIntro/Callout
+      components (`src/components/`)
 
 **Phase 3 — Interactive planner**
-- [ ] Build Your Kit tool (household size + duration → shopping list)
-- [ ] Cost-band estimates
-- [ ] Printable/exportable list (PDF or plain text)
+- [x] Build Your Kit tool: household inputs (adults, children, under-3s,
+      over-65s, dogs, cats, medical needs, flat or house, 3/7/14 days) →
+      quantified list with a free option per line and a "get first" flag.
+      Rules in `src/data/kit-rules.ts`, UI in `src/components/KitPlanner.tsx`.
+      State lives in the URL so a list can be shared.
+- [x] Cost bands per product (budget and standard)
+- [x] Copy as plain text and print
+- [ ] Amazon "add everything to basket" button: mechanism built
+      (`amazonBasketUrl`, needs `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`); appears
+      once products carry verified ASINs. Populate ASINs by hand, never guess.
+- [ ] Supermarket baskets (Tesco, Sainsbury's, Asda, Ocado): no public
+      add-to-basket links exist. Route is a Samsung Food (Whisk) shoppable
+      partnership, as BBC Good Food uses. Phase-two conversation.
+- [ ] Kit pages by household type (flat, family of four, older relative,
+      with a baby, with a dog), pre-filled planner links with commentary
 
 **Phase 4 — Polish & launch**
 - [ ] Accessibility pass (contrast, keyboard nav, screen reader labels)
@@ -113,15 +148,47 @@ Editorial rules that shape every page:
 - [ ] Deploy to hosting, connect custom domain if desired
 - [ ] Light analytics (optional, privacy-respecting)
 
+**Design and imagery (2026-09-18)**
+- [x] Visual system taken from the "Prepare App" Figma file
+      (figma.com/design/oSzUwrqcukRt4CUQnbSKyx): mint hero #a0f1bd,
+      pale-mint cards #d2f8dc, forest-green buttons/footer #2e4f21,
+      off-white page #f9f9f9, pill buttons and tags, rounded-card panels.
+- [x] Illustrations from Streamline's free "Minimal" set via the Figma
+      community file (Alice's choice), in `public/illustrations/` with a
+      node map in its README. Free tier is 400px PNG, so they are shown at
+      380px or less. Attribution to streamlinehq.com is a licence
+      condition and sits in the footer and on Sources. Rendered by
+      `src/components/Illustration.tsx`, which falls back to a soft
+      placeholder for any missing name.
+- [ ] Better matches for Checklist, Build Your Kit, and Sources intros:
+      the Figma MCP only sees pages open in the desktop app, so open the
+      Home, Health, Shopping, or Weather category pages and re-pick.
+- [ ] Dark-mode pass: black line art on dark panels needs inverting or a
+      light backing shape.
+
+**Content notes (2026-09-18)**
+- Six scenarios now, including armed conflict drawn from Ukraine since
+  2022. It stretches the "short, common disruption" framing on purpose and
+  says so in its own copy.
+- Product links: maker's own site only, never a retailer, no affiliate
+  links, only things actually used. Jackery power station and solar panel
+  are the first examples. Disclosure callout sits on the Checklist page.
+- Scenarios, checklist, and the first three FAQ entries mirror the
+  offline guide. When either side changes, update the other.
+- Guidance is UK-first (105 power-cut number, Priority Services Register,
+  Met Office, gov.uk flood warnings). Regionalisation is an open question.
+
 ## 6. Open questions for Alice
 
-- Final name/domain for the site?
+- ~~Final name/domain for the site?~~ Stay Prepared, stayprepared.co.uk.
 - Which region(s) to prioritise first for guidance (UK-specific advice
   reads differently from US/FEMA-style advice) — start UK-first given
   Cambridge base?
 - Any budget for a domain/hosting, or keep it fully free-tier to start?
 - Do we want a donation/no-monetisation stance stated explicitly on the
   site (fits the non-alarmist, non-exploitative tone)?
+  See docs/competitor-review.md for how TruePrepper and The Prepared
+  monetise (affiliate, courses, kits) and the options table.
 
 ## 7. Typography
 
