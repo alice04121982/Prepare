@@ -70,12 +70,6 @@ const audiences = [
   },
 ];
 
-const keyNumbers = [
-  { value: "3 days", label: "the minimum the government asks every household to cover" },
-  { value: "3 litres", label: "of drinking water per person per day, the gov.uk figure" },
-  { value: "9 things", label: "to get first, over a few weeks, from your normal shop" },
-  { value: "2 names", label: "of neighbours you know, and who know you" },
-];
 
 export default function Home() {
   const hero = photoCredits().find((c) => c.slot === "home-hero" && c.rank === 1);
@@ -127,16 +121,6 @@ export default function Home() {
             <Illustration name="hero" alt="" className="drop-shadow-2xl" />
           </div>
         </div>
-      </section>
-
-      {/* Key numbers */}
-      <section className="wrap mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-        {keyNumbers.map((k) => (
-          <div key={k.label} className="rounded-2xl border border-line bg-surface px-5 py-5">
-            <p className="font-heading text-3xl font-medium text-heading sm:text-4xl">{k.value}</p>
-            <p className="mt-1 text-sm text-muted">{k.label}</p>
-          </div>
-        ))}
       </section>
 
       {/* What might actually stop */}
