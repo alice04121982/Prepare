@@ -378,34 +378,6 @@
   "h": 2832
  },
  {
-  "slot": "kit",
-  "rank": 1,
-  "file": "kit-1.webp",
-  "id": "wU_TbWqdPJI",
-  "alt": "woman in white long sleeve shirt holding red plastic basket with fruits",
-  "photographer": "Liuba Bilyk",
-  "profile": "https://unsplash.com/@ibilyk",
-  "page": "https://unsplash.com/photos/woman-in-white-long-sleeve-shirt-holding-red-plastic-basket-with-fruits-wU_TbWqdPJI",
-  "download_location": "https://api.unsplash.com/photos/wU_TbWqdPJI/download?ixid=M3wxMDczNTA2fDB8MXxzZWFyY2h8MXx8c2hvcHBpbmclMjBiYXNrZXQlMjBncm9jZXJpZXN8ZW58MXwwfHx8MTc4OTc2Njg0N3ww",
-  "triggered": true,
-  "w": 4978,
-  "h": 3319
- },
- {
-  "slot": "kit",
-  "rank": 2,
-  "file": "kit-4.webp",
-  "id": "V2nVPUikDak",
-  "alt": "A black and white photo of a city street",
-  "photographer": "Haberdoedas",
-  "profile": "https://unsplash.com/@haberdoedas",
-  "page": "https://unsplash.com/photos/a-black-and-white-photo-of-a-city-street-V2nVPUikDak",
-  "download_location": "https://api.unsplash.com/photos/V2nVPUikDak/download?ixid=M3wxMDczNTA2fDB8MXxzZWFyY2h8NHx8c2hvcHBpbmclMjBiYXNrZXQlMjBncm9jZXJpZXN8ZW58MXwwfHx8MTc4OTc2Njg0N3ww",
-  "triggered": false,
-  "w": 5998,
-  "h": 4499
- },
- {
   "slot": "scen-conflict",
   "rank": 1,
   "file": "scen-conflict-15.webp",
