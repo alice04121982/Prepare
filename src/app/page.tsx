@@ -54,19 +54,19 @@ const sections = [
 
 const audiences = [
   {
-    title: "Just watched the news",
+    title: "You have seen the news",
     sub: "A sensible starting point",
-    body: "A storm warning, a cyber attack in the headlines, a shortage. You want a short, calm answer to what you should actually do.",
+    body: "A weather warning, a cyber attack in the headlines, a shortage. You want a clear answer to what you should actually do.",
   },
   {
-    title: "Busy households",
-    sub: "Limited time and budget",
-    body: "A prioritised list that costs a few pounds a week from the shop you already use, not a weekend and a full car boot.",
+    title: "You have little time or money",
+    sub: "A few pounds a week",
+    body: "A prioritised list built up from the shop you already use, over a few weeks, with nothing going to waste.",
   },
   {
-    title: "Want the real numbers",
+    title: "You want the actual figures",
     sub: "Litres and days, sourced",
-    body: "How much water a family of four really needs for three days, and what most disruptions actually look like.",
+    body: "How much water a family of four needs for three days, and how long most disruptions really last.",
   },
 ];
 
@@ -167,10 +167,10 @@ export default function Home() {
           <SectionLabel>What this site covers</SectionLabel>
         </div>
         <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
-          <span className="block text-left">A few days of supplies, built slowly.</span>
-          <span className="block text-right">That is most of it.</span>
+          <span className="block text-left">Have the essentials at home to tide you over</span>
+          <span className="block text-right">until the council, the utilities or the government can fix the problem or get help to you.</span>
         </h2>
-        <p className="mt-4 text-muted">Three pages do the work. Read them in this order.</p>
+        <p className="mt-4 text-muted">Three pages cover it. Read them in this order.</p>
       </section>
 
       {/* Alternating cards */}
@@ -212,19 +212,18 @@ export default function Home() {
       <section className="wrap px-4 pt-24">
         <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] md:items-start">
           <div>
-            <SectionLabel>Who it is for</SectionLabel>
+            <SectionLabel>Who this is for</SectionLabel>
             <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
-              Written for people who want a sensible answer, not a hobby.
+              Ordinary households, with ordinary amounts of time and money.
             </h2>
           </div>
           <p className="measure leading-relaxed text-muted md:pt-2">
-            No bunkers, no bravado, no one selling you a hundred things. A
-            short list, honest numbers, and the people on your street. For
-            the very worst cases there is little any household can do, and
-            this site will not pretend otherwise. For everything short of
-            that, which is nearly everything that happens, a few days of
-            supplies and a plan is the difference between a bad week and a
-            frightening one.
+            This is not a survival site. It is a short list, the real
+            figures, and a plan you can make in an evening. For the very
+            worst events there is little any household can do, and this site
+            will not pretend otherwise. For everything short of that, which
+            is nearly everything that happens, a few days of supplies and a
+            plan make a difficult week manageable.
           </p>
         </div>
         <div className="mt-12 grid gap-8 sm:grid-cols-3">
@@ -278,8 +277,8 @@ export default function Home() {
             happen.
           </p>
           <p>
-            That is as far as the worry needs to go. The rest is a shopping
-            list.
+            That is the reason for this site. None of it asks more of you
+            than a few days of supplies and a plan your household knows.
           </p>
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
@@ -301,8 +300,8 @@ export default function Home() {
       {/* Closing */}
       <section className="mx-auto max-w-3xl px-4 py-24 text-center">
         <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
-          Three days of supplies and a plan on the fridge. That is the whole
-          job.
+          Three days of supplies and a plan your household knows. Taking
+          action now makes a difficult few days much easier to manage.
         </h2>
         <Link href="/build-your-kit" className="btn btn-primary mt-8">
           Build your list

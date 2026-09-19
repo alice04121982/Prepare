@@ -40,9 +40,9 @@ export default function SiteFooter() {
         </div>
         <div className="mt-16 flex flex-col gap-4 text-sm sm:flex-row sm:items-end sm:justify-between">
           <p className="max-w-md opacity-90">
-            <span className="block font-medium">Calm, practical, and built on other people.</span>
-            Guidance for short, common disruptions. Not a survival site. No
-            tracking, no affiliate links, no fear.
+            <span className="block font-medium">Calm, practical guidance for short disruptions.</span>
+            Based on UK government advice. Not a survival site. No tracking.
+            Some product links earn a small commission.
           </p>
           <p className="opacity-70">
             Free to share. Check official guidance for your region too.

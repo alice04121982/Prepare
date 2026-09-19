@@ -26,9 +26,9 @@ export const faq: FaqGroup[] = [
       },
       {
         slug: "why-not-alarmist",
-        question: "Why does the tone matter so much?",
+        question: "Why is the site so calm about it?",
         answer: [
-          "Because fear makes people do the wrong things. Frightened households panic-buy, which empties shelves for everyone. Frightened people isolate, which is exactly the behaviour that leaves vulnerable neighbours unchecked. Calm, boring preparation, done slowly, is both more effective and more considerate.",
+          "Because fear leads to the wrong actions. Frightened households panic-buy, which empties shelves for everyone. Frightened people keep to themselves, which is how vulnerable neighbours go unchecked. Calm preparation, done slowly, is both more effective and more considerate, and it is the register the government and the Red Cross use for the same reason.",
           "It is also simply more accurate. Most disruptions are short, local, and dull. Describing them that way is not complacency. It is the truth, and it is what makes the preparation feel doable.",
         ],
       },
@@ -36,8 +36,8 @@ export const faq: FaqGroup[] = [
         slug: "who-is-this-for",
         question: "Who is this site for?",
         answer: [
-          "Anyone who has read a news story about a storm, a shortage, or a grid warning and wants a sensible starting point rather than a rabbit hole. It is written for households with limited time and budget who want a short, prioritised list and honest timeframes.",
-          "It is not written for people who want to be self-sufficient for months. There are other sites for that, and they will tell you something quite different about how people behave.",
+          "Anyone who has seen a news story about a storm, a shortage or a grid warning and wants a sensible starting point. It is written for households with limited time and budget who want a short, prioritised list and honest timeframes.",
+          "It is not written for people who want to be self-sufficient for months. The advice here matches what the UK government and the Red Cross ask of households, and stops there.",
         ],
       },
     ],
