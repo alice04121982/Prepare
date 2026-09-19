@@ -46,7 +46,7 @@ const sections = [
     href: "/community",
     eyebrow: "Then everyone else",
     title: "Neighbours",
-    body: "Once your own household is sorted, the people around you. Who to check on, how to find the group that already exists, and what to agree in advance.",
+    body: "Once your own household has what it needs, the people around you. Who to check on, how to find the group that already exists, and what to agree in advance.",
     tags: ["Check-ins", "Skills", "Local groups"],
     illustration: "community",
   },
@@ -97,10 +97,9 @@ export default function Home() {
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
               The government now asks every UK household to be able to cope on
-              its own for seventy-two hours. It would not ask if it did not
-              think it might be needed. This site takes that advice and makes
-              it doable: what to keep, how much, how long it lasts, and what to
-              do first.
+              its own for seventy-two hours. This site takes that advice and
+              makes it practical: what to keep, how much, how long it lasts,
+              and what to do first.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/checklist" className="btn btn-primary">
@@ -246,9 +245,9 @@ export default function Home() {
           </h2>
           <p className="mt-4 max-w-prose leading-relaxed opacity-90">
             In any emergency, help goes first to the people who need it most.
-            Everyone else is expected to manage for a while. So sort your own
-            household out: water, food, light, warmth, medication, a way to
-            hear the news. Then look around you. The better prepared you are,
+            Everyone else is expected to manage for a while. So make sure your
+            own household has what it needs: water, food, light, warmth,
+            medication, a way to hear the news. Then look around you. The better prepared you are,
             the less you need, and the more you can give to the neighbour who
             could not prepare. Communities do pull together in a crisis. They
             pull together faster when fewer households are in trouble.
@@ -277,8 +276,9 @@ export default function Home() {
             happen.
           </p>
           <p>
-            That is the reason for this site. None of it asks more of you
-            than a few days of supplies and a plan your household knows.
+            So be prepared. Buy the essentials and store them away, so you
+            have what you need if the power goes off, the water stops or the
+            shelves are empty.
           </p>
         </div>
         <div className="mt-6 flex flex-wrap gap-3">

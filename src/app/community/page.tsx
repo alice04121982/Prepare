@@ -59,7 +59,7 @@ export default function CommunityPage() {
     <main className="w-full py-4 sm:py-8">
       <PageIntro
         eyebrow="Community and mutual aid"
-        title="Once your own household is sorted, look around you"
+        title="Once your own household has what it needs, look around you"
         lede="In an emergency, help goes first to the people who need it most. Everyone else is expected to manage for a while. The better prepared your household is, the more you can do for the people near you, and a street that knows itself gets through a bad week faster."
         aside={<Illustration name="intro-community" className="w-full" />}
       />

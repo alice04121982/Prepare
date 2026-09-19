@@ -70,9 +70,9 @@ when households are not the ones needing help.
    reader already knows what is on the news.
 4. **Say why now in one honest paragraph and stop.** Every government in
    northern Europe has asked households to hold a few days of supplies
-   since 2024. They would not ask if they did not think it might be
-   needed. None of them say it is imminent. That is as far as the worry
-   goes.
+   since 2024. Report that. Do not add "they would not ask if they did not
+   think it might be needed" or any line that turns the fact into a nudge.
+   None of them say it is imminent, and neither do we.
 5. **Household first, then everyone else.** Help goes to those who need it
    most, so the rest of us are expected to manage. The better prepared
    you are, the less you need and the more you can give. Community is the
@@ -85,7 +85,11 @@ when households are not the ones needing help.
    home page, and do not dwell.
 8. **British and dry.** Understatement over emphasis. Humour only in the
    FAQ, and only at the expense of gear culture, never at the reader.
-9. **Numbers are specific and sourced.** Litres, days, the gov.uk figure,
+9. **No neat closers.** "The rest is a shopping list", "that is the whole
+   job", "sorted": lines that tidy a paragraph away read as written by a
+   machine and as smug. End on the instruction instead: be prepared, buy
+   the essentials, store them away.
+10. **Numbers are specific and sourced.** Litres, days, the gov.uk figure,
    the WHO figure. Never "plenty" or "as much as you can".
 
 ## Words
@@ -107,8 +111,8 @@ Heading: If the power, water or shops stopped for three days, would you be
 all right?
 
 Lede: The government now asks every UK household to be able to cope on its
-own for seventy-two hours. It would not ask if it did not think it might
-be needed. This site takes that advice and makes it doable: what to keep,
+own for seventy-two hours. This site takes that advice and makes it
+practical: what to keep,
 how much, how long it lasts, and what to do first.
 
 Buttons: Start with the checklist. Why three days?
@@ -149,7 +153,8 @@ they give are the same: severe weather, attacks on power and water
 systems, cyber attacks, and the possibility of conflict in Europe. None of
 them say an attack is imminent. All of them have decided it is no longer
 sensible to assume it cannot happen. That is as far as the worry needs to
-go. The rest is a shopping list.
+go. Be prepared: buy the essentials and store them away, so you have what
+you need if the power goes off, the water stops or the shelves are empty.
 
 **Closing line**
 
