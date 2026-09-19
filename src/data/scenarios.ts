@@ -81,6 +81,7 @@ export const scenarios: Scenario[] = [
       "Rotating stock: use the oldest first and replace it as you go, so nothing expires unused.",
       "A little flexibility in what you cook. If one thing is missing, a substitute usually is not.",
       "A small amount of cash in case card payments or cash machines are affected.",
+      "A pair of glasses if you wear contact lenses. Lens deliveries and solution are the sort of thing that goes missing for a fortnight.",
     ],
     worthKnowing: [
       "Panic buying is the mechanism that turns a minor delay into an empty shelf. Buying normally is the single most helpful thing you can do for everyone else.",

@@ -174,9 +174,10 @@ export const checklist: ChecklistCategory[] = [
           "Paracetamol and ibuprofen, antihistamines, rehydration sachets, any child-specific versions your household needs.",
       },
       {
-        item: "Spare glasses or contact lenses",
-        amount: "One spare set if you rely on them",
-        notes: "An old prescription is far better than none.",
+        item: "A pair of glasses, even if you wear contact lenses",
+        amount: "One pair, plus a week of lenses and solution if you wear them",
+        notes:
+          "Lenses need clean hands, clean water and a supply that keeps arriving. Glasses need none of that. An old prescription is far better than none.",
       },
     ],
   },
