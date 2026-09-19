@@ -46,17 +46,6 @@ export default function SiteFooter() {
           </p>
           <p className="opacity-70">
             Free to share. Check official guidance for your region too.
-            <br />
-            Illustrations by{" "}
-            <a
-              href="https://streamlinehq.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-4"
-            >
-              Streamline
-            </a>
-            .
           </p>
         </div>
         </div>

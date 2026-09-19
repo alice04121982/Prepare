@@ -1,20 +1,22 @@
-Illustrations are from Streamline's free "Minimal" set, taken from the
-Figma community file "1,600 Free Illustrations" (file K746Zh0QXHHs1fYDoZ6ggN).
-Streamline's free licence allows commercial use with attribution, so the
-site credits https://streamlinehq.com in the footer and on the Sources page.
-Free-tier files are 400x400 PNG; vectors need a Streamline subscription.
+Illustrations are from the "Textile 3D Shapes" Figma community pack
+(file cDGlcgvl0C8NC55pa6h0pk), released under CC0: free for personal and
+commercial use; the pack itself must not be resold or re-released. Each
+frame was exported at 1024px, trimmed and saved as WebP with transparency.
 
-Mapping (name -> Figma node on the "Activism Environment" page):
-  hero            117:249  Diversity Unity
-  checklist       117:248  Eco Friendly
-  scenarios       117:243  Weather 2
-  community       117:263  Disabled Inclusive Minorities
-  neighbours      117:244  LGBT Families
-  intro-scenarios 117:245  Weather 1
-  intro-checklist 117:250  Water Conservation
-  intro-community 117:263  (same as community)
-  intro-faq       117:262  Megaphone Voice Being Heard
-  intro-kit       117:248  (same as checklist)
-  intro-sources   117:264  Freedom Speech
+Mapping (site slot -> pack frame):
+  hero             15  heart
+  checklist        22  plus
+  scenarios        20  lightning
+  community         1  knotted ring
+  neighbours        5  knot
+  intro-scenarios   7  scribble
+  intro-checklist  24  asterisk
+  intro-community   6  knot
+  intro-faq         3  squiggle
+  intro-kit        14  cube
+  intro-guidance   26  arrow
+  intro-worried    11  cloud
+  intro-sources     2  spiral
 
-Referenced by <Illustration name="..." /> in src/components/Illustration.tsx.
+Rendered by <Illustration name="..." /> in src/components/Illustration.tsx.
+The earlier Streamline line-art files live in git history before this change.

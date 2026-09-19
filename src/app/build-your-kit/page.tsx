@@ -24,7 +24,7 @@ export default async function BuildYourKitPage({
           eyebrow="Build your kit"
           title="Who lives with you, and for how long?"
           lede="Answer a few questions and get a shopping list with the quantities worked out. Tick what you already have. Copy it, print it, or send it straight to a basket."
-          aside={<Illustration name="intro-kit" className="max-w-[260px]" />}
+          aside={<Illustration name="intro-kit" className="w-full" />}
         />
       </div>
       <Photo slot="kit" className="mb-12" />

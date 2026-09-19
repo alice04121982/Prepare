@@ -123,8 +123,8 @@ export default function Home() {
               </Link>
             </p>
           </div>
-          <div className="mx-auto w-full max-w-[400px] rounded-card bg-surface p-8 md:justify-self-end">
-            <Illustration name="hero" alt="" />
+          <div className="mx-auto w-full max-w-[420px] md:justify-self-end">
+            <Illustration name="hero" alt="" className="drop-shadow-2xl" />
           </div>
         </div>
       </section>

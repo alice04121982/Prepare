@@ -24,7 +24,7 @@ export default function PageIntro({ eyebrow, title, lede, aside }: Props) {
             {lede}
           </p>
         </div>
-        {aside ? <div className="w-full max-w-[360px] justify-self-center rounded-card bg-surface p-8 md:justify-self-end">{aside}</div> : null}
+        {aside ? <div className="w-full max-w-[360px] justify-self-center drop-shadow-2xl md:justify-self-end md:pr-4">{aside}</div> : null}
       </div>
     </div>
   );

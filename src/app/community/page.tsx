@@ -61,7 +61,7 @@ export default function CommunityPage() {
         eyebrow="Community and mutual aid"
         title="The most effective form of preparation is other people"
         lede="This is the part of the site that everything else builds outward from. A well-stocked cupboard helps a household for a few days. A street that knows itself helps everyone on it, for as long as it takes."
-        aside={<Illustration name="intro-community" className="max-w-[260px]" />}
+        aside={<Illustration name="intro-community" className="w-full" />}
       />
 
       <Photo slot="community" className="mb-12" />

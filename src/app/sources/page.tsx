@@ -18,7 +18,7 @@ export default function SourcesPage() {
         eyebrow="Sources and methodology"
         title="Where the numbers come from"
         lede="Every duration and quantity on this site is a conservative planning figure drawn from public emergency-preparedness guidance. The full citation list is still being compiled."
-        aside={<Illustration name="intro-sources" className="max-w-[260px]" />}
+        aside={<Illustration name="intro-sources" className="w-full" />}
       />
 
       <div className="mx-auto max-w-3xl">
@@ -43,11 +43,7 @@ export default function SourcesPage() {
         <SectionLabel>Illustrations and design</SectionLabel>
         <h2 className="text-2xl font-semibold">Illustrations and design</h2>
         <p className="mt-3">
-          Illustrations are from the free set by{" "}
-          <a href="https://streamlinehq.com" target="_blank" rel="noopener noreferrer">
-            Streamline
-          </a>
-          , used under their free licence with attribution. Photographs are
+          Illustrations are from the Textile 3D Shapes pack on Figma Community, released under CC0. Photographs are
           from Unsplash under the Unsplash Licence, free for commercial use
           with no attribution required; we credit the photographers below
           anyway. Type is General Sans and Switzer from Fontshare. No

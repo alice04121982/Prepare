@@ -21,7 +21,7 @@ export default function ChecklistPage() {
         eyebrow="The essentials"
         title="What to keep on hand"
         lede="Realistic quantities for a household to build up gradually. Not bought all at once, and never more than you can rotate and actually use. Every figure here is a planning number drawn from public emergency guidance, not a worst case."
-        aside={<Illustration name="intro-checklist" className="max-w-[260px]" />}
+        aside={<Illustration name="intro-checklist" className="w-full" />}
       />
 
       <Photo slot="checklist" className="mb-12" />

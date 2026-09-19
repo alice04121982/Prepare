@@ -18,7 +18,7 @@ export default function FaqPage() {
         eyebrow="Myth-busting and questions"
         title="Sensible preparation, not panic"
         lede="The questions people actually ask, and the misconceptions that stop them starting. Short answers where a short answer is honest, longer ones where it is not."
-        aside={<Illustration name="intro-faq" className="max-w-[260px]" />}
+        aside={<Illustration name="intro-faq" className="w-full" />}
       />
 
       <div className="mx-auto max-w-3xl">

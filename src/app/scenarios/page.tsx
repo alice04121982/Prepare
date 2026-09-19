@@ -29,7 +29,7 @@ export default function ScenariosPage() {
         eyebrow="Understand the scenarios"
         title="What disruption actually looks like"
         lede="Six realistic situations, each with the duration you can reasonably plan for and the handful of things that make a real difference. Five of them are about a difficult day or week. The sixth, armed conflict, is longer and rarer, and is included because people ask, and because Ukraine has shown what it actually looks like for ordinary households."
-        aside={<Illustration name="intro-scenarios" className="max-w-[260px]" />}
+        aside={<Illustration name="intro-scenarios" className="w-full" />}
       />
 
       <div className="mx-auto max-w-3xl">

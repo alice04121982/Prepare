@@ -94,7 +94,7 @@ export default function WorriedPage() {
         eyebrow="If the news is frightening you"
         title="It is normal to feel like this. Here is some perspective, and some help."
         lede="This page is for the moment when the headlines have got to you and the rest of the site feels like too much. Nothing here is a substitute for a doctor or a counsellor. It is what they, and people who have lived through worse, tend to say."
-        aside={<Illustration name="intro-worried" className="max-w-[260px]" />}
+        aside={<Illustration name="intro-worried" className="w-full" />}
       />
 
       <div className="mx-auto max-w-3xl">
