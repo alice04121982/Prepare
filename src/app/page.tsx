@@ -256,7 +256,7 @@ export default function Home() {
             Neighbours and local groups
           </Link>
         </div>
-        <Photo slot="home-household" aspect="aspect-[4/3] md:aspect-auto md:h-full" />
+        <Photo slot="home-household" rank={6} aspect="aspect-[4/3] md:aspect-auto md:h-full" />
       </section>
 
       <Photo slot="home-community" aspect="aspect-[16/8]" className="mt-6" />

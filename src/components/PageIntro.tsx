@@ -9,7 +9,7 @@ type Props = {
 /** Consistent page opener on a navy panel, held to a wide 2.9:1 shape on desktop: small label, light display heading, lede. */
 export default function PageIntro({ eyebrow, title, lede, aside }: Props) {
   return (
-    <div className="mb-12 flex items-center rounded-card bg-mint px-6 py-12 sm:px-12 md:aspect-[2.9/1] md:py-10">
+    <div className="mb-12 flex items-center rounded-card bg-mint px-6 py-12 sm:px-12 md:aspect-[2.9/1] md:py-8">
       <div className="wrap grid w-full items-center gap-8 md:grid-cols-[1.4fr_1fr]">
         <div>
           {eyebrow ? (
@@ -25,7 +25,7 @@ export default function PageIntro({ eyebrow, title, lede, aside }: Props) {
           </p>
         </div>
         {aside ? (
-          <div className="w-full max-w-[320px] justify-self-center drop-shadow-2xl md:max-w-[min(340px,22vw)] md:justify-self-end md:pr-4">
+          <div className="w-full max-w-[320px] justify-self-center drop-shadow-2xl md:max-w-[min(430px,28vw)] md:justify-self-end md:pr-4">
             {aside}
           </div>
         ) : null}
