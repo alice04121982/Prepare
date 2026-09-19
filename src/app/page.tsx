@@ -92,8 +92,8 @@ export default function Home() {
           <div>
             <SectionLabel onDark>Simple steps for a difficult few days</SectionLabel>
             <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
-              If the power, water or shops stopped for three days, would you be
-              all right?
+              If the power went off, the water stopped and the shops were shut
+              for three days, would you be all right?
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
               The government now asks every UK household to be able to cope on

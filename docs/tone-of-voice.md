@@ -107,8 +107,8 @@ fascism, authoritarian, annihilation, macho, "the news is worse".
 
 Eyebrow: Simple steps for a difficult few days
 
-Heading: If the power, water or shops stopped for three days, would you be
-all right?
+Heading: If the power went off, the water stopped and the shops were shut
+for three days, would you be all right?
 
 Lede: The government now asks every UK household to be able to cope on its
 own for seventy-two hours. This site takes that advice and makes it
