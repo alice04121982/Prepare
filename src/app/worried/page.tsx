@@ -5,14 +5,6 @@ import SectionLabel from "@/components/SectionLabel";
 import Callout from "@/components/Callout";
 import Illustration from "@/components/Illustration";
 import Photo from "@/components/Photo";
-import SaferWorldCharts from "@/components/SaferWorldCharts";
-import {
-  childMortality,
-  disasterDeathsPerDecade,
-  extremePoverty,
-  famineDeathsPerDecade,
-  lifeExpectancy,
-} from "@/data/safer-world";
 
 export const metadata: Metadata = {
   title: "If the news is frightening you",
@@ -81,10 +73,7 @@ const sources = [
   { label: "McLaughlin, Gotlieb and Mills, Caught in a Dangerous World: Problematic News Consumption and Its Relationship to Mental and Physical Ill-Being, Health Communication, 2022", url: "https://www.tandfonline.com/doi/full/10.1080/10410236.2022.2106086" },
   { label: "Harvard Health, War anxiety: how to cope, 2022", url: "https://www.health.harvard.edu/blog/war-anxiety-how-to-cope-202205232748" },
   { label: "Swedish Civil Contingencies Agency, If Crisis or War Comes", url: "https://rib.msb.se/filer/pdf/30874.pdf" },
-  { label: "Mass Observation Archive, Mass-Observation and civilian morale", url: "https://massobs.org.uk/wp-content/uploads/2024/10/no8_beavan.pdf" },
-  { label: "National CJD Research and Surveillance Unit figures, summarised by History.com and the CIDRAP archive", url: "https://www.cidrap.umn.edu/bse/study-predicts-increase-british-vcjd-cases" },
   { label: "Action for Children, Talking to your child about upsetting news stories", url: "https://parents.actionforchildren.org.uk/feelings-behaviour/talking-about-feelings/talk-to-child-news/" },
-  { label: "Our World in Data: child mortality, life expectancy, extreme poverty, natural disasters and famines (World series, fetched 19 September 2026)", url: "https://ourworldindata.org/" },
 ];
 
 export default function WorriedPage() {
@@ -141,93 +130,10 @@ export default function WorriedPage() {
             were. It means the feeling and the risk have come apart, and it is
             the feeling that is making you miserable.
           </p>
-
-          <h2 className="mt-12 text-2xl font-semibold">We have been here before</h2>
-          <p className="mt-4">
-            If you have grandparents or great-grandparents who lived through
-            the Second World War, they lived through the Blitz, rationing, and
-            years of not knowing how it would end. The tidy story of the Blitz
-            spirit was partly government publicity; the Mass Observation
-            diaries show people were frightened, angry and exhausted. They
-            also show that those same people went to work, queued, shared,
-            checked on neighbours and carried on, not because they were
-            braver than us but because there was a Tuesday to get through. The
-            spirit was real. It just did not feel like spirit at the time. It
-            felt like doing the next thing.
-          </p>
-          <p>
-            In the 1990s, mad cow disease was expected to kill enormous
-            numbers. One set of epidemiologists put the possible toll at
-            136,000. The final count of deaths in the UK was 178. Every one was
-            a tragedy, and the worst case was a thousand times too large. We
-            lived through the millennium bug, bird flu, swine flu, a financial
-            crash, and then a real pandemic, which was as bad as feared in some
-            ways and, in the way that matters here, also survivable: the great
-            majority of people got through it by staying at home, looking
-            after each other and waiting. There has always been something. The
-            difference now is that you hear about all of it, at once, from
-            everywhere.
-          </p>
-          <p>
-            That is not a reason to relax. It is a reason to calibrate. The
-            catastrophic version of events rarely arrives. The ordinary
-            disruptions do, and those are exactly the ones a household can
-            prepare for.
-          </p>
         </section>
 
         <Photo slot="together-covid" aspect="aspect-[16/8]" caption className="mt-10" />
 
-        <section className="mt-14">
-          <SectionLabel>The safest time there has ever been</SectionLabel>
-          <h2 className="text-2xl font-semibold">The safest time there has ever been</h2>
-          <p className="mt-4 leading-relaxed">
-            This is the part that is hard to feel and easy to check. By almost
-            every measure that decides whether a person lives, and how long,
-            the world is safer now than at any point in history. The numbers
-            below are for the whole world, from Our World in Data, which
-            gathers them from the UN, the World Bank and the disaster
-            database EM-DAT. Pick your own country below if a global average
-            feels too far away. Hover for any year; there is a table view for
-            each.
-          </p>
-
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { label: "Children dying before five", from: "43 in 100", to: "under 4 in 100", span: "1800 to today" },
-              { label: "Life expectancy at birth", from: "29 years", to: "73 years", span: "1770 to today" },
-              { label: "People in extreme poverty", from: "9 in 10", to: "1 in 10", span: "1820 to today" },
-              { label: "Deaths a year from disasters", from: "over 500,000", to: "about 45,000", span: "1920s to 2020s, with four times the population" },
-            ].map((t) => (
-              <div key={t.label} className="rounded-2xl bg-surface px-4 py-4">
-                <p className="text-xs uppercase tracking-wider text-muted">{t.label}</p>
-                <p className="mt-2 font-heading text-2xl font-medium text-heading">
-                  <span className="text-muted line-through decoration-1">{t.from}</span>
-                  <br />
-                  {t.to}
-                </p>
-                <p className="mt-1 text-xs text-muted">{t.span}</p>
-              </div>
-            ))}
-          </div>
-
-          <SaferWorldCharts
-            world={{ code: "OWID_WRL", name: "World", child: childMortality, life: lifeExpectancy, poverty: extremePoverty, disasters: disasterDeathsPerDecade }}
-            famine={famineDeathsPerDecade}
-          />
-          <p className="mt-6 leading-relaxed">
-            Two honest caveats. Deaths from disasters and famine fell because
-            of warnings, engineering, medicine and aid, not because the
-            hazards went away, and some of those hazards are now growing
-            again with the climate. And the last few years have seen war
-            deaths rise for the first time in decades. Neither changes the
-            shape of the charts. A child born today in almost any country is
-            far more likely to reach old age than any child before them, and
-            the disasters that used to kill hundreds of thousands now kill
-            tens of thousands in a world with four times the people. The
-            danger is real. The scale of it is smaller than it has ever been.
-          </p>
-        </section>
 
         <Callout title="The one idea to keep">
           <p>
@@ -312,8 +218,8 @@ export default function WorriedPage() {
             <Link href="/checklist" className="btn btn-primary">
               The nine things to get first
             </Link>
-            <Link href="/scenarios" className="btn btn-secondary">
-              What actually happens in a disruption
+            <Link href="/why" className="btn btn-secondary">
+              Why three days?
             </Link>
           </div>
         </section>
