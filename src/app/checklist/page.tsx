@@ -33,7 +33,7 @@ export default function ChecklistPage() {
         <Steps
           steps={[
             { title: "Count", body: "Most cupboards already hold a few days. Check the tins, the torch drawer and the medicine cabinet before you buy anything." },
-            { title: "Get the nine things", body: "Water, a tin opener, torches, batteries, a power bank, a radio, a contacts card, a first aid kit, a small amount of cash. One or two a week." },
+            { title: "Get essentials", body: "Water, a tin opener, torches, batteries, a power bank, a radio, a contacts card, a first aid kit, a small amount of cash. One or two a week." },
             { title: "Build the rest slowly", body: "One extra of something you already eat each shop. Rotate the oldest first. A few pounds a week, and it never goes to waste." },
           ]}
         />
@@ -66,11 +66,11 @@ export default function ChecklistPage() {
 
       <Callout title="Build it slowly">
         <p>
-          The point of this list is that it costs a few pounds a week, not a
-          weekend and a full car boot. Buying one extra of something you
-          already eat each time you shop gets a household to a week&rsquo;s
-          cover in a couple of months, and takes nothing off the shelf for
-          anyone else.
+          This list is meant to be built up over weeks from your normal
+          shopping, a few pounds at a time. Buying one extra of something you
+          already eat each time you shop gets most households to a
+          week&rsquo;s cover in a couple of months, and takes nothing off the
+          shelf for anyone else.
         </p>
       </Callout>
 

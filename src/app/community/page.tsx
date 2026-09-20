@@ -9,7 +9,7 @@ import Callout from "@/components/Callout";
 export const metadata: Metadata = {
   title: "Community and mutual aid",
   description:
-    "Why community networks are the most effective form of resilience, and how to find or start one where you live.",
+    "Why neighbours matter once your own household is prepared, and how to find or start a local network where you live.",
 };
 
 const firstSteps = [
@@ -59,12 +59,12 @@ export default function CommunityPage() {
     <main className="w-full py-4 sm:py-8">
       <PageIntro
         eyebrow="Community and mutual aid"
-        title="The most effective form of preparation is other people"
-        lede="This is the part of the site that everything else builds outward from. A well-stocked cupboard helps a household for a few days. A street that knows itself helps everyone on it, for as long as it takes."
+        title="Once your own household has what it needs, look around you"
+        lede="In an emergency, help goes first to the people who need it most. Everyone else is expected to manage for a while. The better prepared your household is, the more you can do for the people near you, and a street that knows itself gets through a bad week faster."
         aside={<Illustration name="intro-community" className="w-full" />}
       />
 
-      <Photo slot="community" className="mb-12" />
+      <Photo slot="community" aspect="aspect-[16/8]" className="mb-12" />
 
       <div className="mx-auto max-w-3xl">
 
@@ -90,10 +90,10 @@ export default function CommunityPage() {
           is whether anyone knew they were there.
         </p>
         <p>
-          So this site treats community as the primary layer of preparation
-          and household supplies as the second. The checklist matters because
-          it means you are not the person who needs help in the first day,
-          which frees you to be the person who gives it.
+          So the order is simple. Sort your own household first, so you are
+          not the person who needs help in the first day. Then you are free
+          to be the person who gives it, and that is where most of the help
+          in any emergency actually comes from.
         </p>
       </section>
 

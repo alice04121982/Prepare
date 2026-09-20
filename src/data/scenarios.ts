@@ -81,6 +81,7 @@ export const scenarios: Scenario[] = [
       "Rotating stock: use the oldest first and replace it as you go, so nothing expires unused.",
       "A little flexibility in what you cook. If one thing is missing, a substitute usually is not.",
       "A small amount of cash in case card payments or cash machines are affected.",
+      "A pair of glasses if you wear contact lenses. Lens deliveries and solution are the sort of thing that goes missing for a fortnight.",
     ],
     worthKnowing: [
       "Panic buying is the mechanism that turns a minor delay into an empty shelf. Buying normally is the single most helpful thing you can do for everyone else.",
@@ -146,7 +147,7 @@ export const scenarios: Scenario[] = [
     typicalDuration:
       "Months or longer in affected regions, lived as repeated short disruptions: alerts lasting hours, power cuts of several hours a day, intermittent water and heating",
     description:
-      "This is the scenario people now ask about, and the one this site was least sure about including. It is here because Ukraine has shown, in unusual detail, what conflict looks like for ordinary civilians in a country with a modern grid, supermarkets, card payments, and mobile data. For most people most of the time, it looks like life continuing with recurring interruptions. Strikes on the energy system brought scheduled power cuts of four to twelve hours a day through the winter of 2022 to 2023, and with them lost heating, water pumping, lifts, and mobile signal. People adapted fast, and what they adapted with is a longer version of the same kit as every other scenario on this site, plus a plan for where to shelter and where to go.",
+      "Ukraine has shown, in unusual detail, what conflict looks like for ordinary civilians in a country with a modern grid, supermarkets, card payments and mobile data. For most people most of the time, it looks like life continuing with recurring interruptions. Strikes on the energy system brought scheduled power cuts of four to twelve hours a day through the winter of 2022 to 2023, and with them lost heating, water pumping, lifts, and mobile signal. People adapted fast, and what they adapted with is a longer version of the same kit as every other scenario on this site, plus a plan for where to shelter and where to go.",
     whatHelps: [
       "A safe place in your home: an interior room or corridor away from windows, below ground if you have it. The rule Ukrainians teach is two walls between you and the outside. Know the nearest public shelter too, such as a basement, underground car park, or metro station.",
       "A grab bag by the door: documents, cash in small notes, medication, chargers, a torch, water, a change of clothes, and a paper list of contacts. Electronic copies of documents on a phone as well.",

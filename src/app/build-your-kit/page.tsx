@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
-import Photo from "@/components/Photo";
 import KitPlanner from "@/components/KitPlanner";
 import { householdFromParams } from "@/data/kit-rules";
 
@@ -22,12 +21,11 @@ export default async function BuildYourKitPage({
       <div>
         <PageIntro
           eyebrow="Build your kit"
-          title="Who lives with you, and for how long?"
+          title="Stay prepared and stock up on the essentials"
           lede="Answer a few questions and get a shopping list with the quantities worked out. Tick what you already have. Copy it, print it, or send it straight to a basket."
           aside={<Illustration name="intro-kit" className="w-full" />}
         />
       </div>
-      <Photo slot="kit" className="mb-12" />
       <KitPlanner initial={initial} />
     </main>
   );

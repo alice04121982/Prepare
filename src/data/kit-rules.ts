@@ -310,11 +310,12 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     {
       id: "lenses",
       category: "First aid and medication",
-      item: "Spare glasses, or contact lenses and solution",
+      item: "A pair of glasses, even if you normally wear contact lenses",
       quantity: 1,
-      unit: "spare pair, plus a week of lenses and a bottle of solution if you wear them",
-      basis: "Lenses need clean hands and clean water. When either is short, glasses are the safer option, and an old prescription beats none.",
+      unit: "pair, plus a week of lenses and a bottle of solution if you wear them",
+      basis: "Contact lenses need clean hands, clean water and a steady supply, and all three can run short at once. A pair of glasses does not. An old prescription beats none.",
       freeOption: "Your last pair of glasses, kept with the kit.",
+      priority: true,
       search: "contact lens solution",
     },
     {

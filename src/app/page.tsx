@@ -46,7 +46,7 @@ const sections = [
     href: "/community",
     eyebrow: "Then everyone else",
     title: "Neighbours",
-    body: "Once your own household is sorted, the people around you. Who to check on, how to find the group that already exists, and what to agree in advance.",
+    body: "Once your own household has what it needs, the people around you. Who to check on, how to find the group that already exists, and what to agree in advance.",
     tags: ["Check-ins", "Skills", "Local groups"],
     illustration: "community",
   },
@@ -54,28 +54,22 @@ const sections = [
 
 const audiences = [
   {
-    title: "Just watched the news",
+    title: "You have seen the news",
     sub: "A sensible starting point",
-    body: "A storm warning, a cyber attack in the headlines, a shortage. You want a short, calm answer to what you should actually do.",
+    body: "A weather warning, a cyber attack in the headlines, a shortage. You want a clear answer to what you should actually do.",
   },
   {
-    title: "Busy households",
-    sub: "Limited time and budget",
-    body: "A prioritised list that costs a few pounds a week from the shop you already use, not a weekend and a full car boot.",
+    title: "You have little time or money",
+    sub: "A few pounds a week",
+    body: "A prioritised list built up from the shop you already use, over a few weeks, with nothing going to waste.",
   },
   {
-    title: "Want the real numbers",
+    title: "You want the actual figures",
     sub: "Litres and days, sourced",
-    body: "How much water a family of four really needs for three days, and what most disruptions actually look like.",
+    body: "How much water a family of four needs for three days, and how long most disruptions really last.",
   },
 ];
 
-const keyNumbers = [
-  { value: "3 days", label: "the minimum the government asks every household to cover" },
-  { value: "3 litres", label: "of drinking water per person per day, the gov.uk figure" },
-  { value: "9 things", label: "to get first, over a few weeks, from your normal shop" },
-  { value: "2 names", label: "of neighbours you know, and who know you" },
-];
 
 export default function Home() {
   const hero = photoCredits().find((c) => c.slot === "home-hero" && c.rank === 1);
@@ -98,15 +92,14 @@ export default function Home() {
           <div>
             <SectionLabel onDark>Simple steps for a difficult few days</SectionLabel>
             <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
-              If the power, water or shops stopped for three days, would you be
-              all right?
+              If the power went off, the water stopped and the shops were shut
+              for three days, would you be all right?
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
               The government now asks every UK household to be able to cope on
-              its own for seventy-two hours. It would not ask if it did not
-              think it might be needed. This site takes that advice and makes
-              it doable: what to keep, how much, how long it lasts, and what to
-              do first.
+              its own for seventy-two hours. This site takes that advice and
+              makes it practical: what to keep, how much, how long it lasts,
+              and what to do first.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/checklist" className="btn btn-primary">
@@ -127,16 +120,6 @@ export default function Home() {
             <Illustration name="hero" alt="" className="drop-shadow-2xl" />
           </div>
         </div>
-      </section>
-
-      {/* Key numbers */}
-      <section className="wrap mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-        {keyNumbers.map((k) => (
-          <div key={k.label} className="rounded-2xl border border-line bg-surface px-5 py-5">
-            <p className="font-heading text-3xl font-medium text-heading sm:text-4xl">{k.value}</p>
-            <p className="mt-1 text-sm text-muted">{k.label}</p>
-          </div>
-        ))}
       </section>
 
       {/* What might actually stop */}
@@ -183,10 +166,10 @@ export default function Home() {
           <SectionLabel>What this site covers</SectionLabel>
         </div>
         <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
-          <span className="block text-left">A few days of supplies, built slowly.</span>
-          <span className="block text-right">That is most of it.</span>
+          <span className="block text-left">Have the essentials at home to tide you over</span>
+          <span className="block text-right">until the council, the utilities or the government can fix the problem or get help to you.</span>
         </h2>
-        <p className="mt-4 text-muted">Three pages do the work. Read them in this order.</p>
+        <p className="mt-4 text-muted">Three pages cover it. Read them in this order.</p>
       </section>
 
       {/* Alternating cards */}
@@ -228,19 +211,18 @@ export default function Home() {
       <section className="wrap px-4 pt-24">
         <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] md:items-start">
           <div>
-            <SectionLabel>Who it is for</SectionLabel>
+            <SectionLabel>Who this is for</SectionLabel>
             <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
-              Written for people who want a sensible answer, not a hobby.
+              Ordinary households, with ordinary amounts of time and money.
             </h2>
           </div>
           <p className="measure leading-relaxed text-muted md:pt-2">
-            No bunkers, no bravado, no one selling you a hundred things. A
-            short list, honest numbers, and the people on your street. For
-            the very worst cases there is little any household can do, and
-            this site will not pretend otherwise. For everything short of
-            that, which is nearly everything that happens, a few days of
-            supplies and a plan is the difference between a bad week and a
-            frightening one.
+            This is not a survival site. It is a short list, the real
+            figures, and a plan you can make in an evening. For the very
+            worst events there is little any household can do, and this site
+            will not pretend otherwise. For everything short of that, which
+            is nearly everything that happens, a few days of supplies and a
+            plan make a difficult week manageable.
           </p>
         </div>
         <div className="mt-12 grid gap-8 sm:grid-cols-3">
@@ -263,9 +245,9 @@ export default function Home() {
           </h2>
           <p className="mt-4 max-w-prose leading-relaxed opacity-90">
             In any emergency, help goes first to the people who need it most.
-            Everyone else is expected to manage for a while. So sort your own
-            household out: water, food, light, warmth, medication, a way to
-            hear the news. Then look around you. The better prepared you are,
+            Everyone else is expected to manage for a while. So make sure your
+            own household has what it needs: water, food, light, warmth,
+            medication, a way to hear the news. Then look around you. The better prepared you are,
             the less you need, and the more you can give to the neighbour who
             could not prepare. Communities do pull together in a crisis. They
             pull together faster when fewer households are in trouble.
@@ -274,10 +256,10 @@ export default function Home() {
             Neighbours and local groups
           </Link>
         </div>
-        <Photo slot="home-household" aspect="aspect-[4/3] md:aspect-auto md:h-full" />
+        <Photo slot="home-household" rank={6} aspect="aspect-[4/3] md:aspect-auto md:h-full" />
       </section>
 
-      <Photo slot="home-community" className="mt-6" />
+      <Photo slot="home-community" aspect="aspect-[16/8]" className="mt-6" />
 
       {/* Why now */}
       <section id="why-now" className="mx-auto max-w-3xl scroll-mt-24 px-4 pt-24">
@@ -294,8 +276,9 @@ export default function Home() {
             happen.
           </p>
           <p>
-            That is as far as the worry needs to go. The rest is a shopping
-            list.
+            So be prepared. Buy the essentials and store them away, so you
+            have what you need if the power goes off, the water stops or the
+            shelves are empty.
           </p>
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
@@ -317,8 +300,8 @@ export default function Home() {
       {/* Closing */}
       <section className="mx-auto max-w-3xl px-4 py-24 text-center">
         <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
-          Three days of supplies and a plan on the fridge. That is the whole
-          job.
+          Three days of supplies and a plan your household knows. Taking
+          action now makes a difficult few days much easier to manage.
         </h2>
         <Link href="/build-your-kit" className="btn btn-primary mt-8">
           Build your list

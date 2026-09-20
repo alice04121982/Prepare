@@ -29,7 +29,7 @@ export default function OfficialGuidancePage() {
       <PageIntro
         eyebrow="Official guidance"
         title="What the government currently says"
-        lede="Live links to the official sources, each one opened and checked on the date shown. Other sites hand you survival PDFs from the last century. This page points you at what is actually in force now."
+        lede="Live links to the official sources, each one opened and checked on the date shown, so what you read here is what is currently in force."
         aside={<Illustration name="intro-guidance" className="w-full" />}
       />
 
