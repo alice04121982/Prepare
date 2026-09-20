@@ -161,13 +161,11 @@ export default function Home() {
       </section>
 
       {/* Section header */}
-      <section className="mx-auto max-w-2xl px-4 pb-10 pt-20 text-center">
-        <div className="flex justify-center">
-          <SectionLabel>What this site covers</SectionLabel>
-        </div>
-        <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
-          <span className="block text-left">Have the essentials at home to tide you over</span>
-          <span className="block text-right">until the council, the utilities or the government can fix the problem or get help to you.</span>
+      <section className="wrap pb-10 pt-20">
+        <SectionLabel>What this site covers</SectionLabel>
+        <h2 className="max-w-3xl text-3xl font-normal leading-tight sm:text-5xl">
+          Have the essentials at home to tide you over until the council, the
+          utilities or the government can fix the problem or get help to you.
         </h2>
         <p className="mt-4 text-muted">Three pages cover it. Read them in this order.</p>
       </section>
@@ -298,8 +296,8 @@ export default function Home() {
       </section>
 
       {/* Closing */}
-      <section className="mx-auto max-w-3xl px-4 py-24 text-center">
-        <h2 className="text-3xl font-normal leading-tight sm:text-5xl">
+      <section className="wrap py-24">
+        <h2 className="max-w-3xl text-3xl font-normal leading-tight sm:text-5xl">
           Three days of supplies and a plan your household knows. Taking
           action now makes a difficult few days much easier to manage.
         </h2>
