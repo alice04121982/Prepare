@@ -1,11 +1,10 @@
 import Link from "next/link";
 
 const links = [
-  { href: "/scenarios", label: "Scenarios" },
   { href: "/checklist", label: "Checklist" },
+  { href: "/build-your-kit", label: "Build your kit" },
+  { href: "/why", label: "Why three days" },
   { href: "/community", label: "Community" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/official-guidance", label: "Official guidance" },
   { href: "/worried", label: "Feeling frightened?" },
   { href: "/sources", label: "Sources" },
 ];
