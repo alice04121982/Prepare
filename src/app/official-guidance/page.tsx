@@ -5,7 +5,6 @@ import Callout from "@/components/Callout";
 import Illustration from "@/components/Illustration";
 import ListRow from "@/components/ListRow";
 import SectionLabel from "@/components/SectionLabel";
-import Photo from "@/components/Photo";
 import { officialGuidance, guidanceLastChecked } from "@/data/official-guidance";
 
 export const metadata: Metadata = {
@@ -31,9 +30,8 @@ export default function OfficialGuidancePage() {
         title="What the government currently says"
         lede="Live links to the official sources, each one opened and checked on the date shown, so what you read here is what is currently in force."
         aside={<Illustration name="intro-guidance" className="w-full" />}
+        photo="guidance"
       />
-
-      <Photo slot="guidance" className="mb-12" />
 
       <div className="mx-auto max-w-3xl">
 
