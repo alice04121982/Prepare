@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import SectionLabel from "@/components/SectionLabel";
 import Illustration from "@/components/Illustration";
@@ -47,8 +48,9 @@ export default function SourcesPage() {
           from Unsplash under the Unsplash Licence, free for commercial use
           with no attribution required; we credit the photographers below
           anyway. Type is General Sans and Switzer from Fontshare. No
-          tracking. Some product links may earn a small commission; the
-          checklist says so where it applies.
+          tracking. Some product links earn a small commission; see{" "}
+          <Link href="/disclosure">how this site earns money</Link> and the{" "}
+          <Link href="/privacy">privacy page</Link>.
         </p>
         <h3 className="mt-8 text-lg font-semibold">Photographers</h3>
         <ul className="mt-3 columns-2 gap-6 text-sm leading-relaxed">

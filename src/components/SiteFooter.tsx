@@ -7,6 +7,8 @@ const links = [
   { href: "/community", label: "Community" },
   { href: "/worried", label: "Feeling frightened?" },
   { href: "/sources", label: "Sources" },
+  { href: "/disclosure", label: "How we earn" },
+  { href: "/privacy", label: "Privacy" },
 ];
 
 export default function SiteFooter() {
@@ -40,8 +42,11 @@ export default function SiteFooter() {
         <div className="mt-16 flex flex-col gap-4 text-sm sm:flex-row sm:items-end sm:justify-between">
           <p className="max-w-md opacity-90">
             <span className="block font-medium">Calm, practical guidance for short disruptions.</span>
-            Based on UK government advice. Not a survival site. No tracking.
-            Some product links earn a small commission.
+            Based on UK government advice. Not a survival site. No tracking.{" "}
+            <Link href="/disclosure" className="underline underline-offset-4">
+              Some product links earn a small commission.
+            </Link>{" "}
+            As an Amazon Associate we earn from qualifying purchases.
           </p>
           <p className="opacity-70">
             Free to share. Check official guidance for your region too.

@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
 import SectionLabel from "@/components/SectionLabel";
+import Disclosure from "@/components/Disclosure";
 import { checklist, startingPoint } from "@/data/checklist";
 import { faq } from "@/data/faq";
 
@@ -24,6 +25,8 @@ export default function ChecklistPage() {
       />
 
       <div className="mx-auto max-w-3xl">
+        <Disclosure className="mb-12" />
+
         <section className="mb-14">
           <SectionLabel>Start here</SectionLabel>
           <h2 className="text-2xl font-semibold">Get these first</h2>
@@ -108,7 +111,13 @@ export default function ChecklistPage() {
                                     className="font-medium text-heading underline underline-offset-4 hover:text-sage"
                                   >
                                     {p.name}
-                                  </a>{" "}
+                                  </a>
+                                  {p.priceBand ? <span className="text-muted"> · {p.priceBand}</span> : null}
+                                  {p.usedIt ? (
+                                    <span className="ml-2 inline-block rounded-full bg-tag px-2 py-0.5 text-[0.7rem] font-medium uppercase tracking-wider text-heading">
+                                      Used it
+                                    </span>
+                                  ) : null}{" "}
                                   <span>{p.note}</span>
                                 </li>
                               ))}
@@ -126,7 +135,12 @@ export default function ChecklistPage() {
 
         <p className="mt-4 text-sm text-muted">
           A few items link to a product so you can see what it looks like and
-          roughly costs. Anything similar does the same job.
+          roughly costs. Anything similar does the same job. Some of those
+          links earn us a small commission; see{" "}
+          <Link href="/disclosure" className="underline underline-offset-4">
+            how this site earns money
+          </Link>
+          .
         </p>
 
         <section id="questions" className="mt-16 scroll-mt-24">

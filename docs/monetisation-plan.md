@@ -114,15 +114,24 @@ marketing for a site that ranks for "what should I keep at home".
 
 ## Build order
 
-1. Data model: add `products` to checklist items (done) with fields for
-   budget and standard options, retailer, price band, and a "used it"
-   flag. Add a `disclosure` component shown on any page with links.
+1. ~~Data model and disclosure component.~~ Done 19 September 2026.
+   `ProductLink` in src/data/checklist.ts carries tier, price band and a
+   `usedIt` flag; `Product` in src/data/products.ts carries `usedIt`.
+   `src/components/Disclosure.tsx` sits at the top of the Checklist and
+   Build Your Kit pages.
 2. Apply to Amazon Associates UK and Awin now; both take days to approve.
-   Apply to Jackery and Anker via Impact once traffic exists.
+   Apply to Jackery and Anker via Impact once traffic exists. Alice does
+   this herself; the site now has the pages they check for.
 3. Populate the checklist with two options per purchasable item, about
-   twenty-five products in total.
-4. Build the Build Your Kit planner with the shopping-list output.
+   twenty-five products in total. Needs Alice's list of what she has
+   actually used, and the affiliate tags once approved.
+4. ~~Build the Build Your Kit planner with the shopping-list output.~~
+   Done; the Buy it tab fills an Amazon basket once products are verified
+   and `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` is set.
 5. Write the first three kit pages.
-6. Add the disclosure page, privacy policy, and Amazon wording.
+6. ~~Add the disclosure page, privacy policy, and Amazon wording.~~ Done
+   19 September 2026: /disclosure, /privacy, Amazon sentence in the footer.
+   Contact address is `contactEmail` in src/data/site.ts; confirm it
+   exists before the applications go in.
 7. Newsletter sign-up, once there is something to send.
 8. Printed booklet, later, once the content has settled.

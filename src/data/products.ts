@@ -22,6 +22,8 @@ export type Product = {
   priceBand: string;
   /** Set true after opening the product page and checking it by hand. */
   verified: boolean;
+  /** True only when Alice or the site has actually owned or tested it. Shown to the reader. */
+  usedIt?: boolean;
   /** How many of this product cover one planner unit, e.g. a 24-pack covers 6 "packs of 4". */
   unitsPerProduct?: number;
   /** Amazon image id for the main product photo; see amazonImageUrl(). */

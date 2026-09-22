@@ -1,10 +1,19 @@
 export type ProductLink = {
   /** Product or maker name as shown to the reader. */
   name: string;
-  /** Link to the maker's own site, never a retailer or affiliate link. */
+  /**
+   * Maker or specialist retailer first, Amazon as the fallback. May carry an
+   * affiliate tag; the page says so (docs/monetisation-plan.md).
+   */
   url: string;
   /** Why it is listed: what it does, who it suits. */
   note: string;
+  /** "budget" shows first. Omit when only one option is listed. */
+  tier?: "budget" | "standard";
+  /** A range, never a price. Prices go stale and Amazon forbids quoting them. */
+  priceBand?: string;
+  /** True only when Alice or the site has actually owned or tested it. */
+  usedIt?: boolean;
 };
 
 export type ChecklistItem = {
@@ -16,9 +25,10 @@ export type ChecklistItem = {
   /** True for the handful of items to get first if starting from nothing. */
   priority?: boolean;
   /**
-   * Optional examples of specific products. Rules: link to the maker's own
-   * site, no retailer or affiliate links, and only things that have actually
-   * been used. Absence of a link never means an item is unimportant.
+   * Optional examples of specific products. Rules (docs/monetisation-plan.md):
+   * only checklist items, free option first, a budget and a standard choice,
+   * maker or specialist retailer before Amazon, at most three per item.
+   * Absence of a link never means an item is unimportant.
    */
   products?: ProductLink[];
 };

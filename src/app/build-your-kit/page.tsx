@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
 import KitPlanner from "@/components/KitPlanner";
+import Disclosure from "@/components/Disclosure";
 import { householdFromParams } from "@/data/kit-rules";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default async function BuildYourKitPage({
           aside={<Illustration name="intro-kit" className="w-full" />}
         />
       </div>
+      <Disclosure className="mb-8" />
       <KitPlanner initial={initial} />
     </main>
   );

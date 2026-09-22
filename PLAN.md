@@ -170,9 +170,11 @@ Editorial rules that shape every page:
 - Six scenarios now, including armed conflict drawn from Ukraine since
   2022. It stretches the "short, common disruption" framing on purpose and
   says so in its own copy.
-- Product links: maker's own site only, never a retailer, no affiliate
-  links, only things actually used. Jackery power station and solar panel
-  are the first examples. Disclosure callout sits on the Checklist page.
+- Product links: governed by docs/monetisation-plan.md (19 September
+  2026). Maker or specialist retailer first, Amazon as the fallback, free
+  option first, budget and standard choices, affiliate tags allowed. The
+  `Disclosure` component sits at the top of every page with product links;
+  /disclosure and /privacy carry the full wording.
 - Scenarios, checklist, and the first three FAQ entries mirror the
   offline guide. When either side changes, update the other.
 - Guidance is UK-first (105 power-cut number, Priority Services Register,
@@ -185,10 +187,10 @@ Editorial rules that shape every page:
   reads differently from US/FEMA-style advice) — start UK-first given
   Cambridge base?
 - Any budget for a domain/hosting, or keep it fully free-tier to start?
-- Do we want a donation/no-monetisation stance stated explicitly on the
-  site (fits the non-alarmist, non-exploitative tone)?
-  See docs/competitor-review.md for how TruePrepper and The Prepared
-  monetise (affiliate, courses, kits) and the options table.
+- ~~Do we want a donation/no-monetisation stance stated explicitly on the
+  site?~~ Resolved: affiliate links under the rules in
+  docs/monetisation-plan.md, stated on /disclosure. See
+  docs/competitor-review.md for how TruePrepper and The Prepared monetise.
 
 ## 7. Typography
 
