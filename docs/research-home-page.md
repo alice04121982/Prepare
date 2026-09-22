@@ -1,8 +1,26 @@
 # Home page structure: how this sector opens a task
 
 Research run 22 September 2026. Prompt 3 of the five in
-docs/mobbin-mcp-plan.md. Proposal only, held at the review gate. No code
-changed.
+docs/mobbin-mcp-plan.md.
+
+**Approved and built the same day.** Two notes on what the build added
+to the proposal below:
+
+- **The illustration leaves the hero.** The form takes its column, and
+  at the hero's width there is no room for both. The photograph, the
+  question and the lede are unchanged. This was not in the proposal and
+  is the one visible change beyond it.
+- **A bug came out of it.** `householdFromParams` ran the day count
+  through the same helper as the headcounts, whose 0 to 12 clamp turned
+  14 into 12 and then fell back to three days. Choosing "Two weeks" in
+  the new hero form, in the planner, or opening a shared 14 day link,
+  silently gave three days. Fixed in `src/data/kit-rules.ts`.
+
+The examples are links rather than fields that fill the form, so they
+work without JavaScript and go straight to a built list. The third row
+carries no count, because the site cannot know whether someone has
+spoken to their neighbours and inventing one would be worse than leaving
+it out.
 
 Full report: https://claude.ai/artifact/A64uoRKhHZG4Qw8AA2mK3M
 
