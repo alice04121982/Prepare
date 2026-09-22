@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Illustration from "@/components/Illustration";
 import SectionLabel from "@/components/SectionLabel";
+import ChecklistTracker from "@/components/ChecklistTracker";
 import { checklist, startingPoint } from "@/data/checklist";
 import { faq } from "@/data/faq";
 
@@ -67,62 +68,7 @@ export default function ChecklistPage() {
           </ul>
         </nav>
 
-        <div className="divide-y divide-line">
-          {checklist.map((c) => (
-            <section key={c.slug} id={c.slug} className="scroll-mt-24 py-10">
-              <SectionLabel>{c.title}</SectionLabel>
-              <h2 className="text-2xl font-semibold">{c.title}</h2>
-              <p className="mt-2 max-w-2xl leading-relaxed text-muted">{c.intro}</p>
-
-              <div className="mt-6 overflow-x-auto">
-                <table className="w-full text-[0.95rem]">
-                  <thead>
-                    <tr className="text-left text-xs uppercase tracking-wider text-muted">
-                      <th className="w-[30%] py-2 pr-4 font-semibold">Item</th>
-                      <th className="w-[30%] py-2 pr-4 font-semibold">Realistic amount</th>
-                      <th className="py-2 font-semibold">Shelf life and notes</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-line">
-                    {c.items.map((i) => (
-                      <tr key={i.item} className="align-top">
-                        <td className="py-3 pr-4 font-medium">
-                          {i.item}
-                          {i.priority ? (
-                            <span className="ml-2 inline-block rounded-full bg-tag px-2 py-0.5 text-[0.7rem] font-medium uppercase tracking-wider text-heading">
-                              First
-                            </span>
-                          ) : null}
-                        </td>
-                        <td className="py-3 pr-4">{i.amount}</td>
-                        <td className="py-3 text-muted">
-                          {i.notes}
-                          {i.products ? (
-                            <ul className="mt-2 space-y-1.5 border-l-2 border-sage-light pl-3 text-sm">
-                              {i.products.map((p) => (
-                                <li key={p.url}>
-                                  <a
-                                    href={p.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-medium text-heading underline underline-offset-4 hover:text-sage"
-                                  >
-                                    {p.name}
-                                  </a>{" "}
-                                  <span>{p.note}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          ) : null}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          ))}
-        </div>
+        <ChecklistTracker />
 
         <p className="mt-4 text-sm text-muted">
           A few items link to a product so you can see what it looks like and
