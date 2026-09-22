@@ -1,8 +1,14 @@
 # Microcopy audit: empty states, saved, errors, waiting
 
 Research run 22 September 2026. Prompt 2 of the five in
-docs/mobbin-mcp-plan.md. Held at the review gate: nothing below has been
-written into the code.
+docs/mobbin-mcp-plan.md.
+
+**Approved and applied the same day.** All six changes below are in the
+code, and the two "kept" lines were left as they were. The copy button
+fix was verified in the browser on both paths: with the clipboard denied
+the button reads "Could not copy" and the message appears in a live
+region, and with it allowed the list reaches the clipboard and no
+message shows.
 
 Full report: https://claude.ai/artifact/1BjEm5kGjrz9VpKAYi832H
 

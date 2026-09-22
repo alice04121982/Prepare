@@ -24,9 +24,9 @@ export default function ChecklistTracker() {
           {!ready ? (
             <>Tick anything you already have as you read.</>
           ) : ticked === 0 ? (
-            <>Nothing ticked yet. Tick anything you already have and this page will remember it.</>
+            <>Nothing ticked yet. Tick what you already have, and this page keeps the count of what is left to get.</>
           ) : ticked === total ? (
-            <>All {total} ticked. Put a date in the calendar to check the dates and the batteries in six months.</>
+            <>All {total} ticked. Put a date in the calendar to check the batteries and the food dates in six months.</>
           ) : (
             <>
               You have <span className="tabular-nums">{ticked}</span> of{" "}
@@ -38,7 +38,7 @@ export default function ChecklistTracker() {
           )}
         </p>
         <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
-          <p>Ticks are kept in this browser only. Nothing is sent anywhere.</p>
+          <p>Ticks are kept in this browser, so they will not show up on your phone. Nothing is sent anywhere.</p>
           {ready && ticked > 0 ? (
             <button
               type="button"

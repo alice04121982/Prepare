@@ -74,6 +74,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const [h, setH] = useState<Household>(initial ?? defaultHousehold);
   const { have, ready: haveReady, toggle: toggleHave, clear: clearHave } = useHave();
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
   const [shop, setShop] = useState<Retailer["id"]>("amazon");
   const [tab, setTab] = useState<"list" | "buy">("list");
   const retailer = retailers.find((r) => r.id === shop)!;
@@ -118,10 +119,13 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(plainText());
+      setCopyFailed(false);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      /* clipboard unavailable; the print view still works */
+      // Older browsers, and any page not served over https, refuse this.
+      // Say so and name the two routes that do work.
+      setCopyFailed(true);
     }
   };
 
@@ -199,9 +203,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                   <span className="tabular-nums">{lines.length}</span>.{" "}
                 </span>
               ) : null}
-              Tick anything you already have. Ticked lines stay here, struck through, and drop out of the basket
-              and the copied list. Ticks are kept in this browser only; the link in your address bar carries your
-              household.
+              Tick what you already have. Ticked lines stay on the list and drop out of the basket. Ticks are
+              kept in this browser; the link in your address bar carries your household.
             </p>
             {haveReady && haveCount > 0 ? (
               <button
@@ -215,11 +218,17 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
             <button type="button" onClick={copy} className="btn btn-secondary">
-              {copied ? "Copied" : "Copy list"}
+              {copyFailed ? "Could not copy" : copied ? "Copied" : "Copy list"}
             </button>
             <button type="button" onClick={() => window.print()} className="btn btn-secondary">
               Print
             </button>
+            {copyFailed ? (
+              <p role="status" className="basis-full text-sm text-muted sm:max-w-sm">
+                Your browser would not let the page copy the list. Print it instead, or select the list and
+                copy it by hand.
+              </p>
+            ) : null}
           </div>
         </div>
 
@@ -376,9 +385,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                     ))}
                 </ul>
                 <p className="mt-4 max-w-2xl text-xs text-muted">
-                  {retailer.name} has no way for a website to fill your basket, so it is one click per item: each link opens
-                  the search for that item, you add it there. A single basket button for supermarkets needs a partnership
-                  with Samsung Food, the service behind BBC Good Food&rsquo;s shoppable recipes, which is on the plan.
+                  {retailer.name} has no way for a website to fill your basket, so it is one click per item. Each link
+                  opens the search for that item, and you add it there.
                 </p>
               </>
             )}
