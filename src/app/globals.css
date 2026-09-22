@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /*
   Palette: "institutional utility". Off-white canvas, charcoal text, slate
@@ -50,6 +51,30 @@
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading);
   --radius-card: 1.5rem;
+
+  /*
+    shadcn/ui names, pointed at the palette above so dark mode follows.
+    Two shadcn names already exist here with a different meaning and are
+    deliberately NOT redefined: `muted` is this site's grey text colour
+    (shadcn uses it as a grey background) and `accent` is the Safety Blue
+    action colour (shadcn uses it as a subtle hover background). When
+    adding a shadcn component, swap `bg-muted` for `bg-soft` and check any
+    `hover:bg-accent` reads as intended.
+  */
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-ink);
+  --color-secondary: var(--soft);
+  --color-secondary-foreground: var(--heading);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted);
+  --color-accent-foreground: var(--accent-ink);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--accent);
+  --color-destructive: #b42318;
 }
 
 @media (prefers-color-scheme: dark) {
