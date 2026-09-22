@@ -502,7 +502,9 @@ export function householdFromParams(q: Record<string, string | string[] | undefi
     const v = parseInt(get(k) ?? "", 10);
     return Number.isFinite(v) ? Math.max(0, Math.min(12, v)) : d;
   };
-  const days = n("d", 3);
+  // Days are not a headcount, so they do not go through n(), whose 0 to 12
+  // clamp would turn a fortnight into 12 and then fall back to three days.
+  const days = parseInt(get("d") ?? "", 10);
   return {
     adults: Math.max(1, n("a", 2)),
     children: n("c", 0),

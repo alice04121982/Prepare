@@ -7,7 +7,7 @@ import { householdFromParams } from "@/data/kit-rules";
 export const metadata: Metadata = {
   title: "Build your kit",
   description:
-    "Tell us who lives with you and how many days to cover. Get a shopping list with realistic quantities, a free option for every line, and a print or copy button.",
+    "Say who lives with you and how long to cover. Get a shopping list with the quantities worked out, a free option for every line, and one button that puts the lot into a basket.",
 };
 
 export default async function BuildYourKitPage({
@@ -22,7 +22,7 @@ export default async function BuildYourKitPage({
         <PageIntro
           eyebrow="Build your kit"
           title="Stay prepared and stock up on the essentials"
-          lede="Answer a few questions and get a shopping list with the quantities worked out. Tick what you already have. Copy it, print it, or send it straight to a basket."
+          lede="Say who lives with you and how long to cover. You get a list with the quantities worked out, a free option for every line, and one button that puts the lot into an Amazon basket. Groceries come from your normal shop."
           aside={<Illustration name="intro-kit" className="w-full" />}
         />
       </div>
