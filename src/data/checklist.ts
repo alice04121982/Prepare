@@ -66,13 +66,13 @@ export const checklist: ChecklistCategory[] = [
     slug: "food",
     title: "Food",
     intro:
-      "Built up gradually from things your household already eats. Nothing here should need cooking, and nothing should be new to you.",
+      "Built up gradually from things your household already eats. Nothing here should need cooking, and nothing should be new to you. Complex carbohydrates and protein do the most good: wholegrain cereals, oats, rice and pasta; tinned chickpeas, lentils and kidney beans; unsalted nuts, peanut butter, and tinned oily fish such as tuna, mackerel and sardines. Choose items tinned in water rather than brine or syrup, and go easy on instant noodles, tinned soup and sugary cereal bars, which give little for the amount of salt or sugar they carry (British Nutrition Foundation guidance, reported by the BBC, September 2026).",
     items: [
       {
         item: "Shelf-stable staples",
         amount: "3 to 7 days per person to start",
         notes:
-          "Tinned fish, beans, soup, and vegetables; dried pasta, rice, oats; nut butter; crackers; long-life milk. Rotate stock and buy one extra each week rather than a single big shop.",
+          "Tinned oily fish, pulses, beans, and vegetables; dried pasta, rice, oats; nut butter; crackers; long-life milk. Rotate stock and buy one extra each week rather than a single big shop.",
         priority: true,
       },
       {
@@ -80,6 +80,12 @@ export const checklist: ChecklistCategory[] = [
         amount: "At least a day or two of it within the above",
         notes:
           "Matters in a power cut. Tinned fruit, crackers and nut butter, cereal bars, and ready-to-eat tins.",
+      },
+      {
+        item: "Tinned fruit, pickled vegetables and long-life milk",
+        amount: "A few tins of each",
+        notes:
+          "Tinned fruit's juice is a useful source of fluid, vitamins and fibre if drinking water runs low. Long-life milk gives protein and calcium. Dried herbs and spices make bland tinned food taste better.",
       },
       {
         item: "A manual tin opener",

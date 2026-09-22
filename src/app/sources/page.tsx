@@ -26,10 +26,12 @@ export default function SourcesPage() {
         <p>
           Guidance draws on publicly available information from national and
           international bodies, including UK gov.uk preparedness guidance,
-          the Red Cross and Red Crescent, and FEMA. Durations and quantities
-          are deliberately realistic rather than worst-case. Official guidance
-          for your own region is updated more often than this site, so check
-          it too.
+          the Red Cross and Red Crescent, and FEMA. The specific food
+          suggestions on the checklist follow nutrition guidance from the
+          British Nutrition Foundation, reported by BBC News in September
+          2026. Durations and quantities are deliberately realistic rather
+          than worst-case. Official guidance for your own region is updated
+          more often than this site, so check it too.
         </p>
       </section>
       <Callout title="Still being written">
