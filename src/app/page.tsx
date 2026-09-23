@@ -1,84 +1,64 @@
 import Link from "next/link";
-import { photoCredits } from "@/components/Photo";
 import SectionLabel from "@/components/SectionLabel";
 import DownloadRow from "@/components/DownloadRow";
 import HomeProgress from "@/components/HomeProgress";
 import { kits } from "@/data/kits";
 
 export default function Home() {
-  const heroPicks = photoCredits().filter((c) => c.slot === "home-hero");
-  // Rank 2 is the terraced street: a place someone lives, rather than scenery.
-  const hero = heroPicks.find((c) => c.rank === 2) ?? heroPicks[0];
   return (
     <main className="pb-8">
       {/* Hero, with the form that starts the task in it */}
-      <section className="relative overflow-hidden rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-20">
-        {hero ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={`/photos/${hero.file}`}
-            alt=""
-            width={hero.w}
-            height={hero.h}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        ) : null}
-        {/* A legibility scrim behind the words, clearing toward the photograph,
-            rather than a flat wash that turns the picture into texture. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-mint/95 via-mint/80 to-mint/45"
-        />
-        <div className="wrap relative grid items-center gap-10 md:grid-cols-[1.15fr_minmax(0,22rem)]">
+      <section className="overflow-hidden rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-20">
+                <div className="wrap grid items-center gap-10 md:grid-cols-[1.15fr_minmax(0,22rem)]">
           <div>
             <SectionLabel onDark>Simple steps for a difficult few days</SectionLabel>
-            <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
+            <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-forest sm:text-6xl">
               If the power went off, the water stopped and the shops were shut
               for three days, would you be all right?
             </h1>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-forest/85 sm:text-lg">
               The government asks every UK household to be able to manage on
               its own for three days. Here is what that means, and how to get
               there this week.
             </p>
-            <p className="mt-6 text-sm text-white/75">
+            <p className="mt-6 text-sm text-forest/75">
               Rather read first?{" "}
-              <Link href="/checklist" className="underline underline-offset-4 hover:text-white">
+              <Link href="/checklist" className="underline underline-offset-4 hover:text-forest">
                 See the checklist.
               </Link>{" "}
               Frightened by the news?{" "}
-              <Link href="/worried" className="underline underline-offset-4 hover:text-white">
+              <Link href="/worried" className="underline underline-offset-4 hover:text-forest">
                 Start here instead.
               </Link>
             </p>
           </div>
 
           <div className="md:justify-self-end">
-            <div className="rounded-card border border-white/15 bg-mint/85 p-6 shadow-xl backdrop-blur-md">
-              <p className="font-heading text-lg text-white">Pick your household</p>
-              <p className="mt-1 text-sm text-white/70">
+            <div className="rounded-card bg-surface p-6 shadow-lg">
+              <p className="font-heading text-lg text-heading">Pick your household</p>
+              <p className="mt-1 text-sm text-muted">
                 Each one is a full list with the quantities worked out.
               </p>
-              <ul className="mt-4 divide-y divide-white/15 border-y border-white/15">
+              <ul className="mt-4 divide-y divide-line border-y border-line">
                 {kits.map((k) => (
                   <li key={k.slug}>
                     <Link
                       href={`/kits/${k.slug}`}
-                      className="flex items-baseline justify-between gap-3 py-2.5 text-sm text-white/90 hover:text-white"
+                      className="flex items-baseline justify-between gap-3 py-2.5 text-sm text-foreground hover:text-forest"
                     >
                       <span>{k.title}</span>
-                      <span aria-hidden className="text-white/50">
+                      <span aria-hidden className="text-muted">
                         &rarr;
                       </span>
                     </Link>
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-sm text-white/70">
+              <p className="mt-4 text-sm text-muted">
                 None of these?{" "}
                 <Link
                   href="/build-your-kit"
-                  className="underline underline-offset-4 hover:text-white"
+                  className="underline underline-offset-4 hover:text-forest"
                 >
                   Build your own list.
                 </Link>
@@ -86,11 +66,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {hero ? (
-          <p className="wrap relative mt-8 text-xs text-white/55">
-            {hero.alt.charAt(0).toUpperCase() + hero.alt.slice(1)}. Photograph by {hero.photographer}.
-          </p>
-        ) : null}
       </section>
 
       {/* The three steps, as rows carrying their own state */}

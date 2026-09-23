@@ -6,8 +6,8 @@
  * a scale or a plan that the page is asking the reader to picture. Nothing
  * is drawn that does not carry information.
  *
- * All four sit on the navy intro panel, so they are drawn monochrome in
- * currentColor (white) with opacity for depth. Labels live inside the SVG so
+ * All four sit on the mint intro panel, so they are drawn monochrome in
+ * currentColor (forest green) with opacity for depth. Labels live inside the SVG so
  * they scale with it; the title and desc carry the same content for anyone
  * using a screen reader.
  */
@@ -346,7 +346,7 @@ const DIAGRAMS: Record<DiagramName, () => React.ReactElement> = {
 export default function Diagram({ name, className = "" }: Props) {
   const Drawing = DIAGRAMS[name];
   return (
-    <div className={`text-white ${className}`}>
+    <div className={`text-forest ${className}`}>
       <Drawing />
     </div>
   );

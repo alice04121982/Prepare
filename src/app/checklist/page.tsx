@@ -21,7 +21,6 @@ export default function ChecklistPage() {
         title="What to keep on hand"
         lede="Realistic quantities for a household to build up gradually, a few pounds a week from the shop you already use. Every figure is a planning number drawn from public emergency guidance, not a worst case."
         aside={<Diagram name="water" />}
-        photo="checklist"
       />
 
       <div className="mx-auto max-w-3xl">
