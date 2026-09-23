@@ -1,22 +1,38 @@
-# Source note: Radical with Amol Rajan (BBC Radio 4)
+# Source note: Radical, "Disaster Prepping: Should We All Stock Up?"
 
 Logged 23 September 2026 at Alice's request. Not yet on the site.
 
-Episode link:
-https://podcasts.apple.com/gb/podcast/radical/id1708808280?i=1000790225790
+- Show: Radical (BBC Radio 4)
+- Episode: Disaster Prepping: Should We All Stock Up?
+- Presenter: Gabriel Gatehouse
+- Guest: Mike Chappell, a prepper
+- Published: 17 September 2026
+- Link: https://podcasts.apple.com/gb/podcast/radical/id1708808280?i=1000790225790
 
-## Status: transcript not yet captured
+## Status: only the opening captured
 
-The episode could not be opened from the build environment. Its egress
-policy blocks podcasts.apple.com, podnews.net and podcastrepublic.net,
-and web search did not index this episode. The guest, title and date
-are therefore unconfirmed, and nothing below is quoted.
+Alice pasted the opening from Apple Podcasts' share excerpt, which cuts
+off after the first minute. The rest of the transcript is still needed.
+The build environment cannot fetch it: egress blocks podcasts.apple.com,
+podnews.net and podcastrepublic.net. Copy it in sections from Show
+Transcript in the Apple Podcasts app. Keep the full text out of the repo
+(it is BBC copyright); record short quotes with timestamps here instead.
 
-To complete this note, paste the transcript here. On an iPhone or Mac,
-Apple Podcasts shows it from the episode's menu (Show Transcript), and it
-can be copied from there. BBC Sounds may also carry it.
+What the opening establishes:
 
-## Claims as reported by Alice from listening
+- Gatehouse frames it with the same question the Swedish booklet and
+  this site use: what would you do if the shops, water and power went,
+  "and not just for you, but for everyone".
+- He then asks how long before "law and order begins to break down".
+  That is the register docs/tone-of-voice.md rules out; do not borrow it.
+- He says the government is "urging us to stockpile". The government's
+  own line is "not about stockpiling, this is about sensible
+  safeguards". The site should keep the government's wording.
+- He cites the National Audit Office; the excerpt cuts off there. Find
+  the NAO report he means. If it is the 2026 resilience report, it may
+  belong in src/data/official-guidance.ts under "The bigger picture".
+
+## Claims as reported by Alice from listening (not in the excerpt)
 
 1. **Keep 90 days of food.**
 2. **Sewage can come back up through the toilet** after a certain amount
