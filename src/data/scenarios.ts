@@ -25,7 +25,7 @@ export const scenarios: Scenario[] = [
     title: "Power outage",
     summary:
       "Loss of mains electricity, from a storm, grid fault, or planned load shedding.",
-    typicalDuration: "Most resolve within hours; a small share last 1–3 days",
+    typicalDuration: "Most resolve within hours; a small share last 1 to 3 days",
     description:
       "Power cuts are the most common disruption most households will ever experience. The usual cause is local: a fault on a line, a substation problem, or storm damage. Network operators restore the large majority within a few hours, and the long tail (a day or more) tends to follow severe weather that has damaged many lines at once. Mobile networks usually keep working for a while on backup power, but can degrade after several hours.",
     whatHelps: [

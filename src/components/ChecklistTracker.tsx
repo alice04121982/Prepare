@@ -98,7 +98,7 @@ export default function ChecklistTracker() {
                           >
                             {i.item}
                             {i.priority ? (
-                              <span className="ml-2 inline-block rounded-full bg-tag px-2 py-0.5 align-middle text-[0.7rem] font-medium uppercase tracking-wider text-heading">
+                              <span className="ml-2 inline-block rounded-full bg-tag px-2 py-0.5 align-middle text-[0.7rem] font-medium text-heading">
                                 First
                               </span>
                             ) : null}
