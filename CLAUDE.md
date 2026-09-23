@@ -112,10 +112,14 @@ for depth on shapes only. Their text labels stay solid so they pass AA.
 
 ## The docs are rules
 
-- **`docs/tone-of-voice.md`** governs all copy. Plain, short, second
-  person, sentences under twenty words. Never "stockpile", "survive",
-  "prepper", "bug-out". Household first, community as a consequence.
-  Numbers specific and sourced.
+- **`docs/tone-of-voice.md`** governs all copy. Since 24 September 2026
+  the site is a **practical prepper** shopping tool: "prepper", "prepping"
+  and "stockpile" are allowed, the reasons are named plainly, but never
+  tactical, conspiratorial or fear-invented. Plain, short, second person.
+  Numbers specific and sourced. Its revision section wins over the rest.
+- **`docs/monetisation-plan.md`** (revised 24 September 2026): the product
+  is the ready-made list and the one-click basket. Disclosure, Amazon's
+  wording, price bands and no fake urgency are binding.
 - **`docs/copy-audit.md`** holds the four tests every line has to pass,
   including "would gov.uk say it" and "no flourish at the end of the
   paragraph".

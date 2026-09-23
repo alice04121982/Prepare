@@ -8,15 +8,15 @@ web
 
 ## Users
 
-People in the UK who have just read or heard an alarming news story (power cuts, water notices, severe weather, cyber attacks on infrastructure, conflict in Europe) and want a sensible starting point, not a rabbit hole. Most arrive on a phone from a news link or a share. Many are households with limited time and money who want a short, prioritised list, and people who want realistic timeframes ("how long does three days of supplies last a family of four?") rather than a guess. A distinct group feels frightened or helpless and needs perspective before a checklist.
+UK households who have decided to prepare and want to know exactly what to buy: people worried about power cuts, water outages, severe weather and climate, war in Europe, supply shortages, or losing their income, including to automation. They already know from gov.uk that they should prepare; they come here to get it done. Most arrive on a phone, often from search ("72 hour kit family of four UK") or a share. A smaller group arrives frightened by the news and needs perspective first (the /worried page).
 
 ## Product Purpose
 
-Help an ordinary household be able to cope on its own for three days if the power, water, shops or networks stop, which is what the UK government and its northern European neighbours now ask. The site turns that advice into something practical: what to keep, how much, how long it lasts, and what to do first. Success is a visitor who checks what they already have, fills the gaps with sensible buys, and leaves calmer than they arrived.
+Turn a household into a ready-made shopping list. The visitor says who lives there, picks a scenario (72 hours or a power cut, 2 weeks to 1 month, 3 months for job loss or a crisis, or a grab bag), and gets a list with the quantities worked out that they can send to an Amazon basket in one go, or buy item by item from other shops. Success is a completed basket. The site earns affiliate commission on it and is one of several online income streams for its owner. The guidance that explains the numbers stays, as a guides section that also brings in search traffic.
 
 ## Positioning
 
-A calm public-information guide in the register of gov.uk's Prepare campaign and Sweden's "If Crisis or War Comes" booklet, set against prepper sites (TruePrepper and peers) and their macho register. Household first, then community as a consequence. Sensible safeguards, never stockpiling. Every quantity is specific and sourced, and official guidance is linked with a "last checked" date, where competitors hand out old survival PDFs.
+A practical prepper site for UK households (repositioned 24 September 2026). Openly about prepping and stockpiling sensibly, without the tactical and macho register of TruePrepper and its peers. What no competitor has: lists that scale to your exact household and duration, with every quantity specific and sourced, and one button that buys the lot.
 
 ## Operating Context
 
@@ -30,14 +30,14 @@ A calm public-information guide in the register of gov.uk's Prepare campaign and
 - Next.js App Router, TypeScript, Tailwind CSS v4, shadcn/ui. Deployed on Vercel at stayprepared.co.uk.
 - Pages: home, checklist, build your kit, why (three days), worried (if the news is frightening you), community, sources. Planned in PLAN.md: scenarios, FAQ, official guidance, kit pages by household type.
 - Content lives in `src/data/` (checklist, kit rules, products, scenarios, FAQ, official guidance).
-- Monetisation is affiliate links on checklist and kit items: maker or specialist retailer first, Amazon only as a fallback and never first, free or use-what-you-have option listed first, plain disclosure on every page with links (docs/monetisation-plan.md). The site earns when a reader buys something they needed anyway, never by making them want more.
+- Monetisation is affiliate commission on ready-made lists (docs/monetisation-plan.md, revised 24 September 2026). Amazon Associates UK is live (tag in `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`); Awin is applied for; brand programmes come later. Disclosure on every page with links, Amazon's required wording, price bands never live prices, no fake scarcity or urgency.
 - Open: the owner selected "Something else" for assets to carry forward without specifying it; ask before assuming.
 
 ## Brand Commitments
 
 - Name: Stay Prepared. No logo is decided (concepts only, in `public/brand/logo-concepts.html`).
-- Voice: docs/tone-of-voice.md, approved 18 September 2026. Plain, short, second person, British and dry. Open with a question the reader can answer. Name hazards once, never ideologies or leaders. No neat paragraph closers, no fact turned into a nudge. Banned words include stockpile, hoard, survive, prepper, bunker, bug-out, doomsday.
-- No fear-based language, countdown clocks, or crisis imagery.
+- Voice: docs/tone-of-voice.md, revised 24 September 2026 to "practical prepper". Prepper, prepping and stockpile are allowed; the reasons (power, water, weather and climate, war, shortages, job loss) are named plainly. Still plain, short, second person, British and dry. Never tactical or conspiratorial.
+- No invented threat levels, dates or likelihoods, no countdown clocks, no fake scarcity.
 - No em dashes or double hyphens in any copy.
 - Released on 23 September 2026: the Noble Finance Figma layout (pill buttons, big rounded cards, light display type) and the slate, navy and safety-blue palette are no longer binding. The owner asked for a warm household tone in their place.
 
@@ -50,11 +50,11 @@ A calm public-information guide in the register of gov.uk's Prepare campaign and
 
 ## Product Principles
 
-1. Move the reader from the news to their own cupboard in one line.
-2. Check what you have before buying anything; the free option comes first.
-3. Household first, then neighbours, because prepared households have more to give.
-4. Specific and sourced beats reassuring and vague.
-5. Say the worst case once, honestly, and do not dwell.
+1. From your household to a full basket in as few taps as possible.
+2. Every quantity is specific and sourced; that is why people trust the list enough to buy from it.
+3. Show what you probably already have, so the list is honest and the basket is the right size.
+4. Name the risks plainly, never invent them.
+5. Household first, then neighbours.
 
 ## Accessibility & Inclusion
 

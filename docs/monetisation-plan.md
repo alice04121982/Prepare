@@ -1,5 +1,37 @@
 # Stay Prepared: monetisation plan
 
+## Revision, 24 September 2026: shopping lists first
+
+Alice repositioned the site as a practical prepper shopping tool and wants
+it to earn as one of several online income streams. Where this section
+conflicts with anything below, this section wins.
+
+- **The product is the ready-made list.** A household enters who lives
+  there, picks a scenario (72 hours, 2 weeks to 1 month, 3 months, grab
+  bag), and gets a list with quantities worked out and a "send the whole
+  list to an Amazon basket" button, plus per-item links to other shops.
+- **Guides stay, second.** The existing guidance becomes a guides section.
+  It earns its place as search traffic ("how much water for a family of
+  four for two weeks") that feeds the lists.
+- **Amazon first is now acceptable** while Amazon Associates UK is the
+  only live programme. Awin (Argos, Currys, Screwfix and others) is
+  applied for; add those retailers once approved. Brand programmes
+  (Jackery, EcoFlow, Anker) later, once there is traffic.
+- **Relaxed:** the thirty-product cap, "only link to checklist items" and
+  "maker first" no longer bind. Lists can include anything a scenario
+  genuinely needs.
+- **Still binding, because they are law or platform terms or trust:**
+  the disclosure sentence on every page with links and the Amazon
+  Associates wording; price bands, never live prices; no fake scarcity or
+  urgency (UK CMA and CAP Code); a free or already-owned option shown
+  where one exists, because it is what makes readers trust the rest.
+- **Search pages are the growth engine:** one indexable page per list,
+  then per household size ("72 hour kit for a family of four UK").
+- **Amazon tag:** set `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` in `.env.local`
+  and in Vercel. Links earn nothing without it.
+
+## Original plan (18 September 2026)
+
 Drafted 18 September 2026. Supersedes the earlier "no affiliate links"
 stance in PLAN.md, which was mine, not Alice's. Alice wants the site to
 earn from linking to specific products while keeping the tone honest.

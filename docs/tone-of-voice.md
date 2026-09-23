@@ -1,5 +1,31 @@
 # Stay Prepared: tone of voice
 
+## Revision, 24 September 2026: practical prepper
+
+Alice repositioned the site. Most people get their official guidance from
+gov.uk; this site's job is to turn a household into a ready-made shopping
+list they can buy in one go. The voice moves with it. Where this section
+conflicts with anything below, this section wins.
+
+- **It is a prepper site, and says so.** "Prepper", "prepping" and
+  "stockpile" are allowed. Name the reasons plainly: power cuts, water
+  outages, severe weather and climate, war in Europe, supply shortages,
+  and losing income, including to automation.
+- **Practical, not tactical.** Still no bunkers, firearms, bug-out
+  bravado, "the grid is going down", conspiracy, or veteran posturing.
+  The reader is a household, not a militia.
+- **Confident, not frightening.** Say what could happen and what helps.
+  Never invent a threat level, a date or a likelihood. No countdowns.
+- **Still specific and sourced.** Every quantity has a basis and a source.
+  This is what makes people trust a list enough to buy from it.
+- **Selling is fine; pressure is not.** Buttons can say "buy the whole
+  list". Never fake scarcity or urgency ("only 3 left", "before it's too
+  late"): it is also against UK consumer law.
+- The rules below on plain, short, second-person sentences, no neat
+  closers, British spelling and no em dashes all still apply.
+
+## Original guide (18 September 2026)
+
 Drafted 18 September 2026 for Alice's approval. Nothing on the site has
 been changed to match this yet.
 
