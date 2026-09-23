@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import Diagram from "@/components/Diagram";
 import Callout from "@/components/Callout";
 import Arrow from "@/components/home/Arrow";
 import { scenarios } from "@/data/scenarios";
@@ -38,6 +39,7 @@ export default function WhyPage() {
       <PageIntro
         title="why the government asks you to be ready for three days"
         lede="Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked their citizens to keep a few days of supplies at home. The reasons they give are the same: severe weather, attacks on power and water systems, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent. All of them have decided it is no longer sensible to assume it cannot happen."
+        aside={<Diagram name="duration" />}
       />
 
       {/* What might stop: a ruled list, each line carrying its category label */}

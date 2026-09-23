@@ -73,10 +73,10 @@ as they stand on main.
 | Pattern | /checklist | /build-your-kit |
 | --- | --- | --- |
 | A count | None anywhere on the page | None. A 40 line list gives no sense of progress |
-| Reversible ticking | Nothing is tickable | Ticking "have" deletes the line. No undo |
+| Reversible ticking | Nothing is tickable | Already correct: the line stays, struck through |
 | Collapsed, one open | Every category is a fully expanded 3 column table, a sideways scroll on a phone | Not applicable |
 | Saved, and says so | Nothing persists | Household is in the URL, which is good, but announced in one small grey line |
-| Every line says why | Done well. The notes column is exactly this | Quantities appear with no sourcing |
+| Every line says why | Done well. The notes column is exactly this | Already correct: every line carries its `basis` |
 | Neutral voice on gaps | Nothing has a status, so nothing alarms. Correct by omission | Same |
 | One list, several views | Not applicable | "Your list" and "Buy it" are separate tabs |
 
@@ -84,6 +84,25 @@ One idea is missing from both. Every reference is a record of what
 someone has done, kept between visits. We ask people to stock a cupboard
 over several weeks, the longest running task of any product in this set,
 and we are the only one that remembers nothing.
+
+## Two corrections to the first reading
+
+Made after re-reading src/components/KitPlanner.tsx line by line while
+building. The report published on 22 September carried both errors.
+
+1. **The planner never deleted a ticked line.** In the list tab a ticked
+   item stays where it is at 50% opacity with the text struck through and
+   the checkbox still ticked, so it was always reversible. What a tick
+   removes is the line's place in the Buy tab and in the copied text,
+   which is the intent. Recommendation 4 below was therefore already
+   done.
+2. **Planner quantities were already sourced.** Every line renders its
+   `basis` field underneath, which is exactly the "why is this on the
+   list" the references do well. Recommendation 7 below applied to the
+   checklist, not to the planner.
+
+Neither changes the main finding. Nothing persisted between visits, and
+neither page carried a count.
 
 ## Recommendation
 
@@ -123,7 +142,38 @@ Rejected, with reasons:
   The right end state, but it changes the affiliate surface and the
   products data, so it deserves its own piece of work.
 
-Build notes: three shadcn components cover it, Checkbox, Progress and
+## What was built
+
+Approved 22 September and built the same day. `src/lib/have.ts` holds one
+record of what the household has, keyed by checklist item, in this
+browser's local storage. `src/data/have-map.ts` maps each planner line to
+the checklist item it covers, so a tick in either place counts once.
+
+Done: the status line (1), per category counts (2), real checkboxes with
+a Clear all ticks control (3), the saved-state sentence (5), and the
+quantity as its own right aligned column in tabular numerals (6). Items 4
+and 7 were already correct, per the corrections above.
+
+Two deviations from the recommendation as written:
+
+- **Categories stay open by default.** Target collapses because it holds
+  85 items across 10 categories. Ours is 30 across 9, and collapsing them
+  by default would hide the reference content the page exists to give.
+  The count sits on every category heading and the reader can collapse
+  what they have finished, which is the part of the pattern that carries
+  over.
+- **No shadcn components were used.** The three the report named turned
+  out not to be needed: `<details>` is already this page's accordion, the
+  planner already uses a native checkbox, and the recommendation is a
+  count rather than a bar. Native elements are also the more accessible
+  choice here, and it keeps this work independent of the shadcn setup in
+  #6.
+
+Verified with Playwright at 390px and 1280px: no horizontal overflow on
+either page, ticks survive a reload, and a tick in the planner shows up
+in the checklist's count. Build and lint pass.
+
+Original build note: three shadcn components cover it, Checkbox, Progress and
 Accordion, each with `bg-muted` replaced by `bg-soft` per the ui-builder
 rules. Wrap every localStorage access in try/catch and render correctly
 when it throws. At phone width the checklist table should become one

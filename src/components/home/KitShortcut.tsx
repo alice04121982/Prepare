@@ -9,6 +9,12 @@ const durations = [
   { value: 14, label: "2 weeks" },
 ];
 
+/** One tap for a household that does not want to fill the form in yet. Plain links, so they work without JavaScript. */
+const examples = [
+  { label: "two adults, three days", href: "/build-your-kit?a=2&c=0&d=3" },
+  { label: "a family of four, one week", href: "/build-your-kit?a=2&c=2&d=7" },
+];
+
 const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
 const range = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, i) => from + i);
 
@@ -127,6 +133,16 @@ export default function KitShortcut() {
         <button type="submit" className="btn btn-primary btn-lg w-full">
           see the full list <Arrow />
         </button>
+        <p className="mt-3 text-[0.9375rem]">
+          Or go straight to a list for{" "}
+          {examples.map((e, i) => (
+            <span key={e.href}>
+              {i > 0 ? " or " : null}
+              <a href={e.href} className="font-bold">{e.label}</a>
+            </span>
+          ))}
+          .
+        </p>
       </div>
     </form>
   );

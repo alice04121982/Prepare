@@ -3,6 +3,7 @@ import Arrow from "@/components/home/Arrow";
 import KitShortcut from "@/components/home/KitShortcut";
 import ReachBar from "@/components/home/ReachBar";
 import Shelf, { type Tin } from "@/components/home/Shelf";
+import StepState from "@/components/home/StepState";
 
 const tins: Tin[] = [
   { id: "water", name: "water", amount: "3 litres per person per day", when: "if nothing comes out of the taps", cat: "bg-cat-water" },
@@ -20,18 +21,21 @@ const steps = [
     body: "Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Tick them off against the list before you buy anything.",
     href: "/checklist",
     cta: "see the checklist",
+    state: "check" as const,
   },
   {
     title: "buy what is missing",
     body: "Say who lives with you and the quantities are worked out for you. The free option comes first on every line.",
     href: "/build-your-kit",
     cta: "build your kit",
+    state: "buy" as const,
   },
   {
     title: "talk to your neighbours",
     body: "Two or three names and a way to check on each other. The better prepared you are, the more you can give to the neighbour who could not prepare.",
     href: "/community",
     cta: "how to start",
+    state: null,
   },
 ];
 
@@ -114,9 +118,12 @@ export default function Home() {
                 >
                   {i + 1}
                 </span>
-                <h3 className="pt-1 text-[clamp(1.75rem,7.4vw,3rem)] min-[900px]:pt-2 min-[900px]:text-[3.25rem]">
-                  {s.title}
-                </h3>
+                <div>
+                  <h3 className="pt-1 text-[clamp(1.75rem,7.4vw,3rem)] min-[900px]:pt-2 min-[900px]:text-[3.25rem]">
+                    {s.title}
+                  </h3>
+                  {s.state ? <StepState step={s.state} /> : null}
+                </div>
                 <div className="col-start-2 mt-3.5 min-[900px]:col-start-3 min-[900px]:mt-3">
                   <p className="max-w-[60ch] text-lg min-[900px]:text-[1.1875rem]">{s.body}</p>
                   <Link href={s.href} className="arrow-link mt-4 text-lg">

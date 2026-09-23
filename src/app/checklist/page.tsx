@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageIntro, { catBg, type Cat } from "@/components/PageIntro";
+import PageIntro from "@/components/PageIntro";
+import Diagram from "@/components/Diagram";
+import ChecklistTracker from "@/components/ChecklistTracker";
+import { catFor, catForTitle, Swatch } from "@/components/checklist/cats";
 import PrintButton from "@/components/PrintButton";
 import Arrow from "@/components/home/Arrow";
 import { checklist, startingPoint } from "@/data/checklist";
@@ -12,43 +15,12 @@ export const metadata: Metadata = {
     "What to keep on hand, with realistic quantities and how long each item lasts, plus the questions people ask.",
 };
 
-/**
- * Each checklist category wears the colour of its tin: one meaning per colour
- * across the site. Household-specific lines (babies, pets, older people) are
- * not a tin, so they stay plain paper.
- */
-const catBySlug: Record<string, Cat> = {
-  water: "water",
-  food: "food",
-  "power-and-light": "power",
-  "first-aid-and-medication": "health",
-  communication: "news",
-  sanitation: "health",
-  documents: "money",
-  cash: "money",
-};
-
-const catFor = (slug: string): Cat | undefined => catBySlug[slug];
-const catForTitle = (title: string): Cat | undefined =>
-  catFor(checklist.find((c) => c.title === title)?.slug ?? "");
-const bgFor = (cat: Cat | undefined) => (cat ? catBg[cat] : "bg-paper");
-
-/** A small square of the category colour, printed as an outline. */
-function Swatch({ cat }: { cat: Cat | undefined }) {
-  return (
-    <span
-      aria-hidden="true"
-      data-cat
-      className={`${bgFor(cat)} inline-block size-3.5 flex-none border-2 border-ink`}
-    />
-  );
-}
-
 export default function ChecklistPage() {
   return (
     <main>
       <PageIntro
         title="what to keep on hand"
+        aside={<Diagram name="water" />}
         lede="Realistic quantities for a household to build up gradually, a few pounds a week from the shop you already use. Every figure is a planning number drawn from public emergency guidance, not a worst case."
       >
         <PrintButton />
@@ -112,75 +84,7 @@ export default function ChecklistPage() {
         </ul>
       </nav>
 
-      {/* The tins: one labelled band per category, then its items on the shelf */}
-      {checklist.map((c) => (
-        <section key={c.slug} id={c.slug} aria-labelledby={`${c.slug}-h`} className="scroll-mt-24">
-          <div data-cat className={`${bgFor(catFor(c.slug))} border-y-[3px] border-ink`}>
-            <div className="wrap pb-7 pt-8 min-[900px]:pb-10 min-[900px]:pt-12">
-              <h2
-                id={`${c.slug}-h`}
-                className="display text-[clamp(2.5rem,11vw,5rem)]"
-                style={{ fontVariationSettings: '"wdth" 115' }}
-              >
-                {c.title.toLowerCase()}
-              </h2>
-              <p className="mt-4 max-w-[56ch] text-[1.1875rem] leading-normal">{c.intro}</p>
-            </div>
-          </div>
-
-          <div className="wrap pb-14 min-[900px]:pb-20">
-            <div
-              aria-hidden="true"
-              className="hidden grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.6fr)] gap-x-8 border-b-4 border-ink pb-2 pt-6 text-[0.9375rem] font-extrabold min-[900px]:grid"
-            >
-              <span>Item</span>
-              <span>Realistic amount</span>
-              <span>Shelf life and notes</span>
-            </div>
-            <ul>
-              {c.items.map((i) => (
-                <li
-                  key={i.item}
-                  className="grid gap-y-1.5 border-b border-ink py-5 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.6fr)] min-[900px]:gap-x-8 min-[900px]:py-6"
-                >
-                  <h3 className="text-[1.375rem] min-[900px]:text-[1.5rem]">
-                    {i.item}
-                    {i.priority ? (
-                      <span className="ml-2.5 inline-block translate-y-[-0.2em] rounded-[4px] bg-ink px-1.5 py-0.5 align-middle text-[0.75rem] font-extrabold tracking-normal text-paper print:border print:border-black print:bg-white print:text-black">
-                        First
-                      </span>
-                    ) : null}
-                  </h3>
-                  <p className="font-bold tabular-nums">
-                    <span className="sr-only">Realistic amount: </span>
-                    {i.amount}
-                  </p>
-                  <div className="text-ink-2">
-                    <p className="measure">{i.notes}</p>
-                    {i.products ? (
-                      <ul className="mt-3 border-t-2 border-ink text-[0.9375rem]">
-                        {i.products.map((p) => (
-                          <li key={p.url} className="border-b border-ink py-2.5">
-                            <a
-                              href={p.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="font-extrabold text-ink hover:decoration-4"
-                            >
-                              {p.name}
-                            </a>{" "}
-                            <span>{p.note}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      ))}
+      <ChecklistTracker />
 
       <div className="wrap">
         <p className="measure -mt-4 text-[0.9375rem] text-ink-2 min-[900px]:-mt-8">

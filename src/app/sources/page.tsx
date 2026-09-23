@@ -50,8 +50,9 @@ export default function SourcesPage() {
           <div className="prose-plain measure mt-6 text-lg">
             <p>
               Type is Archivo, an open-source typeface released under the SIL
-              Open Font License and served from this site. The site uses no
-              stock photographs or illustrations. No tracking. Some product
+              Open Font License and served from this site. Diagrams are drawn
+              for this site from its own figures. The site uses no stock
+              photographs or illustrations. No tracking. Some product
               links may earn a small commission; the checklist says so where
               it applies.
             </p>

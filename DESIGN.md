@@ -251,6 +251,9 @@ A bold underlined text link ending in the arrow, 44px tall, width 110. Hover thi
 ### Page intro
 The opener on every inner page: the display title (max 16ch), the lede under it, optional actions, closed by a 3px ink rule. Plain paper on purpose; colour is kept for categories.
 
+### Diagrams
+Four inline SVG figures drawn from the site's own data (`Diagram.tsx`: water bottles, the kit box, a check-in plan, a duration chart), placed in a page intro's `aside`. Monochrome `currentColor` in ink on paper; opacity may give shapes depth, but text labels are always solid ink so they pass AA. Each has a title and description for screen readers. A diagram must carry information; nothing is drawn as decoration.
+
 ### Tin label (signature)
 One label per thing that might stop, stacked into a shelf. A full category colour fill, 3px ink border, no radius. The remedy as the name in display type at width 118 (`clamp(2rem, 8.5vw, 2.75rem)`, never larger than the shelf question above it), the amount in bold under it using a sourced figure wherever one exists, then the hazard as small print at the foot under a 2px ink rule ("if nothing comes out of the taps"). No line sits above the name. Every label is open; nothing hides behind a tap.
 

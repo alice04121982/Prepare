@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import Diagram from "@/components/Diagram";
 import Arrow from "@/components/home/Arrow";
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function CommunityPage() {
       <PageIntro
         title="once your own household has what it needs, look around you"
         lede="In an emergency, help goes first to the people who need it most. Everyone else is expected to manage for a while. The better prepared your household is, the more you can do for the people near you, and a street that knows itself gets through a bad week faster."
+        aside={<Diagram name="checkin" />}
       />
 
       <div className="wrap py-14 min-[900px]:py-20">

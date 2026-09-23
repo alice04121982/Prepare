@@ -17,6 +17,8 @@ import { amazonImageUrl, amazonProductUrl, productsFor } from "@/data/products";
 import { Counter, DaysControl, OptionRow, TickBox } from "@/components/kit/Controls";
 import { DownArrow, goToBuy, StillToGetBar } from "@/components/kit/StillToGet";
 import { catBgFor } from "@/components/kit/categories";
+import { kitLineKey } from "@/data/have-map";
+import { useHave } from "@/lib/have";
 
 const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
 
@@ -75,8 +77,11 @@ function FreeOption({ text }: { text?: string }) {
 
 export default function KitPlanner({ initial }: { initial?: Household }) {
   const [h, setH] = useState<Household>(initial ?? defaultHousehold);
-  const [have, setHave] = useState<Set<string>>(new Set());
+  // The shared record of what the household has: kept in this browser and
+  // ticked from either this page or the checklist.
+  const { have, ready: haveReady, toggle: toggleHave, clear: clearHave } = useHave();
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
   const [shop, setShop] = useState<ShopId>(MAKER_FIRST.id);
   const retailer = retailers.find((r) => r.id === shop);
   const shopNote = retailer ? retailer.note : MAKER_FIRST.note;
@@ -108,7 +113,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
 
   const { lines, tasks } = useMemo(() => buildKit(h), [h]);
   const categories = useMemo(() => [...new Set(lines.map((l) => l.category))], [lines]);
-  const toBuy = lines.filter((l) => !have.has(l.id));
+  const toBuy = lines.filter((l) => !have.has(kitLineKey(l.id)));
   const total = lines.length;
   const ticked = total - toBuy.length;
   const remaining = toBuy.length;
@@ -128,13 +133,6 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const groceriesLeft = toBuy.some((l) => l.category === "Food" || l.id === "water");
 
   const set = <K extends keyof Household>(k: K, v: Household[K]) => setH((prev) => ({ ...prev, [k]: v }));
-  const toggleHave = (id: string) =>
-    setHave((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
 
   const plainText = () => {
     const people = h.adults + h.children + h.babies;
@@ -152,10 +150,13 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(plainText());
+      setCopyFailed(false);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      /* clipboard unavailable; the print view still works */
+      // Older browsers, and any page not served over https, refuse this.
+      // Say so and name the two routes that do work.
+      setCopyFailed(true);
     }
   };
 
@@ -240,14 +241,16 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             ref={closeRef}
             className={`hidden border-x-[3px] border-b-[3px] border-t-[10px] border-ink bg-paper px-6 pb-4 pt-4 min-[900px]:block ${fits ? "" : "min-[900px]:sticky min-[900px]:top-6"}`}
           >
-            <p className="font-extrabold leading-tight">{remaining ? "still to get" : "nothing left to get"}</p>
+            <p className={`font-extrabold leading-tight ${haveReady ? "" : "invisible"}`}>
+              {remaining ? "still to get" : "nothing left to get"}
+            </p>
             <p
-              className="display mt-1 text-[3.5rem] leading-[0.95] tabular-nums"
+              className={`display mt-1 text-[3.5rem] leading-[0.95] tabular-nums ${haveReady ? "" : "invisible"}`}
               style={{ fontVariationSettings: '"wdth" 115' }}
             >
               {remaining}
             </p>
-            <p className="mt-1.5 text-ink-2">
+            <p className={`mt-1.5 text-ink-2 ${haveReady ? "" : "invisible"}`}>
               <span className="tabular-nums">{ticked}</span> already ticked
             </p>
             <a href="#buy" onClick={goToBuy} className="arrow-link mt-1">
@@ -264,17 +267,38 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             <h2 id="kit-list-h" className="text-[clamp(2rem,8.6vw,3.5rem)]">
               your list: {people} {people === 1 ? "person" : "people"}, {daysLabel(h.days)}
             </h2>
+            {haveReady && ticked > 0 ? (
+              <p className="mt-3 font-extrabold">
+                You have <span className="tabular-nums">{ticked}</span> of <span className="tabular-nums">{total}</span>.
+              </p>
+            ) : null}
             <p className="mt-3 max-w-[52ch] text-ink-2">
-              Tick anything you already have. It drops off the list. The link in your address bar saves this household.
+              Tick what you already have. Ticked lines stay on the list and drop out of what to buy. Ticks are kept
+              in this browser, and the link in your address bar carries your household.
             </p>
+            {haveReady && ticked > 0 ? (
+              <button
+                type="button"
+                onClick={clearHave}
+                className="no-print mt-2 min-h-11 font-bold underline underline-offset-4 hover:decoration-4"
+              >
+                clear all ticks
+              </button>
+            ) : null}
           </div>
           <div className="no-print flex flex-wrap gap-2">
             <button type="button" onClick={copy} className="btn btn-secondary">
-              {copied ? "copied" : "copy list"}
+              {copyFailed ? "could not copy" : copied ? "copied" : "copy list"}
             </button>
             <button type="button" onClick={() => window.print()} className="btn btn-secondary">
               print
             </button>
+            {copyFailed ? (
+              <p role="status" className="basis-full max-w-[40ch] text-[0.9375rem] leading-snug text-ink-2">
+                Your browser would not let the page copy the list. Print it instead, or select the list and copy it by
+                hand.
+              </p>
+            ) : null}
           </div>
         </div>
 
@@ -300,13 +324,14 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                 </h4>
                 <ul className="divide-y divide-ink">
                   {items.map((l) => {
-                    const got = have.has(l.id);
+                    const key = kitLineKey(l.id);
+                    const got = have.has(key);
                     return (
                       <li
                         key={l.id}
                         className={`grid grid-cols-[2.75rem_minmax(0,1fr)_auto] gap-x-2.5 px-1.5 py-3 break-inside-avoid min-[900px]:gap-x-4 min-[900px]:px-3.5 min-[900px]:py-4 ${got ? "bg-hush" : ""}`}
                       >
-                        <TickBox checked={got} onChange={() => toggleHave(l.id)} label={`Already have ${l.item}`} />
+                        <TickBox checked={got} onChange={() => toggleHave(key)} label={`Already have ${l.item}`} />
                         <div className={`min-w-0 max-w-[62ch] pt-2 ${got ? "text-ink-2" : ""}`}>
                           <p className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
                             <span className={`text-lg font-extrabold leading-tight ${got ? "line-through" : ""}`}>{l.item}</span>
@@ -372,7 +397,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             buy what is left
           </h3>
           <p className="mt-3 max-w-[60ch] text-[0.9375rem] leading-snug text-ink-2">{DISCLOSURE}</p>
-          <p className="mt-4 max-w-[60ch]">
+          <p className={`mt-4 max-w-[60ch] ${haveReady ? "" : "invisible"}`}>
             {remaining ? (
               <>
                 You have ticked <span className="tabular-nums">{ticked}</span> of{" "}
@@ -571,9 +596,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                   ))}
               </ul>
               <p className="mt-5 max-w-2xl text-[0.9375rem] leading-snug text-ink-2">
-                {retailer.name} has no way for a website to fill your basket, so it is one click per item: each link opens
-                the search for that item, you add it there. A single basket button for supermarkets needs a partnership
-                with Samsung Food, the service behind BBC Good Food&rsquo;s shoppable recipes, which is on the plan.
+                {retailer.name} has no way for a website to fill your basket, so it is one click per item. Each link
+                opens the search for that item, and you add it there.
               </p>
             </>
           ) : null}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
+import Diagram from "@/components/Diagram";
 import KitPlanner from "@/components/KitPlanner";
 import { householdFromParams } from "@/data/kit-rules";
 
@@ -20,6 +21,7 @@ export default async function BuildYourKitPage({
       <PageIntro
         title="work out what your household needs"
         lede="Answer a few questions and get a shopping list with the quantities worked out. Tick what you already have. Copy it, print it, or send it straight to a basket."
+        aside={<Diagram name="box" />}
       />
       <KitPlanner initial={initial} />
     </main>
