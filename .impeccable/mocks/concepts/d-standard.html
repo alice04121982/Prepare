@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stay Prepared</title>
+<meta name="description" content="Calm, practical guidance for UK households on managing for three days if the power, water, shops or networks stop.">
+<style>
+  
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: #ffffff;
+    color: #0b0c0c;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1.25;
+    -webkit-font-smoothing: antialiased;
+    caret-color: #0b0c0c;
+  }
+
+  ::selection { background: #ffdd00; color: #0b0c0c; }
+
+  /* Links */
+  a {
+    color: #1d70b8;
+    text-decoration: underline;
+    text-decoration-thickness: max(1px, .0625rem);
+    text-underline-offset: .15em;
+  }
+  a:visited { color: #4c2c92; }
+  a:hover {
+    color: #003078;
+    text-decoration-thickness: max(3px, .1875rem, .12em);
+  }
+  a:focus-visible {
+    outline: 3px solid transparent;
+    color: #0b0c0c;
+    background-color: #ffdd00;
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+    text-decoration: none;
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    margin: 0; padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    border: 0;
+    white-space: nowrap;
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute;
+    left: 16px; top: -100px;
+    padding: 12px 16px;
+    background: #ffdd00;
+    color: #0b0c0c;
+    font-weight: 700;
+  }
+  .skip-link:focus { top: 8px; }
+
+  /* Width container and grid */
+  .width-container {
+    max-width: 960px;
+    margin: 0 16px;
+  }
+  @media (min-width: 641px) {
+    .width-container { margin: 0 30px; }
+  }
+  @media (min-width: 1020px) {
+    .width-container { margin: 0 auto; }
+  }
+  .two-thirds { width: 100%; }
+  @media (min-width: 641px) {
+    .two-thirds { width: 66.6667%; }
+  }
+
+  /* Header: white, with a thick rule beneath. Site's own wordmark only. */
+  .header {
+    background: #ffffff;
+    border-bottom: 8px solid #1d70b8;
+  }
+  .header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 24px;
+    padding: 12px 0;
+  }
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: #0b0c0c;
+    text-decoration: none;
+  }
+  .wordmark:visited { color: #0b0c0c; }
+  .wordmark:hover { color: #0b0c0c; text-decoration: underline; text-decoration-thickness: 3px; }
+
+  .menu-button {
+    display: none;
+    min-height: 44px;
+    padding: 8px 12px;
+    font: 700 1rem/1 Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: #1d70b8;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .menu-button::after {
+    content: "";
+    display: inline-block;
+    width: 8px; height: 8px;
+    margin-left: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-3px) rotate(45deg);
+  }
+  .menu-button[aria-expanded="true"]::after { transform: translateY(2px) rotate(-135deg); }
+  .menu-button:hover { color: #003078; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: .15em; }
+  .menu-button:focus-visible {
+    outline: 3px solid transparent;
+    color: #0b0c0c;
+    background: #ffdd00;
+    box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  }
+
+  .nav { width: 100%; }
+  .nav__list {
+    margin: 0; padding: 0;
+    list-style: none;
+  }
+  .nav__list a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .nav__list a:visited { color: #1d70b8; }
+  .nav__list a:hover { text-decoration: underline; text-decoration-thickness: 3px; }
+  .nav__list a:focus-visible { text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .js .menu-button { display: inline-flex; align-items: center; }
+    .js .nav[hidden] { display: none; }
+    .nav__list { border-top: 1px solid #b1b4b6; margin-top: 8px; }
+    .nav__list li { border-bottom: 1px solid #b1b4b6; }
+    .nav__list li:last-child { border-bottom: 0; }
+  }
+  @media (min-width: 641px) {
+    .nav[hidden] { display: block; }
+    .nav__list { display: flex; flex-wrap: wrap; gap: 0 24px; }
+  }
+
+  /* Main */
+  main { padding: 32px 0 48px; }
+  @media (min-width: 641px) { main { padding: 48px 0 64px; } }
+
+  /* Typography */
+  h1, h2, h3 { margin: 0; font-weight: 700; color: #0b0c0c; text-wrap: balance; }
+  .heading-xl {
+    font-size: 2rem;
+    line-height: 1.09;
+    letter-spacing: -.015em;
+    margin-bottom: 24px;
+  }
+  .heading-l {
+    font-size: 1.5rem;
+    line-height: 1.04;
+    margin-bottom: 16px;
+  }
+  .heading-m {
+    font-size: 1.125rem;
+    line-height: 1.11;
+    margin-bottom: 12px;
+  }
+  @media (min-width: 641px) {
+    .heading-xl { font-size: 3rem; line-height: 1.04; margin-bottom: 32px; }
+    .heading-l { font-size: 2.25rem; line-height: 1.11; margin-bottom: 24px; }
+    .heading-m { font-size: 1.5rem; line-height: 1.25; margin-bottom: 16px; }
+  }
+
+  p { margin: 0 0 16px; max-width: 68ch; }
+  .body { font-size: 1.1875rem; line-height: 1.32; }
+  .body-l { font-size: 1.125rem; line-height: 1.33; }
+  @media (min-width: 641px) {
+    .body-l { font-size: 1.5rem; line-height: 1.25; margin-bottom: 32px; }
+  }
+  .body-s { font-size: 1rem; line-height: 1.25; }
+
+  body, .body, main p, main li, main dd, main dt { font-size: 1.1875rem; line-height: 1.32; }
+  @media (max-width: 640px) {
+    body, .body, main p, main li, main dd, main dt { font-size: 1.125rem; line-height: 1.39; }
+  }
+  main .body-l { font-size: 1.125rem; line-height: 1.33; }
+  @media (min-width: 641px) { main .body-l { font-size: 1.5rem; line-height: 1.25; } }
+
+  .section-break {
+    margin: 40px 0;
+    border: 0;
+    border-bottom: 1px solid #b1b4b6;
+  }
+  @media (min-width: 641px) { .section-break { margin: 56px 0; } }
+
+  /* Start button */
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    margin: 0 0 24px;
+    padding: 10px 14px 9px;
+    font: 400 1.1875rem/1 Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: #ffffff;
+    background: #00703c;
+    border: 2px solid transparent;
+    border-radius: 0;
+    box-shadow: 0 2px 0 #002d18;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .button:link, .button:visited, .button:hover, .button:active { color: #ffffff; text-decoration: none; }
+  .button:hover { background: #005a30; }
+  .button:active { transform: translateY(2px); box-shadow: none; }
+  .button:focus-visible {
+    outline: 3px solid transparent;
+    outline-offset: 0;
+    border-color: #ffdd00;
+    color: #0b0c0c;
+    background: #ffdd00;
+    box-shadow: inset 0 0 0 1px #ffdd00, 0 2px 0 #0b0c0c;
+  }
+  .button:focus-visible:not(:active):hover { background: #ffdd00; color: #0b0c0c; }
+  .button-start {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    min-height: 52px;
+    padding: 12px 18px 11px;
+  }
+  .button-start svg { flex: none; }
+  .button:focus-visible svg path { fill: #0b0c0c; }
+
+  .hero-actions { margin-bottom: 8px; }
+  .hero-actions .secondary { margin: 0 0 16px; }
+  .hero-actions .secondary a { display: inline-block; padding: 11px 0; }
+  .quiet { color: #505a5f; margin-bottom: 0; }
+  .quiet a { font-weight: 400; }
+
+  /* Summary list */
+  .summary-list {
+    margin: 0 0 24px;
+    font-size: 1.1875rem;
+  }
+  .summary-list__row {
+    border-bottom: 1px solid #b1b4b6;
+    padding: 12px 0;
+  }
+  .summary-list__row:first-child { border-top: 1px solid #b1b4b6; }
+  .summary-list__key, .summary-list__value { margin: 0; }
+  .summary-list__key { font-weight: 700; margin-bottom: 4px; }
+  @media (min-width: 641px) {
+    .summary-list { display: table; width: 100%; table-layout: fixed; border-collapse: collapse; }
+    .summary-list__row { display: table-row; padding: 0; }
+    .summary-list__row:first-child { border-top: 0; }
+    .summary-list__key, .summary-list__value {
+      display: table-cell;
+      padding: 12px 20px 12px 0;
+      vertical-align: top;
+    }
+    .summary-list__key { width: 50%; margin: 0; }
+    .summary-list__value { padding-right: 0; }
+    .summary-list__head .summary-list__key,
+    .summary-list__head .summary-list__value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #505a5f;
+      padding-top: 0;
+      border-bottom: 2px solid #0b0c0c;
+    }
+  }
+  .summary-list__head { display: none; }
+  @media (min-width: 641px) { .summary-list__head { display: table-row; } }
+  .helps-label { font-weight: 400; color: #505a5f; }
+  @media (min-width: 641px) { .helps-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } }
+
+  /* Inset text: the design system's own pattern */
+  .inset-text {
+    margin: 24px 0;
+    padding: 16px 0 16px 16px;
+    border-left: 10px solid #b1b4b6;
+    max-width: 68ch;
+  }
+  .inset-text > :last-child { margin-bottom: 0; }
+
+  /* Step list */
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .steps__item {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 32px 56px;
+  }
+  .steps__item::before {
+    content: counter(step);
+    position: absolute;
+    left: 0; top: -4px;
+    width: 36px; height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    font-variant-numeric: tabular-nums;
+    background: #ffffff;
+    border: 2px solid #0b0c0c;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .steps__item::after {
+    content: "";
+    position: absolute;
+    left: 17px; top: 32px; bottom: 0;
+    width: 2px;
+    background: #b1b4b6;
+  }
+  .steps__item:last-child { padding-bottom: 0; }
+  .steps__item:last-child::after { display: none; }
+  .steps__item p:last-child { margin-bottom: 0; }
+  .steps__action a { font-weight: 700; display: inline-block; padding: 10px 0; }
+
+  /* Form */
+  .form-row { display: flex; flex-direction: column; gap: 20px; margin-bottom: 24px; }
+  @media (min-width: 641px) {
+    .form-row { flex-direction: row; flex-wrap: wrap; gap: 20px 24px; }
+  }
+  .form-group { margin: 0; }
+  .label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    line-height: 1.32;
+  }
+  .select {
+    display: block;
+    min-width: 11.5em;
+    width: 100%;
+    height: 48px;
+    padding: 6px 44px 6px 10px;
+    font: 400 1.1875rem/1.25 Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: #0b0c0c;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%230b0c0c' stroke-width='2.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    border: 2px solid #0b0c0c;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+  @media (min-width: 641px) { .select { width: auto; } .select-short { min-width: 6.5em; } }
+  .select:focus {
+    outline: 3px solid #ffdd00;
+    outline-offset: 0;
+    box-shadow: inset 0 0 0 2px #0b0c0c;
+  }
+  .form-actions { margin-bottom: 0; }
+  .form-actions .button { margin-bottom: 0; }
+
+  /* Warning text */
+  .warning-text {
+    position: relative;
+    margin: 32px 0 24px;
+    padding: 0 0 0 52px;
+    max-width: 68ch;
+  }
+  .warning-text__icon {
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 36px; height: 36px;
+  }
+  .warning-text__text { font-weight: 700; margin: 0; display: block; }
+
+  /* Offline guide */
+  .download {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    padding: 10px 0;
+    margin-bottom: 4px;
+  }
+  @media (max-width: 640px) { .download { font-size: 1.25rem; } }
+  .download-wrap .body { margin-bottom: 0; }
+
+  /* Footer */
+  .footer {
+    background: #f3f2f1;
+    border-top: 1px solid #b1b4b6;
+    padding: 32px 0 40px;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+  @media (min-width: 641px) { .footer { padding: 40px 0 56px; } }
+  .footer p { max-width: 68ch; }
+  .footer__lead { font-weight: 700; font-size: 1.1875rem; margin-bottom: 16px; }
+  .footer__lead span { font-weight: 400; }
+  .footer__links {
+    list-style: none;
+    margin: 0 0 24px; padding: 0 0 16px;
+    border-bottom: 1px solid #b1b4b6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+  }
+  .footer__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: #0b0c0c;
+  }
+  .footer__links a:visited { color: #0b0c0c; }
+  .footer__links a:hover { color: #0b0c0c; }
+  .footer__links a:focus-visible { color: #0b0c0c; }
+  .footer .small { color: #484949; }
+  .footer .small:last-child { margin-bottom: 0; }
+
+  /* Print: A4, black on white, show destinations */
+  @media print {
+    @page { size: A4; margin: 15mm 15mm 18mm; }
+    html, body { background: #ffffff !important; color: #000000 !important; }
+    body { font-size: 11pt; line-height: 1.35; }
+    .skip-link, .menu-button, .nav { display: none !important; }
+    .header { border-bottom: 3pt solid #000000; }
+    .header__inner { padding: 0 0 6pt; }
+    .wordmark { font-size: 16pt; min-height: 0; }
+    .width-container { margin: 0 !important; max-width: none; }
+    .two-thirds { width: 100% !important; }
+    main { padding: 12pt 0 0; }
+    main p, main li, main dd, main dt, .body, .body-l, main .body-l { font-size: 11pt !important; line-height: 1.35 !important; }
+    .heading-xl { font-size: 20pt; margin-bottom: 10pt; }
+    .heading-l { font-size: 15pt; margin-bottom: 8pt; }
+    .heading-m { font-size: 12pt; margin-bottom: 4pt; }
+    h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+    .summary-list__row, .steps__item, .warning-text, .inset-text { break-inside: avoid; }
+    .section-break { margin: 14pt 0; border-color: #000000; }
+    a, a:visited { color: #000000 !important; }
+    a[href^="/"]::after { content: " (stayprepared.co.uk" attr(href) ")"; font-weight: 400; font-size: 9pt; }
+    .button {
+      color: #000000 !important;
+      background: none !important;
+      box-shadow: none !important;
+      border: 1.5pt solid #000000;
+      padding: 4pt 8pt;
+      font-size: 12pt !important;
+      min-height: 0;
+    }
+    .button svg { display: none; }
+    .kit-form { display: none; }
+    .kit-print-note { display: block !important; }
+    .quiet, .footer .small { color: #000000 !important; }
+    .steps__item::after { background: #000000; }
+    .summary-list__head .summary-list__key, .summary-list__head .summary-list__value { color: #000000; border-color: #000000; }
+    .inset-text { border-left-color: #000000; }
+    .footer { background: none; border-top: 1pt solid #000000; padding: 12pt 0 0; }
+    .footer__links { display: none; }
+  }
+  .kit-print-note { display: none; }
+</style>
+</head>
+<body>
+<script>document.body.classList.add("js");</script>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="header">
+  <div class="width-container">
+    <div class="header__inner">
+      <a class="wordmark" href="/">Stay Prepared</a>
+      <button class="menu-button" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a href="/checklist">Checklist</a></li>
+          <li><a href="/build-your-kit">Build your kit</a></li>
+          <li><a href="/why">Why three days?</a></li>
+          <li><a href="/worried">Worried?</a></li>
+          <li><a href="/community">Neighbours</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="width-container">
+  <main id="main">
+
+    <div class="two-thirds">
+      <h1 class="heading-xl">If the power went off, the water stopped and the shops were shut for three days, would you be all right?</h1>
+      <p class="body-l">The government asks every UK household to be able to manage on its own for three days. This site makes that practical: what to keep, how much, how long it lasts, and what to do first.</p>
+
+      <div class="hero-actions">
+        <a href="/checklist" class="button button-start" role="button" draggable="false">
+          Check your cupboard
+          <svg width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/></svg>
+        </a>
+        <p class="secondary"><a href="/why">Why three days?</a></p>
+      </div>
+
+      <p class="quiet">Frightened by the news? <a href="/worried">Start here instead</a>.</p>
+    </div>
+
+    <hr class="section-break">
+
+    <section class="two-thirds" aria-labelledby="what-might-stop">
+      <h2 class="heading-l" id="what-might-stop">What might stop</h2>
+      <p>Severe weather, a fault in the grid, a cyber attack on a water company, or disruption from a conflict elsewhere in Europe can all have the same effect at home.</p>
+
+      <dl class="summary-list">
+        <div class="summary-list__row summary-list__head" aria-hidden="true">
+          <dt class="summary-list__key">What stops</dt>
+          <dd class="summary-list__value">What helps</dd>
+        </div>
+        <div class="summary-list__row">
+          <dt class="summary-list__key">The heating goes off</dt>
+          <dd class="summary-list__value"><span class="helps-label">Helps: </span>Blankets, warm layers, a hot-water bottle</dd>
+        </div>
+        <div class="summary-list__row">
+          <dt class="summary-list__key">Nothing comes out of the taps</dt>
+          <dd class="summary-list__value"><span class="helps-label">Helps: </span>3 litres of water per person per day</dd>
+        </div>
+        <div class="summary-list__row">
+          <dt class="summary-list__key">The shops run short</dt>
+          <dd class="summary-list__value"><span class="helps-label">Helps: </span>Tins and dry food you already eat</dd>
+        </div>
+        <div class="summary-list__row">
+          <dt class="summary-list__key">Cards and cash machines stop</dt>
+          <dd class="summary-list__value"><span class="helps-label">Helps: </span>Some cash in small notes</dd>
+        </div>
+        <div class="summary-list__row">
+          <dt class="summary-list__key">Mobile networks and the internet go down</dt>
+          <dd class="summary-list__value"><span class="helps-label">Helps: </span>A wind-up or battery radio</dd>
+        </div>
+        <div class="summary-list__row">
+          <dt class="summary-list__key">Buses and trains stop</dt>
+          <dd class="summary-list__value"><span class="helps-label">Helps: </span>Knowing who nearby you can reach on foot</dd>
+        </div>
+        <div class="summary-list__row">
+          <dt class="summary-list__key">Prescriptions are hard to get</dt>
+          <dd class="summary-list__value"><span class="helps-label">Helps: </span>A week's spare medication where your GP allows</dd>
+        </div>
+      </dl>
+
+      <p>Most of these last hours or days, not weeks. All of them are easier with a few things in the cupboard and a plan you made while everything worked.</p>
+    </section>
+
+    <hr class="section-break">
+
+    <section class="two-thirds" aria-labelledby="three-things">
+      <h2 class="heading-l" id="three-things">Three things, in this order</h2>
+      <ol class="steps">
+        <li class="steps__item">
+          <h3 class="heading-m">Check what you already have</h3>
+          <p>Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Tick them off against the list before you buy anything.</p>
+          <p class="steps__action"><a href="/checklist">See the checklist</a></p>
+        </li>
+        <li class="steps__item">
+          <h3 class="heading-m">Buy what is missing</h3>
+          <p>Say who lives with you and the quantities are worked out for you. The free option comes first on every line.</p>
+          <p class="steps__action"><a href="/build-your-kit">Build your kit</a></p>
+        </li>
+        <li class="steps__item">
+          <h3 class="heading-m">Talk to your neighbours</h3>
+          <p>Two or three names and a way to check on each other. The better prepared you are, the more you can give to the neighbour who could not prepare.</p>
+          <p class="steps__action"><a href="/community">How to start</a></p>
+        </li>
+      </ol>
+    </section>
+
+    <hr class="section-break">
+
+    <section class="two-thirds" aria-labelledby="how-much">
+      <h2 class="heading-l" id="how-much">How much for your household?</h2>
+
+      <form class="kit-form" action="/build-your-kit" method="get" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="label" for="a">Adults</label>
+            <select class="select select-short" id="a" name="a">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="label" for="c">Children</label>
+            <select class="select select-short" id="c" name="c">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="label" for="d">How long</label>
+            <select class="select" id="d" name="d">
+              <option value="3" selected>3 days, the government minimum</option>
+              <option value="7">1 week</option>
+              <option value="14">2 weeks</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="button" type="submit">Work it out</button>
+        </div>
+      </form>
+      <p class="kit-print-note"><a href="/build-your-kit">Build your kit</a></p>
+
+      <div class="inset-text">
+        <p>2 adults for 3 days need 18 litres of drinking water.</p>
+      </div>
+    </section>
+
+    <hr class="section-break">
+
+    <section class="two-thirds" aria-labelledby="why-three-days">
+      <h2 class="heading-l" id="why-three-days">Why three days?</h2>
+      <p>Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked their citizens to keep a few days of supplies at home. None of them say anything is imminent. All of them have decided it is no longer sensible to assume it cannot happen.</p>
+
+      <div class="warning-text">
+        <svg class="warning-text__icon" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+          <circle cx="18" cy="18" r="18" fill="#0b0c0c"/>
+          <rect x="15.5" y="7" width="5" height="15" fill="#ffffff"/>
+          <rect x="15.5" y="25" width="5" height="5" fill="#ffffff"/>
+        </svg>
+        <strong class="warning-text__text"><span class="visually-hidden">Warning: </span>For the very worst cases there is little any household can do. For everything short of that, three days of supplies make a real difference.</strong>
+      </div>
+
+      <p><a href="/why">What the government says</a></p>
+    </section>
+
+    <hr class="section-break">
+
+    <section class="two-thirds download-wrap" aria-label="Offline guide">
+      <a class="download" href="/offline/index.html">Download the offline guide</a>
+      <p class="body">One file, no internet needed. Save it, print it, share it before you need it.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="width-container">
+    <p class="footer__lead">Stay Prepared. <span>Calm, practical guidance for UK households. Not a survival site.</span></p>
+    <h2 class="visually-hidden">Site links</h2>
+    <ul class="footer__links">
+      <li><a href="/checklist">Checklist</a></li>
+      <li><a href="/build-your-kit">Build your kit</a></li>
+      <li><a href="/why">Why three days?</a></li>
+      <li><a href="/worried">Worried?</a></li>
+      <li><a href="/community">Neighbours</a></li>
+      <li><a href="/sources">Sources</a></li>
+    </ul>
+    <p class="small">Some product links earn us a small commission. The free option is always listed first, and we only list things we would buy ourselves.</p>
+    <p class="small">Figures from gov.uk Prepare, the Met Office and the NHS. Last checked September 2026.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var button = document.querySelector(".menu-button");
+    var nav = document.getElementById("site-nav");
+    if (!button || !nav) return;
+    var mq = window.matchMedia("(max-width: 640px)");
+    function sync() {
+      if (mq.matches) {
+        button.hidden = false;
+        var open = button.getAttribute("aria-expanded") === "true";
+        nav.hidden = !open;
+      } else {
+        button.hidden = true;
+        nav.hidden = false;
+      }
+    }
+    button.addEventListener("click", function () {
+      var open = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!open));
+      nav.hidden = open;
+    });
+    if (mq.addEventListener) mq.addEventListener("change", sync); else mq.addListener(sync);
+    sync();
+  })();
+</script>
+</body>
+</html>

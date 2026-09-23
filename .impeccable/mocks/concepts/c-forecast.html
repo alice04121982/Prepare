@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stay Prepared</title>
+<meta name="description" content="Calm, practical guidance for UK households on managing for three days on your own.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Sofia+Sans+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ground: #eceff1;
+  --ground-2: #e2e6e9;
+  --paper: #f6f7f8;
+  --ink: #15181b;
+  --ink-2: #454c53;
+  --rule: #15181b;
+  --rule-soft: #b3bac0;
+  --blue: #1d4fbf;
+  --blue-deep: #163e98;
+  --on-blue: #ffffff;
+  --display: "Sofia Sans Condensed", "Arial Narrow", sans-serif;
+  --body: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --gutter: 16px;
+  --slot: 5.5rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-color: var(--ink-2) var(--ground-2);
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--ground-2); }
+::-webkit-scrollbar-thumb { background: var(--ink-2); border: 2px solid var(--ground-2); }
+::selection { background: var(--blue); color: var(--on-blue); }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums lining-nums;
+  caret-color: var(--blue);
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+a:hover { color: var(--blue); text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 var(--gutter); }
+
+.skip {
+  position: absolute; left: var(--gutter); top: -100px;
+  background: var(--ink); color: var(--paper); padding: 12px 16px; z-index: 10;
+}
+.skip:focus { top: 8px; }
+
+/* Header */
+.masthead { border-bottom: 3px solid var(--rule); }
+.masthead .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 0 16px; min-height: 64px;
+}
+.wordmark {
+  font-family: var(--display); font-weight: 800; font-size: 1.75rem;
+  letter-spacing: -0.01em; line-height: 1; text-decoration: none;
+}
+.wordmark:hover { color: var(--ink); }
+.menu-btn {
+  font: 600 1rem/1 var(--body); color: var(--ink);
+  background: transparent; border: 1.5px solid var(--ink);
+  min-height: 44px; min-width: 44px; padding: 0 16px; border-radius: 2px;
+  display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+}
+.menu-btn:hover { background: var(--ink); color: var(--paper); }
+.menu-btn svg { width: 14px; height: 14px; }
+
+.site-nav ul { list-style: none; margin: 0; padding: 0; }
+.site-nav a {
+  display: flex; align-items: center; min-height: 48px;
+  font-weight: 600; text-decoration: none;
+}
+.site-nav a:hover { text-decoration: underline; }
+
+@media (max-width: 899px) {
+  .site-nav { flex: 0 0 100%; border-top: 1px solid var(--rule); margin-bottom: 8px; }
+  .js .site-nav[data-open="false"] { display: none; }
+  .site-nav li { border-top: 1px solid var(--rule-soft); }
+  .site-nav li:first-child { border-top: 0; }
+}
+@media (min-width: 900px) {
+  .menu-btn { display: none; }
+  .masthead .wrap { min-height: 76px; }
+}
+
+/* Section scaffold: a listings block with a heading bar */
+section { padding: 40px 0 8px; }
+.block-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  border-bottom: 3px solid var(--rule); padding-bottom: 8px;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+h2 { font-size: 2.25rem; line-height: 1; }
+h3 { font-size: 1.5rem; line-height: 1.05; font-weight: 700; }
+p { margin: 0; }
+
+/* Hero */
+.hero { padding: 28px 0 36px; border-bottom: 1px solid var(--rule); }
+.hero h1 {
+  font-size: clamp(2.5rem, 10.5vw, 5.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  max-width: 17ch;
+}
+.hero .lede { margin-top: 20px; font-size: 1.1875rem; line-height: 1.5; max-width: 60ch; }
+.actions { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 22px; border-radius: 2px;
+  background: var(--blue); color: var(--on-blue); border: 0;
+  font: 700 1.0625rem/1 var(--body); text-decoration: none; cursor: pointer;
+}
+.btn:hover { background: var(--blue-deep); color: var(--on-blue); }
+.btn svg { width: 16px; height: 16px; }
+.text-link { font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; }
+.quiet { margin-top: 22px; color: var(--ink-2); font-size: 1rem; }
+.quiet a { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 559px) {
+  .actions .btn { width: 100%; }
+}
+
+/* Listing rows: slot column on the left, entry on the right */
+.listing { list-style: none; margin: 0; padding: 0; }
+.row {
+  display: grid;
+  grid-template-columns: var(--slot) 1fr;
+  gap: 4px 16px;
+  padding: 14px 0 16px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.slot {
+  font-family: var(--display); font-weight: 700; font-size: 1.25rem; line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.entry-title { font-weight: 700; }
+.helps { color: var(--ink-2); margin-top: 2px; }
+.helps b { color: var(--ink); font-weight: 600; }
+
+.intro { margin: 16px 0 8px; max-width: 64ch; }
+
+/* What might stop: forecast areas read in order */
+.forecast .row { grid-template-columns: 6.5rem 1fr; }
+.forecast .helps, .close .span { grid-column: 2; }
+.close {
+  display: grid; grid-template-columns: 6.5rem 1fr; gap: 12px 16px;
+  padding: 18px 0 8px; align-items: start;
+}
+.close p { max-width: 62ch; }
+.span {
+  width: 100%; max-width: 360px; margin-top: 12px;
+}
+.span-track { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+.span-cell { height: 10px; background: transparent; border: 1.5px solid var(--ink); }
+.span-cell.on { background: var(--blue); border-color: var(--blue); transform-origin: left; }
+.span-labels { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; margin-top: 6px; font-size: 0.875rem; color: var(--ink-2); }
+
+@media (min-width: 900px) {
+  .forecast .row {
+    grid-template-columns: 10rem minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: baseline;
+  }
+  .forecast .helps { margin-top: 0; grid-column: 3; }
+  .close .span { grid-column: 3; }
+  .close { grid-template-columns: 10rem minmax(0, 1fr) minmax(0, 1.15fr); }
+  .close .span { margin-top: 4px; }
+}
+
+/* Running order */
+.running .row { grid-template-columns: 3rem 1fr; }
+.running .slot { font-size: 2.25rem; line-height: 0.9; }
+.running p { margin-top: 4px; max-width: 58ch; }
+.running .go { margin-top: 10px; }
+.go a {
+  font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; gap: 8px;
+}
+.go svg { width: 14px; height: 14px; }
+
+/* Kit panel: a compact listings box */
+.panel {
+  margin-top: 16px;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 2px;
+}
+.panel-head {
+  padding: 14px 16px 12px; border-bottom: 1.5px solid var(--ink);
+}
+.panel form { padding: 4px 16px 16px; }
+.field {
+  display: grid; grid-template-columns: 1fr 9.5rem; align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--rule-soft);
+}
+.field label { font-weight: 600; }
+.field .hint { display: block; font-weight: 400; font-size: 0.875rem; color: var(--ink-2); }
+select {
+  appearance: none; -webkit-appearance: none;
+  font: 500 1rem/1.2 var(--body); color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  background: var(--paper)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2315181b' stroke-width='1.75'/%3E%3C/svg%3E")
+    no-repeat right 12px center;
+  border: 1.5px solid var(--ink); border-radius: 0;
+  min-height: 48px; width: 100%; padding: 0 34px 0 12px; cursor: pointer;
+}
+select:hover { border-color: var(--blue); }
+.field-wide { grid-template-columns: 1fr; gap: 8px; }
+.panel .btn { width: 100%; margin-top: 16px; }
+.example {
+  display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: baseline;
+  padding: 14px 16px; border-top: 1.5px solid var(--ink); background: var(--ground-2);
+}
+.example .fig {
+  font-family: var(--display); font-weight: 800; font-size: 2.75rem; line-height: 0.9;
+  color: var(--blue);
+}
+.example .fig small { font-size: 1.125rem; font-weight: 700; margin-left: 2px; }
+
+/* Why three days */
+.why-row { display: grid; grid-template-columns: 1fr; gap: 6px 16px; padding: 16px 0; border-bottom: 1px solid var(--rule-soft); }
+.why-row p { max-width: 62ch; }
+.countries {
+  margin: 10px 0 0; padding: 0; list-style: none;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.countries li {
+  font-size: 0.875rem; font-weight: 600; border: 1px solid var(--ink); padding: 3px 9px; border-radius: 2px;
+}
+.limit { color: var(--ink); }
+
+/* Offline guide */
+.offline {
+  display: grid; grid-template-columns: var(--slot) 1fr; gap: 4px 16px;
+  padding: 18px 0; border-top: 3px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.offline .slot svg { width: 28px; height: 28px; }
+.offline a.title { font-weight: 700; font-size: 1.125rem; }
+
+.off-sec { padding-top: 32px; }
+
+/* Footer */
+footer { margin-top: 48px; padding: 28px 0 40px; background: var(--ink); color: #d8dde1; }
+footer a { color: #ffffff; }
+footer a:hover { color: #ffffff; }
+footer :focus-visible { outline-color: #8fb0ff; }
+footer ::selection { background: #8fb0ff; color: var(--ink); }
+.foot-name { font-family: var(--display); font-weight: 800; font-size: 1.75rem; color: #fff; line-height: 1; }
+.foot-grid { display: grid; gap: 24px; margin-top: 12px; }
+.foot-links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; }
+.foot-links a { display: flex; align-items: center; min-height: 44px; font-weight: 600; }
+.foot-small { font-size: 0.9375rem; line-height: 1.55; max-width: 60ch; }
+.foot-small + .foot-small { margin-top: 10px; }
+
+/* Desktop: the page widens into a listings grid */
+@media (min-width: 900px) {
+  :root { --gutter: 40px; --slot: 10rem; }
+  body { font-size: 1.125rem; }
+  .site-nav ul { display: flex; gap: 28px; }
+  .site-nav a { min-height: 44px; }
+  h2 { font-size: 3rem; }
+  section { padding-top: 56px; }
+  .hero { padding: 48px 0 56px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 48px; align-items: end; }
+  .hero .lede { margin-top: 0; }
+  .pair { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+  .pair > section { padding-top: 56px; }
+  .off-sec { padding-top: 40px; }
+  .running .row { grid-template-columns: 4rem 1fr; }
+  .why-row { grid-template-columns: var(--slot) 1fr; }
+  .foot-grid { grid-template-columns: 1.1fr 1.3fr 1.6fr; gap: 48px; }
+  .foot-links { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1200px) {
+  .hero h1 { font-size: 5.75rem; }
+}
+
+/* The one authored moment: the span bar settles in once */
+@media (prefers-reduced-motion: no-preference) {
+  .span-cell.on { animation: settle 1100ms var(--ease-out) both; }
+  .span-cell.on + .span-cell.on { animation-delay: 140ms; }
+  @keyframes settle { from { transform: scaleX(0.2); } to { transform: scaleX(1); } }
+}
+
+/* Print: clean black and white A4 */
+@media print {
+  @page { size: A4; margin: 16mm 14mm; }
+  :root { --ground: #fff; --ground-2: #fff; --paper: #fff; --ink: #000; --ink-2: #000; --rule: #000; --rule-soft: #777; --blue: #000; --blue-deep: #000; }
+  body { font-size: 10.5pt; background: #fff; color: #000; }
+  .skip, .menu-btn, .site-nav, .actions .btn svg, .go svg, form, .span { display: none !important; }
+  .hero h1 { font-size: 28pt; }
+  h2 { font-size: 20pt; }
+  .btn { background: none; color: #000; padding: 0; min-height: 0; border: 0; text-decoration: underline; }
+  .panel { border: 1pt solid #000; }
+  .example { background: none; }
+  .example .fig { color: #000; }
+  section, .row, .panel, .offline { break-inside: avoid; }
+  a[href^="/"]::after { content: " (stayprepared.co.uk" attr(href) ")"; font-weight: 400; font-size: 9pt; }
+  .wordmark::after, .site-nav a::after, .foot-links a::after { content: none !important; }
+  footer { background: none; color: #000; border-top: 2pt solid #000; }
+  footer a, .foot-name { color: #000; }
+  .pair, .hero-grid { display: block; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="/">Stay Prepared</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+      Menu
+      <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M0 2h14M0 7h14M0 12h14" stroke="currentColor" stroke-width="1.75"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main" data-open="false">
+      <ul>
+        <li><a href="/checklist">Checklist</a></li>
+        <li><a href="/build-your-kit">Build your kit</a></li>
+        <li><a href="/why">Why three days?</a></li>
+        <li><a href="/worried">Worried?</a></li>
+        <li><a href="/community">Neighbours</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <h1>If the power went off, the water stopped and the shops were shut for three days, would you be all right?</h1>
+      <div>
+        <p class="lede">The government asks every UK household to be able to manage on its own for three days. This site makes that practical: what to keep, how much, how long it lasts, and what to do first.</p>
+        <div class="actions">
+          <a class="btn" href="/checklist">Check your cupboard
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </a>
+          <a class="text-link" href="/why">Why three days?</a>
+        </div>
+        <p class="quiet">Frightened by the news? <a href="/worried">Start here instead</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="forecast" aria-labelledby="stop-h">
+      <div class="block-head"><h2 id="stop-h">What might stop</h2></div>
+      <p class="intro">Severe weather, a fault in the grid, a cyber attack on a water company, or disruption from a conflict elsewhere in Europe can all have the same effect at home.</p>
+      <ol class="listing">
+        <li class="row"><span class="slot">Heating</span><p class="entry-title">The heating goes off.</p><p class="helps"><b>Helps:</b> blankets, warm layers, a hot-water bottle.</p></li>
+        <li class="row"><span class="slot">Water</span><p class="entry-title">Nothing comes out of the taps.</p><p class="helps"><b>Helps:</b> 3 litres of water per person per day.</p></li>
+        <li class="row"><span class="slot">Shops</span><p class="entry-title">The shops run short.</p><p class="helps"><b>Helps:</b> tins and dry food you already eat.</p></li>
+        <li class="row"><span class="slot">Payments</span><p class="entry-title">Cards and cash machines stop.</p><p class="helps"><b>Helps:</b> some cash in small notes.</p></li>
+        <li class="row"><span class="slot">Networks</span><p class="entry-title">Mobile networks and the internet go down.</p><p class="helps"><b>Helps:</b> a wind-up or battery radio.</p></li>
+        <li class="row"><span class="slot">Transport</span><p class="entry-title">Buses and trains stop.</p><p class="helps"><b>Helps:</b> knowing who nearby you can reach on foot.</p></li>
+        <li class="row"><span class="slot">Medicine</span><p class="entry-title">Prescriptions are hard to get.</p><p class="helps"><b>Helps:</b> a week's spare medication where your GP allows.</p></li>
+      </ol>
+      <div class="close">
+        <span class="slot">Outlook</span>
+        <p>Most of these last hours or days, not weeks. All of them are easier with a few things in the cupboard and a plan you made while everything worked.</p>
+        <div class="span" aria-hidden="true">
+          <div class="span-track"><span class="span-cell on"></span><span class="span-cell on"></span><span class="span-cell"></span></div>
+          <div class="span-labels"><span>Hours</span><span>Days</span><span>Weeks</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="pair">
+      <section class="running" aria-labelledby="order-h">
+        <div class="block-head"><h2 id="order-h">Three things, in this order</h2></div>
+        <ol class="listing">
+          <li class="row">
+            <span class="slot">1</span>
+            <div>
+              <h3>Check what you already have.</h3>
+              <p>Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Tick them off against the list before you buy anything.</p>
+              <p class="go"><a href="/checklist">See the checklist <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="slot">2</span>
+            <div>
+              <h3>Buy what is missing.</h3>
+              <p>Say who lives with you and the quantities are worked out for you. The free option comes first on every line.</p>
+              <p class="go"><a href="/build-your-kit">Build your kit <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="slot">3</span>
+            <div>
+              <h3>Talk to your neighbours.</h3>
+              <p>Two or three names and a way to check on each other. The better prepared you are, the more you can give to the neighbour who could not prepare.</p>
+              <p class="go"><a href="/community">How to start <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="kit-h">
+        <div class="block-head"><h2 id="kit-h">How much for your household?</h2></div>
+        <div class="panel">
+          <form action="/build-your-kit" method="get">
+            <div class="field">
+              <label for="a">Adults</label>
+              <select id="a" name="a">
+                <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option>
+                <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="c">Children</label>
+              <select id="c" name="c">
+                <option value="0" selected>0</option><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              </select>
+            </div>
+            <div class="field field-wide">
+              <label for="d">How long</label>
+              <select id="d" name="d">
+                <option value="3" selected>3 days, the government minimum</option>
+                <option value="7">1 week</option>
+                <option value="14">2 weeks</option>
+              </select>
+            </div>
+            <button class="btn" type="submit">Work it out</button>
+          </form>
+          <div class="example">
+            <span class="fig">18<small>L</small></span>
+            <p>2 adults for 3 days need 18 litres of drinking water.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section aria-labelledby="why-h">
+      <div class="block-head"><h2 id="why-h">Why three days?</h2></div>
+      <div class="why-row">
+        <span class="slot">Since 2024</span>
+        <div>
+          <p>Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked their citizens to keep a few days of supplies at home. None of them say anything is imminent. All of them have decided it is no longer sensible to assume it cannot happen.</p>
+        </div>
+      </div>
+      <div class="why-row">
+        <span class="slot">Honestly</span>
+        <div>
+          <p class="limit">For the very worst cases there is little any household can do. For everything short of that, three days of supplies make a real difference.</p>
+          <p class="go"><a href="/why">What the government says <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="off-sec" aria-labelledby="off-h">
+      <h2 id="off-h" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Offline guide</h2>
+      <div class="offline">
+        <span class="slot"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3v15M8 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.25"/><path d="M4 21v4h20v-4" fill="none" stroke="currentColor" stroke-width="2.25"/></svg></span>
+        <div>
+          <p><a class="title" href="/offline/index.html">Download the offline guide.</a></p>
+          <p class="helps">One file, no internet needed. Save it, print it, share it before you need it.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-name">Stay Prepared.</p>
+        <p class="foot-small" style="margin-top:10px">Calm, practical guidance for UK households. Not a survival site.</p>
+      </div>
+      <ul class="foot-links">
+        <li><a href="/checklist">Checklist</a></li>
+        <li><a href="/build-your-kit">Build your kit</a></li>
+        <li><a href="/why">Why three days?</a></li>
+        <li><a href="/worried">Worried?</a></li>
+        <li><a href="/community">Neighbours</a></li>
+        <li><a href="/sources">Sources</a></li>
+      </ul>
+      <div>
+        <p class="foot-small">Some product links earn us a small commission. The free option is always listed first, and we only list things we would buy ourselves.</p>
+        <p class="foot-small">Figures from gov.uk Prepare, the Met Office and the NHS. Last checked September 2026.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var btn = document.querySelector('.menu-btn');
+  var nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    nav.setAttribute('data-open', String(!open));
+  });
+})();
+</script>
+</body>
+</html>
