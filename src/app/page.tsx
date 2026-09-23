@@ -154,6 +154,8 @@ export default function Home() {
                 <option value="3">Three days, the government minimum</option>
                 <option value="7">One week</option>
                 <option value="14">Two weeks</option>
+                <option value="30">One month</option>
+                <option value="90">Three months</option>
               </select>
             </label>
             <button type="submit" className="btn btn-primary mt-2 justify-center">
