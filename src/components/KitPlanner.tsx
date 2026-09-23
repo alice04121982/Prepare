@@ -11,6 +11,8 @@ import {
 } from "@/data/kit-rules";
 import { ExternalLink, ShoppingBasket } from "lucide-react";
 import { amazonImageUrl, amazonProductUrl, productsFor } from "@/data/products";
+import { kitLineKey } from "@/data/have-map";
+import { useHave } from "@/lib/have";
 
 const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
 
@@ -70,8 +72,9 @@ function toQuery(h: Household) {
 
 export default function KitPlanner({ initial }: { initial?: Household }) {
   const [h, setH] = useState<Household>(initial ?? defaultHousehold);
-  const [have, setHave] = useState<Set<string>>(new Set());
+  const { have, ready: haveReady, toggle: toggleHave, clear: clearHave } = useHave();
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
   const [shop, setShop] = useState<Retailer["id"]>("amazon");
   const [tab, setTab] = useState<"list" | "buy">("list");
   const retailer = retailers.find((r) => r.id === shop)!;
@@ -82,7 +85,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
 
   const { lines, tasks } = useMemo(() => buildKit(h), [h]);
   const categories = useMemo(() => [...new Set(lines.map((l) => l.category))], [lines]);
-  const toBuy = lines.filter((l) => !have.has(l.id));
+  const toBuy = lines.filter((l) => !have.has(kitLineKey(l.id)));
+  const haveCount = lines.length - toBuy.length;
   const picks = toBuy
     .map((l) => ({ line: l, product: productsFor(l.id)[0] }))
     .map(({ line, product }) => ({
@@ -98,13 +102,6 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const asinCount = withProduct.length;
 
   const set = <K extends keyof Household>(k: K, v: Household[K]) => setH((prev) => ({ ...prev, [k]: v }));
-  const toggleHave = (id: string) =>
-    setHave((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
 
   const plainText = () => {
     const people = h.adults + h.children + h.babies;
@@ -122,10 +119,13 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(plainText());
+      setCopyFailed(false);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      /* clipboard unavailable; the print view still works */
+      // Older browsers, and any page not served over https, refuse this.
+      // Say so and name the two routes that do work.
+      setCopyFailed(true);
     }
   };
 
@@ -196,17 +196,39 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             <h2 className="text-2xl font-semibold">
               Your list: {people} {people === 1 ? "person" : "people"}, {h.days} days
             </h2>
-            <p className="mt-1 text-sm text-muted">
-              Tick anything you already have. It drops off the list. The link in your address bar saves this household.
+            <p className="mt-1 max-w-xl text-sm text-muted">
+              {haveReady && haveCount > 0 ? (
+                <span className="font-medium text-heading">
+                  You have <span className="tabular-nums">{haveCount}</span> of{" "}
+                  <span className="tabular-nums">{lines.length}</span>.{" "}
+                </span>
+              ) : null}
+              Tick what you already have. Ticked lines stay on the list and drop out of the basket. Ticks are
+              kept in this browser; the link in your address bar carries your household.
             </p>
+            {haveReady && haveCount > 0 ? (
+              <button
+                type="button"
+                onClick={clearHave}
+                className="mt-2 text-sm text-muted underline underline-offset-4 hover:text-heading print:hidden"
+              >
+                Clear all ticks
+              </button>
+            ) : null}
           </div>
           <div className="flex flex-wrap gap-2 print:hidden">
             <button type="button" onClick={copy} className="btn btn-secondary">
-              {copied ? "Copied" : "Copy list"}
+              {copyFailed ? "Could not copy" : copied ? "Copied" : "Copy list"}
             </button>
             <button type="button" onClick={() => window.print()} className="btn btn-secondary">
               Print
             </button>
+            {copyFailed ? (
+              <p role="status" className="basis-full text-sm text-muted sm:max-w-sm">
+                Your browser would not let the page copy the list. Print it instead, or select the list and
+                copy it by hand.
+              </p>
+            ) : null}
           </div>
         </div>
 
@@ -363,9 +385,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                     ))}
                 </ul>
                 <p className="mt-4 max-w-2xl text-xs text-muted">
-                  {retailer.name} has no way for a website to fill your basket, so it is one click per item: each link opens
-                  the search for that item, you add it there. A single basket button for supermarkets needs a partnership
-                  with Samsung Food, the service behind BBC Good Food&rsquo;s shoppable recipes, which is on the plan.
+                  {retailer.name} has no way for a website to fill your basket, so it is one click per item. Each link
+                  opens the search for that item, and you add it there.
                 </p>
               </>
             )}
@@ -379,23 +400,26 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                   <h3 className="mb-3 text-xs font-medium uppercase tracking-wider text-muted">{c}</h3>
                   <ul className="divide-y divide-line rounded-card bg-surface">
                     {items.map((l) => {
-                      const got = have.has(l.id);
+                      const key = kitLineKey(l.id);
+                      const got = have.has(key);
                       return (
                         <li key={l.id} className={`flex gap-4 px-5 py-4 ${got ? "opacity-50" : ""}`}>
                           <input
                             type="checkbox"
                             aria-label={`Already have ${l.item}`}
                             checked={got}
-                            onChange={() => toggleHave(l.id)}
+                            onChange={() => toggleHave(key)}
                             className="mt-1.5 h-5 w-5 shrink-0 accent-accent print:hidden"
                           />
                           <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                              <span className={`font-medium ${got ? "line-through" : ""}`}>{l.item}</span>
-                              <span className="font-heading text-heading">
+                            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                              <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                                <span className={`font-medium ${got ? "line-through" : ""}`}>{l.item}</span>
+                                {l.priority ? <span className="tag text-[0.65rem]">Get first</span> : null}
+                              </span>
+                              <span className="font-heading tabular-nums text-heading sm:text-right">
                                 {l.quantity ? l.quantity : ""} {l.unit}
                               </span>
-                              {l.priority ? <span className="tag text-[0.65rem]">Get first</span> : null}
                             </div>
                             <p className="mt-1 text-sm text-muted">{l.basis}</p>
                             {l.freeOption ? (

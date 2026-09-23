@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
-import Illustration from "@/components/Illustration";
+import Diagram from "@/components/Diagram";
 import ListRow from "@/components/ListRow";
 import SectionLabel from "@/components/SectionLabel";
 import Callout from "@/components/Callout";
@@ -50,7 +50,7 @@ export default function WhyPage() {
         eyebrow="Why now"
         title="Why the government asks you to be ready for three days"
         lede="Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked their citizens to keep a few days of supplies at home. The reasons they give are the same: severe weather, attacks on power and water systems, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent. All of them have decided it is no longer sensible to assume it cannot happen."
-        aside={<Illustration name="intro-scenarios" className="w-full" />}
+        aside={<Diagram name="duration" />}
         photo="guidance"
       />
 
