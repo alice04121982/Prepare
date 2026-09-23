@@ -77,9 +77,13 @@ when households are not the ones needing help.
    most, so the rest of us are expected to manage. The better prepared
    you are, the less you need and the more you can give. Community is the
    result of that, not the starting instruction.
-6. **Sensible safeguards, never stockpiling.** Three days. Things you
-   already buy. A few pounds a week. Never "hoard", "bunker", "bug out",
-   "survive".
+6. **Sensible safeguards, never stockpiling.** Three days first. Things
+   you already buy. A few pounds a week. Never "hoard", "bunker", "bug
+   out", "survive". Longer cover is welcome, up to three months (amended
+   23 September 2026): the kit planner offers one week, two weeks, one
+   month and three months. Present it as the same list, built up a few
+   items each shop and eaten oldest first, never as a bulk buy or a
+   bunker. Three days stays the default and the headline.
 7. **Honest about the limit, briefly.** For the very worst cases there is
    little any household can do. Say it once, in the FAQ and once on the
    home page, and do not dwell.

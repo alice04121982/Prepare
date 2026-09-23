@@ -43,14 +43,11 @@ anything goes on the site.
 
 ## How each fits the site
 
-**90 days of food.** This is thirty times the government's figure. The
-Prepare campaign and Ready Scotland ask for enough for a few days, and
-the site is built on three days (see docs/tone-of-voice.md, rules 6 and
-10). Ninety days is also well beyond what the National Risk Register
-plans for. If it goes on the site at all, it goes in the FAQ as a view
-some people hold, set against the official figure, not as a
-recommendation. The kit planner's longest option is two weeks, and that
-should stay.
+**90 days of food.** Adopted as the longest option in the kit planner
+(23 September 2026), with three days kept as the default and the
+headline. docs/tone-of-voice.md rule 6 now allows cover up to three
+months, built up over time. Bottled water stops at two weeks and baby
+consumables at a month; see src/data/kit-rules.ts.
 
 **Sewage backing up.** Plausible and worth covering. Sewers in low-lying
 areas rely on electric pumping stations. In a long power cut some run on
