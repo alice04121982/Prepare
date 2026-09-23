@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import credits from "../../public/photos/credits.json";
 
 type Credit = {
@@ -14,7 +16,16 @@ type Credit = {
   licence?: string;
 };
 
-const all = credits as Credit[];
+/**
+ * Credits whose file is actually in public/photos/.
+ *
+ * Three entries in credits.json name files that were never added, and a
+ * slot's first pick being one of them meant the page requested a 404 and
+ * showed nothing. Checking at build time means a missing file falls through
+ * to the next pick instead.
+ */
+const dir = path.join(process.cwd(), "public", "photos");
+const all = (credits as Credit[]).filter((c) => fs.existsSync(path.join(dir, c.file)));
 
 export function photoCredits(): Credit[] {
   return all;

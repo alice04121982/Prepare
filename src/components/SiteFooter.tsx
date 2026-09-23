@@ -1,12 +1,14 @@
 import Link from "next/link";
 
 const links = [
+  { href: "/kits", label: "Ready-made kits" },
   { href: "/checklist", label: "Checklist" },
   { href: "/build-your-kit", label: "Build your kit" },
   { href: "/why", label: "Why three days" },
   { href: "/community", label: "Community" },
   { href: "/worried", label: "Feeling frightened?" },
   { href: "/sources", label: "Sources" },
+  { href: "/disclosure", label: "How this site makes money" },
 ];
 
 export default function SiteFooter() {
@@ -41,7 +43,7 @@ export default function SiteFooter() {
           <p className="max-w-md opacity-90">
             <span className="block font-medium">Calm, practical guidance for short disruptions.</span>
             Based on UK government advice. Not a survival site. No tracking.
-            Some product links earn a small commission.
+            As an Amazon Associate we earn from qualifying purchases.
           </p>
           <p className="opacity-70">
             Free to share. Check official guidance for your region too.

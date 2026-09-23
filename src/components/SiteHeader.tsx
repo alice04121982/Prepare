@@ -6,6 +6,7 @@ import { useEffect, useId, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const nav = [
+  { href: "/kits", label: "Ready-made kits" },
   { href: "/checklist", label: "Checklist" },
   { href: "/why", label: "Why three days?" },
   { href: "/community", label: "Neighbours" },

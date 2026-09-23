@@ -38,7 +38,6 @@ export default function CommunityPage() {
         title="Once your own household has what it needs, look around you"
         lede="In an emergency, help goes first to the people who need it most. Everyone else is expected to manage for a while. The better prepared your household is, the more you can do for the people near you, and a street that knows itself gets through a bad week faster."
         aside={<Diagram name="checkin" />}
-        photo="community"
       />
 
       <div className="mx-auto max-w-3xl">

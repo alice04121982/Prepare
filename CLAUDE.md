@@ -85,11 +85,15 @@ The client islands are `ChecklistTracker`, `KitPlanner`, `HomeProgress` and
 Tailwind v4. The palette is CSS custom properties on `:root` in
 `globals.css`, mapped through `@theme inline`, with a dark-mode block.
 
-**Token names lie, deliberately.** They were kept from an earlier mint
-palette so components did not need renaming: `--mint` is the navy hero
-panel, `--mint-pale` is a pale card, `--forest` is the dark panel, and
-`--accent` is Safety Blue. There is a comment at the top of `globals.css`
-saying so. Read the value, not the name.
+**Token names mean what they say.** `--mint` (#a0f1bd) is the bright mint
+panel, `--mint-pale` a pale mint card, `--forest` (#2e4f21) the deep green
+used for type on mint, for buttons and for the footer. Type on a mint
+panel is `text-forest`, never white: the panel is bright.
+
+This palette was replaced once, by `d646793` "Shift the palette to an
+institutional utility scheme", which made everything slate and navy, and
+restored afterwards because the bold version is the intended look. If you
+are about to make the site quieter, that is the wrong direction.
 
 Layout utilities that do real work: `.wrap` (centred, capped at 1440px),
 `.measure` (68ch), `.btn` / `.btn-primary` / `.btn-secondary` /

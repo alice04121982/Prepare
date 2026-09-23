@@ -1,111 +1,68 @@
 import Link from "next/link";
-import { photoCredits } from "@/components/Photo";
 import SectionLabel from "@/components/SectionLabel";
 import DownloadRow from "@/components/DownloadRow";
 import HomeProgress from "@/components/HomeProgress";
-
-const selectClass =
-  "w-full rounded-full border border-line bg-surface px-4 py-2.5 text-sm text-heading focus:border-accent";
-
-/** One tap for a household that does not want to fill the form in yet. */
-const examples = [
-  { label: "Two adults, three days", href: "/build-your-kit?a=2&c=0&d=3" },
-  { label: "A family of four, one week", href: "/build-your-kit?a=2&c=2&d=7" },
-];
+import { kits } from "@/data/kits";
 
 export default function Home() {
-  const hero = photoCredits().find((c) => c.slot === "home-hero" && c.rank === 1);
   return (
     <main className="pb-8">
       {/* Hero, with the form that starts the task in it */}
-      <section className="relative overflow-hidden rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-20">
-        {hero ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={`/photos/${hero.file}`}
-            alt=""
-            width={hero.w}
-            height={hero.h}
-            className="absolute inset-0 h-full w-full object-cover opacity-40 saturate-[.6]"
-          />
-        ) : null}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-mint via-mint/85 to-mint/40" />
-        <div className="wrap relative grid items-center gap-10 md:grid-cols-[1.15fr_minmax(0,22rem)]">
+      <section className="overflow-hidden rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-20">
+                <div className="wrap grid items-center gap-10 md:grid-cols-[1.15fr_minmax(0,22rem)]">
           <div>
             <SectionLabel onDark>Simple steps for a difficult few days</SectionLabel>
-            <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
+            <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-forest sm:text-6xl">
               If the power went off, the water stopped and the shops were shut
               for three days, would you be all right?
             </h1>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-forest/85 sm:text-lg">
               The government asks every UK household to be able to manage on
               its own for three days. Here is what that means, and how to get
               there this week.
             </p>
-            <p className="mt-6 text-sm text-white/75">
+            <p className="mt-6 text-sm text-forest/75">
               Rather read first?{" "}
-              <Link href="/checklist" className="underline underline-offset-4 hover:text-white">
+              <Link href="/checklist" className="underline underline-offset-4 hover:text-forest">
                 See the checklist.
               </Link>{" "}
               Frightened by the news?{" "}
-              <Link href="/worried" className="underline underline-offset-4 hover:text-white">
+              <Link href="/worried" className="underline underline-offset-4 hover:text-forest">
                 Start here instead.
               </Link>
             </p>
           </div>
 
           <div className="md:justify-self-end">
-            <form
-              action="/build-your-kit"
-              method="get"
-              className="grid gap-4 rounded-card bg-white/10 p-6 backdrop-blur-sm"
-            >
-              <p className="font-heading text-lg text-white">Start with your household</p>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="grid gap-1.5 text-sm text-white/90">
-                  <span>Adults</span>
-                  <select id="home-adults" name="a" defaultValue="2" className={selectClass}>
-                    {[1, 2, 3, 4, 5, 6].map((n) => (
-                      <option key={n} value={n}>
-                        {n}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label className="grid gap-1.5 text-sm text-white/90">
-                  <span>Children</span>
-                  <select id="home-children" name="c" defaultValue="0" className={selectClass}>
-                    {[0, 1, 2, 3, 4, 5, 6].map((n) => (
-                      <option key={n} value={n}>
-                        {n}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <label className="grid gap-1.5 text-sm text-white/90">
-                <span>How long to cover</span>
-                <select id="home-days" name="d" defaultValue="3" className={selectClass}>
-                  <option value="3">Three days, the government minimum</option>
-                  <option value="7">One week</option>
-                  <option value="14">Two weeks</option>
-                </select>
-              </label>
-              <button type="submit" className="btn btn-primary mt-1 justify-center">
-                Build my list
-              </button>
-            </form>
-
-            <div className="mt-3 flex flex-wrap gap-2">
-              {examples.map((e) => (
+            <div className="rounded-card bg-surface p-6 shadow-lg">
+              <p className="font-heading text-lg text-heading">Pick your household</p>
+              <p className="mt-1 text-sm text-muted">
+                Each one is a full list with the quantities worked out.
+              </p>
+              <ul className="mt-4 divide-y divide-line border-y border-line">
+                {kits.map((k) => (
+                  <li key={k.slug}>
+                    <Link
+                      href={`/kits/${k.slug}`}
+                      className="flex items-baseline justify-between gap-3 py-2.5 text-sm text-foreground hover:text-forest"
+                    >
+                      <span>{k.title}</span>
+                      <span aria-hidden className="text-muted">
+                        &rarr;
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm text-muted">
+                None of these?{" "}
                 <Link
-                  key={e.href}
-                  href={e.href}
-                  className="rounded-full border border-white/30 px-3 py-1.5 text-sm text-white/85 hover:border-white/60 hover:text-white"
+                  href="/build-your-kit"
+                  className="underline underline-offset-4 hover:text-forest"
                 >
-                  {e.label}
+                  Build your own list.
                 </Link>
-              ))}
+              </p>
             </div>
           </div>
         </div>

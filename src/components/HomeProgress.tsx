@@ -21,7 +21,14 @@ export default function HomeProgress() {
   const ticked = keys.filter((k) => have.has(k)).length;
   const left = total - ticked;
 
-  const rows = [
+  const rows: {
+    title: string;
+    body: string;
+    href: string;
+    cta: string;
+    state: string | null;
+    alt?: { href: string; label: string };
+  }[] = [
     {
       title: "Check what you already have",
       body: "Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Tick them off before you buy anything.",
@@ -32,8 +39,9 @@ export default function HomeProgress() {
     {
       title: "Buy what is missing",
       body: "Say who lives with you and the quantities are worked out for you. One button puts the lot into a basket.",
-      href: "/build-your-kit",
-      cta: "Build the list",
+      href: "/kits",
+      cta: "See the ready-made kits",
+      alt: { href: "/build-your-kit", label: "or build your own" },
       state: !ready ? null : ticked === 0 ? null : left === 0 ? "Nothing left" : `${left} left`,
     },
     {
@@ -60,9 +68,19 @@ export default function HomeProgress() {
               ) : null}
             </div>
             <p className="mt-2 max-w-xl leading-relaxed text-muted">{r.body}</p>
-            <Link href={r.href} className="btn btn-secondary mt-5">
-              {r.cta}
-            </Link>
+            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+              <Link href={r.href} className="btn btn-secondary">
+                {r.cta}
+              </Link>
+              {r.alt ? (
+                <Link
+                  href={r.alt.href}
+                  className="text-sm text-muted underline underline-offset-4 hover:text-heading"
+                >
+                  {r.alt.label}
+                </Link>
+              ) : null}
+            </div>
           </div>
         </li>
       ))}
