@@ -1,12 +1,45 @@
 "use client";
 
-import SectionLabel from "@/components/SectionLabel";
+import { bgFor, catFor } from "@/components/checklist/cats";
 import { checklist } from "@/data/checklist";
 import { haveKey, useHave } from "@/lib/have";
 
 const allItems = checklist.flatMap((c) => c.items.map((i) => ({ ...i, key: haveKey(c.slug, i.item) })));
 const total = allItems.length;
 
+/**
+ * Square tick box in a 44px target. The real checkbox covers the target but is
+ * invisible; the drawn box beside it follows its state. Checked fills ink with
+ * a paper tick. In print it is always an empty box to tick by hand.
+ */
+function TickBox({ id, checked, onChange }: { id: string; checked: boolean; onChange: () => void }) {
+  return (
+    <span className="relative grid size-11 flex-none place-items-center">
+      <input
+        type="checkbox"
+        id={id}
+        checked={checked}
+        onChange={onChange}
+        className="peer absolute inset-0 m-0 size-11 cursor-pointer appearance-none opacity-0"
+      />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none grid size-7 place-items-center rounded-[3px] border-2 border-ink bg-paper peer-hover:bg-(--hover) peer-checked:bg-ink peer-checked:peer-hover:bg-ink peer-focus-visible:outline-3 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-ink peer-checked:[&>svg]:block print:bg-white! print:[&>svg]:hidden!"
+      >
+        <svg width="16" height="12" viewBox="0 0 16 12" className="hidden text-paper">
+          <path d="M1.5 6l4.5 4.5L14.5 1.5" fill="none" stroke="currentColor" strokeWidth="2.8" />
+        </svg>
+      </span>
+    </span>
+  );
+}
+
+/**
+ * The checklist itself, and the household's record of what it already has.
+ * Ticks go into the shared record in src/lib/have.ts, so the kit planner and
+ * the home page see them too. Counts wait until the record has been read, so
+ * the server render and the first client render match.
+ */
 export default function ChecklistTracker() {
   const { have, ready, toggle, clear } = useHave();
 
@@ -16,122 +49,133 @@ export default function ChecklistTracker() {
 
   return (
     <>
-      <section aria-labelledby="progress-heading" className="mb-10 rounded-card bg-mint-pale px-5 py-5 sm:px-6">
-        <h2 id="progress-heading" className="sr-only">
-          What you have so far
-        </h2>
-        <p className="font-heading text-lg leading-snug text-heading">
-          {!ready ? (
-            <>Tick anything you already have as you read.</>
-          ) : ticked === 0 ? (
-            <>Nothing ticked yet. Tick what you already have, and this page keeps the count of what is left to get.</>
-          ) : ticked === total ? (
-            <>All {total} ticked. Put a date in the calendar to check the batteries and the food dates in six months.</>
-          ) : (
-            <>
-              You have <span className="tabular-nums">{ticked}</span> of{" "}
-              <span className="tabular-nums">{total}</span>.{" "}
-              {firstPriorityMissing
-                ? `Of the things to get first, ${firstPriorityMissing.item.toLowerCase()} is still missing.`
-                : `Everything marked "first" is ticked. ${firstMissing ? `Next on the list is ${firstMissing.item.toLowerCase()}.` : ""}`}
-            </>
-          )}
-        </p>
-        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
-          <p>Ticks are kept in this browser, so they will not show up on your phone. Nothing is sent anywhere.</p>
-          {ready && ticked > 0 ? (
-            <button
-              type="button"
-              onClick={clear}
-              className="underline underline-offset-4 hover:text-heading print:hidden"
-            >
-              Clear all ticks
-            </button>
-          ) : null}
+      {/* What you have so far */}
+      <section aria-labelledby="have-h" className="no-print border-t-[3px] border-ink">
+        <div className="wrap py-7 min-[900px]:py-9">
+          <h2 id="have-h" className="sr-only">
+            What you have so far
+          </h2>
+          <p className="max-w-[56ch] text-[1.1875rem] font-extrabold leading-snug" aria-live="polite">
+            {!ready ? (
+              <>Tick anything you already have as you read.</>
+            ) : ticked === 0 ? (
+              <>Nothing ticked yet. Tick what you already have, and this page keeps count of what is left to get.</>
+            ) : ticked === total ? (
+              <>
+                You have all <span className="tabular-nums">{total}</span>. Put a date in the calendar to check the
+                batteries and the food dates in six months.
+              </>
+            ) : (
+              <>
+                You have <span className="tabular-nums">{ticked}</span> of <span className="tabular-nums">{total}</span>.{" "}
+                <span className="font-normal">
+                  {firstPriorityMissing
+                    ? `Of the things to get first, ${firstPriorityMissing.item.toLowerCase()} is still missing.`
+                    : `Everything marked "first" is ticked.${firstMissing ? ` Next on the list is ${firstMissing.item.toLowerCase()}.` : ""}`}
+                </span>
+              </>
+            )}
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1 text-[0.9375rem] text-ink-2">
+            <p>Ticks are kept in this browser, so they will not show up on your phone. Nothing is sent anywhere.</p>
+            {ready && ticked > 0 ? (
+              <button
+                type="button"
+                onClick={clear}
+                className="min-h-11 font-extrabold text-ink underline decoration-2 underline-offset-[0.2em] hover:decoration-4"
+              >
+                clear all ticks
+              </button>
+            ) : null}
+          </div>
         </div>
       </section>
 
-      <div className="divide-y divide-line">
-        {checklist.map((c) => {
-          const keys = c.items.map((i) => haveKey(c.slug, i.item));
-          const done = keys.filter((k) => have.has(k)).length;
+      {/* The tins: one labelled band per category, then its items on the shelf */}
+      {checklist.map((c) => (
+        <section key={c.slug} id={c.slug} aria-labelledby={`${c.slug}-h`} className="scroll-mt-24">
+          <div data-cat className={`${bgFor(catFor(c.slug))} border-y-[3px] border-ink`}>
+            <div className="wrap pb-7 pt-8 min-[900px]:pb-10 min-[900px]:pt-12">
+              <h2
+                id={`${c.slug}-h`}
+                className="display text-[clamp(2rem,9vw,5rem)] [overflow-wrap:anywhere]"
+                style={{ fontVariationSettings: '"wdth" 115' }}
+              >
+                {c.title.toLowerCase()}
+              </h2>
+              <p className="mt-4 max-w-[56ch] text-[1.1875rem] leading-normal">{c.intro}</p>
+            </div>
+          </div>
 
-          return (
-            <details key={c.slug} id={c.slug} open className="group scroll-mt-24 py-8">
-              <summary className="cursor-pointer list-none marker:hidden">
-                <SectionLabel>{c.title}</SectionLabel>
-                <span className="flex items-baseline justify-between gap-4">
-                  <span className="font-heading text-2xl font-semibold text-heading">{c.title}</span>
-                  <span className="shrink-0 text-sm tabular-nums text-muted">
-                    {ready ? (
-                      <>
-                        {done} of {c.items.length}
-                      </>
-                    ) : (
-                      <>{c.items.length} items</>
-                    )}
-                  </span>
-                </span>
-              </summary>
+          <div className="wrap pb-14 min-[900px]:pb-20">
+            <div
+              aria-hidden="true"
+              className="hidden grid-cols-[2.75rem_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.6fr)] gap-x-8 border-b-4 border-ink pb-2 pt-6 text-[0.9375rem] font-extrabold min-[900px]:grid"
+            >
+              <span>Have</span>
+              <span>Item</span>
+              <span>Realistic amount</span>
+              <span>Shelf life and notes</span>
+            </div>
+            <ul>
+              {c.items.map((i) => {
+                const key = haveKey(c.slug, i.item);
+                const got = have.has(key);
+                const id = `have-${key.replace("/", "-")}`;
 
-              <p className="mt-2 max-w-2xl leading-relaxed text-muted">{c.intro}</p>
-
-              <ul className="mt-5 divide-y divide-line border-y border-line">
-                {c.items.map((i) => {
-                  const key = haveKey(c.slug, i.item);
-                  const got = have.has(key);
-
-                  return (
-                    <li key={i.item} className="grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-3 py-4">
-                      <input
-                        type="checkbox"
-                        id={key}
-                        checked={got}
-                        onChange={() => toggle(key)}
-                        className="mt-1 h-5 w-5 shrink-0 accent-accent"
-                      />
-                      <div className={`min-w-0 ${got ? "opacity-60" : ""}`}>
-                        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                          <label
-                            htmlFor={key}
-                            className={`cursor-pointer font-medium ${got ? "line-through" : ""}`}
-                          >
-                            {i.item}
-                            {i.priority ? (
-                              <span className="ml-2 inline-block rounded-full bg-tag px-2 py-0.5 align-middle text-[0.7rem] font-medium text-heading">
-                                First
-                              </span>
-                            ) : null}
-                          </label>
-                          <span className="text-sm tabular-nums text-heading sm:text-right">{i.amount}</span>
-                        </div>
-                        <p className="mt-1 text-sm leading-relaxed text-muted">{i.notes}</p>
-                        {i.products ? (
-                          <ul className="mt-2 space-y-1.5 border-l-2 border-sage-light pl-3 text-sm">
-                            {i.products.map((p) => (
-                              <li key={p.url}>
-                                <a
-                                  href={p.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="font-medium text-heading underline underline-offset-4 hover:text-sage"
-                                >
-                                  {p.name}
-                                </a>{" "}
-                                <span className="text-muted">{p.note}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </details>
-          );
-        })}
-      </div>
+                return (
+                  <li
+                    key={i.item}
+                    className="grid grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-x-3 gap-y-1.5 border-b border-ink py-5 min-[900px]:grid-cols-[2.75rem_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.6fr)] min-[900px]:gap-x-8 min-[900px]:py-6"
+                  >
+                    <div className="row-span-3 -mt-2 min-[900px]:row-span-1">
+                      <TickBox id={id} checked={got} onChange={() => toggle(key)} />
+                    </div>
+                    <h3 className="col-start-2 text-[1.375rem] min-[900px]:col-start-auto min-[900px]:text-[1.5rem]">
+                      <label
+                        htmlFor={id}
+                        className={`cursor-pointer ${got ? "text-ink-2 line-through decoration-[3px] print:text-ink print:no-underline" : ""}`}
+                      >
+                        {i.item}
+                      </label>
+                      {got ? <span className="sr-only"> (you have this)</span> : null}
+                      {i.priority ? (
+                        <span className="ml-2.5 inline-block translate-y-[-0.2em] rounded-[4px] bg-ink px-1.5 py-0.5 align-middle text-[0.75rem] font-extrabold tracking-normal text-paper print:border print:border-black print:bg-white print:text-black">
+                          First
+                        </span>
+                      ) : null}
+                    </h3>
+                    <p className="col-start-2 font-bold tabular-nums min-[900px]:col-start-auto">
+                      <span className="sr-only">Realistic amount: </span>
+                      {i.amount}
+                    </p>
+                    <div className="col-start-2 text-ink-2 min-[900px]:col-start-auto">
+                      <p className="measure">{i.notes}</p>
+                      {i.products ? (
+                        <ul className="mt-3 border-t-2 border-ink text-[0.9375rem]">
+                          {i.products.map((p) => (
+                            <li key={p.url} className="border-b border-ink py-2.5">
+                              <a
+                                href={p.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-extrabold text-ink hover:decoration-4"
+                              >
+                                {p.name}
+                              </a>{" "}
+                              <span>{p.note}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+      ))}
     </>
   );
 }

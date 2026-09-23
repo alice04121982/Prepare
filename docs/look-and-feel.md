@@ -1,5 +1,10 @@
 # Look and feel: direction, and the diagrams
 
+> **Superseded on palette and styling, 23 September 2026.** The site moved to
+> the own-label larder design recorded in `DESIGN.md`; the navy palette and
+> photography direction below no longer apply. The case for diagrams that
+> carry information still stands, and the diagrams are now drawn in ink.
+
 23 September 2026. Four Mobbin searches on visual direction rather than
 structure, after Alice said the styling was not there yet and that she
 could not see the illustrations.

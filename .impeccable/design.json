@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-23T20:17:12+00:00",
+  "title": "Design System: Stay Prepared",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Label Ink",
+        "canonical": "#141414",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Second Ink",
+        "canonical": "#3f3f3f",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "hush": {
+        "role": "neutral",
+        "displayName": "Hush",
+        "canonical": "#f3f3f1",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#252524",
+          "#424240",
+          "#616160",
+          "#828281",
+          "#a5a5a3",
+          "#c9c9c7",
+          "#eeeeec"
+        ]
+      },
+      "hover": {
+        "role": "neutral",
+        "displayName": "Hover Cream",
+        "canonical": "#fff7dd",
+        "tonalRamp": [
+          "#100a00",
+          "#2b2510",
+          "#48422c",
+          "#68614b",
+          "#89826b",
+          "#aca58d",
+          "#d1c9b0",
+          "#f6eed5"
+        ]
+      },
+      "footer-note": {
+        "role": "neutral",
+        "displayName": "Footer Note Grey",
+        "canonical": "#d6d6d6",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "footer-rule": {
+        "role": "neutral",
+        "displayName": "Footer Rule Grey",
+        "canonical": "#5a5a5a",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "cat-water": {
+        "role": "secondary",
+        "displayName": "Tap Water Blue",
+        "canonical": "#4a9aeb",
+        "tonalRamp": [
+          "#000a24",
+          "#002648",
+          "#074377",
+          "#0062af",
+          "#3485d5",
+          "#5aa9fc",
+          "#a5cdfa",
+          "#e3f0ff"
+        ]
+      },
+      "cat-food": {
+        "role": "secondary",
+        "displayName": "Tin Orange",
+        "canonical": "#f4683a",
+        "tonalRamp": [
+          "#210000",
+          "#460f00",
+          "#742304",
+          "#a33913",
+          "#d84f1d",
+          "#f97b53",
+          "#fcb6a0",
+          "#fee9e3"
+        ]
+      },
+      "cat-power": {
+        "role": "secondary",
+        "displayName": "Yolk Yellow",
+        "canonical": "#ffc425",
+        "tonalRamp": [
+          "#130900",
+          "#322200",
+          "#533f0a",
+          "#7a5c07",
+          "#a37c0b",
+          "#cb9e2a",
+          "#fabf1a",
+          "#ffedc7"
+        ]
+      },
+      "cat-health": {
+        "role": "secondary",
+        "displayName": "Plaster Green",
+        "canonical": "#5db84a",
+        "tonalRamp": [
+          "#001100",
+          "#032f00",
+          "#105100",
+          "#22750a",
+          "#3e9a29",
+          "#63be50",
+          "#88e475",
+          "#cefec4"
+        ]
+      },
+      "cat-news": {
+        "role": "secondary",
+        "displayName": "Wireless Lilac",
+        "canonical": "#b49af2",
+        "tonalRamp": [
+          "#11002c",
+          "#2e0a59",
+          "#4a2e7c",
+          "#6a4fa0",
+          "#8b70c5",
+          "#ad93eb",
+          "#cfbdff",
+          "#f0ebfe"
+        ]
+      },
+      "cat-money": {
+        "role": "secondary",
+        "displayName": "Purse Pink",
+        "canonical": "#f7a1c4",
+        "tonalRamp": [
+          "#1f000d",
+          "#490029",
+          "#6c2346",
+          "#904466",
+          "#b56587",
+          "#db87aa",
+          "#fdaece",
+          "#ffe7f0"
+        ]
+      },
+      "cat-people": {
+        "role": "secondary",
+        "displayName": "Neighbour Teal",
+        "canonical": "#2ec4b6",
+        "tonalRamp": [
+          "#00100d",
+          "#002c28",
+          "#054d47",
+          "#187067",
+          "#23958a",
+          "#21bdaf",
+          "#58e3d4",
+          "#b8fff5"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The one page title: page intro and homepage hero."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings (.h-section)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Sub-section headings (.h-sub)."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "The paragraph under a page title."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text, 65ch maximum."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, arrow links, field labels and legends."
+      },
+      "quantity": {
+        "displayName": "Quantity",
+        "purpose": "Litres, counts and step numerals, always tabular."
+      }
+    },
+    "shadows": [
+      {
+        "name": "button-primary-hover-stripe",
+        "value": "inset 0 -5px 0 #ffc425",
+        "purpose": "Yolk stripe along the base of a hovered primary button. Not elevation."
+      },
+      {
+        "name": "button-secondary-border",
+        "value": "inset 0 0 0 3px #141414",
+        "purpose": "Draws the secondary button's 3px ink border."
+      },
+      {
+        "name": "button-secondary-hover",
+        "value": "inset 0 0 0 3px #141414, inset 0 -8px 0 #141414",
+        "purpose": "Ink band along the base of a hovered secondary button."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only authored easing: button states, Menu icon, reach bar."
+      },
+      {
+        "name": "button-state",
+        "value": "160ms",
+        "purpose": "Background and box-shadow change on buttons."
+      },
+      {
+        "name": "small-state",
+        "value": "300ms",
+        "purpose": "Menu icon cross and FAQ plus rotation."
+      },
+      {
+        "name": "reach-bar-slide",
+        "value": "500ms",
+        "purpose": "The phone reach bar sliding up from the bottom edge; the one authored moment."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "none",
+        "purpose": "All transitions and animations off under prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "900px"
+      },
+      {
+        "name": "checklist-row",
+        "value": "600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Square ink block for the one main action on a screen; hover lays a yolk stripe along the base.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\">check your cupboard <svg width=\"20\" height=\"16\" viewBox=\"0 0 20 16\" aria-hidden=\"true\"><path d=\"M0 8h17M11 2l6 6-6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\"/></svg></a>",
+      "css": ".ds-btn { font-family: var(--font-sans); display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; min-height: 3rem; border-radius: 4px; border: 0; padding: 0 1.25rem; font-size: 1.0625rem; font-weight: 800; font-variation-settings: \"wdth\" 110; letter-spacing: -0.01em; line-height: 1.15; text-decoration: none; cursor: pointer; transition: box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease; } .ds-btn-primary { background: var(--ink, #141414); color: var(--paper, #fff); } .ds-btn-primary:hover { background: #000; box-shadow: inset 0 -5px 0 var(--cat-power, #ffc425); } .ds-btn:focus-visible { outline: 3px solid var(--ink, #141414); outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Paper button with a 3px ink border; hover adds an 8px ink band along the base.",
+      "html": "<button class=\"ds-btn ds-btn-secondary\">print the list</button>",
+      "css": ".ds-btn { font-family: var(--font-sans); display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; min-height: 3rem; border-radius: 4px; border: 0; padding: 0 1.25rem; font-size: 1.0625rem; font-weight: 800; font-variation-settings: \"wdth\" 110; letter-spacing: -0.01em; line-height: 1.15; cursor: pointer; transition: box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease; } .ds-btn-secondary { background: var(--paper, #fff); color: var(--ink, #141414); box-shadow: inset 0 0 0 3px var(--ink, #141414); } .ds-btn-secondary:hover { box-shadow: inset 0 0 0 3px var(--ink, #141414), inset 0 -8px 0 var(--ink, #141414); } .ds-btn:focus-visible { outline: 3px solid var(--ink, #141414); outline-offset: 3px; }"
+    },
+    {
+      "name": "Select Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Square select with a 2px ink border, bold tabular value and drawn chevron.",
+      "html": "<label class=\"ds-field-row\"><span>Adults</span><select class=\"ds-field\"><option>1</option><option selected>2</option><option>3</option></select></label>",
+      "css": ".ds-field-row { font-family: var(--font-sans); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.75rem; font-weight: 800; color: var(--ink, #141414); } .ds-field { font: inherit; font-weight: 700; font-size: 1.125rem; font-variant-numeric: tabular-nums; color: var(--ink, #141414); background-color: var(--paper, #fff); border: 2px solid var(--ink, #141414); border-radius: 4px; min-height: 3rem; min-width: 5.5rem; padding: 0 2.5rem 0 0.875rem; appearance: none; background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23141414' stroke-width='2.5'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 0.875rem center; cursor: pointer; } .ds-field:hover { background-color: var(--hover, #fff7dd); } .ds-field:focus-visible { outline: 3px solid var(--ink, #141414); outline-offset: 3px; }"
+    },
+    {
+      "name": "Option Row",
+      "kind": "input",
+      "refersTo": "option-row",
+      "description": "Radio choice as a full-width bordered row that fills ink when chosen. No circles.",
+      "html": "<div class=\"ds-options\"><input type=\"radio\" name=\"d\" id=\"ds-d3\" class=\"ds-sr\" checked><label for=\"ds-d3\" class=\"ds-option\">3 days <small>the government minimum</small></label><input type=\"radio\" name=\"d\" id=\"ds-d7\" class=\"ds-sr\"><label for=\"ds-d7\" class=\"ds-option\">1 week</label></div>",
+      "css": ".ds-options { font-family: var(--font-sans); display: grid; gap: 0.5rem; } .ds-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } .ds-option { display: flex; min-height: 3rem; cursor: pointer; align-items: center; justify-content: space-between; gap: 0.75rem; border-radius: 4px; border: 2px solid var(--ink, #141414); padding: 0 0.875rem; font-weight: 700; color: var(--ink, #141414); background: var(--paper, #fff); } .ds-option small { font-size: 0.875rem; font-weight: 400; } .ds-option:hover { background: var(--hover, #fff7dd); } .ds-sr:checked + .ds-option { background: var(--ink, #141414); color: var(--paper, #fff); } .ds-sr:focus-visible + .ds-option { outline: 3px solid var(--ink, #141414); outline-offset: 3px; }"
+    },
+    {
+      "name": "Site Header",
+      "kind": "nav",
+      "refersTo": "site-header",
+      "description": "Paper bar closed by a 3px ink rule; lowercase wide wordmark and bold lowercase links, current page underlined.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-wordmark\" href=\"#\">stay prepared</a><nav><a href=\"#\" aria-current=\"page\">checklist</a><a href=\"#\">build your kit</a><a href=\"#\">why three days?</a><a href=\"#\">worried?</a></nav></header>",
+      "css": ".ds-header { font-family: var(--font-sans); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; min-height: 5rem; padding: 0 2.5rem; background: var(--paper, #fff); border-bottom: 3px solid var(--ink, #141414); color: var(--ink, #141414); } .ds-wordmark { font-size: 1.75rem; font-weight: 900; font-variation-settings: \"wdth\" 118; letter-spacing: -0.035em; line-height: 0.95; color: inherit; text-decoration: none; } .ds-header nav { display: flex; gap: 1.75rem; } .ds-header nav a { display: inline-flex; min-height: 2.75rem; align-items: center; font-weight: 700; color: inherit; text-decoration: none; } .ds-header nav a:hover, .ds-header nav a[aria-current=page] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.2em; } .ds-header a:focus-visible { outline: 3px solid var(--ink, #141414); outline-offset: 3px; }"
+    },
+    {
+      "name": "Tin Label",
+      "kind": "custom",
+      "refersTo": "tin-label",
+      "description": "Signature: one category-coloured label per thing that might stop, hazard small, remedy big, amount under a rule.",
+      "html": "<ul class=\"ds-shelf\"><li class=\"ds-tin\" style=\"background:#4a9aeb\"><p class=\"ds-tin-when\">if nothing comes out of the taps</p><h3 class=\"ds-tin-name\">water</h3><p class=\"ds-tin-amount\">3 litres of water per person per day</p></li><li class=\"ds-tin\" style=\"background:#ffc425\"><p class=\"ds-tin-when\">if the heating goes off</p><h3 class=\"ds-tin-name\">warmth</h3><p class=\"ds-tin-amount\">Blankets, warm layers, a hot-water bottle</p></li></ul>",
+      "css": ".ds-shelf { font-family: var(--font-sans); list-style: none; margin: 0; padding: 0; display: grid; color: var(--ink, #141414); } .ds-tin { margin-top: -3px; border: 3px solid var(--ink, #141414); padding: 0.75rem 1.125rem 1rem; } .ds-tin:first-child { margin-top: 0; } .ds-tin p { margin: 0; } .ds-tin-when { font-size: 0.9375rem; font-weight: 700; } .ds-tin-name { margin: 0.25rem 0 0; font-size: clamp(2.25rem, 10vw, 3.5rem); font-weight: 900; font-variation-settings: \"wdth\" 118; letter-spacing: -0.035em; line-height: 0.95; } .ds-tin-amount { margin-top: 0.625rem !important; border-top: 2px solid var(--ink, #141414); padding-top: 0.5rem; font-size: 1.125rem; font-weight: 600; line-height: 1.375; }"
+    },
+    {
+      "name": "Quantity Panel",
+      "kind": "card",
+      "refersTo": "quantity-panel",
+      "description": "Pack-back panel: 3px frame, heading closed by a 10px rule, rows split by hairlines, big tabular result.",
+      "html": "<div class=\"ds-panel\"><div class=\"ds-panel-head\"><h2>how much for your household?</h2></div><div class=\"ds-panel-row\"><span>Drinking water</span><strong class=\"ds-qty\">18 <small>litres</small></strong></div><p class=\"ds-panel-note\">3 litres per person per day, the gov.uk figure.</p></div>",
+      "css": ".ds-panel { font-family: var(--font-sans); max-width: 35rem; border: 3px solid var(--ink, #141414); background: var(--paper, #fff); color: var(--ink, #141414); } .ds-panel-head { border-bottom: 10px solid var(--ink, #141414); padding: 1rem 1.125rem 0.875rem; } .ds-panel-head h2 { margin: 0; font-size: 2rem; font-weight: 850; font-variation-settings: \"wdth\" 112; letter-spacing: -0.03em; line-height: 1; } .ds-panel-row { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; border-bottom: 1px solid var(--ink, #141414); padding: 0.625rem 1.125rem 0.375rem; font-weight: 700; } .ds-qty { font-size: 2.5rem; font-weight: 900; font-variation-settings: \"wdth\" 115; letter-spacing: -0.035em; line-height: 0.95; font-variant-numeric: tabular-nums; } .ds-qty small { font-size: 1rem; letter-spacing: normal; } .ds-panel-note { margin: 0; padding: 0.625rem 1.125rem 1rem; font-size: 0.875rem; color: var(--ink-2, #3f3f3f); }"
+    },
+    {
+      "name": "Callout",
+      "kind": "card",
+      "refersTo": "callout",
+      "description": "Boxed note: 3px ink border, title closed by a 6px rule, no radius.",
+      "html": "<aside class=\"ds-callout\"><p class=\"ds-callout-title\">Before you buy anything</p><div class=\"ds-callout-body\"><p>Check what is already in the cupboard. Most homes hold a few days.</p></div></aside>",
+      "css": ".ds-callout { font-family: var(--font-sans); max-width: 65ch; border: 3px solid var(--ink, #141414); color: var(--ink, #141414); } .ds-callout-title { margin: 0; border-bottom: 6px solid var(--ink, #141414); padding: 0.75rem 1.125rem; font-size: 1.125rem; font-weight: 800; } .ds-callout-body { padding: 1rem 1.125rem; font-size: 1.0625rem; line-height: 1.55; } .ds-callout-body p { margin: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Own-Label Larder",
+    "overview": "**Creative North Star: \"The Own-Label Larder\"**\n\nThe household kit is a row of supermarket own-label tins. White paper, near-black ink, heavy lowercase words, and a flat colour label for each thing that might stop: water, food, power, health, news, money, people. The page should read like a well-stocked shelf, plain and confident, never a civic dashboard and never a startup landing page. Readers arrive anxious from a news story on a phone; the system answers with order, big specific numbers and nothing that flickers.\n\nEverything is built from ink rules and square blocks. Structure comes from thick horizontal rules (the shelves), bordered panels (the back of a pack) and full-bleed colour bands, not from cards, shadows or imagery. Colour is information, not decoration: it names a category and does nothing else. The type does the rest, heavy and slightly wide on the Archivo width axis, always lowercase in headings.\n\nThe system is light only (`color-scheme: light`), has no photography or illustration, and prints to A4 in black and white.",
+    "keyCharacteristics": [
+      "White paper, ink text, seven category colours that appear only beside their category name.",
+      "Archivo at 800 to 900 weight, widened with the `wdth` axis, lowercase headings with tight negative tracking.",
+      "Ink rules in fixed weights: 1px hairlines, 2px controls, 3px sections, 8px shelves, 10px panel heads.",
+      "Square corners (4px at most); no shadows, no gradients, no rounded cards.",
+      "One authored motion moment (the phone reach bar); everything else is an instant or 160ms state change."
+    ],
+    "rules": [
+      {
+        "name": "The Label Rule",
+        "body": "A category colour appears only where that category is named: a tin label on the homepage shelf, a checklist category band or swatch, a kit list category header or line swatch. Everything else is ink on paper. If the category name is not on screen next to the colour, the colour is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Yolk Exception",
+        "body": "Yolk Yellow is the one colour allowed to mean \"you are interacting\": the 5px stripe on a hovered primary button, the mobile Menu button hover, the skip link, text selection, and focus outlines inside the ink footer. It is never used as a background for content.",
+        "section": "colors"
+      },
+      {
+        "name": "The Light Only Rule",
+        "body": "There is no dark theme. The ink footer is the only dark surface.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lowercase Rule",
+        "body": "Headings, the wordmark, nav labels, tin names and button text are lowercase. Sentence case is kept for body copy, field labels and footer links.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Every quantity (litres, counts, amounts, step numbers) uses `tabular-nums` so figures line up and do not jitter as the planner updates.",
+        "section": "typography"
+      },
+      {
+        "name": "The Shelf Rule",
+        "body": "Rules are the structure. 1px ink hairlines divide rows; 2px borders draw controls; 3px rules close sections and frame panels; 8px rules are shelves above and below lists; 10px rules close the head of a panel. Pick the weight by role, not by taste.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep every page ink on paper, and put a category colour only where that category is named.",
+      "Do set headings lowercase in heavy Archivo with the width axis, and quantities in tabular numerals.",
+      "Do build structure from ink rules at the fixed weights (1, 2, 3, 8, 10px) and full-bleed bands.",
+      "Do use square controls: 4px radius at most, 2px ink borders, bordered rows for choices, square tick boxes.",
+      "Do give each screen one primary ink button, ending in the arrow when it goes somewhere.",
+      "Do keep targets at 44px or more and check every new pairing against AA.",
+      "Do mark interactive furniture `.no-print` and colour labels `data-cat` so pages print in black and white."
+    ],
+    "donts": [
+      "Don't use rounded cards, drop shadows, gradients or glass effects.",
+      "Don't put eyebrows (small uppercase kickers) above headings.",
+      "Don't use pill shapes or circles for buttons, radios or other large controls.",
+      "Don't use colour for decoration, emphasis or state, other than the Yolk Exception.",
+      "Don't add photographs, illustrations, icon tiles or stock imagery; retailer product thumbnails in the kit planner's shop tab are the only images.",
+      "Don't add a dark theme or navy hero panels.",
+      "Don't add motion beyond the reach bar and short state changes, and never anything that raises alarm."
+    ]
+  }
+}

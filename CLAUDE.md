@@ -59,7 +59,7 @@ them counts once:
 
 - `ChecklistTracker` (the record itself, on `/checklist`)
 - `KitPlanner` (drops ticked lines from the basket and the copied text)
-- `HomeProgress` (the counts on the home page rows)
+- `home/StepState` (the counts on the home page's three steps)
 
 `src/data/have-map.ts` maps each planner line id to the checklist item it
 covers. Several lines share one item on purpose, so they move together; the
@@ -75,29 +75,40 @@ been read, so counts wait rather than flashing a zero through hydration.
 
 ### Server components by default
 
-The client islands are `ChecklistTracker`, `KitPlanner`, `HomeProgress` and
-`AnnounceBar`. Everything else is a server component, including
-`Photo.tsx`, which imports `public/photos/credits.json` at build time, and
-`Diagram.tsx`, which is inline SVG.
+The client islands are `ChecklistTracker`, `KitPlanner` (with
+`kit/StillToGet`), `PrintButton` and the homepage's `home/KitShortcut`,
+`home/ReachBar` and `home/StepState`. Everything else is a server component,
+including `Diagram.tsx`, which is inline SVG. The site has no photographs
+or stock illustrations.
 
 ## Styling
 
-Tailwind v4. The palette is CSS custom properties on `:root` in
-`globals.css`, mapped through `@theme inline`, with a dark-mode block.
+**`DESIGN.md` is the design system and it is binding**: the "own-label
+larder", adopted 23 September 2026. White paper, near-black ink, heavy
+lowercase Archivo (self-hosted through `next/font`), square controls with a
+4px maximum radius, and seven category colours. Read it before any visual
+change. The direction and why it was chosen are in
+`.impeccable/briefs/home.md`; product truth is in `PRODUCT.md`.
 
-**Token names lie, deliberately.** They were kept from an earlier mint
-palette so components did not need renaming: `--mint` is the navy hero
-panel, `--mint-pale` is a pale card, `--forest` is the dark panel, and
-`--accent` is Safety Blue. There is a comment at the top of `globals.css`
-saying so. Read the value, not the name.
+The rule most easily broken: **each colour has one meaning on every page,
+and a category colour appears only where that category is named** (a tin
+label, a checklist category, a kit line). Everything else is ink on paper.
+Household-specific lines (babies, pets, older people) take no colour.
 
-Layout utilities that do real work: `.wrap` (centred, capped at 1440px),
-`.measure` (68ch), `.btn` / `.btn-primary` / `.btn-secondary` /
-`.btn-on-dark`, `.tag`. Full bleed is for backgrounds; content is always
-capped. `docs/layout-patterns.md` explains why, section by section.
+Tailwind v4, tokens on `:root` in `globals.css` mapped through
+`@theme inline`. Light only; there is no dark mode. The old token names
+(`--mint`, `--forest`, `--accent`) survive as aliases that resolve to ink
+and paper; use the real names (`paper`, `ink`, `ink-2`, `hush`,
+`cat-water` and so on) in new code.
 
-Diagrams on the navy intro panel are monochrome `currentColor` with opacity
-for depth, so they need no dark-mode variant.
+Utilities that do real work: `.wrap` (centred, capped at 1360px, with its
+own side padding), `.measure` (65ch), `.display`, `.h-section`, `.h-sub`,
+`.btn` / `.btn-primary` / `.btn-secondary` / `.btn-lg`, `.arrow-link`,
+`.field`, `.no-print`. Page openers use `PageIntro`, which takes an optional
+`aside` for a diagram.
+
+Diagrams are monochrome `currentColor`, drawn in ink on paper, with opacity
+for depth on shapes only. Their text labels stay solid so they pass AA.
 
 ## The docs are rules
 
@@ -111,10 +122,11 @@ for depth, so they need no dark-mode variant.
 - **`docs/audit-govuk-nhs.md`** records the house-style rules taken from
   the GOV.UK Design System and the NHS service manual, what already passes,
   and one open decision.
-- **`docs/research-*.md`** and **`docs/look-and-feel.md`** record what was
-  built from each design research run, what was rejected and why, and two
-  corrections to earlier findings. Read the relevant one before revisiting
-  a decision it covers.
+- **`docs/research-*.md`** record what was built from each design research
+  run, what was rejected and why, and two corrections to earlier findings.
+  Read the relevant one before revisiting a decision it covers.
+- **`docs/look-and-feel.md`** is superseded on palette and styling by
+  `DESIGN.md`. Its diagram rationale still stands.
 
 ### Conventions worth knowing before you write
 

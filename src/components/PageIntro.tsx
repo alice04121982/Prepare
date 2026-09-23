@@ -1,52 +1,50 @@
-import { photoCredits } from "./Photo";
+import type { ReactNode } from "react";
 
-type Props = {
-  eyebrow?: string;
-  title: string;
-  lede: string;
-  /** Optional illustration or visual to sit beside the intro on wide screens. */
-  aside?: React.ReactNode;
-  /** Optional photo slot from credits.json, shown behind the panel with the same duotone treatment as the home hero. */
-  photo?: string;
+export type Cat = "water" | "food" | "power" | "health" | "news" | "money" | "people";
+
+/** Tailwind background class for each category label, shared by the checklist and the kit planner. */
+export const catBg: Record<Cat, string> = {
+  water: "bg-cat-water",
+  food: "bg-cat-food",
+  power: "bg-cat-power",
+  health: "bg-cat-health",
+  news: "bg-cat-news",
+  money: "bg-cat-money",
+  people: "bg-cat-people",
 };
 
-/** Consistent page opener on a navy panel, held to a wide 2.9:1 shape on desktop: small label, light display heading, lede. */
-export default function PageIntro({ eyebrow, title, lede, aside, photo }: Props) {
-  const pic = photo ? photoCredits().find((c) => c.slot === photo && c.rank === 1) : undefined;
+type Props = {
+  title: string;
+  lede: ReactNode;
+  /** Optional actions or links under the lede. */
+  children?: ReactNode;
+  /** Optional explanatory diagram, beside the text on wide screens and under it on phones. */
+  aside?: ReactNode;
+};
+
+/**
+ * Page opener: the heading in heavy lowercase and the lede under it, closed by
+ * an ink rule. Plain paper on purpose: colour is kept for categories.
+ */
+export default function PageIntro({ title, lede, children, aside }: Props) {
   return (
-    <div className="relative mb-12 flex items-center overflow-hidden rounded-card bg-mint px-6 py-12 sm:px-12 md:aspect-[2.9/1] md:py-8">
-      {pic ? (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`/photos/${pic.file}`}
-            alt=""
-            width={pic.w}
-            height={pic.h}
-            className="absolute inset-0 h-full w-full object-cover opacity-40 saturate-[.6]"
-          />
-          <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-mint via-mint/85 to-mint/40" />
-        </>
-      ) : null}
-      <div className="wrap relative grid w-full items-center gap-8 md:grid-cols-[1.4fr_1fr]">
+    <div className="border-b-[3px] border-ink">
+      <div
+        className={`wrap grid items-center gap-x-16 gap-y-8 pb-10 pt-10 min-[900px]:pb-16 min-[900px]:pt-16 ${aside ? "min-[900px]:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]" : ""}`}
+      >
         <div>
-          {eyebrow ? (
-            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-white/70">
-              {eyebrow}
-            </p>
-          ) : null}
-          <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-white sm:text-5xl">
+          <h1
+            className="display max-w-[16ch] text-[clamp(2.5rem,11vw,5.5rem)]"
+            style={{ fontVariationSettings: '"wdth" 112' }}
+          >
             {title}
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+          <div className="mt-6 max-w-[48ch] text-[1.1875rem] leading-normal min-[900px]:mt-8 min-[900px]:text-[1.375rem]">
             {lede}
-          </p>
-        </div>
-        {aside ? (
-          <div className="w-full max-w-[320px] justify-self-center drop-shadow-2xl md:max-w-[min(430px,28vw)] md:justify-self-end md:pr-4">
-            {aside}
           </div>
-        ) : null}
+          {children ? <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">{children}</div> : null}
+        </div>
+        {aside ? <div className="mx-auto w-full max-w-[360px] text-ink">{aside}</div> : null}
       </div>
     </div>
   );

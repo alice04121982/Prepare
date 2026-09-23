@@ -6,9 +6,9 @@
  * a scale or a plan that the page is asking the reader to picture. Nothing
  * is drawn that does not carry information.
  *
- * All four sit on the navy intro panel, so they are drawn monochrome in
- * currentColor (white) with opacity for depth. Labels live inside the SVG so
- * they scale with it; the title and desc carry the same content for anyone
+ * All four sit on the page intro, drawn monochrome in currentColor (ink on
+ * paper) with opacity for depth on shapes only; labels stay solid for
+ * contrast. Labels live inside the SVG so they scale with it; the title and desc carry the same content for anyone
  * using a screen reader.
  */
 
@@ -55,14 +55,14 @@ function Water() {
         Six one and a half litre bottles in three pairs, one pair for each day. Three litres a day to
         drink, nine litres over three days, which is about one six-pack.
       </desc>
-      <text x={200} y={26} textAnchor="middle" fontSize={19} fill="currentColor" opacity={0.75}>
+      <text x={200} y={26} textAnchor="middle" fontSize={19} fill="currentColor">
         3 litres a day, to drink
       </text>
       {groups.map((g) => (
         <g key={g.label}>
           <Bottle cx={g.cx - 21} />
           <Bottle cx={g.cx + 21} />
-          <text x={g.cx} y={230} textAnchor="middle" fontSize={18} fill="currentColor" opacity={0.6}>
+          <text x={g.cx} y={230} textAnchor="middle" fontSize={18} fill="currentColor">
             {g.label}
           </text>
         </g>
@@ -78,7 +78,7 @@ function Water() {
       <text x={200} y={294} textAnchor="middle" fontSize={30} fill="currentColor">
         9 litres
       </text>
-      <text x={200} y={320} textAnchor="middle" fontSize={17} fill="currentColor" opacity={0.6}>
+      <text x={200} y={320} textAnchor="middle" fontSize={17} fill="currentColor">
         one person, one six-pack
       </text>
     </svg>
@@ -93,7 +93,7 @@ function Box() {
         An open box holding two water bottles, a stack of tins, a torch, a power bank and a folder of
         documents. Everything a person needs for three days fits inside it.
       </desc>
-      <text x={200} y={28} textAnchor="middle" fontSize={19} fill="currentColor" opacity={0.75}>
+      <text x={200} y={28} textAnchor="middle" fontSize={19} fill="currentColor">
         One person, three days
       </text>
 
@@ -141,7 +141,7 @@ function Box() {
       <text x={200} y={300} textAnchor="middle" fontSize={26} fill="currentColor">
         It fits in one box
       </text>
-      <text x={200} y={324} textAnchor="middle" fontSize={17} fill="currentColor" opacity={0.6}>
+      <text x={200} y={324} textAnchor="middle" fontSize={17} fill="currentColor">
         water, tins, torch, power bank, papers
       </text>
     </svg>
@@ -172,7 +172,7 @@ function CheckIn() {
         the area. Who calls whom, plus one person everyone can reach.
       </desc>
 
-      <text x={200} y={24} textAnchor="middle" fontSize={17} fill="currentColor" opacity={0.7}>
+      <text x={200} y={24} textAnchor="middle" fontSize={17} fill="currentColor">
         one contact outside the area
       </text>
 
@@ -212,7 +212,7 @@ function CheckIn() {
       {houses.map((h) => (
         <g key={h.label}>
           <House cx={h.cx} y={200} />
-          <text x={h.cx} y={230} textAnchor="middle" fontSize={17} fill="currentColor" opacity={0.6}>
+          <text x={h.cx} y={230} textAnchor="middle" fontSize={17} fill="currentColor">
             {h.label}
           </text>
         </g>
@@ -221,7 +221,7 @@ function CheckIn() {
       <text x={200} y={288} textAnchor="middle" fontSize={26} fill="currentColor">
         Who calls whom
       </text>
-      <text x={200} y={314} textAnchor="middle" fontSize={17} fill="currentColor" opacity={0.6}>
+      <text x={200} y={314} textAnchor="middle" fontSize={17} fill="currentColor">
         agreed while everything still works
       </text>
     </svg>
@@ -257,12 +257,12 @@ function Duration() {
         to a fortnight. A marked line at three days sits past the end of most of them.
       </desc>
 
-      <text x={200} y={24} textAnchor="middle" fontSize={19} fill="currentColor" opacity={0.75}>
+      <text x={200} y={24} textAnchor="middle" fontSize={19} fill="currentColor">
         How long it usually lasts
       </text>
 
       {/* the three day line */}
-      <text x={x(3)} y={54} textAnchor="middle" fontSize={17} fill="currentColor" opacity={0.85}>
+      <text x={x(3)} y={54} textAnchor="middle" fontSize={17} fill="currentColor">
         3 days
       </text>
       <path
@@ -277,7 +277,7 @@ function Duration() {
         const barY = 74 + i * 42;
         return (
           <g key={r.label}>
-            <text x={108} y={barY + 13} textAnchor="end" fontSize={15} fill="currentColor" opacity={0.7}>
+            <text x={108} y={barY + 13} textAnchor="end" fontSize={15} fill="currentColor">
               {r.label}
             </text>
             <rect
@@ -322,7 +322,7 @@ function Duration() {
             textAnchor={t.anchor}
             fontSize={16}
             fill="currentColor"
-            opacity={0.6}
+           
           >
             {t.label}
           </text>

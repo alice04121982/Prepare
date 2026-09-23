@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stay Prepared</title>
+<meta name="description" content="Calm, practical guidance for UK households: what to keep, how much, how long it lasts, and what to do first.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,400&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* Concept A: own-label larder. Flat colour fields, lowercase grotesque, white ground. */
+:root {
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: #141414 #FFFFFF; }
+html::-webkit-scrollbar { width: 12px; }
+html::-webkit-scrollbar-track { background: #FFFFFF; }
+html::-webkit-scrollbar-thumb { background: #141414; border: 3px solid #FFFFFF; }
+body {
+  margin: 0;
+  background: #FFFFFF;
+  color: #141414;
+  font-family: "Archivo", "Helvetica Neue", sans-serif;
+  font-variation-settings: "wdth" 100;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  caret-color: #F4683A;
+  padding-bottom: 76px;
+}
+::selection { background: #FFC425; color: #141414; }
+a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 4px; }
+:focus-visible { outline: 3px solid #141414; outline-offset: 3px; }
+.on-ink :focus-visible { outline-color: #FFC425; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-weight: 850; font-variation-settings: "wdth" 112; letter-spacing: -0.03em; line-height: 0.98; text-wrap: balance; }
+p { max-width: 65ch; text-wrap: pretty; }
+.wrap { max-width: 1360px; margin: 0 auto; padding: 0 20px; }
+.skip { position: absolute; left: -9999px; top: 8px; background: #FFC425; padding: 10px 14px; z-index: 50; font-weight: 700; }
+.skip:focus { left: 8px; }
+
+/* Header */
+.top { border-bottom: 3px solid #141414; background: #FFFFFF; position: relative; z-index: 20; }
+.top .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; min-height: 64px; gap: 0 16px; }
+.mark { display: inline-flex; align-items: center; min-height: 44px; font-weight: 900; font-variation-settings: "wdth" 118; font-size: 1.5rem; letter-spacing: -0.03em; text-decoration: none; line-height: 1; }
+.menu-btn {
+  font: inherit; font-weight: 750; font-size: 1rem; color: #141414; background: #FFFFFF;
+  border: 2px solid #141414; border-radius: 4px; min-height: 44px; padding: 0 16px;
+  display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+}
+.menu-btn .bars { width: 16px; height: 12px; position: relative; }
+.menu-btn .bars::before, .menu-btn .bars::after { content: ""; position: absolute; left: 0; right: 0; height: 2px; background: #141414; transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); }
+.menu-btn .bars::before { top: 2px; }
+.menu-btn .bars::after { bottom: 2px; }
+.menu-btn[aria-expanded="true"] .bars::before { transform: translateY(3px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] .bars::after { transform: translateY(-3px) rotate(-45deg); }
+.menu-btn:hover { background: #FFC425; }
+.nav ul { list-style: none; margin: 0; padding: 0; }
+.nav a { display: flex; align-items: center; min-height: 44px; text-decoration: none; font-weight: 700; }
+.nav a:hover { text-decoration: underline; }
+.js .nav { display: none; }
+.js .nav.open { display: block; }
+.nav { border-top: 3px solid #141414; flex: 0 0 calc(100% + 40px); margin: 10px -20px 0; }
+.nav ul { padding: 8px 20px 16px; }
+.nav li + li { border-top: 1px solid #141414; }
+.nav a { font-size: 1.5rem; font-weight: 850; font-variation-settings: "wdth" 112; letter-spacing: -0.02em; min-height: 56px; }
+
+/* Hero */
+.hero { padding: 40px 0 48px; }
+.hero h1 { font-size: clamp(2.35rem, 10.4vw, 6rem); font-weight: 900; font-variation-settings: "wdth" 108; letter-spacing: -0.035em; line-height: 0.95; max-width: 15.5ch; }
+.hero .lede { margin-top: 28px; font-size: 1.1875rem; line-height: 1.5; max-width: 40ch; }
+.actions { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  min-height: 56px; padding: 0 24px; border-radius: 4px; border: 0;
+  background: #141414; color: #FFFFFF; text-decoration: none;
+  font: inherit; font-weight: 800; font-size: 1.1875rem; font-variation-settings: "wdth" 110; letter-spacing: -0.01em; cursor: pointer;
+}
+.btn:hover { background: #000; text-decoration: none; box-shadow: inset 0 -5px 0 #FFC425; }
+.btn svg { flex: none; }
+.text-link { font-weight: 750; font-size: 1.0625rem; min-height: 44px; display: inline-flex; align-items: center; }
+.quiet { margin-top: 28px; color: #3F3F3F; font-size: 1rem; }
+.quiet a { color: #141414; font-weight: 700; }
+
+/* Section heads */
+.sec { padding: 64px 0; }
+.sec-head h2 { font-size: clamp(2.5rem, 11vw, 5.25rem); }
+.sec-head p { margin-top: 20px; font-size: 1.125rem; max-width: 52ch; }
+
+/* What might stop: the tins */
+.tins { margin: 36px 0 0; padding: 0; list-style: none; border-top: 3px solid #141414; }
+.tin { border-bottom: 3px solid #141414; }
+.tin h3 { margin: 0; font-size: inherit; }
+.tin[data-cat="power"] { background: #FFC425; }
+.tin[data-cat="water"] { background: #4A9AEB; }
+.tin[data-cat="food"] { background: #F4683A; }
+.tin[data-cat="health"] { background: #5DB84A; }
+.tin[data-cat="plain"] { background: #FFFFFF; }
+.tin-btn {
+  all: unset; box-sizing: border-box; display: grid; grid-template-columns: 1fr 44px; align-items: center; gap: 16px;
+  width: 100%; min-height: 96px; padding: 20px 20px; cursor: pointer; color: #141414;
+}
+.tin-btn:focus-visible { outline: 3px solid #141414; outline-offset: -8px; }
+.tin-name {
+  font-family: "Archivo", "Helvetica Neue", sans-serif; font-weight: 900; font-variation-settings: "wdth" 115;
+  font-size: clamp(1.75rem, 8.2vw, 4.5rem); letter-spacing: -0.035em; line-height: 0.98; text-wrap: balance;
+}
+.sign { width: 44px; height: 44px; border: 3px solid #141414; border-radius: 50%; position: relative; justify-self: end; }
+.sign::before, .sign::after { content: ""; position: absolute; left: 50%; top: 50%; width: 18px; height: 3px; background: #141414; transform: translate(-50%, -50%); transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1); }
+.sign::after { transform: translate(-50%, -50%) rotate(90deg); }
+.tin-btn[aria-expanded="true"] .sign::after { transform: translate(-50%, -50%) rotate(0deg); }
+.tin-btn:hover .sign { background: #FFFFFF; }
+.tin-body { display: grid; grid-template-rows: 1fr; }
+.js .tin-body { grid-template-rows: 0fr; transition: grid-template-rows 560ms cubic-bezier(0.16, 1, 0.3, 1); }
+.js .tin.open .tin-body { grid-template-rows: 1fr; }
+.tin-inner { overflow: hidden; }
+.helps {
+  margin: 0 20px 24px; border-top: 2px solid #141414; padding-top: 14px;
+  display: grid; gap: 4px; max-width: 60ch;
+}
+.helps b { font-weight: 800; font-size: 0.9375rem; font-variation-settings: "wdth" 112; }
+.helps span { font-size: 1.3125rem; font-weight: 600; line-height: 1.3; }
+.tin[data-cat="plain"] .helps { border-top-color: #141414; }
+.stop-close { margin-top: 32px; font-size: 1.1875rem; line-height: 1.5; max-width: 52ch; }
+
+/* Three things: the shelf */
+.shelf { list-style: none; margin: 40px 0 0; padding: 0; }
+.plank { border-top: 8px solid #141414; padding: 24px 0 36px; display: grid; grid-template-columns: 64px 1fr; gap: 0 18px; }
+.plank:last-child { border-bottom: 8px solid #141414; }
+.num {
+  width: 64px; height: 80px; display: grid; place-items: center;
+  font-weight: 900; font-variation-settings: "wdth" 125; font-size: 3.25rem; line-height: 1; letter-spacing: -0.04em;
+  border: 3px solid #141414; border-top: 0;
+  font-variant-numeric: tabular-nums;
+}
+.plank:nth-child(1) .num { background: #4A9AEB; }
+.plank:nth-child(2) .num { background: #F4683A; }
+.plank:nth-child(3) .num { background: #5DB84A; }
+.plank h3 { font-size: clamp(1.75rem, 7.4vw, 3rem); padding-top: 4px; }
+.plank-copy { grid-column: 2; margin-top: 14px; }
+.plank-copy p { font-size: 1.0625rem; }
+.plank-copy .arrow { margin-top: 18px; }
+.arrow { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 800; font-size: 1.125rem; font-variation-settings: "wdth" 110; }
+
+/* Kit panel: quantity panel */
+.kit-sec { padding: 64px 0; border-top: 3px solid #141414; }
+.panel { border: 3px solid #141414; margin-top: 32px; max-width: 560px; }
+.panel-title { padding: 16px 18px 14px; border-bottom: 10px solid #141414; }
+.panel-title h2 { font-size: clamp(2rem, 8.6vw, 3rem); }
+.panel-title p { margin-top: 8px; font-size: 0.9375rem; color: #3F3F3F; }
+.row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid #141414; }
+.row label, .row legend { font-weight: 800; font-size: 1.0625rem; }
+.row .hint { display: block; font-weight: 400; font-size: 0.875rem; color: #3F3F3F; }
+select {
+  font: inherit; font-weight: 700; font-size: 1.125rem; color: #141414; background: #FFFFFF;
+  border: 2px solid #141414; border-radius: 4px; min-height: 48px; min-width: 88px; padding: 0 40px 0 14px;
+  appearance: none; -webkit-appearance: none; font-variant-numeric: tabular-nums;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23141414' stroke-width='2.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; cursor: pointer;
+}
+select:hover { background-color: #FFF7DD; }
+fieldset { border: 0; margin: 0; padding: 12px 18px 16px; border-bottom: 1px solid #141414; }
+fieldset legend { padding: 0; float: left; width: 100%; margin-bottom: 10px; font-weight: 800; }
+.durations { clear: both; display: grid; gap: 8px; }
+.dur { position: relative; }
+.dur input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.dur label {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 0 14px;
+  border: 2px solid #141414; border-radius: 4px; cursor: pointer; font-weight: 700;
+}
+.dur label small { font-weight: 400; font-size: 0.875rem; color: #3F3F3F; }
+.dur input:checked + label { background: #141414; color: #FFFFFF; }
+.dur input:checked + label small { color: #D6D6D6; }
+.dur input:focus-visible + label { outline: 3px solid #141414; outline-offset: 3px; }
+.dur label:hover { background: #FFF7DD; }
+.dur input:checked + label:hover { background: #141414; }
+.panel-submit { padding: 16px 18px; border-bottom: 10px solid #141414; }
+.panel-submit .btn { width: 100%; }
+.typical { padding: 14px 18px 16px; }
+.typical .t-head { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9375rem; border-bottom: 4px solid #141414; padding-bottom: 6px; }
+.typical dl { margin: 0; }
+.typical .t-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0 6px; border-bottom: 1px solid #141414; }
+.typical dt { font-weight: 700; }
+.typical dd { margin: 0; font-weight: 900; font-variation-settings: "wdth" 115; font-size: 2rem; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+.typical dd small { font-size: 1rem; font-weight: 700; letter-spacing: 0; }
+.typical .foot { margin-top: 10px; font-size: 0.875rem; color: #3F3F3F; }
+
+/* Why three days: health band */
+.band { padding: 64px 0; border-top: 3px solid #141414; }
+.band-green { background: #5DB84A; }
+.band-blue { background: #4A9AEB; }
+.band h2 { font-size: clamp(2.5rem, 11vw, 5.25rem); }
+.band p { margin-top: 20px; font-size: 1.1875rem; line-height: 1.5; max-width: 50ch; }
+.band .limit { margin-top: 28px; padding-top: 20px; border-top: 3px solid #141414; font-weight: 650; }
+.band .arrow { margin-top: 20px; }
+
+/* Offline */
+.offline h2 { max-width: 14ch; }
+.offline .btn-line { margin-top: 28px; }
+.btn-outline { background: #FFFFFF; color: #141414; border: 3px solid #141414; }
+.btn-outline:hover { background: #FFFFFF; box-shadow: inset 0 -5px 0 #141414; }
+
+/* Footer */
+.foot-sec { background: #141414; color: #FFFFFF; padding: 56px 0 40px; }
+.foot-sec .mark { font-size: 2.25rem; color: #FFFFFF; }
+.foot-sec .tag { margin-top: 10px; font-size: 1.125rem; }
+.foot-links { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; border-top: 1px solid #5A5A5A; }
+.foot-links a { display: flex; align-items: center; min-height: 48px; font-weight: 700; border-bottom: 1px solid #5A5A5A; text-decoration: none; }
+.foot-links a:hover { text-decoration: underline; }
+.foot-small { margin-top: 28px; display: grid; gap: 12px; font-size: 0.9375rem; color: #D6D6D6; }
+.cats { margin-top: 32px; display: grid; grid-template-columns: repeat(4, 1fr); height: 12px; }
+.cats span:nth-child(1) { background: #4A9AEB; }
+.cats span:nth-child(2) { background: #F4683A; }
+.cats span:nth-child(3) { background: #FFC425; }
+.cats span:nth-child(4) { background: #5DB84A; }
+.on-ink ::selection { background: #FFC425; color: #141414; }
+
+/* Phone action bar */
+.reach {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  background: #FFFFFF; border-top: 3px solid #141414;
+  padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
+}
+.reach .btn { width: 100%; min-height: 52px; }
+
+/* Desktop extends the phone layout */
+@media (min-width: 900px) {
+  body { padding-bottom: 0; }
+  .reach { display: none; }
+  .menu-btn { display: none; }
+  .js .nav, .nav { display: block; border-top: 0; flex: 0 1 auto; margin: 0; }
+  .wrap { padding: 0 40px; }
+  .nav ul { display: flex; gap: 28px; padding: 0; }
+  .nav li + li { border-top: 0; }
+  .nav a { font-size: 1rem; font-weight: 700; font-variation-settings: "wdth" 100; letter-spacing: 0; min-height: 44px; }
+  .top .wrap { min-height: 80px; }
+  .mark { font-size: 1.75rem; }
+  .hero { padding: 72px 0 88px; }
+  .hero .lede { font-size: 1.375rem; margin-top: 40px; }
+  .actions { margin-top: 44px; }
+  .sec, .kit-sec, .band { padding: 104px 0; }
+  .tin-btn { min-height: 136px; padding: 24px 20px; grid-template-columns: 1fr 56px; }
+  .sign { width: 56px; height: 56px; }
+  .sign::before, .sign::after { width: 22px; }
+  .helps { margin: 0 20px 32px; grid-template-columns: 180px 1fr; gap: 24px; max-width: none; align-items: baseline; }
+  .helps span { font-size: 1.625rem; }
+  .plank { grid-template-columns: 96px minmax(0, 1.1fr) minmax(0, 1fr); gap: 0 36px; padding: 32px 0 48px; }
+  .num { width: 96px; height: 120px; font-size: 5rem; }
+  .plank h3 { font-size: 3.25rem; padding-top: 8px; }
+  .plank-copy { grid-column: 3; margin-top: 12px; }
+  .plank-copy p { font-size: 1.1875rem; }
+  .panel { max-width: 980px; margin-top: 0; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+  .panel-title { grid-column: 1 / -1; padding: 22px 28px 18px; }
+  .panel-title h2 { font-size: 4rem; }
+  .panel-fields { border-right: 3px solid #141414; }
+  .row, fieldset, .panel-submit { padding-left: 28px; padding-right: 28px; }
+  .panel-submit { border-bottom: 0; }
+  .typical { padding: 22px 28px; }
+  .typical dd { font-size: 3.5rem; }
+  .band-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 64px; align-items: start; }
+  .band-inner p:first-child { margin-top: 12px; }
+  .foot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .foot-links { margin-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* Print: colour fields become ink outlines, A4, black and white */
+@media print {
+  @page { size: A4; margin: 16mm; }
+  body { padding: 0; font-size: 11pt; color: #000; background: #fff; }
+  .reach, .menu-btn, .nav, .skip, .cats, .panel-submit { display: none !important; }
+  .top { border-bottom: 2pt solid #000; }
+  .hero { padding: 12pt 0; }
+  .hero h1 { font-size: 30pt; }
+  .actions .btn { background: #fff; color: #000; border: 1.5pt solid #000; }
+  a[href^="/"]::after { content: " (stayprepared.co.uk" attr(href) ")"; font-weight: 400; font-size: 9pt; }
+  .sec, .kit-sec, .band { padding: 18pt 0; break-inside: auto; }
+  .sec-head h2, .band h2, .panel-title h2 { font-size: 24pt; }
+  .tin, .band-green, .band-blue, .num, .foot-sec { background: #fff !important; color: #000 !important; }
+  .tin { border: 1.5pt solid #000; margin-bottom: 4pt; break-inside: avoid; }
+  .tin-btn { min-height: 0; padding: 8pt; }
+  .tin-name { font-size: 16pt; }
+  .sign { display: none; }
+  .js .tin-body, .tin-body { grid-template-rows: 1fr !important; }
+  .helps { margin: 0 8pt 8pt; }
+  .helps span { font-size: 11pt; }
+  .plank { border-top: 2pt solid #000; break-inside: avoid; }
+  .num { border: 1.5pt solid #000; width: 40pt; height: 48pt; font-size: 26pt; }
+  .plank h3 { font-size: 18pt; }
+  .panel { break-inside: avoid; }
+  .dur input:checked + label { background: #fff; color: #000; border-width: 3pt; }
+  .foot-sec { border-top: 2pt solid #000; padding: 12pt 0; }
+  .foot-sec .mark { color: #000; }
+  .foot-small { color: #000; }
+  .foot-links a { border-color: #000; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="/">stay prepared</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="bars" aria-hidden="true"></span>Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/checklist">checklist</a></li>
+        <li><a href="/build-your-kit">build your kit</a></li>
+        <li><a href="/why">why three days?</a></li>
+        <li><a href="/worried">worried?</a></li>
+        <li><a href="/community">neighbours</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-q">
+    <div class="wrap">
+      <h1 id="hero-q">if the power went off, the water stopped and the shops were shut for three days, would you be all right?</h1>
+      <p class="lede">The government asks every UK household to be able to manage on its own for three days. This site makes that practical: what to keep, how much, how long it lasts, and what to do first.</p>
+      <div class="actions">
+        <a class="btn" href="/checklist">check your cupboard
+          <svg width="20" height="16" viewBox="0 0 20 16" aria-hidden="true"><path d="M0 8h17M11 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>
+        </a>
+        <a class="text-link" href="/why">why three days?</a>
+      </div>
+      <p class="quiet">Frightened by the news? <a href="/worried">Start here instead.</a></p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="stop-h" style="border-top:3px solid #141414">
+    <div class="wrap sec-head">
+      <h2 id="stop-h">what might stop</h2>
+      <p>Severe weather, a fault in the grid, a cyber attack on a water company, or disruption from a conflict elsewhere in Europe can all have the same effect at home.</p>
+    </div>
+    <ul class="tins">
+      <li class="tin" data-cat="power">
+        <h3><button class="tin-btn" type="button" aria-expanded="false" aria-controls="h1"><span class="tin-name">the heating goes off</span><span class="sign" aria-hidden="true"></span></button></h3>
+        <div class="tin-body" id="h1"><div class="tin-inner"><p class="helps"><b>Helps:</b><span>blankets, warm layers, a hot-water bottle.</span></p></div></div>
+      </li>
+      <li class="tin" data-cat="water">
+        <h3><button class="tin-btn" type="button" aria-expanded="false" aria-controls="h2"><span class="tin-name">nothing comes out of the taps</span><span class="sign" aria-hidden="true"></span></button></h3>
+        <div class="tin-body" id="h2"><div class="tin-inner"><p class="helps"><b>Helps:</b><span>3 litres of water per person per day.</span></p></div></div>
+      </li>
+      <li class="tin" data-cat="food">
+        <h3><button class="tin-btn" type="button" aria-expanded="false" aria-controls="h3"><span class="tin-name">the shops run short</span><span class="sign" aria-hidden="true"></span></button></h3>
+        <div class="tin-body" id="h3"><div class="tin-inner"><p class="helps"><b>Helps:</b><span>tins and dry food you already eat.</span></p></div></div>
+      </li>
+      <li class="tin" data-cat="plain">
+        <h3><button class="tin-btn" type="button" aria-expanded="false" aria-controls="h4"><span class="tin-name">cards and cash machines stop</span><span class="sign" aria-hidden="true"></span></button></h3>
+        <div class="tin-body" id="h4"><div class="tin-inner"><p class="helps"><b>Helps:</b><span>some cash in small notes.</span></p></div></div>
+      </li>
+      <li class="tin" data-cat="power">
+        <h3><button class="tin-btn" type="button" aria-expanded="false" aria-controls="h5"><span class="tin-name">mobile networks and the internet go down</span><span class="sign" aria-hidden="true"></span></button></h3>
+        <div class="tin-body" id="h5"><div class="tin-inner"><p class="helps"><b>Helps:</b><span>a wind-up or battery radio.</span></p></div></div>
+      </li>
+      <li class="tin" data-cat="plain">
+        <h3><button class="tin-btn" type="button" aria-expanded="false" aria-controls="h6"><span class="tin-name">buses and trains stop</span><span class="sign" aria-hidden="true"></span></button></h3>
+        <div class="tin-body" id="h6"><div class="tin-inner"><p class="helps"><b>Helps:</b><span>knowing who nearby you can reach on foot.</span></p></div></div>
+      </li>
+      <li class="tin" data-cat="health">
+        <h3><button class="tin-btn" type="button" aria-expanded="false" aria-controls="h7"><span class="tin-name">prescriptions are hard to get</span><span class="sign" aria-hidden="true"></span></button></h3>
+        <div class="tin-body" id="h7"><div class="tin-inner"><p class="helps"><b>Helps:</b><span>a week's spare medication where your GP allows.</span></p></div></div>
+      </li>
+    </ul>
+    <div class="wrap">
+      <p class="stop-close">Most of these last hours or days, not weeks. All of them are easier with a few things in the cupboard and a plan you made while everything worked.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="three-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="three-h">three things, in this order</h2></div>
+      <ol class="shelf">
+        <li class="plank">
+          <span class="num" aria-hidden="true">1</span>
+          <h3>check what you already have</h3>
+          <div class="plank-copy">
+            <p>Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Tick them off against the list before you buy anything.</p>
+            <a class="arrow" href="/checklist">see the checklist <svg width="18" height="14" viewBox="0 0 20 16" aria-hidden="true"><path d="M0 8h17M11 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></a>
+          </div>
+        </li>
+        <li class="plank">
+          <span class="num" aria-hidden="true">2</span>
+          <h3>buy what is missing</h3>
+          <div class="plank-copy">
+            <p>Say who lives with you and the quantities are worked out for you. The free option comes first on every line.</p>
+            <a class="arrow" href="/build-your-kit">build your kit <svg width="18" height="14" viewBox="0 0 20 16" aria-hidden="true"><path d="M0 8h17M11 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></a>
+          </div>
+        </li>
+        <li class="plank">
+          <span class="num" aria-hidden="true">3</span>
+          <h3>talk to your neighbours</h3>
+          <div class="plank-copy">
+            <p>Two or three names and a way to check on each other. The better prepared you are, the more you can give to the neighbour who could not prepare.</p>
+            <a class="arrow" href="/community">how to start <svg width="18" height="14" viewBox="0 0 20 16" aria-hidden="true"><path d="M0 8h17M11 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></a>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="kit-sec" aria-labelledby="kit-h">
+    <div class="wrap kit-grid">
+      <form class="panel" action="/build-your-kit" method="get">
+        <div class="panel-title">
+          <h2 id="kit-h">how much for your household?</h2>
+        </div>
+        <div class="panel-fields">
+        <div class="row">
+          <label for="a">Adults</label>
+          <select id="a" name="a">
+            <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="c">Children</label>
+          <select id="c" name="c">
+            <option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+          </select>
+        </div>
+        <fieldset>
+          <legend>How long</legend>
+          <div class="durations">
+            <div class="dur"><input type="radio" name="d" id="d3" value="3" checked><label for="d3">3 days <small>the government minimum</small></label></div>
+            <div class="dur"><input type="radio" name="d" id="d7" value="7"><label for="d7">1 week</label></div>
+            <div class="dur"><input type="radio" name="d" id="d14" value="14"><label for="d14">2 weeks</label></div>
+          </div>
+        </fieldset>
+        <div class="panel-submit"><button class="btn" type="submit">work it out</button></div>
+        </div>
+        <div class="typical">
+          <div class="t-head"><span>For example</span><span>drinking water</span></div>
+          <dl>
+            <div class="t-row"><dt>2 adults, 3 days</dt><dd>18 <small>litres</small></dd></div>
+          </dl>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="band band-green" aria-labelledby="why-h">
+    <div class="wrap band-inner">
+      <h2 id="why-h">why three days?</h2>
+      <div>
+        <p>Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked their citizens to keep a few days of supplies at home. None of them say anything is imminent. All of them have decided it is no longer sensible to assume it cannot happen.</p>
+        <p class="limit">For the very worst cases there is little any household can do. For everything short of that, three days of supplies make a real difference.</p>
+        <a class="arrow" href="/why">what the government says <svg width="18" height="14" viewBox="0 0 20 16" aria-hidden="true"><path d="M0 8h17M11 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-blue offline" aria-labelledby="off-h">
+    <div class="wrap band-inner">
+      <h2 id="off-h">download the offline guide</h2>
+      <div>
+        <p>One file, no internet needed. Save it, print it, share it before you need it.</p>
+        <div class="btn-line">
+          <a class="btn btn-outline" href="/offline/index.html">
+            <svg width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M8 0v13M2 8l6 6 6-6M0 18.5h16" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>
+            download the offline guide
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot-sec on-ink">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="mark" href="/">stay prepared</a>
+        <p class="tag">Calm, practical guidance for UK households. Not a survival site.</p>
+      </div>
+      <ul class="foot-links">
+        <li><a href="/checklist">Checklist</a></li>
+        <li><a href="/build-your-kit">Build your kit</a></li>
+        <li><a href="/why">Why three days?</a></li>
+        <li><a href="/worried">Worried?</a></li>
+        <li><a href="/community">Neighbours</a></li>
+        <li><a href="/sources">Sources</a></li>
+      </ul>
+    </div>
+    <div class="foot-small">
+      <p>Some product links earn us a small commission. The free option is always listed first, and we only list things we would buy ourselves.</p>
+      <p>Figures from gov.uk Prepare, the Met Office and the NHS. Last checked September 2026.</p>
+    </div>
+    <div class="cats" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  </div>
+</footer>
+
+<div class="reach">
+  <a class="btn" href="/checklist">check your cupboard
+    <svg width="20" height="16" viewBox="0 0 20 16" aria-hidden="true"><path d="M0 8h17M11 2l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>
+  </a>
+</div>
+
+<script>
+(function () {
+  var menu = document.querySelector('.menu-btn');
+  var nav = document.getElementById('site-nav');
+  menu.addEventListener('click', function () {
+    var open = menu.getAttribute('aria-expanded') === 'true';
+    menu.setAttribute('aria-expanded', String(!open));
+    nav.classList.toggle('open', !open);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
+      menu.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('open');
+      menu.focus();
+    }
+  });
+  document.querySelectorAll('.tin-btn').forEach(function (btn) {
+    var tin = btn.closest('.tin');
+    var body = document.getElementById(btn.getAttribute('aria-controls'));
+    body.setAttribute('inert', '');
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      tin.classList.toggle('open', !open);
+      if (open) { body.setAttribute('inert', ''); } else { body.removeAttribute('inert'); }
+    });
+  });
+  window.addEventListener('beforeprint', function () {
+    document.querySelectorAll('.tin-body').forEach(function (b) { b.removeAttribute('inert'); });
+  });
+})();
+</script>
+</body>
+</html>

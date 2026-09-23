@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Diagram from "@/components/Diagram";
-import SectionLabel from "@/components/SectionLabel";
 import ChecklistTracker from "@/components/ChecklistTracker";
+import { catFor, catForTitle, Swatch } from "@/components/checklist/cats";
+import PrintButton from "@/components/PrintButton";
+import Arrow from "@/components/home/Arrow";
 import { checklist, startingPoint } from "@/data/checklist";
 import { faq } from "@/data/faq";
 
@@ -15,103 +17,124 @@ export const metadata: Metadata = {
 
 export default function ChecklistPage() {
   return (
-    <main className="w-full py-4 sm:py-8">
+    <main>
       <PageIntro
-        eyebrow="The essentials"
-        title="What to keep on hand"
-        lede="Realistic quantities for a household to build up gradually, a few pounds a week from the shop you already use. Every figure is a planning number drawn from public emergency guidance, not a worst case."
+        title="what to keep on hand"
         aside={<Diagram name="water" />}
-        photo="checklist"
-      />
+        lede="Realistic quantities for a household to build up gradually, a few pounds a week from the shop you already use. Every figure is a planning number drawn from public emergency guidance, not a worst case."
+      >
+        <PrintButton />
+      </PageIntro>
 
-      <div className="mx-auto max-w-3xl">
-        <section className="mb-14">
-          <SectionLabel>Start here</SectionLabel>
-          <h2 className="text-2xl font-semibold">Get these first</h2>
-          <p className="mt-3 leading-relaxed text-muted">
-            Check the cupboards, the torch drawer and the medicine cabinet
-            before you buy anything. Then these few items cover most of the
-            benefit. Get them over a few weeks and the rest can follow.
-          </p>
-          <ol className="mt-6 grid gap-3 sm:grid-cols-2">
-            {startingPoint.map((i, idx) => (
-              <li key={i.item} className="flex gap-3 rounded-2xl bg-mint-pale px-4 py-3">
-                <span className="font-heading text-xs text-muted">{String(idx + 1).padStart(2, "0")}</span>
-                <span>
-                  <span className="block font-medium">{i.item}</span>
-                  <span className="block text-sm text-muted">{i.amount}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/build-your-kit" className="btn btn-primary">
-              Work out my quantities and buy the kit
+      {/* Start here: the short list */}
+      <section aria-labelledby="first-h" className="wrap pb-16 pt-12 min-[900px]:pb-24 min-[900px]:pt-18">
+        <div className="min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] min-[900px]:gap-16">
+          <div>
+            <h2 id="first-h" className="h-section">
+              get these first
+            </h2>
+            <p className="mt-5 max-w-[48ch] text-[1.1875rem] leading-normal">
+              Check the cupboards, the torch drawer and the medicine cabinet
+              before you buy anything. Then these few items cover most of the
+              benefit. Get them over a few weeks and the rest can follow.
+            </p>
+            <Link href="/build-your-kit" className="no-print btn btn-primary btn-lg mt-7">
+              work out my quantities <Arrow />
             </Link>
           </div>
-        </section>
-
-        <nav aria-label="Categories" className="mb-10">
-          <ul className="flex flex-wrap gap-2 text-sm">
-            {checklist.map((c) => (
-              <li key={c.slug}>
-                <a href={`#${c.slug}`} className="tag hover:bg-tag">
-                  {c.title}
-                </a>
+          <ul className="mt-10 border-b-8 border-t-8 border-ink min-[900px]:mt-2">
+            {startingPoint.map((i) => (
+              <li
+                key={i.item}
+                className="grid gap-x-6 gap-y-0.5 border-t border-ink py-3.5 first:border-t-0 min-[600px]:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] min-[600px]:items-baseline"
+              >
+                <span className="flex items-baseline gap-2.5 font-extrabold">
+                  <Swatch cat={catForTitle(i.category)} />
+                  {i.item}
+                </span>
+                <span className="pl-6 text-ink-2 tabular-nums min-[600px]:pl-0">{i.amount}</span>
               </li>
             ))}
-            <li>
-              <a href="#questions" className="tag hover:bg-tag">
-                Questions
+          </ul>
+        </div>
+      </section>
+
+      {/* Jump to a category */}
+      <nav aria-label="Categories" className="no-print border-t-[3px] border-ink">
+        <ul className="wrap flex flex-wrap gap-2 py-6">
+          {checklist.map((c) => (
+            <li key={c.slug}>
+              <a
+                href={`#${c.slug}`}
+                className="inline-flex min-h-11 items-center gap-2.5 rounded-[4px] border-2 border-ink px-3 font-bold no-underline hover:bg-(--hover)"
+              >
+                <Swatch cat={catFor(c.slug)} />
+                {c.title}
               </a>
             </li>
-          </ul>
-        </nav>
+          ))}
+          <li>
+            <a
+              href="#questions"
+              className="inline-flex min-h-11 items-center rounded-[4px] border-2 border-ink px-3 font-bold no-underline hover:bg-(--hover)"
+            >
+              Questions
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-        <ChecklistTracker />
+      <ChecklistTracker />
 
-        <p className="mt-4 text-sm text-muted">
+      <div className="wrap">
+        <p className="measure -mt-4 text-[0.9375rem] text-ink-2 min-[900px]:-mt-8">
           A few items link to a product so you can see what it looks like and
           roughly costs. Anything similar does the same job.
         </p>
+      </div>
 
-        <section id="questions" className="mt-16 scroll-mt-24">
-          <SectionLabel>Questions</SectionLabel>
-          <h2 className="text-2xl font-semibold">The questions people ask</h2>
-          <div className="mt-6 divide-y divide-line border-y border-line">
-            {faq.flatMap((group) => group.entries).map((e) => (
-              <details key={e.slug} id={e.slug} className="group scroll-mt-24 py-4">
-                <summary className="cursor-pointer list-none font-heading text-lg font-medium text-heading marker:hidden">
-                  <span className="flex items-start justify-between gap-4">
-                    {e.question}
-                    <span aria-hidden className="mt-1 text-muted transition-transform group-open:rotate-45">
-                      +
-                    </span>
-                  </span>
-                </summary>
-                <div className="prose-plain mt-3 leading-relaxed text-foreground/90">
-                  {e.answer.map((p, i) => (
-                    <p key={i}>{p}</p>
-                  ))}
-                </div>
-              </details>
-            ))}
-          </div>
-        </section>
+      {/* Questions */}
+      <section id="questions" aria-labelledby="questions-h" className="wrap scroll-mt-24 pb-16 pt-16 min-[900px]:pb-24 min-[900px]:pt-24">
+        <h2 id="questions-h" className="h-section">
+          the questions people ask
+        </h2>
+        <div className="mt-9 border-t-8 border-ink">
+          {faq.flatMap((group) => group.entries).map((e) => (
+            <details key={e.slug} id={e.slug} className="group scroll-mt-24 border-b border-ink">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3.5 text-[1.1875rem] font-extrabold leading-snug [&::-webkit-details-marker]:hidden">
+                {e.question}
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  aria-hidden="true"
+                  className="no-print flex-none transition-transform duration-300 group-open:rotate-45"
+                >
+                  <path d="M9 0v18M0 9h18" fill="none" stroke="currentColor" strokeWidth="3" />
+                </svg>
+              </summary>
+              <div className="prose-plain measure pb-5">
+                {e.answer.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
 
-        <div className="mt-12 flex flex-wrap gap-4 pt-8 text-sm">
-          <Link href="/build-your-kit" className="btn btn-primary">
-            Build your kit
+        <div className="no-print mt-12 flex flex-wrap items-center gap-4">
+          <Link href="/build-your-kit" className="btn btn-primary btn-lg">
+            build your kit <Arrow />
           </Link>
           <a
             href="/offline/index.html"
             download="stay-prepared-offline-guide.html"
-            className="btn btn-secondary"
+            className="btn btn-secondary btn-lg"
           >
-            Download the offline guide
+            download the offline guide
           </a>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
