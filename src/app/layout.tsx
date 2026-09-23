@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import AnnounceBar from "@/components/AnnounceBar";
+
+// Self-hosted at build time, with the width axis for the wide label headings.
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-archivo",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -10,24 +18,24 @@ export const metadata: Metadata = {
     template: "%s | Stay Prepared",
   },
   description:
-    "A practical, non-alarmist guide to what to keep on hand for social disruption, and realistically how long it lasts.",
+    "Calm, practical guidance for UK households: what to keep, how much, how long it lasts, and what to do first.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <head>
-        {/* Fontshare pairing: General Sans (headings) + Switzer (body) */}
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=switzer@400,500,600&display=swap"
-        />
-      </head>
+    <html lang="en-GB" className={`${archivo.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <a
+          href="#main"
+          className="absolute -left-[9999px] top-2 z-50 bg-cat-power px-3.5 py-2.5 font-bold focus:left-2"
+        >
+          Skip to content
+        </a>
         <SiteHeader />
-        <div className="w-full flex-1 px-4 sm:px-10">{children}</div>
+        <div id="main" className="w-full flex-1">
+          {children}
+        </div>
         <SiteFooter />
-        <AnnounceBar />
       </body>
     </html>
   );

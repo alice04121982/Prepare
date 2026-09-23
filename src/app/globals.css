@@ -2,35 +2,67 @@
 @import "tw-animate-css";
 
 /*
-  Palette: "institutional utility". Off-white canvas, charcoal text, slate
-  navy hero and footer, ultra-light slate cards, International Safety Blue
-  for every action and active state. Token names kept from the earlier
-  mint palette so components did not need renaming: --mint is the hero
-  panel, --mint-pale is a card, --forest is the dark panel.
+  Palette: "own-label larder". Bright white paper, near-black ink, and six
+  category colours that own whole bands, like the labels on a row of tins.
+  Every category colour carries ink text at AA or better. Light only: the
+  site is read indoors, in the evening, after the news.
+
+  The legacy names (--mint, --forest, --accent and friends) are kept as
+  aliases so pages not yet rebuilt still render inside the new palette.
 */
 :root {
-  --background: #f8f9fa;
-  --foreground: #1e293b;
-  --muted: #64748b;
-  --line: #e2e8f0;
-  --heading: #1c2a38;
-  --accent: #005a9c;
-  --accent-ink: #ffffff;
-  --soft: #f0f4f8;
-  --mint: #1c2a38;
-  --mint-pale: #f0f4f8;
-  --mint-light: #f0f4f8;
-  --forest: #1c2a38;
-  --on-forest: #ffffff;
-  --sage: #475569;
-  --sage-light: #cbd5e1;
-  --surface: #ffffff;
-  --tag: #dde6f0;
-  --font-heading: "General Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Switzer", ui-sans-serif, system-ui, sans-serif;
+  color-scheme: light;
+
+  --paper: #ffffff;
+  --ink: #141414;
+  --ink-2: #3f3f3f;
+  --rule: #141414;
+  --hush: #f3f3f1;
+  --hover: #fff7dd;
+
+  /* Category labels. Stops and checklist categories map onto these. */
+  --cat-water: #4a9aeb;
+  --cat-food: #f4683a;
+  --cat-power: #ffc425;
+  --cat-health: #5db84a;
+  --cat-news: #b49af2;
+  --cat-money: #f7a1c4;
+  --cat-people: #2ec4b6;
+
+  /* Legacy aliases for pages still on the old layout. */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --muted: var(--ink-2);
+  --line: #cfcfcf;
+  --heading: var(--ink);
+  --accent: var(--ink);
+  --accent-ink: var(--paper);
+  --soft: var(--hush);
+  --mint: var(--ink);
+  --mint-pale: var(--hush);
+  --mint-light: var(--hush);
+  --forest: var(--ink);
+  --on-forest: var(--paper);
+  --sage: var(--ink-2);
+  --sage-light: #cfcfcf;
+  --surface: var(--paper);
+  --tag: var(--hush);
 }
 
 @theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-rule: var(--rule);
+  --color-hush: var(--hush);
+  --color-cat-water: var(--cat-water);
+  --color-cat-food: var(--cat-food);
+  --color-cat-power: var(--cat-power);
+  --color-cat-health: var(--cat-health);
+  --color-cat-news: var(--cat-news);
+  --color-cat-money: var(--cat-money);
+  --color-cat-people: var(--cat-people);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
@@ -48,117 +80,200 @@
   --color-sage-light: var(--sage-light);
   --color-surface: var(--surface);
   --color-tag: var(--tag);
-  --font-sans: var(--font-body);
-  --font-heading: var(--font-heading);
-  --radius-card: 1.5rem;
+
+  --font-sans: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-heading: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --radius-card: 0.25rem;
 
   /*
-    shadcn/ui names, pointed at the palette above so dark mode follows.
-    Two shadcn names already exist here with a different meaning and are
-    deliberately NOT redefined: `muted` is this site's grey text colour
-    (shadcn uses it as a grey background) and `accent` is the Safety Blue
-    action colour (shadcn uses it as a subtle hover background). When
-    adding a shadcn component, swap `bg-muted` for `bg-soft` and check any
-    `hover:bg-accent` reads as intended.
+    shadcn/ui names. Two shadcn names already exist here with a different
+    meaning and are deliberately NOT redefined: `muted` is this site's
+    secondary text colour (shadcn uses it as a grey background) and
+    `accent` is the action colour (shadcn uses it as a subtle hover
+    background). When adding a shadcn component, swap `bg-muted` for
+    `bg-soft` and check any `hover:bg-accent` reads as intended.
   */
-  --color-primary: var(--accent);
-  --color-primary-foreground: var(--accent-ink);
-  --color-secondary: var(--soft);
-  --color-secondary-foreground: var(--heading);
-  --color-card: var(--surface);
-  --color-card-foreground: var(--foreground);
-  --color-popover: var(--surface);
-  --color-popover-foreground: var(--foreground);
-  --color-muted-foreground: var(--muted);
-  --color-accent-foreground: var(--accent-ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--paper);
+  --color-secondary: var(--hush);
+  --color-secondary-foreground: var(--ink);
+  --color-card: var(--paper);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--paper);
+  --color-popover-foreground: var(--ink);
+  --color-muted-foreground: var(--ink-2);
+  --color-accent-foreground: var(--paper);
   --color-border: var(--line);
-  --color-input: var(--line);
-  --color-ring: var(--accent);
+  --color-input: var(--ink);
+  --color-ring: var(--ink);
   --color-destructive: #b42318;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f172a;
-    --foreground: #e2e8f0;
-    --muted: #94a3b8;
-    --line: #334155;
-    --heading: #e2e8f0;
-    --accent: #3b82f6;
-    --accent-ink: #ffffff;
-    --soft: #1e293b;
-    --mint: #1c2a38;
-    --mint-pale: #1e293b;
-    --mint-light: #1e293b;
-    --forest: #111c27;
-    --on-forest: #e2e8f0;
-    --sage: #94a3b8;
-    --sage-light: #334155;
-    --surface: #16202b;
-    --tag: #334155;
-  }
-}
-
-/* Base styles live in the base layer so Tailwind utilities can override them. */
 @layer base {
+  html {
+    scrollbar-color: var(--ink) var(--paper);
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    caret-color: var(--cat-food);
+  }
+
+  ::selection {
+    background: var(--cat-power);
+    color: var(--ink);
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    color: var(--heading);
-    letter-spacing: -0.015em;
+    color: var(--ink);
+    font-weight: 850;
+    font-variation-settings: "wdth" 112;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  a {
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
   }
 }
 
 /* Long-form prose defaults: keep pages readable without a plugin. */
 .prose-plain p + p { margin-top: 1em; }
-.prose-plain a { text-decoration: underline; text-underline-offset: 3px; }
-.prose-plain a:hover { color: var(--accent); }
+.prose-plain a { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 2px; }
+.prose-plain a:hover { text-decoration-thickness: 4px; }
 
-/* Pill buttons and tags, as used throughout the design. */
+/* Display type: the heavy, slightly wide lowercase voice of the labels. */
+.display {
+  font-weight: 900;
+  font-variation-settings: "wdth" 110;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+/* Buttons are square ink blocks. Hover lays a yolk stripe along the base. */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  padding: 0.75rem 1.375rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1;
-  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  border-radius: 0.25rem;
+  border: 0;
+  padding: 0 1.25rem;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  font-variation-settings: "wdth" 110;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease;
 }
-.btn-primary { background: var(--accent); color: var(--accent-ink); }
-.btn-primary:hover { filter: brightness(1.12); }
-.btn-secondary {
-  background: var(--surface);
-  color: var(--heading);
-  border: 1px solid var(--line);
+.btn-lg { min-height: 3.5rem; padding: 0 1.5rem; font-size: 1.1875rem; }
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: #000; box-shadow: inset 0 -5px 0 var(--cat-power); }
+.btn-secondary,
+.btn-on-dark {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 3px var(--ink);
 }
-.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-.btn-on-dark { background: var(--surface); color: var(--heading); }
-.btn-on-dark:hover { background: var(--tag); }
+.btn-secondary:hover,
+.btn-on-dark:hover { box-shadow: inset 0 0 0 3px var(--ink), inset 0 -8px 0 var(--ink); }
+
+/* A plain text link that ends in an arrow. */
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: 2.75rem;
+  font-weight: 800;
+  font-variation-settings: "wdth" 110;
+  text-decoration: underline;
+}
+.arrow-link:hover { text-decoration-thickness: 4px; }
 
 .tag {
   display: inline-block;
-  border-radius: 9999px;
-  background: var(--tag);
-  padding: 0.35rem 0.8rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--heading);
+  border-radius: 0.25rem;
+  background: var(--hush);
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink);
 }
 
+/* Square form controls with a heavy ink border. */
+.field {
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  background-color: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 0.25rem;
+  min-height: 3rem;
+  padding: 0 2.5rem 0 0.875rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23141414' stroke-width='2.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.875rem center;
+  cursor: pointer;
+}
+.field:hover { background-color: var(--hover); }
+
+/* Full-bleed bands, capped content. */
+.wrap { margin-inline: auto; width: 100%; max-width: 1360px; padding-inline: 1.25rem; }
+@media (min-width: 900px) { .wrap { padding-inline: 2.5rem; } }
+.measure { max-width: 65ch; }
+
+/* The tins: expandable colour labels for what might stop. */
+.tin-body { display: grid; grid-template-rows: 1fr; }
+.tin-body[data-state="closed"] { grid-template-rows: 0fr; }
+.tin-body { transition: grid-template-rows 560ms cubic-bezier(0.16, 1, 0.3, 1); }
+.tin-sign::before,
+.tin-sign::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 45%;
+  height: 3px;
+  background: var(--ink);
+  transform: translate(-50%, -50%);
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tin-sign::after { transform: translate(-50%, -50%) rotate(90deg); }
+[aria-expanded="true"] .tin-sign::after { transform: translate(-50%, -50%) rotate(0deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* Print: colour becomes ink outlines, A4, black and white. */
 @media print {
-  header, footer { display: none; }
-  body { background: #fff; }
+  @page { size: A4; margin: 16mm; }
+  body { font-size: 11pt; background: #fff; color: #000; }
+  .no-print { display: none !important; }
+  [data-cat] { background: #fff !important; border: 1.5pt solid #000; break-inside: avoid; }
+  .tin-body { grid-template-rows: 1fr !important; }
+  .tin-sign { display: none; }
+  main a[href^="/"]::after { content: " (stayprepared.co.uk" attr(href) ")"; font-weight: 400; font-size: 9pt; }
 }
-
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-/* Full-bleed backgrounds, capped content. 1440px keeps grids from stretching on wide screens. */
-.wrap { margin-inline: auto; width: 100%; max-width: 1440px; }
-.measure { max-width: 68ch; }

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function ChecklistPage() {
   return (
-    <main className="w-full py-4 sm:py-8">
+    <main className="w-full px-4 py-4 sm:px-10 sm:py-8">
       <PageIntro
         eyebrow="The essentials"
         title="What to keep on hand"

@@ -45,7 +45,7 @@ function formatDate(iso: string) {
 
 export default function WhyPage() {
   return (
-    <main className="w-full py-4 sm:py-8">
+    <main className="w-full px-4 py-4 sm:px-10 sm:py-8">
       <PageIntro
         eyebrow="Why now"
         title="Why the government asks you to be ready for three days"

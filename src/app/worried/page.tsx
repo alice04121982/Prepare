@@ -78,7 +78,7 @@ const sources = [
 
 export default function WorriedPage() {
   return (
-    <main className="w-full py-4 sm:py-8">
+    <main className="w-full px-4 py-4 sm:px-10 sm:py-8">
       <PageIntro
         eyebrow="If the news is frightening you"
         title="It is normal to feel like this. Here is some perspective, and some help."

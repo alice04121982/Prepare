@@ -17,7 +17,7 @@ export default async function BuildYourKitPage({
 }) {
   const initial = householdFromParams(await searchParams) ?? undefined;
   return (
-    <main className="w-full py-4 sm:py-8">
+    <main className="w-full px-4 py-4 sm:px-10 sm:py-8">
       <div>
         <PageIntro
           eyebrow="Build your kit"

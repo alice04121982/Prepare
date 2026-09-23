@@ -1,199 +1,272 @@
 import Link from "next/link";
-import Illustration from "@/components/Illustration";
-import { photoCredits } from "@/components/Photo";
-import SectionLabel from "@/components/SectionLabel";
-import DownloadRow from "@/components/DownloadRow";
-import { ClipboardCheck, ShoppingBasket, Users, type LucideIcon } from "lucide-react";
+import Arrow from "@/components/home/Arrow";
+import ReachBar from "@/components/home/ReachBar";
+import StopList, { type Stop } from "@/components/home/StopList";
 
-const steps: { title: string; body: string; href: string; cta: string; icon: LucideIcon }[] = [
+const stops: Stop[] = [
+  { id: "heating", what: "the heating goes off", helps: "Blankets, warm layers, a hot-water bottle.", cat: "bg-cat-power" },
+  { id: "taps", what: "nothing comes out of the taps", helps: "3 litres of water per person per day.", cat: "bg-cat-water" },
+  { id: "shops", what: "the shops run short", helps: "Tins and dry food you already eat.", cat: "bg-cat-food" },
+  { id: "cash", what: "cards and cash machines stop", helps: "Some cash in small notes.", cat: "bg-cat-money" },
+  { id: "networks", what: "mobile networks and the internet go down", helps: "A wind-up or battery radio.", cat: "bg-cat-news" },
+  { id: "transport", what: "buses and trains stop", helps: "Knowing who nearby you can reach on foot.", cat: "bg-cat-people" },
+  { id: "prescriptions", what: "prescriptions are hard to get", helps: "A week's spare medication where your GP allows.", cat: "bg-cat-health" },
+];
+
+const steps = [
   {
-    title: "Check what you already have",
+    title: "check what you already have",
     body: "Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Tick them off against the list before you buy anything.",
     href: "/checklist",
-    cta: "See the list",
-    icon: ClipboardCheck,
+    cta: "see the checklist",
+    cat: "bg-cat-water",
   },
   {
-    title: "Buy what is missing",
-    body: "Say who lives with you and we work out the quantities. One button puts the lot into a basket.",
+    title: "buy what is missing",
+    body: "Say who lives with you and the quantities are worked out for you. The free option comes first on every line.",
     href: "/build-your-kit",
-    cta: "Build your kit",
-    icon: ShoppingBasket,
+    cta: "build your kit",
+    cat: "bg-cat-food",
   },
   {
-    title: "Tell your neighbours",
-    body: "Two or three names and a check-in plan. That is what gets a street through a bad week.",
+    title: "talk to your neighbours",
+    body: "Two or three names and a way to check on each other. The better prepared you are, the more you can give to the neighbour who could not prepare.",
     href: "/community",
-    cta: "Four things to do",
-    icon: Users,
+    cta: "how to start",
+    cat: "bg-cat-people",
   },
 ];
 
-const selectClass =
-  "w-full rounded-full border border-line bg-surface px-4 py-2.5 text-sm text-heading focus:border-accent";
+const durations = [
+  { value: "3", label: "3 days", note: "the government minimum" },
+  { value: "7", label: "1 week" },
+  { value: "14", label: "2 weeks" },
+];
 
 export default function Home() {
-  const hero = photoCredits().find((c) => c.slot === "home-hero" && c.rank === 1);
   return (
-    <main className="pb-8">
-      {/* Hero */}
-      <section className="relative overflow-hidden rounded-card bg-mint px-6 py-12 sm:px-12 sm:py-20">
-        {hero ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={`/photos/${hero.file}`}
-            alt=""
-            width={hero.w}
-            height={hero.h}
-            className="absolute inset-0 h-full w-full object-cover opacity-40 saturate-[.6]"
-          />
-        ) : null}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-mint via-mint/85 to-mint/40" />
-        <div className="wrap relative grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
-          <div>
-            <SectionLabel onDark>Simple steps for a difficult few days</SectionLabel>
-            <h1 className="max-w-[18ch] text-4xl font-normal leading-[1.05] text-white sm:text-6xl">
-              If the power went off, the water stopped and the shops were shut
-              for three days, would you be all right?
-            </h1>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
-              The government asks every UK household to be able to manage on
-              its own for three days. Here is what that means, and how to get
-              there this week.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/checklist" className="btn btn-primary">
-                See the checklist
-              </Link>
-              <Link href="/build-your-kit" className="btn btn-on-dark">
-                Build your kit
-              </Link>
-            </div>
-            <p className="mt-6 text-sm text-white/75">
-              Frightened by the news?{" "}
-              <Link href="/worried" className="underline underline-offset-4 hover:text-white">
-                Start here instead.
-              </Link>
-            </p>
-          </div>
-          <div className="mx-auto w-full max-w-[420px] md:justify-self-end">
-            <Illustration name="hero" alt="" className="drop-shadow-2xl" />
-          </div>
+    <main>
+      {/* Hero: the question, then one action */}
+      <section aria-labelledby="hero-q" className="wrap pb-12 pt-10 min-[900px]:pb-22 min-[900px]:pt-18">
+        <h1
+          id="hero-q"
+          className="display max-w-[15.5ch] text-[clamp(2.35rem,10.4vw,6rem)]"
+          style={{ fontVariationSettings: '"wdth" 108' }}
+        >
+          if the power went off, the water stopped and the shops were shut for
+          three days, would you be all right?
+        </h1>
+        <p className="mt-7 max-w-[40ch] text-[1.1875rem] leading-normal min-[900px]:mt-10 min-[900px]:text-[1.375rem]">
+          The government asks every UK household to be able to manage on its own
+          for three days. This site makes that practical: what to keep, how much,
+          how long it lasts, and what to do first.
+        </p>
+        <div id="hero-actions" className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 min-[900px]:mt-11">
+          <Link href="/checklist" className="btn btn-primary btn-lg">
+            check your cupboard <Arrow />
+          </Link>
+          <Link href="/why" className="inline-flex min-h-11 items-center font-bold">
+            why three days?
+          </Link>
+        </div>
+        <p className="mt-7 text-ink-2">
+          Frightened by the news?{" "}
+          <Link href="/worried" className="font-bold text-ink">
+            Start here instead.
+          </Link>
+        </p>
+      </section>
+
+      {/* What might stop: the tins */}
+      <section aria-labelledby="stop-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
+        <div className="wrap">
+          <h2 id="stop-h" className="text-[clamp(2.5rem,11vw,5.25rem)]">
+            what might stop
+          </h2>
+          <p className="mt-5 max-w-[52ch] text-lg">
+            Severe weather, a fault in the grid, a cyber attack on a water
+            company, or disruption from a conflict elsewhere in Europe can all
+            have the same effect at home.
+          </p>
+        </div>
+        <StopList stops={stops} />
+        <div className="wrap">
+          <p className="mt-8 max-w-[52ch] text-[1.1875rem] leading-normal">
+            Most of these last hours or days, not weeks. All of them are easier
+            with a few things in the cupboard and a plan you made while
+            everything worked.
+          </p>
         </div>
       </section>
 
-      {/* What to do */}
-      <section className="wrap pt-20">
-        <SectionLabel>What to do</SectionLabel>
-        <h2 className="max-w-3xl text-3xl font-normal leading-tight sm:text-5xl">
-          Three things, in this order.
+      {/* Three things: the shelf */}
+      <section aria-labelledby="three-h" className="wrap pb-16 min-[900px]:pb-26">
+        <h2 id="three-h" className="text-[clamp(2.5rem,11vw,5.25rem)]">
+          three things, in this order
         </h2>
-        <ol className="mt-10 grid gap-4 md:grid-cols-3">
+        <ol className="mt-10 border-b-8 border-ink">
           {steps.map((s, i) => (
-            <li key={s.href} className="flex flex-col rounded-card bg-mint-pale p-6 sm:p-8">
-              <div className="flex items-center justify-between">
-                <span
-                  aria-hidden
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-surface text-accent"
-                >
-                  <s.icon size={22} strokeWidth={1.75} />
-                </span>
-                <span className="font-heading text-sm text-muted">{String(i + 1).padStart(2, "0")}</span>
+            <li
+              key={s.href}
+              className="grid grid-cols-[4rem_1fr] gap-x-4.5 border-t-8 border-ink pb-9 pt-6 min-[900px]:grid-cols-[6rem_minmax(0,1.1fr)_minmax(0,1fr)] min-[900px]:gap-x-9 min-[900px]:pb-12 min-[900px]:pt-8"
+            >
+              <span
+                aria-hidden="true"
+                data-cat
+                className={`${s.cat} display grid h-20 w-16 place-items-center border-[3px] border-t-0 border-ink text-[3.25rem] tabular-nums min-[900px]:h-30 min-[900px]:w-24 min-[900px]:text-[5rem]`}
+                style={{ fontVariationSettings: '"wdth" 125' }}
+              >
+                {i + 1}
+              </span>
+              <h3 className="pt-1 text-[clamp(1.75rem,7.4vw,3rem)] min-[900px]:pt-2 min-[900px]:text-[3.25rem]">
+                {s.title}
+              </h3>
+              <div className="col-start-2 mt-3.5 min-[900px]:col-start-3 min-[900px]:mt-3">
+                <p className="measure min-[900px]:text-[1.1875rem]">{s.body}</p>
+                <Link href={s.href} className="arrow-link mt-4 text-lg">
+                  {s.cta} <Arrow size={18} />
+                </Link>
               </div>
-              <h3 className="mt-6 text-2xl font-medium leading-tight">{s.title}</h3>
-              <p className="mt-3 flex-1 leading-relaxed text-muted">{s.body}</p>
-              <Link href={s.href} className="btn btn-secondary mt-6 self-start">
-                {s.cta}
-              </Link>
             </li>
           ))}
         </ol>
       </section>
 
-      {/* Get the kit */}
-      <section className="wrap mt-20 rounded-card bg-forest px-6 py-10 text-on-forest sm:px-12 sm:py-14">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center">
-          <div>
-            <SectionLabel onDark>Get the kit</SectionLabel>
-            <h2 className="max-w-[18ch] text-3xl font-normal leading-tight text-on-forest sm:text-5xl">
-              Get everything in one go.
-            </h2>
-            <p className="mt-5 max-w-lg leading-relaxed opacity-90">
-              Say who lives with you and how long to cover. You get a list with
-              the quantities worked out, a free option for every line, and one
-              button that puts the lot into an Amazon basket. Groceries come
-              from your normal shop.
-            </p>
-          </div>
-          <form action="/build-your-kit" method="get" className="grid gap-4 rounded-card bg-surface/10 p-6">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="grid gap-1.5 text-sm">
-                <span className="opacity-90">Adults</span>
-                <select id="home-adults" name="a" defaultValue="2" className={selectClass}>
-                  {[1, 2, 3, 4, 5, 6].map((n) => (
-                    <option key={n} value={n}>
-                      {n}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="grid gap-1.5 text-sm">
-                <span className="opacity-90">Children</span>
-                <select id="home-children" name="c" defaultValue="0" className={selectClass}>
-                  {[0, 1, 2, 3, 4, 5, 6].map((n) => (
-                    <option key={n} value={n}>
-                      {n}
-                    </option>
-                  ))}
-                </select>
-              </label>
+      {/* How much for your household: a quantity panel */}
+      <section aria-labelledby="kit-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
+        <div className="wrap">
+          <form
+            action="/build-your-kit"
+            method="get"
+            className="max-w-[560px] border-[3px] border-ink min-[900px]:grid min-[900px]:max-w-[980px] min-[900px]:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]"
+          >
+            <div className="border-b-[10px] border-ink px-4.5 pb-3.5 pt-4 min-[900px]:col-span-full min-[900px]:px-7 min-[900px]:pb-4.5 min-[900px]:pt-5.5">
+              <h2 id="kit-h" className="text-[clamp(2rem,8.6vw,4rem)]">
+                how much for your household?
+              </h2>
             </div>
-            <label className="grid gap-1.5 text-sm">
-              <span className="opacity-90">How long to cover</span>
-              <select id="home-days" name="d" defaultValue="3" className={selectClass}>
-                <option value="3">Three days, the government minimum</option>
-                <option value="7">One week</option>
-                <option value="14">Two weeks</option>
-              </select>
-            </label>
-            <button type="submit" className="btn btn-primary mt-2 justify-center">
-              Build my list
-            </button>
+            <div className="min-[900px]:border-r-[3px] min-[900px]:border-ink">
+              <div className="grid grid-cols-[1fr_auto] items-center gap-3 border-b border-ink px-4.5 py-3 min-[900px]:px-7">
+                <label htmlFor="home-adults" className="font-extrabold">Adults</label>
+                <select id="home-adults" name="a" defaultValue="2" className="field min-w-22">
+                  {[1, 2, 3, 4, 5, 6].map((n) => (
+                    <option key={n} value={n}>{n}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="grid grid-cols-[1fr_auto] items-center gap-3 border-b border-ink px-4.5 py-3 min-[900px]:px-7">
+                <label htmlFor="home-children" className="font-extrabold">Children</label>
+                <select id="home-children" name="c" defaultValue="0" className="field min-w-22">
+                  {[0, 1, 2, 3, 4, 5, 6].map((n) => (
+                    <option key={n} value={n}>{n}</option>
+                  ))}
+                </select>
+              </div>
+              <fieldset className="border-b border-ink px-4.5 pb-4 pt-3 min-[900px]:px-7">
+                <legend className="float-left mb-2.5 w-full font-extrabold">How long</legend>
+                <div className="clear-both grid gap-2">
+                  {durations.map((d) => (
+                    <div key={d.value}>
+                      <input
+                        type="radio"
+                        name="d"
+                        id={`home-d${d.value}`}
+                        value={d.value}
+                        defaultChecked={d.value === "3"}
+                        className="peer sr-only"
+                      />
+                      <label
+                        htmlFor={`home-d${d.value}`}
+                        className="flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-[4px] border-2 border-ink px-3.5 font-bold hover:bg-[var(--hover)] peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-3 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-ink"
+                      >
+                        {d.label}
+                        {d.note ? <small className="text-sm font-normal opacity-80">{d.note}</small> : null}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </fieldset>
+              <div className="border-b-[10px] border-ink px-4.5 py-4 min-[900px]:border-b-0 min-[900px]:px-7">
+                <button type="submit" className="btn btn-primary btn-lg w-full">
+                  work it out
+                </button>
+              </div>
+            </div>
+            <div className="px-4.5 pb-4 pt-3.5 min-[900px]:px-7 min-[900px]:py-5.5">
+              <div className="flex justify-between border-b-4 border-ink pb-1.5 text-[0.9375rem] font-extrabold">
+                <span>For example</span>
+                <span>drinking water</span>
+              </div>
+              <dl>
+                <div className="flex items-baseline justify-between gap-3 border-b border-ink pb-1.5 pt-2.5">
+                  <dt className="font-bold">2 adults, 3 days</dt>
+                  <dd
+                    className="display text-[2rem] tabular-nums min-[900px]:text-[3.5rem]"
+                    style={{ fontVariationSettings: '"wdth" 115' }}
+                  >
+                    18 <small className="text-base font-bold tracking-normal">litres</small>
+                  </dd>
+                </div>
+              </dl>
+              <p className="mt-2.5 text-sm text-ink-2">
+                3 litres per person per day, the gov.uk figure.
+              </p>
+            </div>
           </form>
         </div>
       </section>
 
-      {/* Why now */}
-      <section id="why-now" className="wrap scroll-mt-24 pt-24">
-        <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] md:items-start">
+      {/* Why three days: the health band */}
+      <section aria-labelledby="why-h" data-cat className="border-t-[3px] border-ink bg-cat-health py-16 min-[900px]:py-26">
+        <div className="wrap min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] min-[900px]:items-start min-[900px]:gap-16">
+          <h2 id="why-h" className="text-[clamp(2.5rem,11vw,5.25rem)]">
+            why three days?
+          </h2>
           <div>
-            <SectionLabel>Why now</SectionLabel>
-            <h2 className="text-3xl font-normal leading-tight sm:text-4xl">
-              Why three days?
-            </h2>
-          </div>
-          <div className="measure">
-            <p className="leading-relaxed text-muted">
-              Since 2024 the UK, the EU, Sweden, Finland, Norway and France
-              have all asked their citizens to keep a few days of supplies at
-              home. None of them say anything is imminent. All of them have
-              decided it is no longer sensible to assume it cannot happen.
+            <p className="mt-5 max-w-[50ch] text-[1.1875rem] leading-normal min-[900px]:mt-3">
+              Since 2024 the UK, the EU, Sweden, Finland, Norway and France have
+              all asked their citizens to keep a few days of supplies at home.
+              None of them say anything is imminent. All of them have decided it
+              is no longer sensible to assume it cannot happen.
             </p>
-            <Link href="/why" className="btn btn-secondary mt-6">
-              What might stop, and what the government says
+            <p className="mt-7 max-w-[50ch] border-t-[3px] border-ink pt-5 text-[1.1875rem] font-semibold leading-normal">
+              For the very worst cases there is little any household can do. For
+              everything short of that, three days of supplies make a real
+              difference.
+            </p>
+            <Link href="/why" className="arrow-link mt-5 text-lg">
+              what the government says <Arrow size={18} />
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="wrap mt-16">
-        <DownloadRow
-          href="/offline/index.html"
-          download="stay-prepared-offline-guide.html"
-          title="Download the offline guide"
-          detail="One file, no internet needed. Save it, print it, share it before you need it."
-        />
+      {/* Offline guide: the water band */}
+      <section aria-labelledby="off-h" data-cat className="border-t-[3px] border-ink bg-cat-water py-16 min-[900px]:py-26">
+        <div className="wrap min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] min-[900px]:items-start min-[900px]:gap-16">
+          <h2 id="off-h" className="max-w-[14ch] text-[clamp(2.5rem,11vw,5.25rem)]">
+            keep a copy offline
+          </h2>
+          <div>
+            <p className="mt-5 max-w-[50ch] text-[1.1875rem] leading-normal min-[900px]:mt-3">
+              One file, no internet needed. Save it, print it, share it before
+              you need it.
+            </p>
+            <a
+              href="/offline/index.html"
+              download="stay-prepared-offline-guide.html"
+              className="btn btn-secondary btn-lg mt-7"
+            >
+              <svg width="16" height="20" viewBox="0 0 16 20" aria-hidden="true" className="flex-none">
+                <path d="M8 0v13M2 8l6 6 6-6M0 18.5h16" fill="none" stroke="currentColor" strokeWidth="2.6" />
+              </svg>
+              download the offline guide
+            </a>
+          </div>
+        </div>
       </section>
+
+      <ReachBar watch="hero-actions" />
     </main>
   );
 }

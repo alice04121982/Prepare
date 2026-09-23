@@ -32,7 +32,7 @@ const firstSteps = [
 
 export default function CommunityPage() {
   return (
-    <main className="w-full py-4 sm:py-8">
+    <main className="w-full px-4 py-4 sm:px-10 sm:py-8">
       <PageIntro
         eyebrow="Community and mutual aid"
         title="Once your own household has what it needs, look around you"

@@ -3,50 +3,67 @@ import Link from "next/link";
 const links = [
   { href: "/checklist", label: "Checklist" },
   { href: "/build-your-kit", label: "Build your kit" },
-  { href: "/why", label: "Why three days" },
-  { href: "/community", label: "Community" },
-  { href: "/worried", label: "Feeling frightened?" },
+  { href: "/why", label: "Why three days?" },
+  { href: "/worried", label: "Worried?" },
+  { href: "/community", label: "Neighbours" },
   { href: "/sources", label: "Sources" },
+];
+
+// One stripe per category label, in shelf order.
+const stripe = [
+  "bg-cat-water",
+  "bg-cat-food",
+  "bg-cat-power",
+  "bg-cat-health",
+  "bg-cat-news",
+  "bg-cat-money",
+  "bg-cat-people",
 ];
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-auto px-4 pb-4 pt-16 sm:px-10 sm:pb-10">
-      <div className="rounded-card bg-forest px-6 py-8 text-on-forest sm:px-10 sm:py-10">
-        <div className="wrap">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <span className="font-heading text-xl">
-            <span className="font-bold">Stay</span> <span className="font-normal">Prepared</span>
-          </span>
-          <div className="flex flex-wrap items-center gap-4">
-            <ul className="flex flex-wrap gap-x-4 text-sm opacity-90">
-              {links.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="underline-offset-4 hover:underline">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <a
-              href="/offline/index.html"
-              download="stay-prepared-offline-guide.html"
-              className="btn btn-on-dark"
+    <footer className="mt-auto bg-ink pb-10 pt-14 text-paper [&_:focus-visible]:outline-cat-power">
+      <div className="wrap">
+        <div className="grid gap-8 min-[900px]:grid-cols-2 min-[900px]:gap-16">
+          <div>
+            <Link
+              href="/"
+              className="display text-4xl text-paper no-underline"
+              style={{ fontVariationSettings: '"wdth" 118' }}
             >
-              Download the offline guide
-            </a>
+              stay prepared
+            </Link>
+            <p className="mt-2.5 text-lg">
+              Calm, practical guidance for UK households. Not a survival site.
+            </p>
           </div>
+          <ul className="grid grid-cols-2 gap-x-5 border-t border-[#5a5a5a]">
+            {links.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="flex min-h-12 items-center border-b border-[#5a5a5a] font-bold no-underline hover:underline"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="mt-16 flex flex-col gap-4 text-sm sm:flex-row sm:items-end sm:justify-between">
-          <p className="max-w-md opacity-90">
-            <span className="block font-medium">Calm, practical guidance for short disruptions.</span>
-            Based on UK government advice. Not a survival site. No tracking.
-            Some product links earn a small commission.
+        <div className="mt-7 grid gap-3 text-[0.9375rem] text-[#d6d6d6]">
+          <p>
+            Some product links earn us a small commission. The free option is
+            always listed first.
           </p>
-          <p className="opacity-70">
-            Free to share. Check official guidance for your region too.
+          <p>
+            Figures from gov.uk Prepare, the Met Office and the NHS. Free to
+            share. Check official guidance for your region too.
           </p>
         </div>
+        <div aria-hidden="true" className="mt-8 grid h-3 grid-cols-7">
+          {stripe.map((c) => (
+            <span key={c} className={c} />
+          ))}
         </div>
       </div>
     </footer>
