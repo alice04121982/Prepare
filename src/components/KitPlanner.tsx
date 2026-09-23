@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   amazonBasketUrl,
   buildKit,
+  coverDays,
   defaultHousehold,
   retailers,
   type Household,
@@ -171,8 +172,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
 
         <div className="rounded-2xl bg-surface px-4 py-3">
           <p className="mb-2 text-sm font-medium">Days of cover</p>
-          <div className="flex gap-2">
-            {([3, 7, 14] as const).map((n) => (
+          <div className="flex flex-wrap gap-2">
+            {coverDays.map((n) => (
               <button
                 key={n}
                 type="button"
@@ -184,7 +185,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             ))}
           </div>
           <p className="mt-2 text-xs text-muted">
-            Three days is the government minimum. Seven covers most storms and outages. Fourteen is for a long disruption.
+            Three days is the government minimum. Seven covers most storms and outages. Fourteen is for a long disruption. Thirty and ninety are for building a deeper store over time.
           </p>
         </div>
       </aside>

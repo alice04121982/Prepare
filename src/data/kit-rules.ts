@@ -21,8 +21,21 @@ export type Household = {
   medicalNeeds: boolean;
   homeType: "flat" | "house";
   /** Days of cover to plan for. */
-  days: 3 | 7 | 14;
+  days: CoverDays;
 };
+
+/** The planner's lengths of cover, shortest first. */
+export const coverDays = [3, 7, 14, 30, 90] as const;
+export type CoverDays = (typeof coverDays)[number];
+
+/**
+ * Bottled water and baby consumables stop scaling here. Mains water is
+ * rarely off for more than a few days, so past two weeks the list relies
+ * on containers and purification instead. Babies outgrow nappy sizes and
+ * formula stages within a month.
+ */
+const WATER_CAP = 14;
+const BABY_CAP = 30;
 
 export type ProductOption = {
   name: string;
@@ -78,7 +91,9 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
   const peopleWhoDrink = h.adults + h.children;
   const d = h.days;
 
-  const water = 3 * peopleWhoDrink * d + (h.babies > 0 ? 2 * h.babies * d : 0);
+  const wd = Math.min(d, WATER_CAP);
+  const bd = Math.min(d, BABY_CAP);
+  const water = 3 * peopleWhoDrink * wd + (h.babies > 0 ? 2 * h.babies * wd : 0);
   const waterPacks = ceil(water / 9); // six 1.5 litre bottles
 
   const lines: KitLine[] = [
@@ -89,7 +104,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       item: "Bottled drinking water",
       quantity: waterPacks,
       unit: "six-packs of 1.5 litre bottles",
-      basis: `${water} litres: 3 litres per person per day for ${peopleWhoDrink} ${peopleWhoDrink === 1 ? "person" : "people"} over ${d} days${h.babies ? `, plus water for making up feeds` : ""}. The gov.uk figure.`,
+      basis: `${water} litres: 3 litres per person per day for ${peopleWhoDrink} ${peopleWhoDrink === 1 ? "person" : "people"} over ${wd} days${h.babies ? `, plus water for making up feeds` : ""}. The gov.uk figure.${d > WATER_CAP ? " Capped at two weeks: mains water is rarely off longer, and past that the containers and purification tablets below do the work." : ""}`,
       freeOption: "Refilled, clearly labelled bottles from the tap, rotated every few months, cost nothing.",
       priority: true,
       products: [
@@ -125,7 +140,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       item: "Tinned or jarred meals and vegetables",
       quantity: 2 * peopleWhoDrink * d,
       unit: "tins",
-      basis: `Two tins per person per day for ${d} days. Beans, soup, fish, vegetables, ready meals. Things you already eat.`,
+      basis: `Two tins per person per day for ${d} days. Beans, soup, fish, vegetables, ready meals. Things you already eat.${d > 14 ? " Build it up a few tins each shop, and eat the oldest first." : ""}`,
       freeOption: "Most cupboards hold a few days already. Count what you have before buying.",
       priority: true,
       products: [{ name: "Own-brand tinned beans, soup, tuna, vegetables", tier: "budget", priceBand: "50p to £1.50 a tin" }],
@@ -401,9 +416,9 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       search: "nappies",
             category: "Babies",
             item: "Nappies",
-            quantity: 6 * h.babies * d,
+            quantity: 6 * h.babies * bd,
             unit: "nappies",
-            basis: `Six a day for ${h.babies} ${h.babies === 1 ? "baby" : "babies"} over ${d} days.`,
+            basis: `Six a day for ${h.babies} ${h.babies === 1 ? "baby" : "babies"} over ${bd} days.${d > BABY_CAP ? " Capped at a month: babies outgrow the size." : ""}`,
             products: [{ name: "Own-brand nappies, large pack", tier: "budget", priceBand: "£5 to £10" }],
           } satisfies KitLine,
           {
@@ -411,7 +426,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       search: "ready to feed formula",
             category: "Babies",
             item: "Ready-to-feed formula (if bottle feeding)",
-            quantity: 4 * h.babies * d,
+            quantity: 4 * h.babies * bd,
             unit: "200 ml cartons",
             basis: "Ready-to-feed needs no water or heating. Skip if breastfeeding or past formula.",
           } satisfies KitLine,
@@ -420,7 +435,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       search: "baby wipes",
             category: "Babies",
             item: "Baby wipes",
-            quantity: ceil(d / 2) * h.babies,
+            quantity: ceil(bd / 2) * h.babies,
             unit: "packs",
             basis: "One pack every two days per baby.",
           } satisfies KitLine,
@@ -502,7 +517,7 @@ export function householdFromParams(q: Record<string, string | string[] | undefi
     const v = parseInt(get(k) ?? "", 10);
     return Number.isFinite(v) ? Math.max(0, Math.min(12, v)) : d;
   };
-  const days = n("d", 3);
+  const days = parseInt(get("d") ?? "", 10);
   return {
     adults: Math.max(1, n("a", 2)),
     children: n("c", 0),
@@ -512,7 +527,7 @@ export function householdFromParams(q: Record<string, string | string[] | undefi
     cats: n("cats", 0),
     medicalNeeds: get("med") === "1",
     homeType: get("home") === "flat" ? "flat" : "house",
-    days: days === 7 || days === 14 ? days : 3,
+    days: (coverDays as readonly number[]).includes(days) ? (days as CoverDays) : 3,
   };
 }
 
