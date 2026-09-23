@@ -6,7 +6,9 @@ import HomeProgress from "@/components/HomeProgress";
 import { kits } from "@/data/kits";
 
 export default function Home() {
-  const hero = photoCredits().find((c) => c.slot === "home-hero" && c.rank === 1);
+  const heroPicks = photoCredits().filter((c) => c.slot === "home-hero");
+  // Rank 2 is the terraced street: a place someone lives, rather than scenery.
+  const hero = heroPicks.find((c) => c.rank === 2) ?? heroPicks[0];
   return (
     <main className="pb-8">
       {/* Hero, with the form that starts the task in it */}
@@ -18,10 +20,15 @@ export default function Home() {
             alt=""
             width={hero.w}
             height={hero.h}
-            className="absolute inset-0 h-full w-full object-cover opacity-40 saturate-[.6]"
+            className="absolute inset-0 h-full w-full object-cover"
           />
         ) : null}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-mint via-mint/85 to-mint/40" />
+        {/* A legibility scrim behind the words, clearing toward the photograph,
+            rather than a flat wash that turns the picture into texture. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-mint/95 via-mint/80 to-mint/45"
+        />
         <div className="wrap relative grid items-center gap-10 md:grid-cols-[1.15fr_minmax(0,22rem)]">
           <div>
             <SectionLabel onDark>Simple steps for a difficult few days</SectionLabel>
@@ -47,7 +54,7 @@ export default function Home() {
           </div>
 
           <div className="md:justify-self-end">
-            <div className="rounded-card bg-white/10 p-6 backdrop-blur-sm">
+            <div className="rounded-card border border-white/15 bg-mint/85 p-6 shadow-xl backdrop-blur-md">
               <p className="font-heading text-lg text-white">Pick your household</p>
               <p className="mt-1 text-sm text-white/70">
                 Each one is a full list with the quantities worked out.
@@ -79,6 +86,11 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {hero ? (
+          <p className="wrap relative mt-8 text-xs text-white/55">
+            {hero.alt.charAt(0).toUpperCase() + hero.alt.slice(1)}. Photograph by {hero.photographer}.
+          </p>
+        ) : null}
       </section>
 
       {/* The three steps, as rows carrying their own state */}
