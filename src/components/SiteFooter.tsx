@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const links = [
+  { href: "/lists", label: "Ready-made lists" },
   { href: "/checklist", label: "Checklist" },
-  { href: "/build-your-kit", label: "Build your kit" },
-  { href: "/why", label: "Why three days?" },
-  { href: "/worried", label: "Worried?" },
+  { href: "/why", label: "Why prepare?" },
   { href: "/community", label: "Neighbours" },
+  { href: "/worried", label: "Worried?" },
   { href: "/sources", label: "Sources" },
 ];
 
@@ -24,7 +24,7 @@ export default function SiteFooter() {
               stay prepared
             </Link>
             <p className="mt-2.5 text-lg">
-              Calm, practical guidance for UK households.
+              Ready-made prepping lists for UK households.
             </p>
           </div>
           <ul className="grid grid-cols-2 gap-x-5 border-t border-[#5a5a5a]">
@@ -42,8 +42,8 @@ export default function SiteFooter() {
         </div>
         <div className="mt-7 grid max-w-[65ch] gap-3 text-[0.9375rem] text-[#d6d6d6]">
           <p>
-            Some product links earn us a small commission. The free option is
-            always listed first.
+            Some product links earn us a small commission, at no extra cost to
+            you. As an Amazon Associate we earn from qualifying purchases.
           </p>
           <p>
             Figures from gov.uk Prepare, the Met Office and the NHS. Free to

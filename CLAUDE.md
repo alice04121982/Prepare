@@ -76,8 +76,9 @@ been read, so counts wait rather than flashing a zero through hydration.
 ### Server components by default
 
 The client islands are `ChecklistTracker`, `KitPlanner` (with
-`kit/StillToGet`), `PrintButton` and the homepage's `home/KitShortcut`,
-`home/ReachBar` and `home/StepState`. Everything else is a server component,
+`kit/StillToGet` and `kit/ListPicker`), `PrintButton` and the homepage's
+`home/StepState`. The homepage and `/lists` start from `home/StartForm`, a
+plain GET form whose four submit buttons each open `/lists/[slug]`. Everything else is a server component,
 including `Diagram.tsx`, which is inline SVG. The site has no photographs
 or stock illustrations.
 

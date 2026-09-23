@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 
 export const nav = [
+  { href: "/lists", label: "lists" },
   { href: "/checklist", label: "checklist" },
-  { href: "/build-your-kit", label: "build your kit" },
-  { href: "/why", label: "why three days?" },
-  { href: "/worried", label: "worried?" },
+  { href: "/why", label: "why prepare?" },
   { href: "/community", label: "neighbours" },
+  { href: "/worried", label: "worried?" },
 ];
 
 export default function SiteHeader() {
