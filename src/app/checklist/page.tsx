@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
-import Illustration from "@/components/Illustration";
+import Diagram from "@/components/Diagram";
 import SectionLabel from "@/components/SectionLabel";
 import ChecklistTracker from "@/components/ChecklistTracker";
 import { checklist, startingPoint } from "@/data/checklist";
@@ -20,7 +20,7 @@ export default function ChecklistPage() {
         eyebrow="The essentials"
         title="What to keep on hand"
         lede="Realistic quantities for a household to build up gradually, a few pounds a week from the shop you already use. Every figure is a planning number drawn from public emergency guidance, not a worst case."
-        aside={<Illustration name="intro-checklist" className="w-full" />}
+        aside={<Diagram name="water" />}
         photo="checklist"
       />
 

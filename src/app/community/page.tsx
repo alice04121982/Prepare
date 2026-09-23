@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import SectionLabel from "@/components/SectionLabel";
-import Illustration from "@/components/Illustration";
+import Diagram from "@/components/Diagram";
 import Photo from "@/components/Photo";
 
 export const metadata: Metadata = {
@@ -37,7 +37,7 @@ export default function CommunityPage() {
         eyebrow="Community and mutual aid"
         title="Once your own household has what it needs, look around you"
         lede="In an emergency, help goes first to the people who need it most. Everyone else is expected to manage for a while. The better prepared your household is, the more you can do for the people near you, and a street that knows itself gets through a bad week faster."
-        aside={<Illustration name="intro-community" className="w-full" />}
+        aside={<Diagram name="checkin" />}
         photo="community"
       />
 

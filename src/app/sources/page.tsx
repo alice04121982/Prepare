@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
 import SectionLabel from "@/components/SectionLabel";
-import Illustration from "@/components/Illustration";
 import { photoCredits } from "@/components/Photo";
 import Callout from "@/components/Callout";
 
@@ -18,7 +17,6 @@ export default function SourcesPage() {
         eyebrow="Sources and methodology"
         title="Where the numbers come from"
         lede="Every duration and quantity on this site is a conservative planning figure drawn from public emergency-preparedness guidance. The full citation list is still being compiled."
-        aside={<Illustration name="intro-sources" className="w-full" />}
       />
 
       <div className="mx-auto max-w-3xl">
@@ -40,10 +38,10 @@ export default function SourcesPage() {
         </p>
       </Callout>
       <section className="prose-plain mt-8 leading-relaxed">
-        <SectionLabel>Illustrations and design</SectionLabel>
-        <h2 className="text-2xl font-semibold">Illustrations and design</h2>
+        <SectionLabel>Diagrams and design</SectionLabel>
+        <h2 className="text-2xl font-semibold">Diagrams and design</h2>
         <p className="mt-3">
-          Illustrations are from the Textile 3D Shapes pack on Figma Community, released under CC0. Photographs are
+          Diagrams are drawn for this site and are part of it. Photographs are
           from Unsplash under the Unsplash Licence, free for commercial use
           with no attribution required; we credit the photographers below
           anyway. Type is General Sans and Switzer from Fontshare. No

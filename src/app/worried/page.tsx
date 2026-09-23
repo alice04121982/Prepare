@@ -3,7 +3,6 @@ import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import SectionLabel from "@/components/SectionLabel";
 import Callout from "@/components/Callout";
-import Illustration from "@/components/Illustration";
 import Photo from "@/components/Photo";
 
 export const metadata: Metadata = {
@@ -83,7 +82,6 @@ export default function WorriedPage() {
         eyebrow="If the news is frightening you"
         title="It is normal to feel like this. Here is some perspective, and some help."
         lede="This page is for the moment when the headlines have got to you and the rest of the site feels like too much. Nothing here is a substitute for a doctor or a counsellor. It is what they, and people who have lived through worse, tend to say."
-        aside={<Illustration name="intro-worried" className="w-full" />}
       />
 
       <div className="mx-auto max-w-3xl">
