@@ -5,12 +5,14 @@ type Props = {
   children: ReactNode;
 };
 
-/** Pale-mint rounded aside, the site's equivalent of the offline guide's notice block. */
+/** A boxed note: heavy ink border, a thick rule under the title, like the panel on the back of a pack. */
 export default function Callout({ title, children }: Props) {
   return (
-    <aside className="my-8 rounded-card bg-mint-pale px-6 py-5 text-[0.95rem] leading-relaxed">
-      {title ? <p className="mb-1 font-heading font-medium text-heading">{title}</p> : null}
-      <div className="prose-plain text-foreground/90">{children}</div>
+    <aside className="my-8 max-w-[65ch] border-[3px] border-ink">
+      {title ? (
+        <p className="border-b-[6px] border-ink px-4.5 py-3 text-lg font-extrabold">{title}</p>
+      ) : null}
+      <div className="prose-plain px-4.5 py-4">{children}</div>
     </aside>
   );
 }

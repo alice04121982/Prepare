@@ -166,6 +166,10 @@
   line-height: 0.95;
 }
 
+/* Section and sub-section headings inside pages. */
+.h-section { font-size: clamp(2.25rem, 9vw, 4rem); }
+.h-sub { font-size: clamp(1.5rem, 5.5vw, 2.25rem); }
+
 /* Buttons are square ink blocks. Hover lays a yolk stripe along the base. */
 .btn {
   display: inline-flex;

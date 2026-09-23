@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
-import SectionLabel from "@/components/SectionLabel";
-import Illustration from "@/components/Illustration";
-import Photo from "@/components/Photo";
+import Arrow from "@/components/home/Arrow";
 
 export const metadata: Metadata = {
   title: "Community and mutual aid",
@@ -32,56 +30,63 @@ const firstSteps = [
 
 export default function CommunityPage() {
   return (
-    <main className="w-full px-4 py-4 sm:px-10 sm:py-8">
+    <main>
       <PageIntro
-        eyebrow="Community and mutual aid"
-        title="Once your own household has what it needs, look around you"
+        cat="people"
+        title="once your own household has what it needs, look around you"
         lede="In an emergency, help goes first to the people who need it most. Everyone else is expected to manage for a while. The better prepared your household is, the more you can do for the people near you, and a street that knows itself gets through a bad week faster."
-        aside={<Illustration name="intro-community" className="w-full" />}
-        photo="community"
       />
 
-      <div className="mx-auto max-w-3xl">
-        <p className="leading-relaxed">
+      <div className="wrap py-14 min-[900px]:py-20">
+        <p className="measure text-[1.1875rem] leading-relaxed min-[900px]:text-[1.3125rem]">
           The evidence from decades of disasters says ordinary people are the
           first responders: they share generators, cook for strangers and
           check on people they have never spoken to. The people who come to
           harm are the ones nobody thought to check on. So sort your own
           household first, and then be the person who knocks.
         </p>
+      </div>
 
-        <section className="mt-12">
-          <SectionLabel>Four things to do first</SectionLabel>
-          <h2 className="text-2xl font-semibold">Four things to do first</h2>
-          <p className="mt-3 leading-relaxed text-muted">
+      <section aria-labelledby="first-h" className="border-t-[3px] border-ink pb-16 pt-14 min-[900px]:pb-26 min-[900px]:pt-20">
+        <div className="wrap">
+          <h2 id="first-h" className="h-section">
+            four things to do first
+          </h2>
+          <p className="mt-5 max-w-[52ch] text-lg text-ink-2">
             None of these cost money, and the first two take an afternoon.
           </p>
-          <ol className="mt-8 space-y-8">
+          <ol className="mt-10 border-b-8 border-ink">
             {firstSteps.map((step, i) => (
-              <li key={step.title} className="flex gap-5">
-                <span className="font-heading mt-1 shrink-0 text-sm text-accent">
-                  {String(i + 1).padStart(2, "0")}
+              <li
+                key={step.title}
+                className="grid grid-cols-[3.5rem_1fr] gap-x-4.5 border-t-8 border-ink pb-9 pt-6 min-[900px]:grid-cols-[5rem_minmax(0,1fr)_minmax(0,1.1fr)] min-[900px]:gap-x-9 min-[900px]:pb-12 min-[900px]:pt-8"
+              >
+                <span
+                  aria-hidden="true"
+                  data-cat
+                  className="display grid h-16 w-14 place-items-center border-[3px] border-t-0 border-ink bg-cat-people text-[2.5rem] tabular-nums min-[900px]:h-24 min-[900px]:w-20 min-[900px]:text-[3.75rem]"
+                  style={{ fontVariationSettings: '"wdth" 125' }}
+                >
+                  {i + 1}
                 </span>
-                <div>
-                  <h3 className="text-lg font-semibold">{step.title}</h3>
-                  <p className="mt-2 leading-relaxed">{step.body}</p>
-                </div>
+                <h3 className="h-sub pt-1 lowercase min-[900px]:pt-2">{step.title}</h3>
+                <p className="measure col-start-2 mt-3.5 text-[1.0625rem] leading-relaxed min-[900px]:col-start-3 min-[900px]:mt-2 min-[900px]:text-[1.1875rem]">
+                  {step.body}
+                </p>
               </li>
             ))}
           </ol>
-        </section>
 
-        <Photo slot="together-everyday" aspect="aspect-[16/8]" caption className="mt-14" />
-
-        <div className="mt-12 flex flex-wrap gap-4 pt-8 text-sm">
-          <Link href="/checklist" className="btn btn-primary">
-            See the checklist
-          </Link>
-          <Link href="/build-your-kit" className="btn btn-secondary">
-            Build your kit
-          </Link>
+          <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-3">
+            <Link href="/checklist" className="btn btn-primary btn-lg">
+              see the checklist <Arrow />
+            </Link>
+            <Link href="/build-your-kit" className="arrow-link text-lg">
+              build your kit <Arrow size={18} />
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

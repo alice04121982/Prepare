@@ -1,22 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
-import Illustration from "@/components/Illustration";
-import ListRow from "@/components/ListRow";
-import SectionLabel from "@/components/SectionLabel";
 import Callout from "@/components/Callout";
+import Arrow from "@/components/home/Arrow";
 import { scenarios } from "@/data/scenarios";
 import { officialGuidance, guidanceLastChecked } from "@/data/official-guidance";
-import {
-  Banknote,
-  Bus,
-  Droplet,
-  Pill,
-  ShoppingCart,
-  Thermometer,
-  WifiOff,
-  type LucideIcon,
-} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Why three days",
@@ -24,14 +12,15 @@ export const metadata: Metadata = {
     "Why the UK government asks households to be ready for three days, what usually stops, how long it lasts, and where the official guidance is.",
 };
 
-const whatStops: { text: string; icon: LucideIcon }[] = [
-  { text: "The heating goes off.", icon: Thermometer },
-  { text: "The shops run short, or cannot take cards.", icon: ShoppingCart },
-  { text: "Nothing comes out of the taps.", icon: Droplet },
-  { text: "Cash machines and card readers stop.", icon: Banknote },
-  { text: "Mobile networks and the internet go down.", icon: WifiOff },
-  { text: "Buses and trains stop.", icon: Bus },
-  { text: "Prescriptions are hard to get.", icon: Pill },
+/** What might stop, each with the category label it carries on the homepage shelf. */
+const whatStops: { text: string; cat: string }[] = [
+  { text: "The heating goes off.", cat: "bg-cat-power" },
+  { text: "The shops run short, or cannot take cards.", cat: "bg-cat-food" },
+  { text: "Nothing comes out of the taps.", cat: "bg-cat-water" },
+  { text: "Cash machines and card readers stop.", cat: "bg-cat-money" },
+  { text: "Mobile networks and the internet go down.", cat: "bg-cat-news" },
+  { text: "Buses and trains stop.", cat: "bg-cat-people" },
+  { text: "Prescriptions are hard to get.", cat: "bg-cat-health" },
 ];
 
 function formatDate(iso: string) {
@@ -45,55 +34,69 @@ function formatDate(iso: string) {
 
 export default function WhyPage() {
   return (
-    <main className="w-full px-4 py-4 sm:px-10 sm:py-8">
+    <main>
       <PageIntro
-        eyebrow="Why now"
-        title="Why the government asks you to be ready for three days"
+        cat="health"
+        title="why the government asks you to be ready for three days"
         lede="Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked their citizens to keep a few days of supplies at home. The reasons they give are the same: severe weather, attacks on power and water systems, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent. All of them have decided it is no longer sensible to assume it cannot happen."
-        aside={<Illustration name="intro-scenarios" className="w-full" />}
-        photo="guidance"
       />
 
-      <div className="mx-auto max-w-3xl">
-        <section>
-          <SectionLabel>What might stop</SectionLabel>
-          <h2 className="text-2xl font-semibold">What might actually stop</h2>
-          <p className="mt-3 leading-relaxed text-muted">
-            Severe weather, a fault in the grid, a cyber attack on a water
-            company, or disruption from a conflict elsewhere in Europe can all
-            have the same effect at home.
-          </p>
-          <ul className="mt-6 grid gap-2 sm:grid-cols-2">
-            {whatStops.map(({ text, icon: Icon }) => (
-              <li key={text} className="flex items-center gap-4 rounded-2xl bg-mint-pale px-4 py-3 text-sm">
-                <span
-                  aria-hidden
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface text-accent"
-                >
-                  <Icon size={20} strokeWidth={1.75} />
-                </span>
-                {text}
-              </li>
-            ))}
-          </ul>
-        </section>
+      {/* What might stop: a ruled list, each line carrying its category label */}
+      <section aria-labelledby="stop-h" className="wrap py-16 min-[900px]:py-24">
+        <h2 id="stop-h" className="h-section">
+          what might actually stop
+        </h2>
+        <p className="measure mt-5 text-lg">
+          Severe weather, a fault in the grid, a cyber attack on a water
+          company, or disruption from a conflict elsewhere in Europe can all
+          have the same effect at home.
+        </p>
+        <ul className="mt-9 max-w-[980px] border-t-[3px] border-ink min-[900px]:grid min-[900px]:grid-cols-2 min-[900px]:gap-x-10">
+          {whatStops.map(({ text, cat }) => (
+            <li
+              key={text}
+              className="flex min-h-16 items-center gap-4 border-b border-ink py-3.5 text-[1.1875rem] font-bold leading-snug"
+            >
+              <span
+                aria-hidden="true"
+                data-cat
+                className={`${cat} size-6 flex-none border-2 border-ink`}
+              />
+              {text}
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        <section className="mt-16">
-          <SectionLabel>How long it lasts</SectionLabel>
-          <h2 className="text-2xl font-semibold">What it usually looks like</h2>
-          <p className="mt-3 leading-relaxed text-muted">
+      {/* How long it lasts: duration on the left in tabular text */}
+      <section aria-labelledby="long-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-24">
+        <div className="wrap">
+          <h2 id="long-h" className="h-section">
+            what it usually looks like
+          </h2>
+          <p className="measure mt-5 text-lg">
             Six realistic situations, how long each usually lasts, and the
             things that make the most difference. Five are about a difficult
             day or week. The sixth is longer and rarer.
           </p>
-          <ol className="mt-6 divide-y divide-line border-y border-line">
-            {scenarios.map((s, i) => (
-              <ListRow key={s.slug} index={i + 1} meta={s.typicalDuration} title={s.title}>
-                <p className="text-muted">{s.summary}</p>
-                <p className="mt-1">
-                  <span className="font-medium">What helps most:</span> {s.whatHelps.slice(0, 2).join(" ")}
+          <ol className="mt-9 border-y-[3px] border-ink">
+            {scenarios.map((s) => (
+              <li
+                key={s.slug}
+                className="grid gap-y-3 border-t border-ink py-6 first:border-t-0 min-[900px]:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] min-[900px]:gap-x-10 min-[900px]:py-8"
+              >
+                <p className="font-bold tabular-nums text-ink-2 min-[900px]:pt-1.5">
+                  {s.typicalDuration}
                 </p>
-              </ListRow>
+                <div className="measure">
+                  <h3 className="h-sub lowercase">{s.title}</h3>
+                  <p className="mt-3">{s.summary}</p>
+                  <p className="mt-2">
+                    <b className="font-extrabold">What helps most:</b>{" "}
+                    {s.whatHelps.slice(0, 2).join(" ")}
+                  </p>
+                </div>
+              </li>
             ))}
           </ol>
           <Callout title="One kit covers all of them">
@@ -104,40 +107,65 @@ export default function WhyPage() {
               it.
             </p>
           </Callout>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-16">
-          <SectionLabel>Official guidance</SectionLabel>
-          <h2 className="text-2xl font-semibold">What the government says</h2>
-          <p className="mt-3 leading-relaxed text-muted">
+      {/* Official guidance: grouped ruled lists, publisher in small text */}
+      <section aria-labelledby="gov-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-24">
+        <div className="wrap">
+          <h2 id="gov-h" className="h-section">
+            what the government says
+          </h2>
+          <p className="measure mt-5 text-lg">
             The UK government&rsquo;s own site is called Prepare. It is short,
             calm and worth ten minutes, and everything here is consistent with
             it. Every link below was opened and checked on{" "}
-            {formatDate(guidanceLastChecked)}.
+            <span className="tabular-nums">{formatDate(guidanceLastChecked)}</span>.
           </p>
-          <div className="mt-6 divide-y divide-line">
+          <div className="mt-6">
             {officialGuidance.map((group) => (
-              <section key={group.title} className="py-8">
-                <h3 className="text-lg font-semibold">{group.title}</h3>
-                <ol className="mt-2 divide-y divide-line">
-                  {group.links.map((l, i) => (
-                    <ListRow key={l.url + l.title} index={i + 1} title={l.title} href={l.url} external tag={l.publisher} />
+              <section key={group.title} className="mt-12 min-[900px]:mt-16">
+                <h3 className="h-sub lowercase">{group.title}</h3>
+                <ol className="mt-5 border-y-[3px] border-ink">
+                  {group.links.map((l) => (
+                    <li
+                      key={l.url + l.title}
+                      className="grid gap-y-1.5 border-t border-ink py-4.5 first:border-t-0 min-[900px]:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] min-[900px]:gap-x-10"
+                    >
+                      <p className="text-[0.9375rem] font-bold text-ink-2 min-[900px]:pt-1">
+                        {l.publisher}
+                      </p>
+                      <div className="measure">
+                        <a
+                          href={l.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex min-h-11 items-center gap-2.5 text-[1.1875rem] font-extrabold leading-snug hover:decoration-4"
+                        >
+                          {l.title}
+                          <span className="sr-only"> (opens in a new tab)</span>
+                        </a>
+                        <p className="text-ink-2">{l.summary}</p>
+                      </div>
+                    </li>
                   ))}
                 </ol>
               </section>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <div className="mt-8 flex flex-wrap gap-4 pt-8 text-sm">
-          <Link href="/checklist" className="btn btn-primary">
-            See the checklist
+      <section aria-label="Next steps" className="no-print border-t-[3px] border-ink py-12 min-[900px]:py-16">
+        <div className="wrap flex flex-wrap items-center gap-x-7 gap-y-4">
+          <Link href="/checklist" className="btn btn-primary btn-lg">
+            see the checklist <Arrow />
           </Link>
-          <Link href="/build-your-kit" className="btn btn-secondary">
-            Build your kit
+          <Link href="/build-your-kit" className="btn btn-secondary btn-lg">
+            build your kit
           </Link>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

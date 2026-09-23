@@ -46,20 +46,18 @@ const durations = [
 export default function Home() {
   return (
     <main>
-      {/* Hero: the question, then one action */}
-      <section aria-labelledby="hero-q" className="wrap pb-12 pt-10 min-[900px]:pb-22 min-[900px]:pt-18">
+      {/* Hero: what the site is, then one action */}
+      <section aria-labelledby="hero-h" className="wrap pb-12 pt-10 min-[900px]:pb-22 min-[900px]:pt-18">
         <h1
-          id="hero-q"
-          className="display max-w-[15.5ch] text-[clamp(2.35rem,10.4vw,6rem)]"
+          id="hero-h"
+          className="display max-w-[14ch] text-[clamp(2.75rem,12vw,6.5rem)]"
           style={{ fontVariationSettings: '"wdth" 108' }}
         >
-          if the power went off, the water stopped and the shops were shut for
-          three days, would you be all right?
+          a practical guide to being ready at home
         </h1>
         <p className="mt-7 max-w-[40ch] text-[1.1875rem] leading-normal min-[900px]:mt-10 min-[900px]:text-[1.375rem]">
-          The government asks every UK household to be able to manage on its own
-          for three days. This site makes that practical: what to keep, how much,
-          how long it lasts, and what to do first.
+          What to keep, how much, how long it lasts and what to do first, if the
+          power, water or shops stop for a few days.
         </p>
         <div id="hero-actions" className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 min-[900px]:mt-11">
           <Link href="/checklist" className="btn btn-primary btn-lg">
@@ -80,13 +78,16 @@ export default function Home() {
       {/* What might stop: the tins */}
       <section aria-labelledby="stop-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
         <div className="wrap">
-          <h2 id="stop-h" className="text-[clamp(2.5rem,11vw,5.25rem)]">
-            what might stop
+          <h2 id="stop-h" className="max-w-[20ch] text-[clamp(2rem,8.5vw,4.25rem)]">
+            if the power went off, the water stopped and the shops were shut
+            for three days, would you be all right?
           </h2>
           <p className="mt-5 max-w-[52ch] text-lg">
-            Severe weather, a fault in the grid, a cyber attack on a water
-            company, or disruption from a conflict elsewhere in Europe can all
-            have the same effect at home.
+            The government asks every UK household to be able to manage on its
+            own for three days. Severe weather, a fault in the grid, a cyber
+            attack on a water company, or disruption from a conflict elsewhere
+            in Europe can all have the same effect at home. This is what might
+            stop.
           </p>
         </div>
         <StopList stops={stops} />

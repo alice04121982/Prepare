@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
-import Illustration from "@/components/Illustration";
 import KitPlanner from "@/components/KitPlanner";
 import { householdFromParams } from "@/data/kit-rules";
 
@@ -17,15 +16,12 @@ export default async function BuildYourKitPage({
 }) {
   const initial = householdFromParams(await searchParams) ?? undefined;
   return (
-    <main className="w-full px-4 py-4 sm:px-10 sm:py-8">
-      <div>
-        <PageIntro
-          eyebrow="Build your kit"
-          title="Stay prepared and stock up on the essentials"
-          lede="Answer a few questions and get a shopping list with the quantities worked out. Tick what you already have. Copy it, print it, or send it straight to a basket."
-          aside={<Illustration name="intro-kit" className="w-full" />}
-        />
-      </div>
+    <main>
+      <PageIntro
+        cat="food"
+        title="stay prepared and stock up on the essentials"
+        lede="Answer a few questions and get a shopping list with the quantities worked out. Tick what you already have. Copy it, print it, or send it straight to a basket."
+      />
       <KitPlanner initial={initial} />
     </main>
   );

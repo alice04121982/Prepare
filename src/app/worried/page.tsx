@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
-import SectionLabel from "@/components/SectionLabel";
 import Callout from "@/components/Callout";
-import Illustration from "@/components/Illustration";
-import Photo from "@/components/Photo";
+import Arrow from "@/components/home/Arrow";
 
 export const metadata: Metadata = {
   title: "If the news is frightening you",
@@ -78,19 +76,22 @@ const sources = [
 
 export default function WorriedPage() {
   return (
-    <main className="w-full px-4 py-4 sm:px-10 sm:py-8">
+    <main>
       <PageIntro
-        eyebrow="If the news is frightening you"
-        title="It is normal to feel like this. Here is some perspective, and some help."
+        cat="news"
+        title="it is normal to feel like this. here is some perspective, and some help."
         lede="This page is for the moment when the headlines have got to you and the rest of the site feels like too much. Nothing here is a substitute for a doctor or a counsellor. It is what they, and people who have lived through worse, tend to say."
-        aside={<Illustration name="intro-worried" className="w-full" />}
       />
 
-      <div className="mx-auto max-w-3xl">
-        <section className="prose-plain leading-relaxed">
-          <SectionLabel>First, this is not weakness</SectionLabel>
-          <h2 className="text-2xl font-semibold">First, this is not weakness</h2>
-          <p className="mt-4">
+      <div className="wrap">
+        <section
+          aria-labelledby="weakness-h"
+          className="measure prose-plain py-14 text-[1.125rem] leading-relaxed min-[900px]:py-20 min-[900px]:text-[1.1875rem]"
+        >
+          <h2 id="weakness-h" className="h-sub">
+            first, this is not weakness
+          </h2>
+          <p className="mt-5">
             Sweden&rsquo;s civil defence agency opens its national booklet with
             one line: &ldquo;Many people may feel a sense of anxiety when faced
             with an uncertain world.&rdquo; A government does not print that on
@@ -103,8 +104,8 @@ export default function WorriedPage() {
             built for.
           </p>
 
-          <h2 className="mt-12 text-2xl font-semibold">Why it feels worse than it is</h2>
-          <p className="mt-4">
+          <h2 className="h-sub mt-14">why it feels worse than it is</h2>
+          <p className="mt-5">
             A hundred years ago you would not have known about a flood in New
             Zealand, a shooting in another country, or, most days, a fire in
             the next town. You would have known what happened to the people you
@@ -130,113 +131,140 @@ export default function WorriedPage() {
             were. It means the feeling and the risk have come apart, and it is
             the feeling that is making you miserable.
           </p>
+
+          <div className="mt-12">
+            <Callout title="The one idea to keep">
+              <p>
+                Fear is the feeling of a threat with nothing to do about it.
+                Preparation is the doing. That is why people who fill two bottles
+                and write three phone numbers on a card feel calmer afterwards,
+                and why people who scroll for another hour do not.
+              </p>
+            </Callout>
+          </div>
         </section>
+      </div>
 
-        <Photo slot="together-covid" aspect="aspect-[16/8]" caption className="mt-10" />
-
-
-        <Callout title="The one idea to keep">
-          <p>
-            Fear is the feeling of a threat with nothing to do about it.
-            Preparation is the doing. That is why people who fill two bottles
-            and write three phone numbers on a card feel calmer afterwards,
-            and why people who scroll for another hour do not.
-          </p>
-        </Callout>
-
-        <section className="mt-12">
-          <SectionLabel>What counsellors and psychologists suggest</SectionLabel>
-          <h2 className="text-2xl font-semibold">What counsellors and psychologists suggest</h2>
-          <p className="mt-3 leading-relaxed text-muted">
-            Collected from NHS, Mental Health Foundation and clinical advice
-            written during the pandemic and the war in Ukraine. Pick two.
-          </p>
-          <ol className="mt-8 space-y-7">
-            {habits.map((h, i) => (
-              <li key={h.title} className="flex gap-5">
-                <span className="font-heading mt-1 shrink-0 text-sm text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="text-lg font-semibold">{h.title}</h3>
-                  <p className="mt-2 leading-relaxed">{h.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="mt-14">
-          <SectionLabel>If you have children who are frightened</SectionLabel>
-          <h2 className="text-2xl font-semibold">If you have children who are frightened</h2>
-          <ul className="mt-5 space-y-3 leading-relaxed">
-            {children.map((c) => (
-              <li key={c} className="flex gap-3">
-                <span aria-hidden className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                <span>{c}</span>
+      <section aria-labelledby="habits-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
+        <div className="wrap">
+          <div className="measure">
+            <h2 id="habits-h" className="h-sub">
+              what counsellors and psychologists suggest
+            </h2>
+            <p className="mt-5 text-[1.125rem] leading-relaxed text-ink-2">
+              Collected from NHS, Mental Health Foundation and clinical advice
+              written during the pandemic and the war in Ukraine. Pick two.
+            </p>
+          </div>
+          <ul className="measure mt-10 border-b-[3px] border-ink">
+            {habits.map((h) => (
+              <li key={h.title} className="border-t-[3px] border-ink pb-8 pt-5">
+                <h3 className="text-[1.3125rem] leading-tight min-[900px]:text-[1.5rem]">{h.title}</h3>
+                <p className="mt-3 text-[1.125rem] leading-relaxed">{h.body}</p>
               </li>
             ))}
           </ul>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-14 rounded-card bg-mint-pale px-6 py-6">
-          <SectionLabel>If it is more than worry</SectionLabel>
-          <h2 className="text-2xl font-semibold">If it is more than worry</h2>
-          <p className="mt-3 leading-relaxed">
-            If the fear is stopping you sleeping, working or leaving the
-            house, or has lasted more than a couple of weeks, that is worth
-            talking to someone about. None of these will think you are being
-            silly.
-          </p>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+      <section aria-labelledby="children-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
+        <div className="wrap">
+          <h2 id="children-h" className="h-sub measure">
+            if you have children who are frightened
+          </h2>
+          <ul className="measure mt-8 border-b border-ink text-[1.125rem] leading-relaxed">
+            {children.map((c) => (
+              <li key={c} className="border-t border-ink py-4">
+                {c}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="help-h"
+        data-cat
+        className="border-t-[3px] border-ink bg-cat-news py-14 min-[900px]:py-20"
+      >
+        <div className="wrap min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] min-[900px]:items-start min-[900px]:gap-16">
+          <div className="measure">
+            <h2 id="help-h" className="h-sub">
+              if it is more than worry
+            </h2>
+            <p className="mt-5 text-[1.125rem] leading-relaxed">
+              If the fear is stopping you sleeping, working or leaving the
+              house, or has lasted more than a couple of weeks, that is worth
+              talking to someone about. None of these will think you are being
+              silly.
+            </p>
+          </div>
+          <ul className="mt-8 border-b-[3px] border-ink min-[900px]:mt-0">
             {help.map((h) => (
-              <li key={h.name} className="rounded-2xl bg-surface px-4 py-3 text-sm">
+              <li
+                key={h.name}
+                className="grid gap-1 border-t-[3px] border-ink py-4 min-[900px]:grid-cols-[13rem_1fr] min-[900px]:gap-6"
+              >
                 <a
                   href={h.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-heading text-base font-medium text-heading underline-offset-4 hover:underline"
+                  className="inline-flex min-h-11 items-start pt-0.5 text-lg font-extrabold min-[900px]:min-h-0"
                 >
                   {h.name}
                 </a>
-                <p className="mt-1 text-muted">{h.detail}</p>
+                <p className="text-[1.0625rem] leading-relaxed">{h.detail}</p>
               </li>
             ))}
           </ul>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-14 prose-plain leading-relaxed">
-          <SectionLabel>Then, when you are ready</SectionLabel>
-          <h2 className="text-2xl font-semibold">Then, when you are ready</h2>
-          <p className="mt-4">
-            Not today, necessarily. But the calmest thing you can do about a
-            frightening world is to sort out the small part of it that is
-            yours. Nine things, over a few weeks, from the shop you already
-            use.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/checklist" className="btn btn-primary">
-              The nine things to get first
+      <section aria-labelledby="ready-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
+        <div className="wrap">
+          <div className="measure">
+            <h2 id="ready-h" className="h-sub">
+              then, when you are ready
+            </h2>
+            <p className="mt-5 text-[1.125rem] leading-relaxed">
+              Not today, necessarily. But the calmest thing you can do about a
+              frightening world is to sort out the small part of it that is
+              yours. Nine things, over a few weeks, from the shop you already
+              use.
+            </p>
+          </div>
+          <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
+            <Link href="/checklist" className="btn btn-primary btn-lg">
+              the nine things to get first <Arrow />
             </Link>
-            <Link href="/why" className="btn btn-secondary">
-              Why three days?
+            <Link href="/why" className="inline-flex min-h-11 items-center font-bold">
+              why three days?
             </Link>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-14 border-t border-line pt-8">
-          <h2 className="text-lg font-semibold">Sources</h2>
-          <ul className="mt-3 space-y-1.5 text-sm text-muted">
+      <section aria-labelledby="sources-h" className="border-t-[3px] border-ink pb-16 pt-10 min-[900px]:pb-24">
+        <div className="wrap">
+          <h2 id="sources-h" className="text-[1.3125rem]">
+            sources
+          </h2>
+          <ul className="measure mt-4 border-b border-ink text-[0.9375rem] leading-snug text-ink-2">
             {sources.map((s) => (
-              <li key={s.url}>
-                <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-accent">
+              <li key={s.url} className="border-t border-ink">
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block py-3 text-ink-2 hover:text-ink"
+                >
                   {s.label}
                 </a>
               </li>
             ))}
           </ul>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
   );
 }
