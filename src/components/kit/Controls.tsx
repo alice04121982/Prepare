@@ -142,12 +142,15 @@ export function DaysControl({
   min,
   max,
   presets,
+  note: noteOverride,
 }: {
   value: number;
   onChange: (n: number) => void;
   min: number;
   max: number;
   presets: { days: number; note?: string }[];
+  /** Replaces the note under the presets, for a list with its own range. */
+  note?: string;
 }) {
   const [draft, setDraft] = useState<string | null>(null);
   const inputId = useId();
@@ -162,11 +165,12 @@ export function DaysControl({
   };
 
   const note =
-    value < 3
+    noteOverride ??
+    (value < 3
       ? "Three days is the government minimum."
       : value >= max
-        ? `Up to ${max} days. Past that, water becomes the hard part.`
-        : `Any whole number of days from ${min} to ${max}.`;
+        ? `Up to ${max} days. Past 14, the list swaps extra bottled water for a filter.`
+        : `Any whole number of days from ${min} to ${max}.`);
 
   return (
     <div className="px-4.5 pb-4.5 pt-2.5 min-[900px]:px-6">
@@ -245,6 +249,19 @@ export function DaysControl({
       <p id={noteId} aria-live="polite" className="mt-3 text-[0.9375rem] leading-snug text-ink-2">
         {note}
       </p>
+    </div>
+  );
+}
+
+/** Days of cover as fixed text, for a list with one length only. */
+export function FixedDays({ label, value, note }: { label: string; value: string; note?: string }) {
+  return (
+    <div className="px-4.5 pb-4.5 pt-2.5 min-[900px]:px-6">
+      <div className="grid grid-cols-[1fr_auto] items-center gap-3">
+        <span className="font-extrabold leading-tight">{label}</span>
+        <span className="display text-[1.75rem] tabular-nums">{value}</span>
+      </div>
+      {note ? <p className="mt-2 text-[0.9375rem] leading-snug text-ink-2">{note}</p> : null}
     </div>
   );
 }

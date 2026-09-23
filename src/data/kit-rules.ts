@@ -6,7 +6,15 @@
  * per day, the top of the World Health Organisation's 2.5 to 3 litre minimum,
  * as quoted by gov.uk. Other figures follow the site's checklist. Everything
  * is a planning figure, rounded up.
+ *
+ * A household can carry one of the four ready-made lists (src/data/lists.ts).
+ * The first three set the days and change a few rules with duration: past 14
+ * days bottled water gives way to a filter, tins drop to one a day and bulk
+ * staples carry the rest, and from 7 days a camping stove joins the list. The
+ * grab bag is a different list altogether, built by buildGrabBag().
  */
+
+import { clampDaysForList, isListSlug, type ListSlug } from "@/data/lists";
 
 export type Household = {
   adults: number;
@@ -23,6 +31,8 @@ export type Household = {
   homeType: "flat" | "house";
   /** Days of cover to plan for: a whole number from MIN_DAYS to MAX_DAYS. */
   days: number;
+  /** The ready-made list, if the reader picked one. Its range bounds `days`. */
+  list?: ListSlug;
 };
 
 export type ProductOption = {
@@ -48,6 +58,12 @@ export type KitLine = {
   /** The free or already-owned way to cover this, shown first. */
   freeOption?: string;
   products?: ProductOption[];
+  /**
+   * Another line id whose products (src/data/products.ts) fit this line too.
+   * Lets a grab bag line reuse the home kit's head torch or radio without
+   * sharing its tick.
+   */
+  productsFrom?: string;
   /** True for the nine things to get first. */
   priority?: boolean;
   /** What to type into a supermarket search to find this. */
@@ -75,12 +91,24 @@ export const defaultHousehold: Household = {
 const ceil = Math.ceil;
 
 export const MIN_DAYS = 1;
-export const MAX_DAYS = 28;
+export const MAX_DAYS = 90;
 
 /** Clamps any number to a whole number of days in range. */
 export function clampDays(n: number): number {
   return Math.max(MIN_DAYS, Math.min(MAX_DAYS, Math.round(n)));
 }
+
+/** Days are clamped to the list's own range when a list is set. */
+function daysFor(h: Household): number {
+  return h.list ? clampDaysForList(h.list, h.days) : clampDays(h.days);
+}
+
+/** Bottled water covers this many days. Past it, a filter takes over. */
+export const BOTTLED_WATER_DAYS = 14;
+/** Tins are planned at two a day for this many days, then one. */
+export const TWO_TIN_DAYS = 14;
+/** A camping stove and gas join the list from this many days. */
+export const STOVE_FROM_DAYS = 7;
 
 /** "1 day", "14 days". */
 export function daysLabel(n: number): string {
@@ -88,12 +116,27 @@ export function daysLabel(n: number): string {
 }
 
 export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
+  if (h.list === "grab-bag") return buildGrabBag(h);
+
   const people = h.adults + h.children + h.babies;
   const peopleWhoDrink = h.adults + h.children;
-  const d = h.days;
+  const d = daysFor(h);
+  const drinkers = `${peopleWhoDrink} ${peopleWhoDrink === 1 ? "person" : "people"}`;
 
-  const water = 3 * peopleWhoDrink * d + (h.babies > 0 ? 2 * h.babies * d : 0);
+  // Water: bottled for the first 14 days, a filter after that.
+  const waterPerDay = 3 * peopleWhoDrink + (h.babies > 0 ? 2 * h.babies : 0);
+  const filtering = d > BOTTLED_WATER_DAYS;
+  const water = waterPerDay * Math.min(d, BOTTLED_WATER_DAYS);
+  const waterWholeStay = waterPerDay * d;
   const waterPacks = ceil(water / 9); // six 1.5 litre bottles
+
+  // Food: two tins a day for the first 14 days, then one, with bulk staples
+  // carrying the rest.
+  const twoTinDays = Math.min(d, TWO_TIN_DAYS);
+  const oneTinDays = Math.max(0, d - TWO_TIN_DAYS);
+  const tins = 2 * peopleWhoDrink * twoTinDays + peopleWhoDrink * oneTinDays;
+  const carbsKg = 0.1 * peopleWhoDrink * twoTinDays + 0.2 * peopleWhoDrink * oneTinDays;
+  const gas = ceil((peopleWhoDrink / 2) * (d / 3));
 
   const lines: KitLine[] = [
     {
@@ -103,7 +146,9 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       item: "Bottled drinking water",
       quantity: waterPacks,
       unit: "six-packs of 1.5 litre bottles",
-      basis: `${water} litres: 3 litres per person per day for ${peopleWhoDrink} ${peopleWhoDrink === 1 ? "person" : "people"} over ${daysLabel(d)}${h.babies ? `, plus water for making up feeds` : ""}. That is the top of the World Health Organisation's 2.5 to 3 litre minimum, as quoted by gov.uk.`,
+      basis: filtering
+        ? `${water} litres, for the first 14 days: 3 litres per person per day for ${drinkers}${h.babies ? `, plus water for making up feeds` : ""}. That is the top of the World Health Organisation's 2.5 to 3 litre minimum, as quoted by gov.uk. It stops at 14 days because ${daysLabel(d)} would need ${waterWholeStay.toLocaleString("en-GB")} litres, more than most homes can store. The filter below covers the rest.`
+        : `${water} litres: 3 litres per person per day for ${drinkers} over ${daysLabel(d)}${h.babies ? `, plus water for making up feeds` : ""}. That is the top of the World Health Organisation's 2.5 to 3 litre minimum, as quoted by gov.uk.`,
       freeOption: "Refilled, clearly labelled bottles from the tap, rotated every few months, cost nothing.",
       priority: true,
       products: [
@@ -132,28 +177,66 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       freeOption: "A pan and a heat source.",
       products: [{ name: "Chlorine or chlorine dioxide tablets, 30 to 50 pack", tier: "budget", priceBand: "£5 to £10" }],
     },
+    ...(filtering
+      ? [
+          {
+            id: "water-filter",
+            search: "gravity water filter",
+            category: "Water",
+            item: "Gravity water filter",
+            quantity: 1,
+            unit: "for the household",
+            basis: `Included because you are planning for more than 14 days. Past that, storing bottles stops being realistic: your household would need ${waterWholeStay.toLocaleString("en-GB")} litres for ${daysLabel(d)}. A gravity filter cleans tap, rain or river water in batches, with no power or pumping. One per household. Check what the maker says it removes before you rely on it, and use the tablets above on any water you are unsure of.`,
+            freeOption: "Boiling water for one minute makes it safe to drink, if you have the fuel to spare.",
+          } satisfies KitLine,
+          {
+            id: "water-store",
+            search: "10 litre water container with tap",
+            category: "Water",
+            item: "Containers for filtered drinking water",
+            quantity: Math.max(2, ceil(peopleWhoDrink / 2)),
+            unit: "containers of 10 litres, with a tap",
+            basis: `One per two people, and at least two, so a day's filtered water is always ready and covered while the next batch runs through. Your household drinks about ${waterPerDay} litres a day.`,
+            freeOption: "Clean, lidded food-grade containers you already own do the same job.",
+            productsFrom: "water-extra",
+          } satisfies KitLine,
+        ]
+      : []),
     {
       id: "tins",
       search: "tinned beans soup tuna",
       category: "Food",
       item: "Tinned or jarred meals and vegetables",
-      quantity: 2 * peopleWhoDrink * d,
+      quantity: tins,
       unit: "tins",
-      basis: `Two tins per person per day for ${daysLabel(d)}. Beans, soup, fish, vegetables, ready meals. Things you already eat.`,
+      basis: oneTinDays
+        ? `Two tins per person per day for the first 14 days, then one a day for the other ${daysLabel(oneTinDays)}, because the bulk staples below carry the rest and pack far smaller. Beans, soup, fish, vegetables, ready meals. Things you already eat. Put new tins at the back and eat from the front.`
+        : `Two tins per person per day for ${daysLabel(d)}. Beans, soup, fish, vegetables, ready meals. Things you already eat.`,
       freeOption: "Most cupboards hold a few days already. Count what you have before buying.",
       priority: true,
       products: [{ name: "Own-brand tinned beans, soup, tuna, vegetables", tier: "budget", priceBand: "50p to £1.50 a tin" }],
     },
-    {
-      id: "carbs",
-      search: "pasta 500g",
-      category: "Food",
-      item: "Pasta, rice or instant mash",
-      quantity: ceil((0.1 * peopleWhoDrink * d) / 0.5),
-      unit: "packs of 500 g",
-      basis: `About 100 g per person per day. Needs cooking, so pair with the no-cook items below.`,
-      products: [{ name: "Own-brand pasta or rice, 500 g to 1 kg", tier: "budget", priceBand: "£1 to £2" }],
-    },
+    oneTinDays
+      ? {
+          id: "carbs",
+          search: "long grain rice 5kg",
+          category: "Food",
+          item: "Pasta or rice",
+          quantity: ceil(carbsKg),
+          unit: "kg",
+          basis: `About 100 g per person per day for the first 14 days, then 200 g a day for the other ${daysLabel(oneTinDays)}, because the second tin drops out and dry food takes its place. These are the site's planning figures. Keep it in sealed tubs, eat the oldest first and replace it as you go.`,
+          products: [{ name: "Own-brand long grain rice or pasta, 5 kg bag", tier: "budget", priceBand: "£5 to £10" }],
+        }
+      : {
+          id: "carbs",
+          search: "pasta 500g",
+          category: "Food",
+          item: "Pasta, rice or instant mash",
+          quantity: ceil((0.1 * peopleWhoDrink * d) / 0.5),
+          unit: "packs of 500 g",
+          basis: `About 100 g per person per day. Needs cooking, so pair with the no-cook items below.`,
+          products: [{ name: "Own-brand pasta or rice, 500 g to 1 kg", tier: "budget", priceBand: "£1 to £2" }],
+        },
     {
       id: "nocook",
       search: "crackers peanut butter cereal bars",
@@ -184,8 +267,35 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       item: "Porridge oats or cereal",
       quantity: ceil(0.06 * peopleWhoDrink * d),
       unit: "kg",
-      basis: "About 60 g per person per breakfast.",
+      basis: oneTinDays
+        ? "About 60 g per person per breakfast. Oats keep for months in a sealed tub; eat the oldest first."
+        : "About 60 g per person per breakfast.",
     },
+    ...(oneTinDays
+      ? [
+          {
+            id: "pulses",
+            search: "red lentils 1kg",
+            category: "Food",
+            item: "Dried lentils, beans or split peas",
+            quantity: ceil(0.05 * peopleWhoDrink * oneTinDays),
+            unit: "kg",
+            basis: `About 50 g per person per day for the ${daysLabel(oneTinDays)} past 14, to replace the protein the second tin gave. A site planning figure. Red lentils need no soaking and cook fastest, which saves gas.`,
+            products: [{ name: "Own-brand red lentils or dried beans, 500 g to 2 kg", tier: "budget", priceBand: "£1 to £4" }],
+          } satisfies KitLine,
+          {
+            id: "oil",
+            search: "vegetable oil 1 litre",
+            category: "Food",
+            item: "Cooking oil",
+            quantity: ceil(0.03 * peopleWhoDrink * oneTinDays),
+            unit: ceil(0.03 * peopleWhoDrink * oneTinDays) === 1 ? "litre" : "litres",
+            basis: `About two tablespoons (30 ml) per person per day for the ${daysLabel(oneTinDays)} past 14. Rice, pasta and lentils on their own are low in fat; oil adds energy and makes them easier to eat. A site planning figure.`,
+            freeOption: "Check the cupboard: most kitchens already have a bottle open.",
+            products: [{ name: "Own-brand vegetable or rapeseed oil, 1 litre", tier: "budget", priceBand: "£1.50 to £3" }],
+          } satisfies KitLine,
+        ]
+      : []),
     {
       id: "tin-opener",
       search: "tin opener",
@@ -198,6 +308,31 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       priority: true,
       products: [{ name: "Basic manual tin opener", tier: "budget", priceBand: "£2 to £6" }],
     },
+    ...(d >= STOVE_FROM_DAYS
+      ? [
+          {
+            id: "stove",
+            search: "portable camping gas stove",
+            category: "Food",
+            item: "Camping stove",
+            quantity: 1,
+            unit: "",
+            basis: `Included because you are planning for ${STOVE_FROM_DAYS} days or more. Cold food is fine for a few days; after that the tins and staples need heating. Use it outdoors only, never indoors or in a garage: stoves give off carbon monoxide.`,
+            freeOption: "A camping stove you already own. Light it once before you need it.",
+            products: [{ name: "Single-burner portable gas stove", tier: "budget", priceBand: "£15 to £30" }],
+          } satisfies KitLine,
+          {
+            id: "gas",
+            search: "butane gas canisters",
+            category: "Food",
+            item: "Gas canisters for the stove",
+            quantity: gas,
+            unit: gas === 1 ? "canister" : "canisters",
+            basis: `One canister per two people every 3 days, the site's planning rate: ${gas} for ${drinkers} over ${daysLabel(d)}. Buy the type your stove takes, and store them somewhere cool and aired, away from the house if you can.`,
+            products: [{ name: "Butane canisters to fit your stove, pack of 4", tier: "budget", priceBand: "£6 to £12" }],
+          } satisfies KitLine,
+        ]
+      : []),
     {
       id: "torch",
       search: "led torch",
@@ -497,7 +632,280 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     { id: "plan", text: "Agree a check-in plan: who calls whom, and one out-of-area contact everyone can reach." },
     { id: "neighbours", text: "Learn two neighbours' names and numbers. Write them on the contacts sheet." },
     ...(h.homeType === "flat" ? [{ id: "lifts", text: "Know the stairs. Lifts stop in a power cut; plan for carrying water and shopping up." }] : []),
+    ...(oneTinDays ? [{ id: "rotate", text: "Eat from your stores and replace what you use, oldest first, so nothing goes out of date." }] : []),
     ...(h.medicalNeeds ? [{ id: "equipment", text: "Keep a paper copy of instructions for any medical equipment and ask the supplier about battery backup." }] : []),
+  ];
+
+  return { lines, tasks };
+}
+
+/**
+ * What the grab bag list says about its own numbers, for any page that shows
+ * it. The same words open the list's first line.
+ */
+export const GRAB_BAG_NOTE =
+  "Quantities on this list are the site's planning figures, based on gov.uk's list of supplies to keep in a bag in case you are asked to leave home quickly. If you are escaping a fire, never stop to take anything: get out, stay out and call 999.";
+
+/**
+ * The grab bag: one bag per person who can carry one, packed for 3 days.
+ * Per person unless the line says household. Lines have ids of their own
+ * (gb-...), so a torch ticked at home does not tick the one in the bag.
+ */
+export function buildGrabBag(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
+  const carriers = Math.max(1, h.adults + h.children);
+  const people = h.adults + h.children + h.babies;
+  const animals = h.dogs + h.cats;
+  const days = 3;
+  const firstDayWater = 3 * carriers + 2 * h.babies;
+  const each = (n: number) => `${n} ${n === 1 ? "person" : "people"}`;
+
+  const lines: KitLine[] = [
+    {
+      id: "gb-bag",
+      search: "rucksack backpack",
+      category: "The bag",
+      item: "Rucksack",
+      quantity: carriers,
+      unit: carriers === 1 ? "bag" : "bags, one per person",
+      basis: `One per person who can carry one: ${each(carriers)}. A child under 5 can share an adult's bag, so take one off for each, and babies' things go in an adult's bag. ${GRAB_BAG_NOTE}`,
+      freeOption: "A school bag or any rucksack you already own.",
+      priority: true,
+    },
+    {
+      id: "gb-clothes",
+      category: "The bag",
+      item: "A change of clothes, spare glasses, keys and a phone charger",
+      quantity: people,
+      unit: people === 1 ? "set" : "sets, one per person",
+      basis: "Warm layers and socks for each person. Pack the clothes now; the glasses, keys and charger go in on your way out.",
+      freeOption: "All of it is already at home.",
+    },
+    {
+      id: "gb-multitool",
+      search: "multi tool non locking",
+      category: "The bag",
+      item: "Multi-tool",
+      quantity: 1,
+      unit: "for the household",
+      basis: "One per household, in an adult's bag. Choose one whose blade folds, does not lock and is under 3 inches: UK law restricts carrying other blades in public without a good reason.",
+      freeOption: "One you already own, if it fits that rule.",
+    },
+    {
+      id: "gb-water",
+      search: "still water 1.5l",
+      category: "Water",
+      item: "Bottled drinking water",
+      quantity: Math.ceil(firstDayWater / 1.5),
+      unit: "bottles of 1.5 litres",
+      basis: `${firstDayWater} litres: 3 litres per person for the first day, the World Health Organisation figure quoted by gov.uk${h.babies ? ", plus water for making up feeds" : ""}. Water is heavy, so this covers one day and the filter bottles cover the next two.`,
+      freeOption: "Tap water in bottles you already have, changed every few months.",
+      priority: true,
+    },
+    {
+      id: "gb-filter-bottle",
+      search: "water filter bottle",
+      category: "Water",
+      item: "Water bottle with a built-in filter",
+      quantity: carriers,
+      unit: carriers === 1 ? "bottle" : "bottles, one per person",
+      basis: "One per person, so you can refill from a tap, a shop or a stream once the bottled water runs out. Check what the maker says it removes.",
+      freeOption: "An ordinary bottle, and boiled water wherever you can get it.",
+    },
+    {
+      id: "gb-food",
+      search: "cereal bars multipack",
+      category: "Food",
+      item: "Food that needs no cooking",
+      quantity: days,
+      unit: `days' worth for ${carriers} (food bars, nuts, tinned fruit with a ring pull)`,
+      basis: `${days} days per person, with no cooking and no tin opener needed. Pick things everyone will eat, and check the dates when you check the bag.`,
+      freeOption: "Take some from the cupboard, and replace it when you shop.",
+      priority: true,
+    },
+    {
+      id: "gb-blanket",
+      search: "foil emergency blanket",
+      category: "Warmth",
+      item: "Foil emergency blanket",
+      quantity: people,
+      unit: people === 1 ? "blanket" : "blankets, one each",
+      basis: "One each, babies included. They weigh almost nothing and fold small.",
+    },
+    {
+      id: "gb-poncho",
+      search: "rain poncho",
+      category: "Warmth",
+      item: "Rain poncho",
+      quantity: carriers,
+      unit: carriers === 1 ? "poncho" : "ponchos, one each",
+      basis: "One each. Staying dry is most of staying warm. A poncho also fits over a rucksack.",
+      freeOption: "A waterproof coat you already own, packed or worn.",
+    },
+    {
+      id: "gb-torch",
+      search: "led head torch",
+      category: "Power and light",
+      item: "Head torch",
+      quantity: carriers,
+      unit: carriers === 1 ? "" : "one per person",
+      basis: "One per person who can hold one. It leaves hands free for bags and children.",
+      freeOption: "A torch from the home kit, if you will not need it there.",
+      productsFrom: "torch",
+      priority: true,
+    },
+    {
+      id: "gb-batteries",
+      search: "aa batteries",
+      category: "Power and light",
+      item: "Spare batteries for the torches and radio",
+      quantity: 1,
+      unit: "pack of 4, for the household",
+      basis: "One spare set per household. Alkaline keeps for years; check the date when you check the bag.",
+      productsFrom: "batteries",
+    },
+    {
+      id: "gb-powerbank",
+      search: "power bank 10000mah",
+      category: "Power and light",
+      item: "Power bank and charging cables",
+      quantity: 1,
+      unit: "for the household, kept charged",
+      basis: "One per household. A 10,000 mAh bank charges a phone two or three times. Top it up when you check the bag.",
+      productsFrom: "powerbank",
+      priority: true,
+    },
+    {
+      id: "gb-firstaid",
+      search: "small first aid kit travel",
+      category: "First aid and medication",
+      item: "Small first aid kit",
+      quantity: carriers,
+      unit: carriers === 1 ? "kit" : "kits, one per bag",
+      basis: "One per bag: plasters, dressings, antiseptic wipes, tape and gloves, with paracetamol for adults.",
+      freeOption: "Make one up from the bathroom cabinet in a sandwich bag.",
+    },
+    {
+      id: "gb-meds",
+      category: "First aid and medication",
+      item: "A week of each person's medication",
+      quantity: 7,
+      unit: "days' supply, for each person who takes regular medication",
+      basis: "Prescriptions, inhalers and allergy treatment, with a copy of each prescription so a pharmacy elsewhere can help.",
+      freeOption: "Ask your GP or pharmacist to reorder a few days early each time until you are a week ahead.",
+      priority: true,
+    },
+    {
+      id: "gb-radio",
+      search: "wind up radio",
+      category: "Communication",
+      item: "Wind-up or battery radio",
+      quantity: 1,
+      unit: "for the household",
+      basis: "One per household. Local radio carries the news about where to go and when you can go home.",
+      productsFrom: "radio",
+    },
+    {
+      id: "gb-whistle",
+      search: "safety whistle",
+      category: "Communication",
+      item: "Whistle",
+      quantity: carriers,
+      unit: carriers === 1 ? "" : "one per person",
+      basis: "One per person, clipped to the bag strap. A whistle carries further than a voice and takes less breath.",
+    },
+    {
+      id: "gb-contacts",
+      category: "Communication",
+      item: "Paper list of contacts and numbers",
+      quantity: 1,
+      unit: "for the household",
+      basis: "Your phone may be flat or lost. Family, your out-of-area contact, GP and insurer, written down.",
+      freeOption: "A sheet of paper. Free.",
+    },
+    {
+      id: "gb-cash",
+      category: "Cash and documents",
+      item: "Cash in small notes",
+      quantity: 40 + 20 * (people - 1),
+      unit: "pounds, roughly, for the household",
+      basis: "For food, travel or a phone top-up if card machines are down where you end up.",
+      priority: true,
+    },
+    {
+      id: "gb-documents",
+      category: "Cash and documents",
+      item: "Copies of ID, insurance and prescriptions",
+      quantity: 1,
+      unit: "set, in a waterproof wallet",
+      basis: "One set per household. Proof of who you are and what you own helps with your insurer, and with the council if you need somewhere to stay.",
+      freeOption: "Photocopies or photos. Free.",
+    },
+    ...(h.babies > 0
+      ? [
+          {
+            id: "gb-nappies",
+            search: "nappies",
+            category: "Babies",
+            item: "Nappies",
+            quantity: 6 * h.babies * days,
+            unit: "nappies",
+            basis: `Six a day for ${h.babies} ${h.babies === 1 ? "baby" : "babies"} over ${daysLabel(days)}, in an adult's bag.`,
+          } satisfies KitLine,
+          {
+            id: "gb-formula",
+            search: "ready to feed formula",
+            category: "Babies",
+            item: "Ready-to-feed formula (if bottle feeding)",
+            quantity: 4 * h.babies * days,
+            unit: "200 ml cartons",
+            basis: "Ready-to-feed needs no water or heating. Pack a clean bottle with it. Skip if breastfeeding or past formula.",
+          } satisfies KitLine,
+          {
+            id: "gb-babywipes",
+            search: "baby wipes",
+            category: "Babies",
+            item: "Baby wipes",
+            quantity: h.babies,
+            unit: h.babies === 1 ? "pack" : "packs",
+            basis: "One pack per baby.",
+          } satisfies KitLine,
+        ]
+      : []),
+    ...(animals > 0
+      ? [
+          {
+            id: "gb-pets",
+            search: "pet travel carrier",
+            category: "Pets",
+            item: "Pet food, lead and carrier",
+            quantity: days,
+            unit: `days of usual food for ${animals} ${animals === 1 ? "animal" : "animals"}`,
+            basis: "Plus any medication, a little extra water, and a recent photo in case you are separated.",
+          } satisfies KitLine,
+        ]
+      : []),
+    ...(h.over65 > 0
+      ? [
+          {
+            id: "gb-hearing",
+            search: "hearing aid batteries",
+            category: "Older household members",
+            item: "Spare hearing-aid batteries and mobility-aid chargers",
+            quantity: 1,
+            unit: "set, if used",
+            basis: "Small, cheap, and the thing that is missing when it matters.",
+          } satisfies KitLine,
+        ]
+      : []),
+  ];
+
+  const tasks: KitTask[] = [
+    { id: "gb-fire", text: "If you are escaping a fire, leave the bag. Get out, stay out and call 999." },
+    { id: "gb-place", text: "Keep the bags where you can reach them on the way out, not in the loft or the shed." },
+    { id: "gb-where", text: "Agree where you would go, such as a friend or relative out of the area, and how you would get there." },
+    { id: "gb-check", text: "Check the bags every six months: food dates, batteries, medication and children's clothes sizes." },
+    { id: "flood", text: "Sign up for flood warnings for your postcode.", url: "https://www.gov.uk/sign-up-for-flood-warnings" },
+    { id: "alerts", text: "Check your phone can receive Emergency Alerts.", url: "https://www.gov.uk/alerts" },
   ];
 
   return { lines, tasks };
@@ -514,7 +922,13 @@ export function amazonBasketUrl(items: { asin: string; quantity: number }[], tag
   return `https://www.amazon.co.uk/gp/aws/cart/add.html?${params.join("&")}${tagParam}`;
 }
 
-/** Parses planner state from URL search params (server or client). */
+/**
+ * Parses planner state from URL search params (server or client).
+ *
+ * With a `list` param, days are clamped to that list's range and a missing
+ * `d` takes the list's default; 72 hours and the grab bag are always 3.
+ * Without one, days run from MIN_DAYS to MAX_DAYS.
+ */
 export function householdFromParams(q: Record<string, string | string[] | undefined>): Household | null {
   if (!Object.keys(q).length) return null;
   const get = (k: string) => {
@@ -525,9 +939,16 @@ export function householdFromParams(q: Record<string, string | string[] | undefi
     const v = parseInt(get(k) ?? "", 10);
     return Number.isFinite(v) ? Math.max(0, Math.min(12, v)) : d;
   };
-  // Days has its own range, checked before anything else clamps it.
+  const rawList = get("list");
+  const list = isListSlug(rawList) ? rawList : undefined;
+  // Days has its own range, checked before anything else clamps it: the
+  // 0 to 12 clamp above once turned a shared 14-day link into 12.
   const rawDays = parseInt(get("d") ?? "", 10);
-  const days = Number.isFinite(rawDays) ? clampDays(rawDays) : defaultHousehold.days;
+  const days = list
+    ? clampDaysForList(list, Number.isFinite(rawDays) ? rawDays : Number.NaN)
+    : Number.isFinite(rawDays)
+      ? clampDays(rawDays)
+      : defaultHousehold.days;
   return {
     adults: Math.max(1, n("a", 2)),
     children: n("c", 0),
@@ -538,7 +959,25 @@ export function householdFromParams(q: Record<string, string | string[] | undefi
     medicalNeeds: get("med") === "1",
     homeType: get("home") === "flat" ? "flat" : "house",
     days,
+    ...(list ? { list } : {}),
   };
+}
+
+/** Writes planner state to a query string. householdFromParams reads it back. */
+export function householdToQuery(h: Household): string {
+  const q = new URLSearchParams({
+    ...(h.list ? { list: h.list } : {}),
+    a: String(h.adults),
+    c: String(h.children),
+    b: String(h.babies),
+    e: String(h.over65),
+    dogs: String(h.dogs),
+    cats: String(h.cats),
+    med: h.medicalNeeds ? "1" : "0",
+    home: h.homeType,
+    d: String(h.list ? clampDaysForList(h.list, h.days) : h.days),
+  });
+  return `?${q.toString()}`;
 }
 
 export type Retailer = {

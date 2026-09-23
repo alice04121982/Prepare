@@ -6,6 +6,7 @@ import {
   buildKit,
   daysLabel,
   defaultHousehold,
+  householdToQuery,
   MAX_DAYS,
   MIN_DAYS,
   retailers,
@@ -14,27 +15,33 @@ import {
 } from "@/data/kit-rules";
 import { ExternalLink, ShoppingBasket } from "lucide-react";
 import { amazonImageUrl, amazonProductUrl, productsFor } from "@/data/products";
-import { Counter, DaysControl, OptionRow, TickBox } from "@/components/kit/Controls";
+import { Counter, DaysControl, FixedDays, OptionRow, TickBox } from "@/components/kit/Controls";
+import { ListPicker } from "@/components/kit/ListPicker";
 import { DownArrow, goToBuy, StillToGetBar } from "@/components/kit/StillToGet";
 import { catBgFor } from "@/components/kit/categories";
 import { kitLineKey } from "@/data/have-map";
 import { useHave } from "@/lib/have";
+import { daysRangeFor, defaultDaysFor, listBySlug, type ListSlug } from "@/data/lists";
 
 const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
 
-function toQuery(h: Household) {
-  const q = new URLSearchParams({
-    a: String(h.adults),
-    c: String(h.children),
-    b: String(h.babies),
-    e: String(h.over65),
-    dogs: String(h.dogs),
-    cats: String(h.cats),
-    med: h.medicalNeeds ? "1" : "0",
-    home: h.homeType,
-    d: String(h.days),
-  });
-  return `?${q.toString()}`;
+/** Quick picks under the days stepper, per list. Without a list, the original three. */
+const PRESETS: Record<"none" | ListSlug, { days: number; note?: string }[]> = {
+  none: [{ days: 3, note: "the government minimum" }, { days: 7 }, { days: 14 }],
+  "72-hours": [],
+  "two-weeks-to-a-month": [{ days: 7, note: "a week" }, { days: 14, note: "2 weeks" }, { days: 30, note: "a month" }],
+  "three-months": [{ days: 31, note: "a month" }, { days: 60, note: "2 months" }, { days: 90, note: "3 months" }],
+  "grab-bag": [],
+};
+
+/** The note under a list's days stepper: its range, and where to go past either end. */
+function listDaysNote(slug: ListSlug, value: number): string {
+  const { min, max } = daysRangeFor(slug);
+  if (value <= min && slug === "two-weeks-to-a-month") return `From ${min} days on this list. For fewer, change to 72 hours.`;
+  if (value >= max && slug === "two-weeks-to-a-month") return `Up to ${max} days on this list. For longer, change to 3 months.`;
+  if (value <= min && slug === "three-months") return `From ${min} days on this list. For fewer, change to 2 weeks to a month.`;
+  if (value >= max) return `Up to ${max} days on this list.`;
+  return `Any whole number of days from ${min} to ${max}.`;
 }
 
 /** Small solid block of a category's label colour, or plain paper for household lines. */
@@ -91,19 +98,22 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const [fits, setFits] = useState(false);
   const asideRef = useRef<HTMLElement>(null);
   const closeRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.history.replaceState(null, "", toQuery(h));
+    window.history.replaceState(null, "", householdToQuery(h));
   }, [h]);
 
   useEffect(() => {
     const aside = asideRef.current;
     const close = closeRef.current;
     if (!aside || !close) return;
-    const check = () => setFits(aside.offsetHeight + close.offsetHeight + 48 <= window.innerHeight);
+    const check = () =>
+      setFits(aside.offsetHeight + (listRef.current?.offsetHeight ?? 0) + close.offsetHeight + 48 <= window.innerHeight);
     const ro = new ResizeObserver(check);
     ro.observe(aside);
     ro.observe(close);
+    if (listRef.current) ro.observe(listRef.current);
     window.addEventListener("resize", check);
     return () => {
       ro.disconnect();
@@ -118,7 +128,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const ticked = total - toBuy.length;
   const remaining = toBuy.length;
   const picks = toBuy
-    .map((l) => ({ line: l, product: productsFor(l.id)[0] }))
+    .map((l) => ({ line: l, product: productsFor(l.productsFrom ?? l.id)[0] }))
     .map(({ line, product }) => ({
       line,
       product,
@@ -134,9 +144,21 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
 
   const set = <K extends keyof Household>(k: K, v: Household[K]) => setH((prev) => ({ ...prev, [k]: v }));
 
+  const list = h.list ? listBySlug(h.list) : undefined;
+  const isGrabBag = h.list === "grab-bag";
+
+  // A new list keeps the days if they fit its range, otherwise starts at its default.
+  const chooseList = (slug: ListSlug) =>
+    setH((prev) => {
+      const { min, max } = daysRangeFor(slug);
+      const days = prev.days >= min && prev.days <= max ? prev.days : defaultDaysFor(slug);
+      return { ...prev, list: slug, days };
+    });
+
   const plainText = () => {
     const people = h.adults + h.children + h.babies;
-    const head = `Stay Prepared shopping list: ${people} ${people === 1 ? "person" : "people"}, ${daysLabel(h.days)}\n${window.location.href}\n`;
+    const name = list ? `${list.title} list` : "shopping list";
+    const head = `Stay Prepared ${name}: ${people} ${people === 1 ? "person" : "people"}, ${daysLabel(h.days)}\n${window.location.href}\n`;
     const body = categories
       .map((c) => {
         const items = toBuy.filter((l) => l.category === c);
@@ -181,6 +203,11 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
       {/* Inputs: the household panel, then (on wide screens) the closing count */}
       <div className="no-print min-w-0">
         <div className={fits ? "min-[900px]:sticky min-[900px]:top-6" : "contents"}>
+          {h.list ? (
+            <div ref={listRef}>
+              <ListPicker value={h.list} onChange={chooseList} />
+            </div>
+          ) : null}
           <aside
             ref={asideRef}
             id="kit-household"
@@ -210,7 +237,10 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
               </OptionRow>
             </div>
 
-            <fieldset className="border-b border-ink px-4.5 pb-4 pt-3 min-[900px]:px-6">
+            <fieldset
+              hidden={isGrabBag}
+              className="border-b border-ink px-4.5 pb-4 pt-3 min-[900px]:px-6"
+            >
               <legend className="float-left mb-2.5 w-full font-extrabold">Home</legend>
               <div className="clear-both grid grid-cols-2 gap-2">
                 {(["flat", "house"] as const).map((t) => (
@@ -228,13 +258,28 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
               </div>
             </fieldset>
 
-            <DaysControl
-              value={h.days}
-              onChange={(v) => set("days", v)}
-              min={MIN_DAYS}
-              max={MAX_DAYS}
-              presets={[{ days: 3, note: "the government minimum" }, { days: 7 }, { days: 14 }]}
-            />
+            {isGrabBag ? (
+              <FixedDays label="Packed for" value="3 days" note="Enough to carry. Bottled water covers the first day and the filter bottles the rest." />
+            ) : h.list === "72-hours" ? (
+              <FixedDays label="Days of cover" value="3 days" note="The government minimum. For longer, change list." />
+            ) : h.list ? (
+              <DaysControl
+                value={h.days}
+                onChange={(v) => set("days", v)}
+                min={daysRangeFor(h.list).min}
+                max={daysRangeFor(h.list).max}
+                presets={PRESETS[h.list]}
+                note={listDaysNote(h.list, h.days)}
+              />
+            ) : (
+              <DaysControl
+                value={h.days}
+                onChange={(v) => set("days", v)}
+                min={MIN_DAYS}
+                max={MAX_DAYS}
+                presets={PRESETS.none}
+              />
+            )}
           </aside>
 
           <div
@@ -265,7 +310,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
         <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-5">
           <div className="min-w-0">
             <h2 id="kit-list-h" className="text-[clamp(2rem,8.6vw,3.5rem)]">
-              your list: {people} {people === 1 ? "person" : "people"}, {daysLabel(h.days)}
+              {isGrabBag ? "your grab bag" : "your list"}: {people} {people === 1 ? "person" : "people"}
+              {isGrabBag ? "" : `, ${daysLabel(h.days)}`}
             </h2>
             {haveReady && ticked > 0 ? (
               <p className="mt-3 font-extrabold">
