@@ -12,7 +12,6 @@ export default function SourcesPage() {
   return (
     <main>
       <PageIntro
-        cat="money"
         title="where the numbers come from"
         lede="Every duration and quantity on this site is a conservative planning figure drawn from public emergency-preparedness guidance. The full citation list is still being compiled."
       />

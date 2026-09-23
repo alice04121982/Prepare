@@ -78,7 +78,6 @@ export default function WorriedPage() {
   return (
     <main>
       <PageIntro
-        cat="news"
         title="it is normal to feel like this. here is some perspective, and some help."
         lede="This page is for the moment when the headlines have got to you and the rest of the site feels like too much. Nothing here is a substitute for a doctor or a counsellor. It is what they, and people who have lived through worse, tend to say."
       />
@@ -184,8 +183,7 @@ export default function WorriedPage() {
 
       <section
         aria-labelledby="help-h"
-        data-cat
-        className="border-t-[3px] border-ink bg-cat-news py-14 min-[900px]:py-20"
+        className="border-t-[3px] border-ink bg-hush py-14 min-[900px]:py-20"
       >
         <div className="wrap min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] min-[900px]:items-start min-[900px]:gap-16">
           <div className="measure">

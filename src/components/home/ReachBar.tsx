@@ -6,30 +6,40 @@ import Arrow from "@/components/home/Arrow";
 
 /**
  * The main action, pinned within thumb reach on phones once the hero's own
- * button has scrolled away, and tucked away again when the footer arrives so
- * it never covers it. Hidden on wide screens and when printing.
+ * button has scrolled away. It tucks away again over the footer and over any
+ * element in `hideOver` (a form with its own main button), so there is never
+ * a second primary action on screen. Hidden on wide screens and when printing.
  */
-export default function ReachBar({ watch }: { watch: string }) {
+export default function ReachBar({ watch, hideOver = [] }: { watch: string; hideOver?: string[] }) {
   const [passedHero, setPassedHero] = useState(false);
-  const [atFooter, setAtFooter] = useState(false);
-  const show = passedHero && !atFooter;
+  const [covered, setCovered] = useState<Set<Element>>(new Set());
+  const show = passedHero && covered.size === 0;
+  const hideKey = hideOver.join(" ");
 
   useEffect(() => {
     const hero = document.getElementById(watch);
-    const footer = document.querySelector("footer");
+    const others = [
+      document.querySelector("footer"),
+      ...hideKey.split(" ").filter(Boolean).map((id) => document.getElementById(id)),
+    ].filter((el): el is HTMLElement => !!el);
     const io = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.target === hero) {
           setPassedHero(!entry.isIntersecting && entry.boundingClientRect.top < 0);
         } else {
-          setAtFooter(entry.isIntersecting);
+          setCovered((prev) => {
+            const next = new Set(prev);
+            if (entry.isIntersecting) next.add(entry.target);
+            else next.delete(entry.target);
+            return next;
+          });
         }
       }
     });
     if (hero) io.observe(hero);
-    if (footer) io.observe(footer);
+    others.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, [watch]);
+  }, [watch, hideKey]);
 
   return (
     <div

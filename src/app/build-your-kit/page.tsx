@@ -18,8 +18,7 @@ export default async function BuildYourKitPage({
   return (
     <main>
       <PageIntro
-        cat="food"
-        title="stay prepared and stock up on the essentials"
+        title="work out what your household needs"
         lede="Answer a few questions and get a shopping list with the quantities worked out. Tick what you already have. Copy it, print it, or send it straight to a basket."
       />
       <KitPlanner initial={initial} />

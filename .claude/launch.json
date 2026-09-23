@@ -18,7 +18,7 @@
       "port": 4173
     },
     {
-      "name": "start",
+      "name": "production build (run next build first)",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
         "run",

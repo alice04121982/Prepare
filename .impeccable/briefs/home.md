@@ -14,7 +14,7 @@ OWN-WORLD: Bright white ground, near-black ink, category colours owning full-wid
 
 STORY: The visitor recognises their own cupboard, sees each thing that could stop and the one thing that helps, and checks what they already have before buying.
 
-FIRST VIEWPORT: On a 390px phone, the question fills the screen in large lowercase; directly below, one ink button "Check your cupboard" in thumb reach, then the first colour labels peeking in at the fold.
+FIRST VIEWPORT: The heading introduces the site ("a practical guide to being ready at home", pinned by the owner on 23 September 2026, replacing the question) with one ink button "check your cupboard". The question leads the shelf of tin labels: beside the heading on desktop, directly after it on a 390px phone with the first label at the fold. Each tin leads with the remedy and amount; the hazard is the small print.
 
 FORM: Own-label larder, position 1 of 7 on the ranked list. Seed key: none (concept-seed not run; the skill's binary was declined, directions were ranked by hand and chosen by the owner from built mocks).
 
@@ -22,7 +22,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 ## Open decisions
 
-- Seven stops need distinct colours; the mock reused yellow and left two white. Extend the palette to six category roles and map every checklist category to one.
+- Resolved: seven distinct category colours, one per tin; colour appears only where a category is named (second critique, 23 September 2026).
 - Print version is untested; checklist and kit pages must print in black and white on A4.
-- Imagery: none for now (start fresh); any future photography should look like the product's own shelf, not stock.
+- Imagery: none; old photos and illustrations deleted. See docs/photo-brief.md.
 - Logo: none decided; the lowercase wordmark stands in.

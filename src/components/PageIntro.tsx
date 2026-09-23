@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export type Cat = "water" | "food" | "power" | "health" | "news" | "money" | "people";
 
-/** Tailwind background class for each category label. */
+/** Tailwind background class for each category label, shared by the checklist and the kit planner. */
 export const catBg: Record<Cat, string> = {
   water: "bg-cat-water",
   food: "bg-cat-food",
@@ -16,16 +16,17 @@ export const catBg: Record<Cat, string> = {
 type Props = {
   title: string;
   lede: ReactNode;
-  /** The category colour that labels this page, like the band on a tin. */
-  cat: Cat;
   /** Optional actions or links under the lede. */
   children?: ReactNode;
 };
 
-/** Page opener: a full-width colour label with the heading in heavy lowercase and the lede under it. */
-export default function PageIntro({ title, lede, cat, children }: Props) {
+/**
+ * Page opener: the heading in heavy lowercase and the lede under it, closed by
+ * an ink rule. Plain paper on purpose: colour is kept for categories.
+ */
+export default function PageIntro({ title, lede, children }: Props) {
   return (
-    <div data-cat className={`${catBg[cat]} border-b-[3px] border-ink`}>
+    <div className="border-b-[3px] border-ink">
       <div className="wrap pb-10 pt-10 min-[900px]:pb-16 min-[900px]:pt-16">
         <h1
           className="display max-w-[16ch] text-[clamp(2.5rem,11vw,5.5rem)]"

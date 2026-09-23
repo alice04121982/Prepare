@@ -9,16 +9,6 @@ const links = [
   { href: "/sources", label: "Sources" },
 ];
 
-// One stripe per category label, in shelf order.
-const stripe = [
-  "bg-cat-water",
-  "bg-cat-food",
-  "bg-cat-power",
-  "bg-cat-health",
-  "bg-cat-news",
-  "bg-cat-money",
-  "bg-cat-people",
-];
 
 export default function SiteFooter() {
   return (
@@ -28,13 +18,13 @@ export default function SiteFooter() {
           <div>
             <Link
               href="/"
-              className="display text-4xl text-paper no-underline"
+              className="display inline-flex min-h-11 items-center text-4xl text-paper no-underline"
               style={{ fontVariationSettings: '"wdth" 118' }}
             >
               stay prepared
             </Link>
             <p className="mt-2.5 text-lg">
-              Calm, practical guidance for UK households. Not a survival site.
+              Calm, practical guidance for UK households.
             </p>
           </div>
           <ul className="grid grid-cols-2 gap-x-5 border-t border-[#5a5a5a]">
@@ -50,7 +40,7 @@ export default function SiteFooter() {
             ))}
           </ul>
         </div>
-        <div className="mt-7 grid gap-3 text-[0.9375rem] text-[#d6d6d6]">
+        <div className="mt-7 grid max-w-[65ch] gap-3 text-[0.9375rem] text-[#d6d6d6]">
           <p>
             Some product links earn us a small commission. The free option is
             always listed first.
@@ -59,11 +49,6 @@ export default function SiteFooter() {
             Figures from gov.uk Prepare, the Met Office and the NHS. Free to
             share. Check official guidance for your region too.
           </p>
-        </div>
-        <div aria-hidden="true" className="mt-8 grid h-3 grid-cols-7">
-          {stripe.map((c) => (
-            <span key={c} className={c} />
-          ))}
         </div>
       </div>
     </footer>

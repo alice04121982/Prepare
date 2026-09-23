@@ -36,7 +36,6 @@ export default function WhyPage() {
   return (
     <main>
       <PageIntro
-        cat="health"
         title="why the government asks you to be ready for three days"
         lede="Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked their citizens to keep a few days of supplies at home. The reasons they give are the same: severe weather, attacks on power and water systems, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent. All of them have decided it is no longer sensible to assume it cannot happen."
       />

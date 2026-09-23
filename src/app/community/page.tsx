@@ -32,7 +32,6 @@ export default function CommunityPage() {
   return (
     <main>
       <PageIntro
-        cat="people"
         title="once your own household has what it needs, look around you"
         lede="In an emergency, help goes first to the people who need it most. Everyone else is expected to manage for a while. The better prepared your household is, the more you can do for the people near you, and a street that knows itself gets through a bad week faster."
       />
@@ -63,8 +62,7 @@ export default function CommunityPage() {
               >
                 <span
                   aria-hidden="true"
-                  data-cat
-                  className="display grid h-16 w-14 place-items-center border-[3px] border-t-0 border-ink bg-cat-people text-[2.5rem] tabular-nums min-[900px]:h-24 min-[900px]:w-20 min-[900px]:text-[3.75rem]"
+                  className="display grid h-16 w-14 place-items-center bg-ink text-paper text-[2.5rem] tabular-nums min-[900px]:h-24 min-[900px]:w-20 min-[900px]:text-[3.75rem]"
                   style={{ fontVariationSettings: '"wdth" 125' }}
                 >
                   {i + 1}
