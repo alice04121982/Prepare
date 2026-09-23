@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro, { catBg, type Cat } from "@/components/PageIntro";
+import PrintButton from "@/components/PrintButton";
 import Arrow from "@/components/home/Arrow";
 import { checklist, startingPoint } from "@/data/checklist";
 import { faq } from "@/data/faq";
@@ -11,7 +12,11 @@ export const metadata: Metadata = {
     "What to keep on hand, with realistic quantities and how long each item lasts, plus the questions people ask.",
 };
 
-/** Each checklist category wears one category colour, like the label on a tin. */
+/**
+ * Each checklist category wears the colour of its tin: one meaning per colour
+ * across the site. Household-specific lines (babies, pets, older people) are
+ * not a tin, so they stay plain paper.
+ */
 const catBySlug: Record<string, Cat> = {
   water: "water",
   food: "food",
@@ -21,20 +26,20 @@ const catBySlug: Record<string, Cat> = {
   sanitation: "health",
   documents: "money",
   cash: "money",
-  "household-specific": "people",
 };
 
-const catFor = (slug: string): Cat => catBySlug[slug] ?? "water";
-const catForTitle = (title: string): Cat =>
+const catFor = (slug: string): Cat | undefined => catBySlug[slug];
+const catForTitle = (title: string): Cat | undefined =>
   catFor(checklist.find((c) => c.title === title)?.slug ?? "");
+const bgFor = (cat: Cat | undefined) => (cat ? catBg[cat] : "bg-paper");
 
 /** A small square of the category colour, printed as an outline. */
-function Swatch({ cat }: { cat: Cat }) {
+function Swatch({ cat }: { cat: Cat | undefined }) {
   return (
     <span
       aria-hidden="true"
       data-cat
-      className={`${catBg[cat]} inline-block size-3.5 flex-none border-2 border-ink`}
+      className={`${bgFor(cat)} inline-block size-3.5 flex-none border-2 border-ink`}
     />
   );
 }
@@ -45,7 +50,9 @@ export default function ChecklistPage() {
       <PageIntro
         title="what to keep on hand"
         lede="Realistic quantities for a household to build up gradually, a few pounds a week from the shop you already use. Every figure is a planning number drawn from public emergency guidance, not a worst case."
-      />
+      >
+        <PrintButton />
+      </PageIntro>
 
       {/* Start here: the short list */}
       <section aria-labelledby="first-h" className="wrap pb-16 pt-12 min-[900px]:pb-24 min-[900px]:pt-18">
@@ -60,7 +67,7 @@ export default function ChecklistPage() {
               benefit. Get them over a few weeks and the rest can follow.
             </p>
             <Link href="/build-your-kit" className="no-print btn btn-primary btn-lg mt-7">
-              work out my quantities and buy the kit <Arrow />
+              work out my quantities <Arrow />
             </Link>
           </div>
           <ul className="mt-10 border-b-8 border-t-8 border-ink min-[900px]:mt-2">
@@ -108,7 +115,7 @@ export default function ChecklistPage() {
       {/* The tins: one labelled band per category, then its items on the shelf */}
       {checklist.map((c) => (
         <section key={c.slug} id={c.slug} aria-labelledby={`${c.slug}-h`} className="scroll-mt-24">
-          <div data-cat className={`${catBg[catFor(c.slug)]} border-y-[3px] border-ink`}>
+          <div data-cat className={`${bgFor(catFor(c.slug))} border-y-[3px] border-ink`}>
             <div className="wrap pb-7 pt-8 min-[900px]:pb-10 min-[900px]:pt-12">
               <h2
                 id={`${c.slug}-h`}

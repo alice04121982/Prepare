@@ -161,8 +161,8 @@ Every label colour carries ink text at AA or better, so text always sits directl
 - **Yolk Yellow** (#ffc425, ink 11.6:1): power, light and warmth. Also the site's single interaction highlight (see the rule below).
 - **Plaster Green** (#5db84a, ink 7.4:1): health, first aid, medication, sanitation.
 - **Wireless Lilac** (#b49af2, ink 7.8:1): news and communication (the radio tin).
-- **Purse Pink** (#f7a1c4, ink 9.5:1): money, cash and documents.
-- **Neighbour Teal** (#2ec4b6, ink 8.5:1): people, neighbours, babies, children, pets, older household members.
+- **Purse Pink** (#f7a1c4, ink 9.5:1): money and papers (cash, documents).
+- **Neighbour Teal** (#2ec4b6, ink 8.5:1): neighbours and people around you. Household-specific lines (babies, pets, older household members) are not a tin and take no category colour: plain paper with the 3px ink border.
 
 ### Neutral
 - **Paper** (#ffffff): the ground of every page and the fill of secondary buttons, fields and option rows.
@@ -172,7 +172,7 @@ Every label colour carries ink text at AA or better, so text always sits directl
 - **Footer Note Grey** (#d6d6d6, 12.7:1 on ink) and **Footer Rule Grey** (#5a5a5a): small print and hairlines inside the ink footer only.
 
 ### Named Rules
-**The Label Rule.** A category colour appears only where that category is named: a tin label on the homepage shelf, a checklist category band or swatch, a kit list category header or line swatch. Everything else is ink on paper. If the category name is not on screen next to the colour, the colour is wrong.
+**The Label Rule.** Each colour has one meaning on every page, and a category colour appears only where that category is named: a tin label on the homepage shelf, a checklist category band or swatch, a kit list category header or line swatch. Everything else is ink on paper. If the category name is not on screen next to the colour, the colour is wrong.
 
 **The Yolk Exception.** Yolk Yellow is the one colour allowed to mean "you are interacting": the 5px stripe on a hovered primary button, the mobile Menu button hover, the skip link, text selection, and focus outlines inside the ink footer. It is never used as a background for content.
 
@@ -238,7 +238,7 @@ A bold underlined text link ending in the arrow, 44px tall, width 110. Hover thi
 
 ### Inputs / Fields
 - **Select (`.field`):** paper fill, 2px ink border, 4px radius, 48px tall, bold 1.125rem tabular text, a drawn chevron at the right. Hover fills Hover Cream.
-- **Option rows (radio and checkbox):** the input is visually hidden; its label is a 48px bordered row (2px, 4px radius) with an optional small note at the right. Hover fills Hover Cream; checked fills ink with paper text; keyboard focus shows a 3px ink outline offset 3px.
+- **Option rows (radio and checkbox):** the input is visually hidden; its label is a 48px bordered row (2px, 4px radius) with an optional small note at the right. Hover fills Hover Cream; checked fills ink with paper text in the planner, while the homepage duration rows mark checked with a 4px border on Hush so the choice never looks like the primary button beneath it; keyboard focus shows a 3px ink outline offset 3px.
 - **Stepper:** label on the left, then a square 44px minus button, a display-weight count, and a square 44px plus button. Disabled buttons fade the ink to 30%.
 - **Tick box:** a 28px square (2px border, 3px radius) inside a 44px target; checked fills ink with a paper tick. Prints as an empty box to tick by hand.
 - **Segmented tabs:** a 3px bordered strip of 48px cells split by 3px rules; the selected cell is ink.
@@ -252,7 +252,7 @@ A bold underlined text link ending in the arrow, 44px tall, width 110. Hover thi
 The opener on every inner page: the display title (max 16ch), the lede under it, optional actions, closed by a 3px ink rule. Plain paper on purpose; colour is kept for categories.
 
 ### Tin label (signature)
-One label per thing that might stop, stacked into a shelf. A full category colour fill, 3px ink border, no radius. Small bold hazard line on top ("if nothing comes out of the taps"), the remedy as the name in display type at width 118 (`clamp(2.25rem, 10vw, 3.5rem)`), then the amount under a 2px ink rule. Every label is open; nothing hides behind a tap.
+One label per thing that might stop, stacked into a shelf. A full category colour fill, 3px ink border, no radius. The remedy as the name in display type at width 118 (`clamp(2rem, 8.5vw, 2.75rem)`, never larger than the shelf question above it), the amount in bold under it using a sourced figure wherever one exists, then the hazard as small print at the foot under a 2px ink rule ("if nothing comes out of the taps"). No line sits above the name. Every label is open; nothing hides behind a tap.
 
 ### Step shelf
 A numbered list between 8px ink shelves. Each step has an ink block with a paper numeral (64 by 80px, 96 by 120px at 900px, width 125), a lowercase heading, body copy and an arrow link.

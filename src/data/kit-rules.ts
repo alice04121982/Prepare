@@ -2,9 +2,10 @@
  * Quantity rules for the Build Your Kit planner.
  *
  * Inputs describe the household; the rules turn them into a shopping list
- * with realistic quantities. Figures follow prepare.campaign.gov.uk where it
- * gives one (3 litres of drinking water per person per day) and the site's
- * checklist elsewhere. Everything is a planning figure, rounded up.
+ * with realistic quantities. Drinking water is planned at 3 litres per person
+ * per day, the top of the World Health Organisation's 2.5 to 3 litre minimum,
+ * as quoted by gov.uk. Other figures follow the site's checklist. Everything
+ * is a planning figure, rounded up.
  */
 
 export type Household = {
@@ -20,8 +21,8 @@ export type Household = {
   /** Someone relies on regular prescriptions or powered medical equipment. */
   medicalNeeds: boolean;
   homeType: "flat" | "house";
-  /** Days of cover to plan for. */
-  days: 3 | 7 | 14;
+  /** Days of cover to plan for: a whole number from MIN_DAYS to MAX_DAYS. */
+  days: number;
 };
 
 export type ProductOption = {
@@ -73,6 +74,19 @@ export const defaultHousehold: Household = {
 
 const ceil = Math.ceil;
 
+export const MIN_DAYS = 1;
+export const MAX_DAYS = 28;
+
+/** Clamps any number to a whole number of days in range. */
+export function clampDays(n: number): number {
+  return Math.max(MIN_DAYS, Math.min(MAX_DAYS, Math.round(n)));
+}
+
+/** "1 day", "14 days". */
+export function daysLabel(n: number): string {
+  return `${n} ${n === 1 ? "day" : "days"}`;
+}
+
 export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
   const people = h.adults + h.children + h.babies;
   const peopleWhoDrink = h.adults + h.children;
@@ -89,7 +103,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       item: "Bottled drinking water",
       quantity: waterPacks,
       unit: "six-packs of 1.5 litre bottles",
-      basis: `${water} litres: 3 litres per person per day for ${peopleWhoDrink} ${peopleWhoDrink === 1 ? "person" : "people"} over ${d} days${h.babies ? `, plus water for making up feeds` : ""}. The gov.uk figure.`,
+      basis: `${water} litres: 3 litres per person per day for ${peopleWhoDrink} ${peopleWhoDrink === 1 ? "person" : "people"} over ${daysLabel(d)}${h.babies ? `, plus water for making up feeds` : ""}. That is the top of the World Health Organisation's 2.5 to 3 litre minimum, as quoted by gov.uk.`,
       freeOption: "Refilled, clearly labelled bottles from the tap, rotated every few months, cost nothing.",
       priority: true,
       products: [
@@ -125,7 +139,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       item: "Tinned or jarred meals and vegetables",
       quantity: 2 * peopleWhoDrink * d,
       unit: "tins",
-      basis: `Two tins per person per day for ${d} days. Beans, soup, fish, vegetables, ready meals. Things you already eat.`,
+      basis: `Two tins per person per day for ${daysLabel(d)}. Beans, soup, fish, vegetables, ready meals. Things you already eat.`,
       freeOption: "Most cupboards hold a few days already. Count what you have before buying.",
       priority: true,
       products: [{ name: "Own-brand tinned beans, soup, tuna, vegetables", tier: "budget", priceBand: "50p to £1.50 a tin" }],
@@ -146,8 +160,11 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       category: "Food",
       item: "Food that needs no cooking",
       quantity: Math.min(d, 3),
-      unit: `days' worth for ${peopleWhoDrink} (crackers, nut butter, cereal bars, tinned fruit)`,
-      basis: "At least two or three days of it, for a power cut. Counted separately because it is the part people forget.",
+      unit: `${Math.min(d, 3) === 1 ? "day's" : "days'"} worth for ${peopleWhoDrink} (crackers, nut butter, cereal bars, tinned fruit)`,
+      basis:
+        d > 3
+          ? "Three days of it, for a power cut. It stops at three because the tins and dry food above cover the days after that. Counted separately because it is the part people forget."
+          : "Enough for every day you are planning for, in case the power goes. Counted separately because it is the part people forget.",
       priority: true,
     },
     {
@@ -243,7 +260,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
             unit: "",
             basis: h.medicalNeeds
               ? "Included because someone relies on medical equipment. Ask the equipment supplier what it draws before choosing a size."
-              : "Included for a week or more of cover. Runs a router, a fridge for medication, or several phones through long cuts. Optional.",
+              : "Included because you are planning for 7 days or more. It runs a router, a fridge for medication, or several phones through a cut that long. Optional.",
             products: [
               { name: "Jackery Explorer, small model", tier: "standard", url: "https://uk.jackery.com/collections/portable-power-station", priceBand: "£200 to £500" },
               { name: "Jackery SolarSaga folding panel", tier: "standard", url: "https://uk.jackery.com/collections/solar-panel", priceBand: "£150 to £300" },
@@ -303,7 +320,13 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       item: "Buffer of regular prescriptions",
       quantity: h.medicalNeeds || d >= 14 ? 28 : 14,
       unit: "extra days' supply",
-      basis: "Ask your GP or pharmacist to reorder a few days early each time. Builds up without anyone going without.",
+      basis: `${
+        h.medicalNeeds
+          ? "28 days, because someone relies on regular prescriptions."
+          : d >= 14
+            ? "28 days, because you are planning for 14 days or more."
+            : "14 days while you plan for under 14 days of cover. It goes up to 28 at 14 days or more."
+      } Ask your GP or pharmacist to reorder a few days early each time. Builds up without anyone going without.`,
       freeOption: "Free on prescription. It is a conversation, not a purchase.",
       priority: true,
     },
@@ -403,7 +426,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
             item: "Nappies",
             quantity: 6 * h.babies * d,
             unit: "nappies",
-            basis: `Six a day for ${h.babies} ${h.babies === 1 ? "baby" : "babies"} over ${d} days.`,
+            basis: `Six a day for ${h.babies} ${h.babies === 1 ? "baby" : "babies"} over ${daysLabel(d)}.`,
             products: [{ name: "Own-brand nappies, large pack", tier: "budget", priceBand: "£5 to £10" }],
           } satisfies KitLine,
           {
@@ -447,7 +470,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
             category: "Pets",
             item: "Pet food",
             quantity: d,
-            unit: `days of usual food for ${h.dogs + h.cats} ${h.dogs + h.cats === 1 ? "animal" : "animals"}`,
+            unit: `${d === 1 ? "day" : "days"} of usual food for ${h.dogs + h.cats} ${h.dogs + h.cats === 1 ? "animal" : "animals"}`,
             basis: "Plus any medication, a carrier, and a recent photo. Water is counted in the household total.",
           } satisfies KitLine,
         ]
@@ -502,7 +525,9 @@ export function householdFromParams(q: Record<string, string | string[] | undefi
     const v = parseInt(get(k) ?? "", 10);
     return Number.isFinite(v) ? Math.max(0, Math.min(12, v)) : d;
   };
-  const days = n("d", 3);
+  // Days has its own range, checked before anything else clamps it.
+  const rawDays = parseInt(get("d") ?? "", 10);
+  const days = Number.isFinite(rawDays) ? clampDays(rawDays) : defaultHousehold.days;
   return {
     adults: Math.max(1, n("a", 2)),
     children: n("c", 0),
@@ -512,7 +537,7 @@ export function householdFromParams(q: Record<string, string | string[] | undefi
     cats: n("cats", 0),
     medicalNeeds: get("med") === "1",
     homeType: get("home") === "flat" ? "flat" : "house",
-    days: days === 7 || days === 14 ? days : 3,
+    days,
   };
 }
 

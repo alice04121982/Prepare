@@ -1,6 +1,12 @@
 import { catBg, type Cat } from "@/components/PageIntro";
 
-/** Which label colour each kit category wears. Unknown categories fall back to people. */
+/**
+ * Which label colour each kit category wears. One meaning per colour: water,
+ * food, power (with light and warmth), health (first aid, medication,
+ * sanitation), news (communication), money (cash and documents), people
+ * (neighbours). Household-specific lines (babies, children, pets, older
+ * people) wear no colour: paper inside the usual ink border.
+ */
 const byCategory: Record<string, Cat> = {
   Water: "water",
   Food: "food",
@@ -10,16 +16,16 @@ const byCategory: Record<string, Cat> = {
   "First aid and medication": "health",
   Sanitation: "health",
   "Cash and documents": "money",
-  Babies: "people",
-  Children: "people",
-  Pets: "people",
-  "Older household members": "people",
+  Neighbours: "people",
 };
 
-export function catFor(category: string): Cat {
-  return byCategory[category] ?? "people";
+/** The category's colour, or null when it should stay paper. */
+export function catFor(category: string): Cat | null {
+  return byCategory[category] ?? null;
 }
 
+/** Background class for a category: its label colour, or plain paper. */
 export function catBgFor(category: string): string {
-  return catBg[catFor(category)];
+  const cat = catFor(category);
+  return cat ? catBg[cat] : "bg-paper";
 }

@@ -5,13 +5,13 @@ import ReachBar from "@/components/home/ReachBar";
 import Shelf, { type Tin } from "@/components/home/Shelf";
 
 const tins: Tin[] = [
-  { id: "water", name: "water", amount: "3 litres of water per person per day", when: "if nothing comes out of the taps", cat: "bg-cat-water" },
+  { id: "water", name: "water", amount: "3 litres per person per day", when: "if nothing comes out of the taps", cat: "bg-cat-water" },
   { id: "warmth", name: "warmth", amount: "Blankets, warm layers, a hot-water bottle", when: "if the heating goes off", cat: "bg-cat-power" },
-  { id: "food", name: "food", amount: "Tins and dry food you already eat", when: "if the shops run short", cat: "bg-cat-food" },
-  { id: "cash", name: "cash", amount: "Some cash in small notes", when: "if cards and cash machines stop", cat: "bg-cat-money" },
-  { id: "radio", name: "a radio", amount: "Wind-up or battery", when: "if mobile networks and the internet go down", cat: "bg-cat-news" },
-  { id: "neighbours", name: "neighbours", amount: "Knowing who nearby you can reach on foot", when: "if buses and trains stop", cat: "bg-cat-people" },
-  { id: "medicine", name: "medicine", amount: "A week's spare, where your GP allows", when: "if prescriptions are hard to get", cat: "bg-cat-health" },
+  { id: "food", name: "food", amount: "3 to 7 days per person, from what you already eat", when: "if the shops run short", cat: "bg-cat-food" },
+  { id: "cash", name: "cash", amount: "A couple of days' essentials, in small notes", when: "if cards and cash machines stop", cat: "bg-cat-money" },
+  { id: "radio", name: "radio", amount: "One per household, wind-up or battery", when: "if mobile networks and the internet go down", cat: "bg-cat-news" },
+  { id: "neighbours", name: "neighbours", amount: "Two or three names you can reach on foot", when: "if buses and trains stop", cat: "bg-cat-people" },
+  { id: "medicine", name: "medicine", amount: "A 1 to 2 week buffer of prescriptions, where your GP allows", when: "if prescriptions are hard to get", cat: "bg-cat-health" },
 ];
 
 const steps = [
@@ -46,7 +46,7 @@ export default function Home() {
         <div className="min-[900px]:sticky min-[900px]:top-10 min-[900px]:self-start">
           <h1
             id="hero-h"
-            className="display max-w-[12ch] text-[clamp(2.6rem,11.5vw,6rem)]"
+            className="display max-w-[14ch] text-[clamp(2.6rem,11.5vw,4.75rem)]"
             style={{ fontVariationSettings: '"wdth" 108' }}
           >
             a practical guide to being ready at home
@@ -55,12 +55,9 @@ export default function Home() {
             What to keep, how much, how long it lasts and what to do first, if
             the power, water or shops stop for a few days.
           </p>
-          <div id="hero-actions" className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3 min-[900px]:mt-10">
+          <div id="hero-actions" className="mt-7 min-[900px]:mt-10">
             <Link href="/checklist" className="btn btn-primary btn-lg">
               check your cupboard <Arrow />
-            </Link>
-            <Link href="/why" className="inline-flex min-h-11 items-center font-bold">
-              why three days?
             </Link>
           </div>
           <p className="mt-6 border-t-[3px] border-ink pt-4 text-lg font-semibold">
@@ -72,7 +69,7 @@ export default function Home() {
         </div>
 
         <div className="mt-10 min-[900px]:mt-0">
-          <h2 id="stop-h" className="mb-5 max-w-[22ch] text-[clamp(1.75rem,7vw,2.75rem)]">
+          <h2 id="stop-h" className="mb-5 max-w-[22ch] text-[clamp(1.75rem,7vw,3rem)]">
             if the power went off, the water stopped and the shops were shut
             for three days, would you be all right?
           </h2>
@@ -87,8 +84,13 @@ export default function Home() {
             <p>
               Most of these last hours or days, not weeks. All of them are
               easier with a few things in the cupboard and a plan you made
-              while everything worked.
+              while everything worked. For the very worst cases there is little
+              any household can do; for everything short of that, three days
+              of supplies make a real difference.
             </p>
+            <Link href="/why" className="arrow-link">
+              why three days? <Arrow size={18} />
+            </Link>
           </div>
         </div>
       </section>
@@ -134,52 +136,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why three days */}
-      <section aria-labelledby="why-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
-        <div className="wrap min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] min-[900px]:items-start min-[900px]:gap-16">
-          <h2 id="why-h" className="h-section">
-            why three days?
-          </h2>
-          <div>
-            <p className="mt-5 max-w-[60ch] text-[1.1875rem] leading-normal min-[900px]:mt-3">
-              Since 2024 the UK, the EU, Sweden, Finland, Norway and France have
-              all asked their citizens to keep a few days of supplies at home.
-              None of them say anything is imminent. All of them have decided it
-              is no longer sensible to assume it cannot happen.
-            </p>
-            <p className="mt-7 max-w-[60ch] border-t-[3px] border-ink pt-5 text-[1.1875rem] font-semibold leading-normal">
-              For the very worst cases there is little any household can do. For
-              everything short of that, three days of supplies make a real
-              difference.
-            </p>
-            <Link href="/why" className="arrow-link mt-5 text-lg">
-              what the government says <Arrow size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Offline guide */}
+      {/* Keep a copy: end on something to do, on paper */}
       <section aria-labelledby="off-h" className="border-t-[3px] border-ink bg-hush py-16 min-[900px]:py-26">
         <div className="wrap min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] min-[900px]:items-start min-[900px]:gap-16">
           <h2 id="off-h" className="h-section max-w-[14ch]">
-            keep a copy offline
+            keep a copy on paper
           </h2>
           <div>
             <p className="mt-5 max-w-[60ch] text-[1.1875rem] leading-normal min-[900px]:mt-3">
-              One file, no internet needed. Save it, print it, share it before
-              you need it.
+              A power cut takes the internet with it. Print the checklist and
+              keep it with your documents, or save the offline guide to your
+              phone. One file, no internet needed.
             </p>
-            <a
-              href="/offline/index.html"
-              download="stay-prepared-offline-guide.html"
-              className="btn btn-secondary btn-lg mt-7"
-            >
-              <svg width="16" height="20" viewBox="0 0 16 20" aria-hidden="true" className="flex-none">
-                <path d="M8 0v13M2 8l6 6 6-6M0 18.5h16" fill="none" stroke="currentColor" strokeWidth="2.6" />
-              </svg>
-              download the guide
-            </a>
+            <div className="mt-7 flex flex-wrap items-center gap-4">
+              <Link href="/checklist" className="btn btn-primary btn-lg">
+                print the checklist <Arrow />
+              </Link>
+              <a
+                href="/offline/index.html"
+                download="stay-prepared-offline-guide.html"
+                className="btn btn-secondary btn-lg"
+              >
+                <svg width="16" height="20" viewBox="0 0 16 20" aria-hidden="true" className="flex-none">
+                  <path d="M8 0v13M2 8l6 6 6-6M0 18.5h16" fill="none" stroke="currentColor" strokeWidth="2.6" />
+                </svg>
+                download the offline guide
+              </a>
+            </div>
           </div>
         </div>
       </section>
