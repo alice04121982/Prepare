@@ -3,15 +3,7 @@ import { photoCredits } from "@/components/Photo";
 import SectionLabel from "@/components/SectionLabel";
 import DownloadRow from "@/components/DownloadRow";
 import HomeProgress from "@/components/HomeProgress";
-
-const selectClass =
-  "w-full rounded-full border border-line bg-surface px-4 py-2.5 text-sm text-heading focus:border-accent";
-
-/** One tap for a household that does not want to fill the form in yet. */
-const examples = [
-  { label: "Two adults, three days", href: "/build-your-kit?a=2&c=0&d=3" },
-  { label: "A family of four, one week", href: "/build-your-kit?a=2&c=2&d=7" },
-];
+import { kits } from "@/data/kits";
 
 export default function Home() {
   const hero = photoCredits().find((c) => c.slot === "home-hero" && c.rank === 1);
@@ -55,57 +47,35 @@ export default function Home() {
           </div>
 
           <div className="md:justify-self-end">
-            <form
-              action="/build-your-kit"
-              method="get"
-              className="grid gap-4 rounded-card bg-white/10 p-6 backdrop-blur-sm"
-            >
-              <p className="font-heading text-lg text-white">Start with your household</p>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="grid gap-1.5 text-sm text-white/90">
-                  <span>Adults</span>
-                  <select id="home-adults" name="a" defaultValue="2" className={selectClass}>
-                    {[1, 2, 3, 4, 5, 6].map((n) => (
-                      <option key={n} value={n}>
-                        {n}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label className="grid gap-1.5 text-sm text-white/90">
-                  <span>Children</span>
-                  <select id="home-children" name="c" defaultValue="0" className={selectClass}>
-                    {[0, 1, 2, 3, 4, 5, 6].map((n) => (
-                      <option key={n} value={n}>
-                        {n}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <label className="grid gap-1.5 text-sm text-white/90">
-                <span>How long to cover</span>
-                <select id="home-days" name="d" defaultValue="3" className={selectClass}>
-                  <option value="3">Three days, the government minimum</option>
-                  <option value="7">One week</option>
-                  <option value="14">Two weeks</option>
-                </select>
-              </label>
-              <button type="submit" className="btn btn-primary mt-1 justify-center">
-                Build my list
-              </button>
-            </form>
-
-            <div className="mt-3 flex flex-wrap gap-2">
-              {examples.map((e) => (
+            <div className="rounded-card bg-white/10 p-6 backdrop-blur-sm">
+              <p className="font-heading text-lg text-white">Pick your household</p>
+              <p className="mt-1 text-sm text-white/70">
+                Each one is a full list with the quantities worked out.
+              </p>
+              <ul className="mt-4 divide-y divide-white/15 border-y border-white/15">
+                {kits.map((k) => (
+                  <li key={k.slug}>
+                    <Link
+                      href={`/kits/${k.slug}`}
+                      className="flex items-baseline justify-between gap-3 py-2.5 text-sm text-white/90 hover:text-white"
+                    >
+                      <span>{k.title}</span>
+                      <span aria-hidden className="text-white/50">
+                        &rarr;
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm text-white/70">
+                None of these?{" "}
                 <Link
-                  key={e.href}
-                  href={e.href}
-                  className="rounded-full border border-white/30 px-3 py-1.5 text-sm text-white/85 hover:border-white/60 hover:text-white"
+                  href="/build-your-kit"
+                  className="underline underline-offset-4 hover:text-white"
                 >
-                  {e.label}
+                  Build your own list.
                 </Link>
-              ))}
+              </p>
             </div>
           </div>
         </div>
