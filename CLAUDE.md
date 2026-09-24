@@ -35,7 +35,9 @@ Everything factual lives in `src/data/*.ts` and pages render from it.
 Changing a quantity, a scenario or an FAQ answer means editing data, never
 markup. `checklist.ts` (what to keep, with amounts and sourcing notes),
 `scenarios.ts` (what stops and for how long), `faq.ts`,
-`official-guidance.ts` (dated links), `products.ts` (Amazon ASINs).
+`official-guidance.ts` (dated links), `products.ts` (Amazon ASINs),
+`guides.ts` (the short answer pages at `/guides/[slug]`, one question each,
+answer first, sources listed, `verified: false` until checked by hand).
 
 `Diagram.tsx` draws figures taken from these same files, so a change to
 `scenarios.ts` must be checked against the `duration` diagram, which plots

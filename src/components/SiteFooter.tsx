@@ -7,6 +7,7 @@ const links = [
   { href: "/what-might-stop", label: "What might stop" },
   { href: "/worried", label: "Worried?" },
   { href: "/community", label: "Neighbours" },
+  { href: "/guides", label: "Short answers" },
   { href: "/sources", label: "Sources" },
 ];
 
