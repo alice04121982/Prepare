@@ -14,7 +14,7 @@ export type Scenario = {
   /** The mutual-aid thread: how neighbours and community fit this scenario. */
   community: string;
   /**
-   * Where this scenario sits on the duration chart on /why, in days. Planning
+   * Where this scenario sits on the duration chart on /what-might-stop, in days. Planning
    * figures read from typicalDuration above; keep the two in step. A scenario
    * with no chart entry is left off the chart.
    */

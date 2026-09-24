@@ -278,8 +278,8 @@ export default function WorriedPage() {
             <Link href="/checklist" className="btn btn-primary btn-lg">
               the nine things to get first <Arrow />
             </Link>
-            <Link href="/why" className="inline-flex min-h-11 items-center font-bold">
-              why three days?
+            <Link href="/what-might-stop" className="inline-flex min-h-11 items-center font-bold">
+              what might stop, and for how long
             </Link>
           </div>
         </div>

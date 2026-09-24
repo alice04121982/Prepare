@@ -8,7 +8,7 @@ export const nav = [
   { href: "/what-you-can-do-now", label: "do it now" },
   { href: "/checklist", label: "checklist" },
   { href: "/build-your-kit", label: "build your kit" },
-  { href: "/why", label: "why three days?" },
+  { href: "/what-might-stop", label: "what might stop" },
   { href: "/worried", label: "worried?" },
   { href: "/community", label: "neighbours" },
 ];

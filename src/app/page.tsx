@@ -98,8 +98,8 @@ export default function Home() {
                 any household can do; for everything short of that, three days
                 of supplies make a real difference.
               </p>
-              <Link href="/why" className="arrow-link">
-                why three days? <Arrow size={18} />
+              <Link href="/what-might-stop" className="arrow-link">
+                what might stop, and for how long <Arrow size={18} />
               </Link>
             </div>
           </div>
