@@ -167,13 +167,13 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
 
   const basketBlock = basket ? (
     <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-      <a href={basket} target="_blank" rel="noopener noreferrer sponsored" className="btn btn-primary btn-lg no-underline">
+      <a href={basket} rel="sponsored" className="btn btn-primary btn-lg no-underline">
         <ShoppingBasket size={20} strokeWidth={2.25} />
         Add {asinCount} {asinCount === 1 ? "item" : "items"} to my Amazon basket
       </a>
       <p className="max-w-md text-[0.9375rem] leading-snug text-ink-2">
-        Opens Amazon with these {asinCount} products in your basket, in the quantities shown. You check the
-        basket and pay there. Nothing is bought until you choose to.
+        Opens Amazon with these {asinCount} products, in the quantities shown. Tap <strong>Add to basket</strong>
+        to confirm, then check the basket and pay there. Nothing is bought until you choose to.
       </p>
     </div>
   ) : null;

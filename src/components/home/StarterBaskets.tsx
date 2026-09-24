@@ -129,16 +129,15 @@ export default function StarterBaskets() {
             </p>
             <a
               href={url}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
+              rel="sponsored"
               className="btn btn-primary btn-lg mt-4 w-full no-underline"
             >
               <ShoppingBasket size={20} strokeWidth={2.25} aria-hidden="true" />
               send it all to my Amazon basket
             </a>
             <p className="mt-3 text-sm leading-snug text-ink-2">
-              You check the basket and pay on Amazon. Nothing is bought until you do. About &pound;{chosen.estimate}
-              {" "}is a guide, because prices change.
+              Amazon asks you to confirm: tap <strong>Add to basket</strong> there. Nothing is bought until you pay.
+              About &pound;{chosen.estimate} is a guide, because prices change.
             </p>
           </>
         ) : (

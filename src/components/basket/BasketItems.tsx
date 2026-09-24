@@ -163,8 +163,7 @@ export default function BasketItems({ people, days }: { people: number; days: nu
           {url ? (
             <a
               href={url}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
+              rel="sponsored"
               className="btn btn-primary btn-lg w-full no-underline"
             >
               <ShoppingBasket size={20} strokeWidth={2.25} aria-hidden="true" />
@@ -174,7 +173,8 @@ export default function BasketItems({ people, days }: { people: number; days: nu
             <p>You have ticked off everything the basket would hold.</p>
           )}
           <p className="mt-3 text-sm leading-snug text-ink-2">
-            Opens Amazon with every product on this page in your basket. You check it and pay there.
+            Opens Amazon with every product on this page. Tap <strong>Add to basket</strong> to confirm, then check
+            the basket and pay there. Anything Amazon has run out of is listed on that page and left out.
           </p>
           <p className="mt-3 text-sm leading-snug">
             Already have some of this?{" "}

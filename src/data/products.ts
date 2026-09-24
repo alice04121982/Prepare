@@ -54,7 +54,7 @@ export const products: Product[] = [
   // Amazon Fresh keep separate baskets and cannot be filled by the link.
   // Found through search on 24 September 2026; price bands are estimates
   // until someone opens each page.
-  { lineId: "water", retailer: "amazon", name: "Highland Spring still water, 6 x 1.5 litres", asin: "B016OVGU5M", priceBand: "£3 to £5", verified: false, short: ["six-pack of 1.5 litre water", "six-packs of 1.5 litre water"] },
+  { lineId: "water", retailer: "amazon", name: "Buxton still natural mineral water, 6 x 1.5 litres", asin: "B014DEI028", priceBand: "£3 to £5", verified: false, short: ["six-pack of 1.5 litre water", "six-packs of 1.5 litre water"] },
   { lineId: "tins", retailer: "amazon", name: "Heinz Baked Beanz, 12 x 415 g", asin: "B09P4L33SW", priceBand: "£10 to £14", verified: false, unitsPerProduct: 12, share: 0.5, short: ["case of 12 tins of beans", "cases of 12 tins of beans"] },
   { lineId: "tins", retailer: "amazon", name: "Heinz Cream of Tomato Soup, 12 x 400 g", asin: "B09P473FRS", priceBand: "£8 to £12", verified: false, unitsPerProduct: 12, share: 0.5, short: ["case of 12 tins of soup", "cases of 12 tins of soup"] },
   { lineId: "carbs", retailer: "amazon", name: "Napolina wholewheat fusilli, 6 x 500 g", asin: "B0089X3Z7A", priceBand: "£5 to £8", verified: false, unitsPerProduct: 6, short: ["pack of 6 bags of pasta", "packs of 6 bags of pasta"] },
