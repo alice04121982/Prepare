@@ -443,6 +443,187 @@ export const guides: Guide[] = [
     verified: false,
     related: ["no-water", "power-cut", "how-much-water-to-store"],
   },
+  {
+    slug: "keep-warm-without-heating",
+    title: "how to keep warm if the heating fails",
+    metaTitle: "How to keep warm if the heating fails",
+    description:
+      "Pick one room, close it off and dress in layers. How to stay warm safely without heating, and who to check on.",
+    answer: [
+      "Pick one room to keep warm, close the door and curtains, and dress in layers.",
+      "Cold is hardest on older people, babies and anyone unwell. The NHS suggests keeping a living room at 18°C or more.",
+    ],
+    stepsTitle: "what to do",
+    steps: [
+      { title: "Choose one room", body: "The smallest room you can all use. Close its door and keep other doors shut." },
+      { title: "Close curtains at dusk", body: "Keep them open in the day if the sun is out, then close them to hold the heat in." },
+      { title: "Wear layers, and a hat", body: "Several thin layers beat one thick one. Keep hands and feet warm too." },
+      { title: "Have hot drinks and hot food", body: "A flask filled while you still have power keeps water hot for hours." },
+      { title: "Keep moving", body: "Get up and walk around every hour if you can. Sitting still makes you colder." },
+      { title: "Use a hot-water bottle safely", body: "Fill it with hot, not boiling, water. Replace old or worn rubber bottles." },
+      { title: "Check on anyone at risk", body: "Older neighbours, babies and people who are unwell feel the cold first. Knock or call." },
+    ],
+    warning: {
+      title: "Never heat a room with a gas oven, hob or barbecue",
+      body: "They give off carbon monoxide. If you smell gas, call the gas emergency line on 0800 111 999.",
+    },
+    ready: [
+      { item: "Thermal base layers", tip: "Worn under normal clothes, they keep you warm without the heating on.", search: "thermal base layer set" },
+      { item: "Hot-water bottle", tip: "With a cover. Replace it every few years.", search: "hot water bottle with cover" },
+      { item: "Fleece blankets", tip: "One for each person, kept in the room you would use.", search: "fleece blanket" },
+      { item: "Vacuum flask", tip: "Keeps water hot for hours for drinks and hot-water bottles.", search: "vacuum flask 1 litre" },
+    ],
+    sources: [
+      { label: "Keep warm, keep well", publisher: "NHS", url: "https://www.nhs.uk/live-well/seasonal-health/keep-warm-keep-well/" },
+      { label: "Weather-health alerts", publisher: "UK Health Security Agency", url: "https://ukhsa-dashboard.data.gov.uk/weather-health-alerts" },
+      { label: "Carbon monoxide poisoning", publisher: "NHS", url: "https://www.nhs.uk/conditions/carbon-monoxide-poisoning/" },
+    ],
+    checked: "2026-09-24",
+    verified: false,
+    related: ["power-cut", "cook-without-electricity", "priority-services-register"],
+  },
+  {
+    slug: "emergency-alerts",
+    title: "what an Emergency Alert means",
+    metaTitle: "What an Emergency Alert on your phone means",
+    description:
+      "An Emergency Alert means there is a danger to life nearby. What the loud sound is, what to do, and why you do not need to sign up.",
+    answer: [
+      "An Emergency Alert means there is a danger to life nearby. Read it and follow what it says.",
+      "Your phone makes a loud, siren-like sound and vibrates, even on silent. You do not need to sign up.",
+    ],
+    stepsTitle: "when one arrives",
+    steps: [
+      { title: "Stop and read it", body: "It tells you what is happening and what to do. It may link to gov.uk for more." },
+      { title: "If you are driving, do not read it", body: "Find somewhere safe and legal to stop first, or ask a passenger." },
+      { title: "Do what it says", body: "That might be to stay indoors, to leave an area, or to avoid a road." },
+      { title: "Tell people nearby who may not have it", body: "Older relatives, neighbours, or anyone without a smartphone." },
+      { title: "Check local radio for updates", body: "A battery or wind-up radio keeps working if mobile networks are busy." },
+      { title: "It does not track you", body: "Alerts go to every phone in an area. The government does not know your number or location." },
+      { title: "Keep them switched on", body: "You can turn them off in your phone's settings, but you would miss real warnings." },
+    ],
+    ready: [
+      { item: "Wind-up or battery radio", tip: "For updates when the mobile network is busy or down.", search: "wind up radio FM" },
+      { item: "Power bank", tip: "Keeps your phone on if the power goes.", search: "power bank 10000mAh USB-C" },
+    ],
+    sources: [
+      { label: "Emergency Alerts", publisher: "UK Government", url: "https://www.gov.uk/alerts" },
+      { label: "How Emergency Alerts work", publisher: "UK Government", url: "https://www.gov.uk/alerts/how-alerts-work" },
+    ],
+    checked: "2026-09-24",
+    verified: false,
+    related: ["ready-for-3-days", "flood-warning", "before-a-storm"],
+  },
+  {
+    slug: "food-that-needs-no-cooking",
+    title: "emergency food that needs no cooking",
+    metaTitle: "Emergency food that needs no cooking",
+    description:
+      "Tins, packets and long-life food you can eat cold, straight from the cupboard. What to keep for 3 days, and what to remember for babies.",
+    answer: [
+      "Keep 3 days of food you can eat cold: tins, packets and long-life drinks you already like.",
+      "Buy what you normally eat, a little at a time, and use the oldest first. Keep a tin opener that does not need power.",
+    ],
+    stepsTitle: "what to keep",
+    steps: [
+      { title: "Tinned fish and meat", body: "Tuna, sardines, salmon and ham are cooked in the tin and eaten cold." },
+      { title: "Tinned beans and pulses", body: "Baked beans, chickpeas and lentils are already cooked. They are fine cold." },
+      { title: "Tinned fruit and vegetables", body: "Fruit in juice, sweetcorn and potatoes. Drink the juice too." },
+      { title: "Crackers, oatcakes and breakfast cereal", body: "They keep for months. Eat cereal dry or with long-life milk." },
+      { title: "Nuts, peanut butter and dried fruit", body: "A lot of energy in a small space. Check for allergies at home." },
+      { title: "Long-life milk and juice", body: "UHT cartons keep for months unopened. Once opened, drink them that day without a fridge." },
+      { title: "For babies, ready-to-feed formula", body: "It comes in cartons and needs no water or boiling. Keep a few days of it." },
+    ],
+    ready: [
+      { item: "Manual tin opener", tip: "Does not need power. Keep it with the tins.", search: "manual tin opener" },
+      { item: "Cereal bars", tip: "A box keeps for months, and needs nothing.", search: "cereal bars multipack" },
+      { item: "Long-life milk", tip: "UHT cartons keep for months unopened.", search: "UHT semi skimmed milk" },
+      { item: "Tinned fish", tip: "Protein that is cooked in the tin and eaten cold.", search: "tinned tuna multipack" },
+    ],
+    sources: [
+      {
+        label: "Prepare: get prepared for emergencies",
+        publisher: "UK Government (Cabinet Office)",
+        url: "https://prepare.campaign.gov.uk/get-prepared-for-emergencies/",
+      },
+      { label: "Types of formula", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/bottle-feeding/types-of-formula/" },
+    ],
+    checked: "2026-09-24",
+    verified: false,
+    related: ["cook-without-electricity", "ready-for-3-days", "how-much-water-to-store"],
+  },
+  {
+    slug: "priority-services-register",
+    title: "the Priority Services Register explained",
+    metaTitle: "The Priority Services Register: who can join and what you get",
+    description:
+      "A free register that gets you extra help from your energy network and water company in a power cut or water outage. Who can join and how.",
+    answer: [
+      "The Priority Services Register is free. It gets you extra help from your energy network and water company in a cut.",
+      "You can join if anyone at home is older, disabled, unwell, pregnant, has young children, or relies on power for medical equipment.",
+    ],
+    stepsTitle: "what it gives you",
+    steps: [
+      { title: "Warning of planned cuts", body: "You hear in advance when power or water will be switched off for work." },
+      { title: "Priority help in a cut", body: "Updates and support come to you first, and sometimes a visit." },
+      { title: "Water brought to your door", body: "If the taps stop, your water company delivers bottled water." },
+      { title: "A password for callers", body: "So you know someone at the door or on the phone really is from the company." },
+      { title: "Information you can use", body: "Bills and messages in large print, braille, audio or another language." },
+      { title: "How to join", body: "Contact your energy supplier and your water company. Ask each to share it with your network operator." },
+      { title: "It can be for a short time", body: "After an operation, or with a new baby. Tell them when it no longer applies." },
+    ],
+    ready: [],
+    sources: [
+      { label: "Priority Services Register", publisher: "Energy networks and water companies", url: "https://www.thepsr.co.uk/" },
+      { label: "Consumer Council for Water", publisher: "CCW", url: "https://www.ccwater.org.uk/" },
+    ],
+    checked: "2026-09-24",
+    verified: false,
+    related: ["power-cut", "no-water", "keep-warm-without-heating"],
+  },
+  {
+    slug: "cook-without-electricity",
+    title: "how to cook safely without electricity",
+    metaTitle: "How to cook safely without electricity",
+    description:
+      "Eat food that needs no cooking first. If you need heat, a gas hob often still works; camping stoves and barbecues go outside only.",
+    answer: [
+      "Eat food that needs no cooking first. Save heat for hot drinks and one hot meal a day.",
+      "A gas hob often still works in a power cut. Camping stoves and barbecues are for outside only.",
+    ],
+    stepsTitle: "what to do",
+    steps: [
+      { title: "Start with no-cook food", body: "Tins, crackers, cereal and fruit. Keep fuel and effort for when you need them." },
+      { title: "Try your gas hob", body: "If the ignition is electric, light it carefully with a long match. Never leave it unattended." },
+      { title: "Cook outside with a camping stove or barbecue", body: "Keep it well away from doors, windows and vents, and on a firm surface." },
+      { title: "Boil only what you need", body: "Then keep the rest hot in a vacuum flask for drinks later." },
+      { title: "Keep a fire blanket in the kitchen", body: "It puts out a pan fire. Never use water on burning oil." },
+      { title: "Fit a carbon monoxide alarm", body: "Near any room with a gas, oil or solid fuel appliance. Test it monthly." },
+      { title: "Keep food safe", body: "Eat from the fridge first, then the freezer, then the cupboard." },
+    ],
+    warning: {
+      title: "Never use a barbecue or camping stove indoors",
+      body: "Not in a garage, tent or porch either. They give off carbon monoxide, which you cannot see or smell and which kills.",
+    },
+    ready: [
+      { item: "Carbon monoxide alarm", tip: "Battery powered, so it works in a power cut. Check the date on it.", search: "carbon monoxide alarm battery" },
+      { item: "Fire blanket", tip: "Hangs on the kitchen wall. Pull the tapes and cover the pan.", search: "kitchen fire blanket" },
+      { item: "Camping stove", tip: "For outside use only, with spare gas.", search: "portable camping gas stove" },
+      { item: "Vacuum flask", tip: "Boil once and have hot water for hours.", search: "vacuum flask 1 litre" },
+    ],
+    sources: [
+      { label: "Carbon monoxide poisoning", publisher: "NHS", url: "https://www.nhs.uk/conditions/carbon-monoxide-poisoning/" },
+      { label: "Gas safety advice", publisher: "Gas Safe Register", url: "https://www.gassaferegister.co.uk/" },
+      {
+        label: "Food safety during a power outage",
+        publisher: "US Government (FoodSafety.gov)",
+        url: "https://www.foodsafety.gov/food-safety-charts/food-safety-during-power-outage",
+      },
+    ],
+    checked: "2026-09-24",
+    verified: false,
+    related: ["food-that-needs-no-cooking", "power-cut", "keep-warm-without-heating"],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {

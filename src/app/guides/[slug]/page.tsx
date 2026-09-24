@@ -95,6 +95,7 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
             Check what you already have first. The checklist keeps count, and the kit on the home page puts
             everything for your household in one Amazon basket.
           </p>
+          {guide.ready.length ? (
           <ul className="mt-8 grid gap-3 min-[700px]:grid-cols-2 min-[1100px]:grid-cols-3">
             {guide.ready.map((r) => (
               <li key={r.item} className="flex flex-col border-[3px] border-ink bg-paper px-4 py-3.5">
@@ -111,6 +112,7 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
               </li>
             ))}
           </ul>
+          ) : null}
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href="/checklist" className="btn btn-primary btn-lg">
               check your cupboard <Arrow />
