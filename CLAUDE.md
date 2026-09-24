@@ -81,6 +81,21 @@ The client islands are `ChecklistTracker`, `KitPlanner` (with
 including `Diagram.tsx`, which is inline SVG. The site has no photographs
 or stock illustrations.
 
+### Search and sharing
+
+`src/lib/site.ts` holds the public address and `PAGES`, the list the sitemap
+is built from. A new page needs three things: an entry in `PAGES`, and in its
+`metadata` a `title`, a `description` and `alternates: { canonical: "/path" }`.
+The canonical is per page on purpose; setting it in the layout would point
+every page at the home page. `metadataBase` in the layout makes these paths
+absolute. `/basket` is left out of the sitemap because it is driven by the
+query string.
+
+The share image is `src/app/opengraph-image.png`, drawn from the design
+system; every page uses it. The checklist emits its FAQ as schema.org
+`FAQPage` JSON-LD from `faq.ts`. `@vercel/analytics` counts page views without
+cookies, and only once Web Analytics is switched on in the Vercel project.
+
 ## Styling
 
 **`DESIGN.md` is the design system and it is binding**: the "own-label

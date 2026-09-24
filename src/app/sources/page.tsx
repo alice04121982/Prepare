@@ -3,6 +3,7 @@ import PageIntro from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/sources" },
   title: "Sources and methodology",
   description:
     "Where the durations and quantities on this site come from, and how they were derived.",

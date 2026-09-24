@@ -15,6 +15,7 @@ import {
 } from "@/data/safer-world";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/worried" },
   title: "If the news is frightening you",
   description:
     "Perspective and practical help for people who feel frightened or helpless watching the news, drawing on psychologists, counsellors and people who have lived through crises before.",
