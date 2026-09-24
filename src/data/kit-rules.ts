@@ -553,7 +553,7 @@ export type Retailer = {
 const enc = (q: string) => encodeURIComponent(q);
 
 export const retailers: Retailer[] = [
-  { id: "amazon", name: "Amazon", search: (q) => `https://www.amazon.co.uk/s?k=${enc(q)}`, note: "Everything on the list is here. One button can also fill a basket with the items that have a verified product code." },
+  { id: "amazon", name: "Amazon", search: (q) => `https://www.amazon.co.uk/s?k=${enc(q)}`, note: "Everything on the list is here. One button can also fill a basket with everything on the list that has a product code." },
   { id: "tesco", name: "Tesco", search: (q) => `https://www.tesco.com/groceries/en-GB/search?query=${enc(q)}`, note: "Groceries, batteries, torches and first aid. No power banks or radios. Each link opens the search for that item; add to your basket there." },
   { id: "sainsburys", name: "Sainsbury's", search: (q) => `https://www.sainsburys.co.uk/gol-ui/SearchResults/${enc(q)}`, note: "Groceries, batteries and first aid. Each link opens the search for that item." },
   { id: "asda", name: "Asda", search: (q) => `https://groceries.asda.com/search/${enc(q)}`, note: "Groceries, batteries, torches and some electricals. Each link opens the search for that item." },

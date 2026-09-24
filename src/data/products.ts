@@ -1,12 +1,13 @@
 /**
  * Specific products for the planner's "buy it" view, keyed by kit line id.
  *
- * Rules (docs/monetisation-plan.md): only items on the checklist; a budget
- * option first where one exists; maker or specialist retailer first, Amazon
- * as the fallback. Every Amazon entry has an ASIN found on an amazon.co.uk
- * product page; `verified` flips to true only after a person has opened the
- * page and confirmed it is the right thing. Unverified items still show, but
- * the one-click basket button only includes verified ones.
+ * Rules: docs/product-policy.md (how a product is chosen, verified and
+ * rechecked) and docs/monetisation-plan.md. Every Amazon entry has an ASIN
+ * found on an amazon.co.uk product page; `verified` flips to true only after
+ * a person has opened the page and checked it against the policy, and
+ * `checked` records that date. Unverified items still show and still go in
+ * the one-click basket (policy decision A, 24 September 2026); verify them
+ * rather than filter them.
  *
  * `image` is the id of the product's main photo on Amazon's image host
  * (the part before the first dot in the /images/I/ path). We link to
@@ -22,6 +23,8 @@ export type Product = {
   priceBand: string;
   /** Set true after opening the product page and checking it by hand. */
   verified: boolean;
+  /** ISO date of the last hand check, for the 3-monthly review. Absent means never checked. */
+  checked?: string;
   /** How many of this product cover one planner unit, e.g. a 24-pack covers 6 "packs of 4". */
   unitsPerProduct?: number;
   /** Amazon image id for the main product photo; see amazonImageUrl(). */
