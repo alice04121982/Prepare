@@ -146,9 +146,10 @@ for depth on shapes only. Their text labels stay solid so they pass AA.
 
 ## Environment note
 
-`.env.local` holds the Unsplash key and, later,
-`NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`. Neither is committed, and the affiliate
-tag being absent is a normal local state, not a bug.
+`.env.local` holds the Unsplash key and, optionally,
+`NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`. Neither is committed. The affiliate tag
+falls back to the site's own (`stayprepared2-21`, in `src/lib/amazon.ts`)
+because Amazon's add-to-basket form opens an empty basket without one.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

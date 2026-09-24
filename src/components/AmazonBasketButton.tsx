@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { ShoppingBasket } from "lucide-react";
 
-const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
+import { AMAZON_TAG as TAG } from "@/lib/amazon";
 
 /**
  * Sends a list of products to the reader's Amazon basket.

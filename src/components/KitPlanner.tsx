@@ -21,7 +21,7 @@ import { buysFor } from "@/data/packs";
 import AmazonBasketButton from "@/components/AmazonBasketButton";
 import { useHave } from "@/lib/have";
 
-const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
+import { AMAZON_TAG as TAG } from "@/lib/amazon";
 
 function toQuery(h: Household) {
   const q = new URLSearchParams({

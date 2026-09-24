@@ -10,7 +10,7 @@ import { BOTTLED_DAYS, DURATIONS, buildPack } from "@/data/packs";
 import { catBgFor } from "@/components/kit/categories";
 import { useHave } from "@/lib/have";
 
-const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
+import { AMAZON_TAG as TAG } from "@/lib/amazon";
 
 const externalLink =
   "mt-2 inline-flex min-h-11 items-center gap-1.5 font-extrabold underline underline-offset-4 hover:decoration-4";
