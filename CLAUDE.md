@@ -159,6 +159,9 @@ chart reads its rows from the `chart` fields in `scenarios.ts`.
 - **`docs/research-*.md`** record what was built from each design research
   run, what was rejected and why, and two corrections to earlier findings.
   Read the relevant one before revisiting a decision it covers.
+- **`docs/product-policy.md`** (draft for approval) sets how a product
+  is chosen, verified and rechecked. `verified: true` is set only by a
+  person who has opened the listing, never from search results.
 - **`docs/look-and-feel.md`** is superseded on palette and styling by
   `DESIGN.md`. Its diagram rationale still stands.
 
