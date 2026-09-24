@@ -1,9 +1,8 @@
 # Stay Prepared: product policy
 
-Drafted 24 September 2026 for Alice's approval. It turns the rules in
+Approved by Alice on 24 September 2026. It turns the rules in
 `monetisation-plan.md` into a working routine for `src/data/products.ts`,
-and records where the site does not yet meet them. Until approved, treat
-it as a proposal.
+and records where the site does not yet meet them.
 
 ## What this covers
 
@@ -73,8 +72,7 @@ To verify a product:
 1. Open `https://www.amazon.co.uk/dp/<ASIN>`.
 2. Check each point in section 2: the right item, UK seller, in stock,
    inside the price band, reviews, and that our name matches.
-3. If it passes, set `verified: true` and record the date (open decision
-   C proposes a `checked` field for this).
+3. If it passes, set `verified: true` and `checked` to the date.
 4. If it fails, replace it with one that passes, or remove it.
 
 Claude can prepare for this: cross-check codes against search results,
@@ -110,24 +108,21 @@ sign-off is a person's.
   where true. None qualifies yet.
 - **Only one option per line**, not a budget and a standard option.
 - **Amazon only.** Specialist retailers wait on Awin approval.
-- **The basket includes unverified products.** The comment at the top of
-  `products.ts` says the one-click basket only includes verified ones; it
-  does not. The home page kit and `/basket` send every product. The
-  planner's own note says the same thing and is also out of date.
+- **The basket includes unverified products**, by decision A below, until
+  all 20 are verified.
 
-## Open decisions for Alice
+## Decisions (agreed 24 September 2026)
 
-- **A. Unverified products in the basket.** Either filter them out (the
-  basket would be empty until products are verified), or keep sending
-  them and correct the comments. Recommended: keep sending them for now,
-  fix the comments, and verify all 20 this week.
-- **B. The free option in the one-click basket.** The planner shows it;
-  the home page kit does not. Recommended: one line under the kit, "Already
-  have some? Tick it off", which is there now, is enough, because the
-  basket is a shortcut for people who have decided to buy.
-- **C. A `checked` date on each product.** Add `checked: "2026-09-24"`
-  beside `verified`, so the 3-monthly review knows what is stale.
-  Recommended: yes.
-- **D. A reader-facing line.** Say on `/basket` how products are chosen,
-  in one sentence, with a link to a short public version of this policy.
-  Recommended: yes, once the products are verified.
+- **A. Unverified products in the basket.** Keep sending them for now,
+  with the code comments corrected to say so, and verify all 20 this week.
+  Filtering them out would empty the basket.
+- **B. The free option in the one-click basket.** The line under the home
+  page kit, "Already have some? Tick it off", is enough: the basket is a
+  shortcut for people who have decided to buy. The planner keeps showing
+  the free option first.
+- **C. A `checked` date on each product.** Added beside `verified` in
+  `products.ts`. It is set by the person who verifies, so the 3-monthly
+  review knows what is stale; absent means never checked.
+- **D. A reader-facing line.** Once the products are verified, `/basket`
+  says in one sentence how products are chosen, with a link to a short
+  public version of this policy.
