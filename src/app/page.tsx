@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Arrow from "@/components/home/Arrow";
+import OfficialChannels from "@/components/OfficialChannels";
 import ReachBar from "@/components/home/ReachBar";
 import Shelf, { type Tin } from "@/components/home/Shelf";
 import StarterBaskets from "@/components/home/StarterBaskets";
@@ -150,6 +151,8 @@ export default function Home() {
           </ol>
         </div>
       </section>
+
+      <OfficialChannels />
 
       {/* Keep a copy: end on something to do, on paper */}
       <section aria-labelledby="off-h" className="border-t-[3px] border-ink bg-hush py-16 min-[900px]:py-26">

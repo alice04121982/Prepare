@@ -48,6 +48,11 @@ with Archivo embedded from `src/assets/`. It downloads as "Offline
 guide.html" through a `Content-Disposition` header, has no scripts and makes
 no requests. Edit the data, not the guide.
 
+`official-channels.ts` lists where to go for instructions during an
+emergency (Emergency Alerts, gov.uk, BBC, the council, 999 and 111). It
+shows on the home page and in the offline guide. The site prepares people
+beforehand; it publishes no live updates and takes no political view.
+
 `Diagram.tsx` draws figures taken from these same files, so a change to
 `scenarios.ts` must be checked against the `duration` diagram, which plots
 it.
