@@ -32,8 +32,8 @@ export type ChecklistCategory = {
 };
 
 // Quantities are conservative planning figures from public guidance (gov.uk,
-// Red Cross, FEMA), not worst-case numbers. Keep in sync with the table in
-// public/offline/index.html.
+// Red Cross, FEMA), not worst-case numbers. The offline guide
+// (src/app/offline-guide/route.ts) is built from this list.
 export const checklist: ChecklistCategory[] = [
   {
     slug: "water",

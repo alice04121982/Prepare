@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
       { source: "/official-guidance", destination: "/what-might-stop", permanent: true },
       { source: "/why", destination: "/what-might-stop", permanent: true },
       { source: "/faq", destination: "/checklist#questions", permanent: true },
+      // The offline guide is now generated from the site data.
+      { source: "/offline/index.html", destination: "/offline-guide", permanent: true },
     ];
   },
 };
