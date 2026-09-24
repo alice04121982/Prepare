@@ -258,8 +258,8 @@ export const checklist: ChecklistCategory[] = [
           "Passport or driving licence, home and car insurance, prescriptions, bank contact details. Paper in a waterproof folder, or offline on a phone, or both.",
       },
       {
-        item: "A grab bag if you are in a flood-risk area",
-        amount: "One, kept by the door",
+        item: "A bag by the door if you are in a flood-risk area",
+        amount: "One, packed and ready",
         notes:
           "Documents, medication, chargers, a change of clothes, a torch, and a little cash.",
       },

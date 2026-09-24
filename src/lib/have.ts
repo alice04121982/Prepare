@@ -11,7 +11,7 @@ import { useCallback, useSyncExternalStore } from "react";
  *
  * A key is `category-slug/item-slug`, derived from the checklist data rather
  * than stored in it. Renaming an item in src/data/checklist.ts therefore
- * clears that one tick and leaves the rest alone. Planner lines with no
+ * clears that one tick, unless the old key is added to RENAMED below. Planner lines with no
  * checklist counterpart get a `kit/line-id` key of their own.
  */
 const STORAGE_KEY = "stay-prepared-have-v1";
@@ -27,12 +27,23 @@ export function haveKey(categorySlug: string, item: string) {
   return `${categorySlug}/${slug(item)}`;
 }
 
+/**
+ * Items renamed in checklist.ts since people started ticking them: the old
+ * key maps to the new one when the record is read, so the tick survives the
+ * rename. Add a line here whenever an item's display name changes.
+ */
+const RENAMED: Record<string, string> = {
+  "documents/a-grab-bag-if-you-are-in-a-flood-risk-area": "documents/a-bag-by-the-door-if-you-are-in-a-flood-risk-area",
+};
+
 function read(): string[] {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
     const parsed: unknown = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed.filter((k): k is string => typeof k === "string") : [];
+    return Array.isArray(parsed)
+      ? parsed.filter((k): k is string => typeof k === "string").map((k) => RENAMED[k] ?? k)
+      : [];
   } catch {
     // Private window, blocked site data, or something else wrote to this key.
     // The pages work either way; they just forget.

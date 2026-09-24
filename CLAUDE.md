@@ -78,7 +78,8 @@ record is deliberately kept at the checklist's coarser granularity.
 
 **Keys are derived, not stored.** `haveKey(categorySlug, item)` slugifies
 the item's display name, so renaming an item in `checklist.ts` silently
-clears that one tick. Accept that or add explicit ids, but know it.
+clears that one tick, unless the old key is added to `RENAMED` in
+`have.ts`, which maps it to the new one when the record is read.
 
 Every `localStorage` access is wrapped and every page must render correctly
 when it throws or returns nothing. `ready` is false until the record has
