@@ -38,7 +38,7 @@ export default function StarterBaskets() {
   const litres = 3 * people * days;
 
   return (
-    <div id="hero-actions" className="mt-7 border-[3px] border-ink min-[900px]:mt-10">
+    <div id="hero-actions" className="mt-9 border-[3px] border-ink min-[900px]:mt-2">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b-[3px] border-ink px-4.5 py-3.5 min-[900px]:px-6">
         <p id="people-label" className="text-lg font-extrabold">
           People in your home
@@ -74,7 +74,7 @@ export default function StarterBaskets() {
 
       <fieldset className="px-4.5 pb-4 pt-3.5 min-[900px]:px-6">
         <legend className="float-left mb-3 w-full text-lg font-extrabold">How long for</legend>
-        <div className="clear-both grid grid-cols-2 gap-2 min-[560px]:grid-cols-4">
+        <div className="clear-both grid grid-cols-2 gap-2">
           {packs.map((p) => {
             const d = DURATIONS.find((x) => x.days === p.days)!;
             return (
