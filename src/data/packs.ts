@@ -53,7 +53,10 @@ export function midPrice(band: string): number {
  */
 function packUnits(line: KitLine, product: Product, people: number): number {
   const units = line.id === "nocook" ? line.quantity * people : line.quantity;
-  return Math.max(1, Math.ceil((units * (product.share ?? 1)) / (product.unitsPerProduct ?? 1)));
+  // Rounded before ceil so a fractional pack size (8 / 9) cannot tip an
+  // exact fit up by one through floating point error.
+  const exact = (units * (product.share ?? 1)) / (product.unitsPerProduct ?? 1);
+  return Math.max(1, Math.ceil(Math.round(exact * 1e6) / 1e6));
 }
 
 /**
@@ -93,7 +96,8 @@ export function buildPack(people: number, days: number, owned: (lineId: string) 
     buys,
     estimate: Math.round(buys.reduce((sum, b) => sum + b.cost, 0)),
     elsewhere: needed.filter((l) => !bought.has(l.id)),
-    bottledLitres: waterBuy ? waterBuy.quantity * 9 : 0,
+    // A planner unit of water is a six-pack of 1.5 litres: 9 litres.
+    bottledLitres: waterBuy ? Math.round(waterBuy.quantity * (waterBuy.product.unitsPerProduct ?? 1) * 9) : 0,
   };
 }
 
