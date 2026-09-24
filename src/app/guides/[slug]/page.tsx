@@ -6,8 +6,7 @@ import Diagram from "@/components/Diagram";
 import Callout from "@/components/Callout";
 import Arrow from "@/components/home/Arrow";
 import { getGuide, guides } from "@/data/guides";
-import { amazonProductUrl, products } from "@/data/products";
-import { AMAZON_TAG } from "@/lib/amazon";
+import { amazonSearchUrl } from "@/lib/amazon";
 
 export const dynamicParams = false;
 
@@ -40,10 +39,6 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
   const guide = getGuide(slug);
   if (!guide) notFound();
 
-  // One product per planner line: the first listed, which is the budget pick.
-  const picks = guide.lines
-    .map((id) => products.find((p) => p.lineId === id))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
   const related = guide.related.map(getGuide).filter((g): g is NonNullable<typeof g> => Boolean(g));
 
   return (
@@ -100,24 +95,22 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
             Check what you already have first. The checklist keeps count, and the kit on the home page puts
             everything for your household in one Amazon basket.
           </p>
-          {picks.length ? (
-            <ul className="mt-8 grid gap-3 min-[700px]:grid-cols-2 min-[1100px]:grid-cols-3">
-              {picks.map((p) => (
-                <li key={p.asin} className="flex flex-col border-[3px] border-ink bg-paper px-4 py-3.5">
-                  <p className="font-extrabold leading-snug">{p.name}</p>
-                  <p className="mt-1 text-ink-2 tabular-nums">{p.priceBand}</p>
-                  <a
-                    href={amazonProductUrl(p.asin, AMAZON_TAG)}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="mt-auto inline-flex min-h-11 items-center pt-2 font-bold"
-                  >
-                    View on Amazon<span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : null}
+          <ul className="mt-8 grid gap-3 min-[700px]:grid-cols-2 min-[1100px]:grid-cols-3">
+            {guide.ready.map((r) => (
+              <li key={r.item} className="flex flex-col border-[3px] border-ink bg-paper px-4 py-3.5">
+                <p className="text-lg font-extrabold leading-snug">{r.item}</p>
+                <p className="mt-1 leading-snug">{r.tip}</p>
+                <a
+                  href={amazonSearchUrl(r.search)}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="mt-auto inline-flex min-h-11 items-center pt-2 font-bold"
+                >
+                  Choose one on Amazon<span className="sr-only">: {r.item} (opens in a new tab)</span>
+                </a>
+              </li>
+            ))}
+          </ul>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href="/checklist" className="btn btn-primary btn-lg">
               check your cupboard <Arrow />

@@ -38,6 +38,9 @@ markup. `checklist.ts` (what to keep, with amounts and sourcing notes),
 `official-guidance.ts` (dated links), `products.ts` (Amazon ASINs),
 `guides.ts` (the short answer pages at `/guides/[slug]`, one question each,
 answer first, sources listed, `verified: false` until checked by hand).
+Guides name kinds of things, never brands: each "what to have ready" item
+links to a tagged Amazon search (`amazonSearchUrl`). Specific products stay
+in the one-click basket and on `/basket`, which shows their photos.
 
 `Diagram.tsx` draws figures taken from these same files, so a change to
 `scenarios.ts` must be checked against the `duration` diagram, which plots
