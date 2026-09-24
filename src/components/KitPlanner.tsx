@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  amazonBasketUrl,
   buildKit,
   daysLabel,
   defaultHousehold,
@@ -19,6 +18,7 @@ import { DownArrow, goToBuy, StillToGetBar } from "@/components/kit/StillToGet";
 import { catBgFor } from "@/components/kit/categories";
 import { kitLineKey } from "@/data/have-map";
 import { buysFor } from "@/data/packs";
+import AmazonBasketButton from "@/components/AmazonBasketButton";
 import { useHave } from "@/lib/have";
 
 const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
@@ -128,10 +128,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   // The basket shares its rules with the homepage packs, so a line split
   // across products (tins as beans and soup) buys each part.
   const basketBuys = buysFor(toBuy, h.adults + h.children);
-  const basket = amazonBasketUrl(
-    basketBuys.map((b) => ({ asin: b.product.asin, quantity: b.quantity })),
-    TAG,
-  );
+  const basket = basketBuys.length > 0;
   const asinCount = basketBuys.length;
   const groceriesLeft = toBuy.some((l) => (l.category === "Food" || l.id === "water") && !productsFor(l.id).length);
 
@@ -167,10 +164,9 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
 
   const basketBlock = basket ? (
     <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-      <a href={basket} rel="sponsored" className="btn btn-primary btn-lg no-underline">
-        <ShoppingBasket size={20} strokeWidth={2.25} />
+      <AmazonBasketButton items={basketBuys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}>
         Add {asinCount} {asinCount === 1 ? "item" : "items"} to my Amazon basket
-      </a>
+      </AmazonBasketButton>
       <p className="max-w-md text-[0.9375rem] leading-snug text-ink-2">
         Opens Amazon with these {asinCount} products, in the quantities shown. Tap <strong>Add to basket</strong>
         to confirm, then check the basket and pay there. Nothing is bought until you choose to.

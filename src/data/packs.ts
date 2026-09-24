@@ -26,6 +26,13 @@ export type PackDays = (typeof DURATIONS)[number]["days"];
 
 export const BOTTLED_DAYS = 7;
 
+/**
+ * Lines bought once and kept, as opposed to food, water and supplies that
+ * are used up. Most of a pack's price is this kit, and many homes already
+ * own some of it, so the page shows the two figures apart.
+ */
+const KIT_ONCE = new Set(["torch", "lantern", "powerbank", "radio", "firstaid", "tin-opener", "water-extra", "purify"]);
+
 export type PackBuy = { line: KitLine; product: Product; quantity: number; cost: number };
 
 export type Pack = {
@@ -34,6 +41,10 @@ export type Pack = {
   buys: PackBuy[];
   /** Estimated total in pounds, rounded to the nearest pound. */
   estimate: number;
+  /** The part of the estimate that is kit bought once (torches, radio). */
+  kitOnce: number;
+  /** The part that is food, water and supplies. */
+  supplies: number;
   /** Lines still needed that the basket cannot hold: prescriptions, cash, things with no product yet. */
   elsewhere: KitLine[];
   /** Litres of bottled drinking water in the pack. */
@@ -95,6 +106,8 @@ export function buildPack(people: number, days: number, owned: (lineId: string) 
     days,
     buys,
     estimate: Math.round(buys.reduce((sum, b) => sum + b.cost, 0)),
+    kitOnce: Math.round(buys.filter((b) => KIT_ONCE.has(b.line.id)).reduce((sum, b) => sum + b.cost, 0)),
+    supplies: Math.round(buys.filter((b) => !KIT_ONCE.has(b.line.id)).reduce((sum, b) => sum + b.cost, 0)),
     elsewhere: needed.filter((l) => !bought.has(l.id)),
     // A planner unit of water is a six-pack of 1.5 litres: 9 litres.
     bottledLitres: waterBuy ? Math.round(waterBuy.quantity * (waterBuy.product.unitsPerProduct ?? 1) * 9) : 0,

@@ -2,13 +2,11 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { ShoppingBasket } from "lucide-react";
-import { amazonBasketUrl } from "@/data/kit-rules";
+import AmazonBasketButton from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
 import { BOTTLED_DAYS, DURATIONS, buildPack, durationLabel, type PackDays } from "@/data/packs";
 import { useHave } from "@/lib/have";
 
-const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
 const MAX_PEOPLE = 12;
 
 const stepClass =
@@ -33,10 +31,7 @@ export default function StarterBaskets() {
     [people, have],
   );
   const chosen = packs.find((p) => p.days === days) ?? packs[0];
-  const url = amazonBasketUrl(
-    chosen.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity })),
-    TAG,
-  );
+  const url = chosen.buys.length > 0;
   const covers = [...new Set(chosen.buys.map((b) => b.line.category.toLowerCase()))];
   const who = `${people} ${people === 1 ? "person" : "people"}`;
 
@@ -127,14 +122,22 @@ export default function StarterBaskets() {
                 ? ` Bottled water covers the first week. After that, you fill the containers from the tap.`
                 : ""}
             </p>
-            <a
-              href={url}
-              rel="sponsored"
-              className="btn btn-primary btn-lg mt-4 w-full no-underline"
+            <dl className="mt-3 grid gap-1 border-y border-ink py-2.5 text-[0.9375rem] tabular-nums">
+              <div className="flex justify-between gap-3">
+                <dt>Food, water and supplies</dt>
+                <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.supplies}</dd>
+              </div>
+              <div className="flex justify-between gap-3">
+                <dt>Kit you buy once (torches, radio)</dt>
+                <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.kitOnce}</dd>
+              </div>
+            </dl>
+            <AmazonBasketButton
+              items={chosen.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
+              className="mt-4"
             >
-              <ShoppingBasket size={20} strokeWidth={2.25} aria-hidden="true" />
               send it all to my Amazon basket
-            </a>
+            </AmazonBasketButton>
             <p className="mt-3 text-sm leading-snug text-ink-2">
               Amazon asks you to confirm: tap <strong>Add to basket</strong> there. Nothing is bought until you pay.
               About &pound;{chosen.estimate} is a guide, because prices change.

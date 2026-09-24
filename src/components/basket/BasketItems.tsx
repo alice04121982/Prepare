@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { ExternalLink, ShoppingBasket } from "lucide-react";
-import { amazonBasketUrl } from "@/data/kit-rules";
+import AmazonBasketButton from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
 import { amazonImageUrl, amazonProductUrl } from "@/data/products";
 import { BOTTLED_DAYS, DURATIONS, buildPack } from "@/data/packs";
@@ -32,10 +32,7 @@ function Swatch({ category }: { category: string }) {
 export default function BasketItems({ people, days }: { people: number; days: number }) {
   const { have } = useHave();
   const pack = useMemo(() => buildPack(people, days, (id) => have.has(kitLineKey(id))), [people, days, have]);
-  const url = amazonBasketUrl(
-    pack.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity })),
-    TAG,
-  );
+  const url = pack.buys.length > 0;
   const categories = [...new Set(pack.buys.map((b) => b.line.category))];
 
   return (
@@ -158,17 +155,22 @@ export default function BasketItems({ people, days }: { people: number; days: nu
           <p className="mt-2 text-sm text-ink-2">
             {pack.buys.length} products. From the middle of each price band. Prices change, so this is a guide.
           </p>
+          <dl className="mt-3 grid gap-1 border-y border-ink py-2.5 text-[0.9375rem] tabular-nums">
+            <div className="flex justify-between gap-3">
+              <dt>Food, water and supplies</dt>
+              <dd className="whitespace-nowrap font-extrabold">about &pound;{pack.supplies}</dd>
+            </div>
+            <div className="flex justify-between gap-3">
+              <dt>Kit you buy once (torches, radio)</dt>
+              <dd className="whitespace-nowrap font-extrabold">about &pound;{pack.kitOnce}</dd>
+            </div>
+          </dl>
         </div>
         <div className="px-4.5 py-4">
           {url ? (
-            <a
-              href={url}
-              rel="sponsored"
-              className="btn btn-primary btn-lg w-full no-underline"
-            >
-              <ShoppingBasket size={20} strokeWidth={2.25} aria-hidden="true" />
+            <AmazonBasketButton items={pack.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}>
               send it all to my Amazon basket
-            </a>
+            </AmazonBasketButton>
           ) : (
             <p>You have ticked off everything the basket would hold.</p>
           )}
