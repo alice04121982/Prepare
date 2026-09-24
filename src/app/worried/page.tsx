@@ -4,7 +4,15 @@ import PageIntro from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 import Arrow from "@/components/home/Arrow";
 import SaferWorld from "@/components/SaferWorld";
-import { childMortality, disasterDeathRatePerDecade, extremePoverty, lifeExpectancy } from "@/data/safer-world";
+import {
+  childMortality,
+  conflictDeathRate,
+  disasterDeathRatePerDecade,
+  drinkingWater,
+  electricityAccess,
+  extremePoverty,
+  lifeExpectancy,
+} from "@/data/safer-world";
 
 export const metadata: Metadata = {
   title: "If the news is frightening you",
@@ -70,6 +78,9 @@ const help = [
 const sources = [
   { label: "Our World in Data: child mortality, life expectancy, extreme poverty and natural disaster deaths (world series fetched 19 September 2026)", url: "https://ourworldindata.org/" },
   { label: "Gapminder and the UN Population Division: population by country, used to turn disaster deaths into a rate", url: "https://www.gapminder.org/data/documentation/gd003/" },
+  { label: "World Bank World Development Indicators: access to electricity, and basic drinking water from the WHO and UNICEF Joint Monitoring Programme", url: "https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS" },
+  { label: "Uppsala Conflict Data Program and PRIO: deaths in state-based conflicts since 1946, and Organized violence 1989 to 2023", url: "https://ucdp.uu.se/" },
+  { label: "Our World in Data: world conflict deaths from the Conflict Catalogue, 1920 to 1945", url: "https://ourworldindata.org/war-and-peace" },
   { label: "Mental Health Foundation, Doomscrolling: tips for healthier news consumption", url: "https://www.mentalhealth.org.uk/explore-mental-health/articles/doomscrolling-tips-healthier-news-consumption" },
   { label: "Mental Health Foundation, Talking to children about scary world events", url: "https://www.mentalhealth.org.uk/explore-mental-health/articles/talking-children-about-scary-world-events" },
   { label: "McLaughlin, Gotlieb and Mills, Caught in a Dangerous World: Problematic News Consumption and Its Relationship to Mental and Physical Ill-Being, Health Communication, 2022", url: "https://www.tandfonline.com/doi/full/10.1080/10410236.2022.2106086" },
@@ -159,8 +170,9 @@ export default function WorriedPage() {
               person lives, and for how long, the world is safer now than ever before.
             </p>
             <p className="mt-4">
-              The figures come from Our World in Data, which gathers them from the UN, the World Bank and the
-              disaster database EM-DAT. Choose a country if a world average feels too far away.
+              The figures come from the UN, the World Bank, WHO and UNICEF, the disaster database EM-DAT and
+              the conflict researchers at Uppsala and Oslo, mostly gathered by Our World in Data. Choose a country
+              if a world average feels too far away.
             </p>
           </div>
           <div className="mt-10">
@@ -171,7 +183,10 @@ export default function WorriedPage() {
                 child: childMortality,
                 life: lifeExpectancy,
                 poverty: extremePoverty,
+                water: drinkingWater,
+                elec: electricityAccess,
                 disasters: disasterDeathRatePerDecade,
+                conflict: conflictDeathRate,
               }}
             />
           </div>

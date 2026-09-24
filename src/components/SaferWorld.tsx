@@ -4,10 +4,21 @@ import { useEffect, useState, type KeyboardEvent, type PointerEvent } from "reac
 import type { Point } from "@/data/safer-world";
 
 type Country = { code: string; name: string };
-type Series = { code: string; name: string; child: Point[]; life: Point[]; poverty: Point[]; disasters: Point[] };
+type Series = {
+  code: string;
+  name: string;
+  child: Point[];
+  life: Point[];
+  poverty: Point[];
+  water?: Point[];
+  elec?: Point[];
+  disasters: Point[];
+  /** World only; see the conflict measure. */
+  conflict?: Point[];
+};
 
 type Measure = {
-  key: "child" | "life" | "poverty" | "disasters";
+  key: "child" | "life" | "poverty" | "water" | "elec" | "disasters" | "conflict";
   title: string;
   /** How a single value reads in words, e.g. "4 in 100". */
   say: (v: number) => string;
@@ -26,7 +37,15 @@ type Measure = {
   note?: string;
   /** Shown under a single country's chart only. */
   countryNote?: string;
+  /** Charted for the world only; a country gets this reason instead. */
+  worldOnly?: string;
 };
+
+/** "12 in 100", or "everyone" once the share rounds to 100. */
+const reach = (v: number) => (v >= 99.5 ? "everyone" : `${Math.round(v)} in 100`);
+/** A yearly rate per 100,000 people. */
+const perYear = (v: number) =>
+  v === 0 ? "none recorded" : v < 0.1 ? "under 0.1 a year" : v < 1 ? `${v.toFixed(1)} a year` : `${Math.round(v)} a year`;
 
 const round = (v: number) => (v >= 10 ? Math.round(v) : Math.round(v * 10) / 10);
 
@@ -57,15 +76,45 @@ const MEASURES: Measure[] = [
     note: "1820 to 1980 are historical estimates; 1990 on are World Bank figures. 2025 and 2026 are World Bank projections.",
   },
   {
+    key: "water",
+    title: "people with clean drinking water",
+    say: reach,
+    axis: (v) => `${v} in 100`,
+    kind: "line",
+    minTop: 100,
+    definition:
+      "At least a basic supply: a safe source no more than a 30-minute round trip away. WHO and UNICEF figures.",
+  },
+  {
+    key: "elec",
+    title: "people with electricity at home",
+    say: reach,
+    axis: (v) => `${v} in 100`,
+    kind: "line",
+    minTop: 100,
+    definition: "World Bank figures, from household surveys.",
+  },
+  {
     key: "disasters",
     title: "deaths from disasters, per 100,000 people",
-    say: (v) =>
-      v === 0 ? "none recorded" : v < 0.1 ? "under 0.1 a year" : v < 1 ? `${v.toFixed(1)} a year` : `${Math.round(v)} a year`,
+    say: perYear,
     axis: (v) => `${v} a year`,
     kind: "bars",
     note: "Average per year in each decade, divided by the world's population then, so the rise from 2 billion people to 8 billion is taken into account.",
     countryNote:
       "Average per year in each decade, divided by the population then. Country records are thin before the 1960s, and deaths in heatwaves have only been counted since the 2000s, so part of any recent rise is better counting.",
+  },
+  {
+    key: "conflict",
+    title: "deaths in wars and conflicts, per 100,000 people",
+    say: perYear,
+    axis: (v) => `${v} a year`,
+    kind: "line",
+    definition:
+      "Soldiers and civilians killed in fighting where at least one side is a government. Deaths from hunger and disease caused by war are not counted.",
+    note: "1920 to 1945 from the Conflict Catalogue; 1946 to 2020 from PRIO and UCDP; 2022 and 2023 from UCDP. There is no comparable figure for 2021, so the line joins 2020 to 2022.",
+    worldOnly:
+      "Shown for the world only. The country records we can use end in 2018, before the wars of the last few years, so they would give a false picture.",
   },
 ];
 
@@ -108,6 +157,15 @@ function HeatNote() {
  */
 function Chart({ m, points, place, isWorld }: { m: Measure; points: Point[]; place: string; isWorld: boolean }) {
   const [active, setActive] = useState<number | null>(null);
+
+  if (m.worldOnly && !isWorld) {
+    return (
+      <figure className="border-[3px] border-ink bg-paper">
+        <figcaption className="border-b-[10px] border-ink px-4 py-3 font-extrabold">{m.title}</figcaption>
+        <p className="px-4 py-5 text-[0.9375rem] leading-relaxed">{m.worldOnly}</p>
+      </figure>
+    );
+  }
 
   if (points.length < 2) {
     return (
@@ -187,8 +245,14 @@ function Chart({ m, points, place, isWorld }: { m: Measure; points: Point[]; pla
       <div className="border-b-[10px] border-ink px-4 pb-3 pt-3">
         <figcaption className="text-[0.9375rem] font-extrabold">{m.title}</figcaption>
         <p className="mt-1.5 flex flex-wrap items-baseline gap-x-2.5 tabular-nums">
-          <span className="text-lg font-bold text-ink-2 line-through decoration-2">{m.say(first[1])}</span>
-          <span className="sr-only">in {first[0]}{s}, now</span>
+          {m.say(first[1]) === m.say(last[1]) ? (
+            <span className="sr-only">in {first[0]}{s} and now</span>
+          ) : (
+            <>
+              <span className="text-lg font-bold text-ink-2 line-through decoration-2">{m.say(first[1])}</span>
+              <span className="sr-only">in {first[0]}{s}, now</span>
+            </>
+          )}
           <span
             className="display text-[clamp(1.75rem,7vw,2.25rem)] leading-none"
             style={{ fontVariationSettings: '"wdth" 115' }}
@@ -406,7 +470,7 @@ export default function SaferWorld({ world }: { world: Series }) {
       </div>
       <div className="mt-6 grid gap-4 min-[700px]:grid-cols-2">
         {MEASURES.map((m) => (
-          <Chart key={`${series.code}-${m.key}`} m={m} points={series[m.key]} place={place} isWorld={series.code === world.code} />
+          <Chart key={`${series.code}-${m.key}`} m={m} points={series[m.key] ?? []} place={place} isWorld={series.code === world.code} />
         ))}
       </div>
       {series.code !== world.code ? (
