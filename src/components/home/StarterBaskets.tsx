@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { ShoppingBasket } from "lucide-react";
 import { amazonBasketUrl } from "@/data/kit-rules";
 import { kitLineKey } from "@/data/have-map";
-import { BUDGETS, pickLabel, starterBasket, type Budget } from "@/data/starter-baskets";
+import { BOTTLED_DAYS, DURATIONS, buildPack, durationLabel, type PackDays } from "@/data/packs";
 import { useHave } from "@/lib/have";
 
 const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
@@ -14,27 +14,31 @@ const MAX_PEOPLE = 12;
 const stepClass =
   "grid h-12 w-12 place-items-center rounded-[4px] border-[3px] border-ink text-2xl font-extrabold leading-none hover:bg-[var(--hover)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent";
 
+const joinWords = (words: string[]) =>
+  words.length < 2 ? words.join("") : `${words.slice(0, -1).join(", ")} and ${words[words.length - 1]}`;
+
 /**
- * The hero's quick route to a basket: say how many people live with you, pick
- * a budget, and Amazon opens with the things in it. Each basket is the
- * planner's list for that household, cut to the budget (see
- * src/data/starter-baskets.ts), less anything ticked off on the checklist.
+ * The hero's quick route to a complete kit: say how many people live with
+ * you and for how long, and Amazon opens with everything in one basket. Each
+ * pack is the planner's whole list for that household (see src/data/packs.ts),
+ * less anything ticked off on the checklist.
  */
 export default function StarterBaskets() {
   const [people, setPeople] = useState(2);
-  const [budget, setBudget] = useState<Budget>(50);
+  const [days, setDays] = useState<PackDays>(3);
   const { have } = useHave();
 
-  const baskets = useMemo(
-    () => BUDGETS.map((b) => starterBasket(people, b, (id) => have.has(kitLineKey(id)))),
+  const packs = useMemo(
+    () => DURATIONS.map((d) => buildPack(people, d.days, (id) => have.has(kitLineKey(id)))),
     [people, have],
   );
-  const chosen = baskets.find((b) => b.budget === budget) ?? baskets[0];
+  const chosen = packs.find((p) => p.days === days) ?? packs[0];
   const url = amazonBasketUrl(
-    chosen.picks.map((p) => ({ asin: p.product.asin, quantity: p.quantity })),
+    chosen.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity })),
     TAG,
   );
-  const things = chosen.picks.reduce((n, p) => n + p.quantity, 0);
+  const covers = [...new Set(chosen.buys.map((b) => b.line.category.toLowerCase()))];
+  const who = `${people} ${people === 1 ? "person" : "people"}`;
 
   return (
     <div id="hero-actions" className="mt-7 border-[3px] border-ink min-[900px]:mt-10">
@@ -72,43 +76,38 @@ export default function StarterBaskets() {
       </div>
 
       <fieldset className="px-4.5 pb-4 pt-3.5 min-[900px]:px-6">
-        <legend className="float-left mb-3 w-full text-lg font-extrabold">Choose a budget</legend>
+        <legend className="float-left mb-3 w-full text-lg font-extrabold">How long for</legend>
         <div className="clear-both grid grid-cols-2 gap-2 min-[560px]:grid-cols-4">
-          {baskets.map((b) => {
-            const count = b.picks.reduce((n, p) => n + p.quantity, 0);
+          {packs.map((p) => {
+            const d = DURATIONS.find((x) => x.days === p.days)!;
             return (
               <div
-                key={b.budget}
+                key={p.days}
                 className="flex h-full flex-col rounded-[4px] border-2 border-ink hover:bg-[var(--hover)] has-checked:bg-hush has-checked:shadow-[inset_0_0_0_2px_var(--ink)] has-focus-visible:outline-3 has-focus-visible:outline-offset-3 has-focus-visible:outline-ink"
               >
                 <input
                   type="radio"
-                  name="budget"
-                  id={`budget-${b.budget}`}
-                  value={b.budget}
-                  checked={budget === b.budget}
-                  onChange={() => setBudget(b.budget)}
+                  name="days"
+                  id={`pack-${p.days}`}
+                  value={p.days}
+                  checked={days === p.days}
+                  onChange={() => setDays(d.days)}
                   className="sr-only"
                 />
-                <label
-                  htmlFor={`budget-${b.budget}`}
-                  className="flex flex-1 cursor-pointer flex-col justify-between px-3 pt-2.5"
-                >
+                <label htmlFor={`pack-${p.days}`} className="flex flex-1 cursor-pointer flex-col justify-between px-3 pt-2.5">
                   <span
-                    className="display text-[2rem] tabular-nums leading-none"
+                    className="display text-[1.75rem] leading-none"
                     style={{ fontVariationSettings: '"wdth" 115' }}
                   >
-                    &pound;{b.budget}
+                    {d.label}
                   </span>
                   <span className="mt-1.5 text-sm font-bold leading-snug">
-                    {count ? `${count} ${count === 1 ? "thing" : "things"}, about £${b.estimate}` : "nothing left to add"}
+                    {p.buys.length ? `about £${p.estimate}` : "nothing left to add"}
+                    {"note" in d ? <span className="block font-normal">{d.note}</span> : null}
                   </span>
                 </label>
-                <Link
-                  href={`/basket?p=${people}&b=${b.budget}`}
-                  className="flex min-h-11 items-center px-3 text-sm font-extrabold"
-                >
-                  see items<span className="sr-only"> in the &pound;{b.budget} basket</span>
+                <Link href={`/basket?p=${people}&d=${p.days}`} className="flex min-h-11 items-center px-3 text-sm font-extrabold">
+                  see items<span className="sr-only"> for {d.label}</span>
                 </Link>
               </div>
             );
@@ -120,12 +119,12 @@ export default function StarterBaskets() {
         {url ? (
           <>
             <p className="font-extrabold">
-              In the &pound;{chosen.budget} basket for {people} {people === 1 ? "person" : "people"}
+              Everything for {who} for {durationLabel(days)}
             </p>
             <p aria-live="polite" className="mt-1 text-[0.9375rem] leading-snug">
-              {chosen.picks.map(pickLabel).join(", ")}.
-              {chosen.leftOut
-                ? ` ${chosen.leftOut} more ${chosen.leftOut === 1 ? "thing" : "things"} on the full list did not fit.`
+              {chosen.buys.length} products covering {joinWords(covers)}, in one Amazon basket.
+              {days > BOTTLED_DAYS
+                ? ` Bottled water covers the first week. After that, you fill the containers from the tap.`
                 : ""}
             </p>
             <a
@@ -135,17 +134,20 @@ export default function StarterBaskets() {
               className="btn btn-primary btn-lg mt-4 w-full no-underline"
             >
               <ShoppingBasket size={20} strokeWidth={2.25} aria-hidden="true" />
-              fill my Amazon basket
+              send it all to my Amazon basket
             </a>
             <p className="mt-3 text-sm leading-snug text-ink-2">
-              Opens Amazon with these {things} {things === 1 ? "thing" : "things"} in your basket. You check it
-              and pay there, and nothing is bought until you do. Prices change, so the totals are a guide.
+              You check the basket and pay on Amazon. Nothing is bought until you do. About &pound;{chosen.estimate}
+              {" "}is a guide, because prices change.
             </p>
           </>
         ) : (
           <p className="text-[0.9375rem]">
-            You have ticked off everything a basket would hold. Water and food are next, and they are cheaper
-            at a supermarket.
+            You have ticked off everything a basket would hold.{" "}
+            <Link href={`/basket?p=${people}&d=${days}`} className="font-bold">
+              See what is left
+            </Link>
+            .
           </p>
         )}
         <p className="mt-3 text-sm leading-snug">
@@ -153,11 +155,7 @@ export default function StarterBaskets() {
           <Link href="/checklist" className="font-bold">
             Tick it off first
           </Link>{" "}
-          and it leaves the basket. Or{" "}
-          <Link href={`/build-your-kit?a=${people}&c=0&d=3`} className="font-bold">
-            build the full list
-          </Link>
-          , with water and food.
+          and it leaves the basket.
         </p>
         <p className="mt-3 text-[0.8125rem] leading-snug text-ink-2">
           Some links here earn us a small commission. As an Amazon Associate we earn from qualifying purchases.

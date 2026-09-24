@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
 import BasketItems from "@/components/basket/BasketItems";
-import { BUDGETS, type Budget } from "@/data/starter-baskets";
+import { DURATIONS, durationLabel } from "@/data/packs";
 
 export const metadata: Metadata = {
   title: "What is in the basket",
   description:
-    "Every item in a Stay Prepared budget basket, with the quantity for your household and a price band, before it goes to Amazon.",
+    "Every item in a Stay Prepared kit for your household, with quantities and price bands, before it goes to your Amazon basket.",
 };
 
 const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
@@ -19,16 +19,16 @@ export default async function BasketPage({
   const q = await searchParams;
   const rawPeople = parseInt(first(q.p) ?? "", 10);
   const people = Number.isFinite(rawPeople) ? Math.max(1, Math.min(12, rawPeople)) : 2;
-  const rawBudget = parseInt(first(q.b) ?? "", 10);
-  const budget: Budget = (BUDGETS as readonly number[]).includes(rawBudget) ? (rawBudget as Budget) : 50;
+  const rawDays = parseInt(first(q.d) ?? "", 10);
+  const days = DURATIONS.find((d) => d.days === rawDays)?.days ?? 3;
 
   return (
     <main>
       <PageIntro
-        title={`the £${budget} basket for ${people} ${people === 1 ? "person" : "people"}`}
-        lede="This is what the button on the home page puts in your Amazon basket. The quantities are for three days. Anything you have ticked off on the checklist is left out."
+        title={`everything for ${people} ${people === 1 ? "person" : "people"}, ${durationLabel(days)}`}
+        lede="This is what the button on the home page puts in your Amazon basket, in one go. Anything you have ticked off on the checklist is left out."
       />
-      <BasketItems people={people} budget={budget} />
+      <BasketItems people={people} days={days} />
     </main>
   );
 }

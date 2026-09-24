@@ -18,6 +18,7 @@ import { Counter, DaysControl, OptionRow, TickBox } from "@/components/kit/Contr
 import { DownArrow, goToBuy, StillToGetBar } from "@/components/kit/StillToGet";
 import { catBgFor } from "@/components/kit/categories";
 import { kitLineKey } from "@/data/have-map";
+import { buysFor } from "@/data/packs";
 import { useHave } from "@/lib/have";
 
 const TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG;
@@ -124,13 +125,15 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
       product,
       buyQty: product ? Math.max(1, Math.ceil(line.quantity / (product.unitsPerProduct ?? 1))) : 0,
     }));
-  const withProduct = picks.filter((p) => p.product);
+  // The basket shares its rules with the homepage packs, so a line split
+  // across products (tins as beans and soup) buys each part.
+  const basketBuys = buysFor(toBuy, h.adults + h.children);
   const basket = amazonBasketUrl(
-    withProduct.map((p) => ({ asin: p.product!.asin, quantity: p.buyQty })),
+    basketBuys.map((b) => ({ asin: b.product.asin, quantity: b.quantity })),
     TAG,
   );
-  const asinCount = withProduct.length;
-  const groceriesLeft = toBuy.some((l) => l.category === "Food" || l.id === "water");
+  const asinCount = basketBuys.length;
+  const groceriesLeft = toBuy.some((l) => (l.category === "Food" || l.id === "water") && !productsFor(l.id).length);
 
   const set = <K extends keyof Household>(k: K, v: Household[K]) => setH((prev) => ({ ...prev, [k]: v }));
 
@@ -170,8 +173,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
       </a>
       <p className="max-w-md text-[0.9375rem] leading-snug text-ink-2">
         Opens Amazon with these {asinCount} products in your basket, in the quantities shown. You check the
-        basket and pay there. Nothing is bought until you choose to. Groceries are on your list; buy those at
-        a supermarket.
+        basket and pay there. Nothing is bought until you choose to.
       </p>
     </div>
   ) : null;
