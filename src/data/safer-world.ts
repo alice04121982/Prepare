@@ -140,3 +140,31 @@ export const famineDeathsPerDecade: Point[] = [
   [2010, 1118333.0],
   [2020, 1052666.0],
 ];
+
+/**
+ * World population, average for each decade, in billions. Rounded from the
+ * HYDE and UN World Population Prospects series that Our World in Data uses
+ * (the average of the decade's first year and the next decade's first year).
+ * The 2020s are 2020 to 2024. Used only to turn disaster deaths into a rate.
+ */
+export const worldPopulationByDecade: Record<number, number> = {
+  1900: 1.71,
+  1910: 1.84,
+  1920: 2.0,
+  1930: 2.2,
+  1940: 2.4,
+  1950: 2.76,
+  1960: 3.36,
+  1970: 4.07,
+  1980: 4.89,
+  1990: 5.75,
+  2000: 6.58,
+  2010: 7.44,
+  2020: 8.0,
+};
+
+/** Deaths a year from natural disasters per 100,000 people, by decade. */
+export const disasterDeathRatePerDecade: Point[] = disasterDeathsPerDecade.map(([decade, deaths]) => [
+  decade,
+  Math.round((deaths / (worldPopulationByDecade[decade] * 1e9)) * 1e5 * 100) / 100,
+]);

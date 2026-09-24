@@ -4,7 +4,7 @@ import PageIntro from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 import Arrow from "@/components/home/Arrow";
 import SaferWorld from "@/components/SaferWorld";
-import { childMortality, disasterDeathsPerDecade, extremePoverty, lifeExpectancy } from "@/data/safer-world";
+import { childMortality, disasterDeathRatePerDecade, extremePoverty, lifeExpectancy } from "@/data/safer-world";
 
 export const metadata: Metadata = {
   title: "If the news is frightening you",
@@ -170,7 +170,7 @@ export default function WorriedPage() {
                 child: childMortality,
                 life: lifeExpectancy,
                 poverty: extremePoverty,
-                disasters: disasterDeathsPerDecade,
+                disasters: disasterDeathRatePerDecade,
               }}
             />
           </div>
