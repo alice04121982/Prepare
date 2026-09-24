@@ -10,9 +10,26 @@ import { checklist, startingPoint } from "@/data/checklist";
 import { faq } from "@/data/faq";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/checklist" },
   title: "Essentials checklist",
   description:
     "What to keep on hand, with realistic quantities and how long each item lasts, plus the questions people ask.",
+};
+
+/**
+ * The questions below as schema.org FAQPage data, so search results can show
+ * the answers. Built from faq.ts, the same source the page renders.
+ */
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq
+    .flatMap((group) => group.entries)
+    .map((e) => ({
+      "@type": "Question",
+      name: e.question,
+      acceptedAnswer: { "@type": "Answer", text: e.answer.join("\n\n") },
+    })),
 };
 
 export default function ChecklistPage() {
@@ -94,6 +111,11 @@ export default function ChecklistPage() {
       </div>
 
       {/* Questions */}
+      <script
+        type="application/ld+json"
+        // Escaping "<" keeps the data from ever closing the script tag.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
+      />
       <section id="questions" aria-labelledby="questions-h" className="wrap scroll-mt-24 pb-16 pt-16 min-[900px]:pb-24 min-[900px]:pt-24">
         <h2 id="questions-h" className="h-section">
           the questions people ask

@@ -5,6 +5,7 @@ import Diagram from "@/components/Diagram";
 import Arrow from "@/components/home/Arrow";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/community" },
   title: "Community and mutual aid",
   description:
     "Why neighbours matter once your own household is prepared, and four things to do first where you live.",

@@ -8,6 +8,7 @@ import { scenarios } from "@/data/scenarios";
 import { officialGuidance, guidanceLastChecked } from "@/data/official-guidance";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/what-might-stop" },
   title: "What might stop",
   description:
     "What usually stops in an emergency, how long it lasts, why the UK government asks households to be ready for three days, and where the official guidance is.",

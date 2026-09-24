@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Arrow from "@/components/home/Arrow";
 import ReachBar from "@/components/home/ReachBar";
 import Shelf, { type Tin } from "@/components/home/Shelf";
 import StarterBaskets from "@/components/home/StarterBaskets";
 import StepState from "@/components/home/StepState";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const tins: Tin[] = [
   { id: "water", name: "water", amount: "3 litres per person per day", when: "if nothing comes out of the taps", cat: "bg-cat-water" },

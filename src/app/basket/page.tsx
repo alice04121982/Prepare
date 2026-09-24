@@ -5,6 +5,7 @@ import BasketItems from "@/components/basket/BasketItems";
 import { DURATIONS, durationLabel } from "@/data/packs";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/basket" },
   title: "What is in the basket",
   description:
     "Every item in a Stay Prepared kit for your household, with quantities and price bands, before it goes to your Amazon basket.",

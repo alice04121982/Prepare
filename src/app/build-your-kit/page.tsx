@@ -5,6 +5,7 @@ import KitPlanner from "@/components/KitPlanner";
 import { householdFromParams } from "@/data/kit-rules";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/build-your-kit" },
   title: "Build your kit",
   description:
     "Tell us who lives with you and how many days to cover. Get a shopping list with realistic quantities, a free option for every line, and a print or copy button.",

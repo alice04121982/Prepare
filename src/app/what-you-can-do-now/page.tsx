@@ -5,6 +5,7 @@ import Arrow from "@/components/home/Arrow";
 import { doNow, type NowStep } from "@/data/do-now";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/what-you-can-do-now" },
   title: "What you can do now",
   description:
     "Free things to do today to be ready at home: check Emergency Alerts, save the 105 power cut number, find your stopcock, make a household plan. No shopping needed.",
