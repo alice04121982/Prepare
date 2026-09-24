@@ -150,6 +150,10 @@ chart reads its rows from the `chart` fields in `scenarios.ts`.
   person, sentences under twenty words. Never "stockpile", "survive",
   "prepper", "bug-out". Household first, community as a consequence.
   Numbers specific and sourced.
+- **Marketing skills yield to these docs.** `.claude/skills/` holds
+  Corey Haines' marketing skills (`skills-lock.json`, update with
+  `npx skills update -p`). Use them for structure and SEO; never take
+  urgency, scarcity, fear or loss framing from them into copy.
 - **`docs/copy-audit.md`** holds the four tests every line has to pass,
   including "would gov.uk say it" and "no flourish at the end of the
   paragraph".
