@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import BasketItems from "@/components/basket/BasketItems";
 import { DURATIONS, durationLabel } from "@/data/packs";
@@ -26,7 +27,16 @@ export default async function BasketPage({
     <main>
       <PageIntro
         title={`everything for ${people} ${people === 1 ? "person" : "people"}, ${durationLabel(days)}`}
-        lede="This is what the button on the home page puts in your Amazon basket, in one go. Anything you have ticked off on the checklist is left out."
+        lede={
+          <>
+            This is what the button on the home page puts in your Amazon basket, in one go. Anything you have ticked
+            off on the{" "}
+            <Link href="/checklist" className="font-bold">
+              checklist
+            </Link>{" "}
+            is left out.
+          </>
+        }
       />
       <BasketItems people={people} days={days} />
     </main>
