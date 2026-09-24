@@ -3,6 +3,16 @@ import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 import Arrow from "@/components/home/Arrow";
+import SaferWorld from "@/components/SaferWorld";
+import {
+  childMortality,
+  conflictDeathRate,
+  disasterDeathRatePerDecade,
+  drinkingWater,
+  electricityAccess,
+  extremePoverty,
+  lifeExpectancy,
+} from "@/data/safer-world";
 
 export const metadata: Metadata = {
   title: "If the news is frightening you",
@@ -66,6 +76,11 @@ const help = [
 ];
 
 const sources = [
+  { label: "Our World in Data: child mortality, life expectancy, extreme poverty and natural disaster deaths (world series fetched 19 September 2026)", url: "https://ourworldindata.org/" },
+  { label: "Gapminder and the UN Population Division: population by country, used to turn disaster deaths into a rate", url: "https://www.gapminder.org/data/documentation/gd003/" },
+  { label: "World Bank World Development Indicators: access to electricity, and basic drinking water from the WHO and UNICEF Joint Monitoring Programme", url: "https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS" },
+  { label: "Uppsala Conflict Data Program and PRIO: deaths in state-based conflicts since 1946, and Organized violence 1989 to 2023", url: "https://ucdp.uu.se/" },
+  { label: "Our World in Data: world conflict deaths from the Conflict Catalogue, 1920 to 1945", url: "https://ourworldindata.org/war-and-peace" },
   { label: "Mental Health Foundation, Doomscrolling: tips for healthier news consumption", url: "https://www.mentalhealth.org.uk/explore-mental-health/articles/doomscrolling-tips-healthier-news-consumption" },
   { label: "Mental Health Foundation, Talking to children about scary world events", url: "https://www.mentalhealth.org.uk/explore-mental-health/articles/talking-children-about-scary-world-events" },
   { label: "McLaughlin, Gotlieb and Mills, Caught in a Dangerous World: Problematic News Consumption and Its Relationship to Mental and Physical Ill-Being, Health Communication, 2022", url: "https://www.tandfonline.com/doi/full/10.1080/10410236.2022.2106086" },
@@ -143,6 +158,50 @@ export default function WorriedPage() {
           </div>
         </section>
       </div>
+
+      <section aria-labelledby="safest-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
+        <div className="wrap">
+          <div className="measure text-[1.125rem] leading-relaxed">
+            <h2 id="safest-h" className="h-sub">
+              the safest time there has ever been
+            </h2>
+            <p className="mt-5">
+              This is the part that is hard to feel and easy to check. By almost every measure of whether a
+              person lives, and for how long, the world is safer now than ever before.
+            </p>
+            <p className="mt-4">
+              The figures come from the UN, the World Bank, WHO and UNICEF, the disaster database EM-DAT and
+              the conflict researchers at Uppsala and Oslo, mostly gathered by Our World in Data. Choose a country
+              if a world average feels too far away.
+            </p>
+          </div>
+          <div className="mt-10">
+            <SaferWorld
+              world={{
+                code: "OWID_WRL",
+                name: "World",
+                child: childMortality,
+                life: lifeExpectancy,
+                poverty: extremePoverty,
+                water: drinkingWater,
+                elec: electricityAccess,
+                disasters: disasterDeathRatePerDecade,
+                conflict: conflictDeathRate,
+              }}
+            />
+          </div>
+          <div className="measure mt-10 text-[1.125rem] leading-relaxed">
+            <p>
+              Two honest caveats. Deaths from disasters and famine fell because of warnings, engineering,
+              medicine and aid. The hazards did not go away, and some are growing again with the climate. War
+              deaths have also risen in the last few years, for the first time in decades.
+            </p>
+            <p className="mt-4">
+              Neither changes the shape of these charts. The danger is real. It is smaller than it has ever been.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section aria-labelledby="habits-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
         <div className="wrap">
@@ -235,8 +294,8 @@ export default function WorriedPage() {
             <Link href="/checklist" className="btn btn-primary btn-lg">
               the nine things to get first <Arrow />
             </Link>
-            <Link href="/why" className="inline-flex min-h-11 items-center font-bold">
-              why three days?
+            <Link href="/what-might-stop" className="inline-flex min-h-11 items-center font-bold">
+              what might stop, and for how long
             </Link>
           </div>
         </div>

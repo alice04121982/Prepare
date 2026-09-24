@@ -8,9 +8,9 @@ import { scenarios } from "@/data/scenarios";
 import { officialGuidance, guidanceLastChecked } from "@/data/official-guidance";
 
 export const metadata: Metadata = {
-  title: "Why three days",
+  title: "What might stop",
   description:
-    "Why the UK government asks households to be ready for three days, what usually stops, how long it lasts, and where the official guidance is.",
+    "What usually stops in an emergency, how long it lasts, why the UK government asks households to be ready for three days, and where the official guidance is.",
 };
 
 /** What might stop, each with the category label it carries on the homepage shelf. */
@@ -33,11 +33,11 @@ function formatDate(iso: string) {
   });
 }
 
-export default function WhyPage() {
+export default function WhatMightStopPage() {
   return (
     <main>
       <PageIntro
-        title="why the government asks you to be ready for three days"
+        title="what might stop, and for how long"
         lede="Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked their citizens to keep a few days of supplies at home. The reasons they give are the same: severe weather, attacks on power and water systems, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent. All of them have decided it is no longer sensible to assume it cannot happen."
         aside={<Diagram name="duration" />}
       />
@@ -45,7 +45,7 @@ export default function WhyPage() {
       {/* What might stop: a ruled list, each line carrying its category label */}
       <section aria-labelledby="stop-h" className="wrap py-16 min-[900px]:py-24">
         <h2 id="stop-h" className="h-section">
-          what might actually stop
+          what it looks like at home
         </h2>
         <p className="measure mt-5 text-lg">
           Severe weather, a fault in the grid, a cyber attack on a water

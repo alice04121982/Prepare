@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Arrow from "@/components/home/Arrow";
-import KitShortcut from "@/components/home/KitShortcut";
 import ReachBar from "@/components/home/ReachBar";
 import Shelf, { type Tin } from "@/components/home/Shelf";
 import StarterBaskets from "@/components/home/StarterBaskets";
@@ -43,10 +42,10 @@ const steps = [
 export default function Home() {
   return (
     <main>
-      {/* Opening: what the site is on the left, the shelf beside it */}
+      {/* Opening: what the site is on the left, the kit picker beside it */}
       <section
         aria-labelledby="hero-h"
-        className="wrap grid gap-x-16 pb-16 pt-9 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:pb-26 min-[900px]:pt-16"
+        className="wrap grid gap-x-16 pb-16 pt-9 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:items-start min-[900px]:pb-26 min-[900px]:pt-16"
       >
         <div>
           <h1
@@ -60,7 +59,6 @@ export default function Home() {
             What to keep, how much, how long it lasts and what to do first, if
             the power, water or shops stop for a few days.
           </p>
-          <StarterBaskets />
           <p className="mt-6 border-t-[3px] border-ink pt-4 text-lg font-semibold">
             Frightened by the news?{" "}
             <Link href="/worried" className="inline-flex min-h-11 items-center">
@@ -75,29 +73,38 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="mt-10 min-[900px]:mt-0">
-          <h2 id="stop-h" className="mb-5 max-w-[22ch] text-[clamp(1.75rem,7vw,3rem)]">
-            if the power went off, the water stopped and the shops were shut
-            for three days, would you be all right?
-          </h2>
-          <Shelf tins={tins} />
-          <div className="mt-6 grid max-w-[52ch] gap-4 text-lg">
-            <p>
-              The government asks every UK household to be able to manage on
-              its own for three days. Severe weather, a fault in the grid, a
-              cyber attack on a water company, or disruption from a conflict
-              elsewhere in Europe can all have the same effect at home.
-            </p>
-            <p>
-              Most of these last hours or days, not weeks. All of them are
-              easier with a few things in the cupboard and a plan you made
-              while everything worked. For the very worst cases there is little
-              any household can do; for everything short of that, three days
-              of supplies make a real difference.
-            </p>
-            <Link href="/why" className="arrow-link">
-              why three days? <Arrow size={18} />
-            </Link>
+        <StarterBaskets />
+      </section>
+
+      {/* Would you be all right: the question and the shelf of tins */}
+      <section aria-labelledby="stop-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
+        <div className="wrap grid gap-x-16 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:items-start">
+          <div>
+            <h2 id="stop-h" className="max-w-[22ch] text-[clamp(1.75rem,7vw,3rem)]">
+              if the power went off, the water stopped and the shops were shut
+              for three days, would you be all right?
+            </h2>
+            <div className="mt-6 grid max-w-[52ch] gap-4 text-lg">
+              <p>
+                The government asks every UK household to be able to manage on
+                its own for three days. Severe weather, a fault in the grid, a
+                cyber attack on a water company, or disruption from a conflict
+                elsewhere in Europe can all have the same effect at home.
+              </p>
+              <p>
+                Most of these last hours or days, not weeks. All of them are
+                easier with a few things in the cupboard and a plan you made
+                while everything worked. For the very worst cases there is little
+                any household can do; for everything short of that, three days
+                of supplies make a real difference.
+              </p>
+              <Link href="/what-might-stop" className="arrow-link">
+                what might stop, and for how long <Arrow size={18} />
+              </Link>
+            </div>
+          </div>
+          <div className="mt-10 min-[900px]:mt-0">
+            <Shelf tins={tins} />
           </div>
         </div>
       </section>
@@ -139,13 +146,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How much for your household: the quantity panel */}
-      <section aria-labelledby="kit-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
-        <div className="wrap">
-          <KitShortcut />
-        </div>
-      </section>
-
       {/* Keep a copy: end on something to do, on paper */}
       <section aria-labelledby="off-h" className="border-t-[3px] border-ink bg-hush py-16 min-[900px]:py-26">
         <div className="wrap min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] min-[900px]:items-start min-[900px]:gap-16">
@@ -177,7 +177,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ReachBar watch="hero-actions" hideOver={["kit"]} />
+      <ReachBar watch="hero-actions" />
     </main>
   );
 }

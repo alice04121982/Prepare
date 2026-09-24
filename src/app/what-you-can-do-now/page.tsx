@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageIntro from "@/components/PageIntro";
+import PageIntro, { catBg } from "@/components/PageIntro";
 import Arrow from "@/components/home/Arrow";
 import { doNow, type NowStep } from "@/data/do-now";
 
@@ -57,12 +57,25 @@ export default function DoNowPage() {
                   >
                     <span
                       aria-hidden="true"
-                      className="display grid h-11 w-11 place-items-center bg-ink text-[1.5rem] tabular-nums text-paper min-[900px]:h-13 min-[900px]:w-13 min-[900px]:text-[1.75rem]"
+                      data-cat={step.category ? "" : undefined}
+                      className={`display grid h-11 w-11 place-items-center text-[1.5rem] tabular-nums min-[900px]:h-13 min-[900px]:w-13 min-[900px]:text-[1.75rem] ${
+                        step.category ? `${catBg[step.category.cat]} border-[3px] border-ink text-ink` : "bg-ink text-paper"
+                      }`}
                       style={{ fontVariationSettings: '"wdth" 115' }}
                     >
                       {n}
                     </span>
                     <div className="min-w-0">
+                      {step.category ? (
+                        <p className="mb-2">
+                          <span
+                            data-cat=""
+                            className={`${catBg[step.category.cat]} inline-block border-2 border-ink px-2 py-0.5 text-[0.875rem] font-extrabold leading-tight text-ink`}
+                          >
+                            {step.category.name}
+                          </span>
+                        </p>
+                      ) : null}
                       <h3 className="text-[1.3125rem] leading-tight min-[900px]:text-[1.5rem]">{step.title}</h3>
                       <p className="mt-2.5 max-w-[60ch] text-[1.125rem] leading-relaxed">{step.body}</p>
                       {step.link ? <StepLink link={step.link} /> : null}

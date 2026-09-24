@@ -4,9 +4,20 @@
  *
  * Every link here is also in official-guidance.ts or is the organisation's
  * own site. Phone numbers are for Great Britain unless the line says so.
+ *
+ * A step takes a category colour only when it belongs to one checklist
+ * category, and the page prints that category's name beside the colour
+ * (DESIGN.md: a colour appears only where its category is named).
  */
+import type { Cat } from "@/components/PageIntro";
+
+/** The checklist category a step belongs to, named with the step. */
+export type NowCat = { cat: Cat; name: string };
+
 export type NowStep = {
   id: string;
+  /** Colours the step's number, and prints the category name above it. Steps with no one category stay ink. */
+  category?: NowCat;
   title: string;
   body: string;
   link?: { label: string; url: string };
@@ -27,27 +38,32 @@ export const doNow: NowGroup[] = [
     steps: [
       {
         id: "alerts",
+        category: { cat: "news", name: "communication" },
         title: "Check your phone can get Emergency Alerts",
         body: "Search your phone's settings for \"emergency alerts\" and make sure they are switched on. An alert only comes when there is danger to life nearby.",
         link: { label: "Emergency Alerts on gov.uk", url: "https://www.gov.uk/alerts" },
       },
       {
         id: "numbers",
+        category: { cat: "news", name: "communication" },
         title: "Save the emergency numbers in your phone",
         body: "105 is the free number for a power cut anywhere in Great Britain. 0800 111 999 is the gas emergency line. Save your water company's number too; it is on your bill. Northern Ireland has its own numbers.",
       },
       {
         id: "paper",
+        category: { cat: "news", name: "communication" },
         title: "Write key numbers on paper",
         body: "A phone with a flat battery holds nobody's number. Write down family, a neighbour, your GP and one friend outside your area. Keep the card by the door or in a wallet.",
       },
       {
         id: "torch",
+        category: { cat: "power", name: "power and light" },
         title: "Find a torch and check it works",
         body: "Put it where you could find it in the dark, the same place every time. If it needs batteries, note what size.",
       },
       {
         id: "bottles",
+        category: { cat: "water", name: "water" },
         title: "Fill a few bottles from the tap",
         body: "Clean, clearly labelled bottles of tap water cost nothing. Write the date on them and swap them every few months.",
       },
@@ -65,6 +81,7 @@ export const doNow: NowGroup[] = [
       },
       {
         id: "warnings",
+        category: { cat: "news", name: "communication" },
         title: "Sign up for flood and weather warnings",
         body: "Flood warnings for your postcode come free by text, call or email. Scotland and Wales run their own services, linked from the same page.",
         link: { label: "Sign up for flood warnings", url: "https://www.gov.uk/sign-up-for-flood-warnings" },
@@ -86,16 +103,19 @@ export const doNow: NowGroup[] = [
       },
       {
         id: "neighbours",
+        category: { cat: "people", name: "neighbours" },
         title: "Swap numbers with two neighbours",
         body: "Knock, say hello, and swap numbers. The people next door are the ones who can reach you when nothing else is running.",
       },
       {
         id: "charge",
+        category: { cat: "power", name: "power and light" },
         title: "Keep a power bank charged",
         body: "If you already have one, charge it and put it with the torch. Top it up once a month.",
       },
       {
         id: "documents",
+        category: { cat: "money", name: "cash and documents" },
         title: "Photograph your important documents",
         body: "Passports, insurance, prescriptions and bank details. Keep the photos somewhere you can reach from another phone, and paper copies in a folder.",
       },
@@ -114,16 +134,19 @@ export const doNow: NowGroup[] = [
       },
       {
         id: "tins",
+        category: { cat: "food", name: "food" },
         title: "Add a few extra tins to each shop",
         body: "Two or three extra tins a week builds three days of food without a big spend. Buy what you already eat, and use the oldest first.",
       },
       {
         id: "prescriptions",
+        category: { cat: "health", name: "first aid and medication" },
         title: "Reorder prescriptions earlier",
         body: "Order repeats when you have a week left, not a day. Ask your GP or pharmacist whether a small buffer is possible.",
       },
       {
         id: "cash",
+        category: { cat: "money", name: "cash and documents" },
         title: "Keep a little cash at home",
         body: "Cards and cash machines stop in a power cut. A couple of days' essentials in small notes is enough.",
       },

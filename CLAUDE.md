@@ -76,8 +76,8 @@ been read, so counts wait rather than flashing a zero through hydration.
 ### Server components by default
 
 The client islands are `ChecklistTracker`, `KitPlanner` (with
-`kit/StillToGet`), `PrintButton` and the homepage's `home/KitShortcut`,
-`home/ReachBar`, `home/StarterBaskets` and `home/StepState`, and `basket/BasketItems` on `/basket`. Everything else is a server component,
+`kit/StillToGet`), `PrintButton` and the homepage's
+`home/ReachBar`, `home/StarterBaskets` and `home/StepState`, `basket/BasketItems` on `/basket`, and `SaferWorld` on `/worried`. Everything else is a server component,
 including `Diagram.tsx`, which is inline SVG. The site has no photographs
 or stock illustrations.
 
@@ -107,8 +107,10 @@ own side padding), `.measure` (65ch), `.display`, `.h-section`, `.h-sub`,
 `.field`, `.no-print`. Page openers use `PageIntro`, which takes an optional
 `aside` for a diagram.
 
-Diagrams are monochrome `currentColor`, drawn in ink on paper, with opacity
-for depth on shapes only. Their text labels stay solid so they pass AA.
+Diagrams are "back of the pack" figures: the headline number in HTML, then
+flat ink pictograms on a shelf rule, category colour only where the figure
+names the category (see DESIGN.md, Diagrams and Charts). The `duration`
+chart reads its rows from the `chart` fields in `scenarios.ts`.
 
 ## The docs are rules
 
