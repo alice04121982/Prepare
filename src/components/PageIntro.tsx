@@ -30,7 +30,7 @@ export default function PageIntro({ title, lede, children, aside }: Props) {
   return (
     <div className="border-b-[3px] border-ink">
       <div
-        className={`wrap grid items-center gap-x-16 gap-y-8 pb-10 pt-10 min-[900px]:pb-16 min-[900px]:pt-16 ${aside ? "min-[900px]:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]" : ""}`}
+        className={`wrap grid items-start gap-x-16 gap-y-8 pb-10 pt-10 min-[900px]:pb-16 min-[900px]:pt-16 ${aside ? "min-[900px]:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]" : ""}`}
       >
         <div>
           <h1
@@ -44,7 +44,7 @@ export default function PageIntro({ title, lede, children, aside }: Props) {
           </div>
           {children ? <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">{children}</div> : null}
         </div>
-        {aside ? <div className="mx-auto w-full max-w-[360px] text-ink">{aside}</div> : null}
+        {aside ? <div className="mx-auto w-full max-w-[440px] text-ink">{aside}</div> : null}
       </div>
     </div>
   );

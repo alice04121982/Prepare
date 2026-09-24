@@ -260,5 +260,6 @@
   body { font-size: 11pt; background: #fff; color: #000; }
   .no-print { display: none !important; }
   [data-cat] { background: #fff !important; border: 1.5pt solid #000; break-inside: avoid; }
+  svg [data-cat] { fill: #fff !important; }
   main a[href^="/"]::after { content: " (stayprepared.co.uk" attr(href) ")"; font-weight: 400; font-size: 9pt; }
 }
