@@ -12,9 +12,6 @@ const MAX_PEOPLE = 12;
 const stepClass =
   "grid h-12 w-12 place-items-center rounded-[4px] border-[3px] border-ink text-2xl font-extrabold leading-none hover:bg-[var(--hover)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent";
 
-const joinWords = (words: string[]) =>
-  words.length < 2 ? words.join("") : `${words.slice(0, -1).join(", ")} and ${words[words.length - 1]}`;
-
 /**
  * The hero's quick route to a complete kit: say how many people live with
  * you and for how long, and Amazon opens with everything in one basket. Each
@@ -32,13 +29,28 @@ export default function StarterBaskets() {
   );
   const chosen = packs.find((p) => p.days === days) ?? packs[0];
   const url = chosen.buys.length > 0;
-  const covers = [...new Set(chosen.buys.map((b) => b.line.category.toLowerCase()))];
   const who = `${people} ${people === 1 ? "person" : "people"}`;
   // The planner's drinking water rule: 3 litres per person per day.
   const litres = 3 * people * days;
 
   return (
-    <div id="hero-actions" className="mt-9 border-[3px] border-ink min-[900px]:mt-2">
+    <section
+      id="hero-actions"
+      aria-labelledby="kit-h"
+      className="mt-9 border-[3px] border-ink min-[900px]:mt-2"
+    >
+      <div className="border-b-[10px] border-ink px-4.5 pb-3.5 pt-4 min-[900px]:px-6">
+        <h2
+          id="kit-h"
+          className="display text-[clamp(1.75rem,6vw,2.25rem)] leading-none"
+          style={{ fontVariationSettings: '"wdth" 115' }}
+        >
+          a ready-made kit
+        </h2>
+        <p className="mt-2 text-[0.9375rem] leading-snug">
+          Choose who and for how long. It all goes into one Amazon basket.
+        </p>
+      </div>
       <div className="flex flex-wrap items-center justify-between gap-3 border-b-[3px] border-ink px-4.5 py-3.5 min-[900px]:px-6">
         <p id="people-label" className="text-lg font-extrabold">
           People in your home
@@ -119,7 +131,7 @@ export default function StarterBaskets() {
               Everything for {who} for {durationLabel(days)}
             </p>
             <p aria-live="polite" className="mt-1 text-[0.9375rem] leading-snug">
-              {chosen.buys.length} products covering {joinWords(covers)}, in one Amazon basket.
+              {chosen.buys.length} products, in one Amazon basket.
               {days > BOTTLED_DAYS
                 ? ` Bottled water covers the first week. After that, you fill the containers from the tap.`
                 : ""}
@@ -146,8 +158,7 @@ export default function StarterBaskets() {
               send it all to my Amazon basket
             </AmazonBasketButton>
             <p className="mt-3 text-sm leading-snug text-ink-2">
-              Amazon asks you to confirm: tap <strong>Add to basket</strong> there. Nothing is bought until you pay.
-              About &pound;{chosen.estimate} is a guide, because prices change.
+              On Amazon, tap <strong>Add to basket</strong>. Nothing is bought until you pay.
             </p>
           </>
         ) : (
@@ -160,23 +171,21 @@ export default function StarterBaskets() {
           </p>
         )}
         <p className="mt-3 text-sm leading-snug">
-          Already have some of this?{" "}
+          Already have some?{" "}
           <Link href="/checklist" className="font-bold">
-            Tick it off first
-          </Link>{" "}
-          and it leaves the basket.
-        </p>
-        <p className="mt-3 text-sm leading-snug">
-          Babies, pets or someone older at home?{" "}
-          <Link href={`/build-your-kit?a=${people}&c=0&d=${days}`} className="font-bold">
-            Build the full list
+            Tick it off
           </Link>
-          , with what they need too.
         </p>
-        <p className="mt-3 text-[0.8125rem] leading-snug text-ink-2">
-          Some links here earn us a small commission. As an Amazon Associate we earn from qualifying purchases.
+        <p className="mt-1 text-sm leading-snug">
+          Babies, pets or older people?{" "}
+          <Link href={`/build-your-kit?a=${people}&c=0&d=${days}`} className="font-bold">
+            Full list
+          </Link>
+        </p>
+        <p className="mt-2 text-[0.8125rem] leading-snug text-ink-2">
+          As an Amazon Associate we earn from qualifying purchases.
         </p>
       </div>
-    </div>
+    </section>
   );
 }
