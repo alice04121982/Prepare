@@ -69,6 +69,7 @@ const help = [
 
 const sources = [
   { label: "Our World in Data: child mortality, life expectancy, extreme poverty and natural disaster deaths (world series fetched 19 September 2026)", url: "https://ourworldindata.org/" },
+  { label: "Gapminder and the UN Population Division: population by country, used to turn disaster deaths into a rate", url: "https://www.gapminder.org/data/documentation/gd003/" },
   { label: "Mental Health Foundation, Doomscrolling: tips for healthier news consumption", url: "https://www.mentalhealth.org.uk/explore-mental-health/articles/doomscrolling-tips-healthier-news-consumption" },
   { label: "Mental Health Foundation, Talking to children about scary world events", url: "https://www.mentalhealth.org.uk/explore-mental-health/articles/talking-children-about-scary-world-events" },
   { label: "McLaughlin, Gotlieb and Mills, Caught in a Dangerous World: Problematic News Consumption and Its Relationship to Mental and Physical Ill-Being, Health Communication, 2022", url: "https://www.tandfonline.com/doi/full/10.1080/10410236.2022.2106086" },
