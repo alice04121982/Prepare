@@ -54,6 +54,8 @@ export type StarterBasket = {
   estimate: number;
   /** Lines the household still needs that did not fit this budget. */
   leftOut: number;
+  /** The same lines in words: "2 lanterns", "3 more head torches". */
+  missing: string[];
 };
 
 /** "£15 to £25" gives 20; "£1 to £2" gives 1.5. */
@@ -92,9 +94,14 @@ export function starterBasket(people: number, budget: Budget, owned: (lineId: st
   const picks: BasketPick[] = wanted
     .filter((w) => w.quantity > 0)
     .map((w) => ({ line: w.line, product: w.product, quantity: w.quantity, cost: w.quantity * w.unit }));
-  const leftOut = wanted.filter((w) => w.quantity < w.needed).length;
+  const short = wanted.filter((w) => w.quantity < w.needed);
+  const missing = short.map((w) => {
+    const n = w.needed - w.quantity;
+    const [one, many] = SHORT_NAME[w.line.id] ?? [w.product.name, w.product.name];
+    return `${n} ${w.quantity ? "more " : ""}${n === 1 ? one : many}`;
+  });
 
-  return { budget, picks, estimate: Math.round(spent), leftOut };
+  return { budget, picks, estimate: Math.round(spent), leftOut: short.length, missing };
 }
 
 export function pickLabel(p: BasketPick): string {

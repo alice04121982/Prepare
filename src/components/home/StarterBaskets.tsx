@@ -77,7 +77,10 @@ export default function StarterBaskets() {
           {baskets.map((b) => {
             const count = b.picks.reduce((n, p) => n + p.quantity, 0);
             return (
-              <div key={b.budget}>
+              <div
+                key={b.budget}
+                className="flex h-full flex-col rounded-[4px] border-2 border-ink hover:bg-[var(--hover)] has-checked:bg-hush has-checked:shadow-[inset_0_0_0_2px_var(--ink)] has-focus-visible:outline-3 has-focus-visible:outline-offset-3 has-focus-visible:outline-ink"
+              >
                 <input
                   type="radio"
                   name="budget"
@@ -85,11 +88,11 @@ export default function StarterBaskets() {
                   value={b.budget}
                   checked={budget === b.budget}
                   onChange={() => setBudget(b.budget)}
-                  className="peer sr-only"
+                  className="sr-only"
                 />
                 <label
                   htmlFor={`budget-${b.budget}`}
-                  className="flex h-full min-h-22 cursor-pointer flex-col justify-between rounded-[4px] border-2 border-ink px-3 py-2.5 hover:bg-[var(--hover)] peer-checked:border-[4px] peer-checked:bg-hush peer-checked:px-2.5 peer-checked:py-2 peer-focus-visible:outline-3 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-ink"
+                  className="flex flex-1 cursor-pointer flex-col justify-between px-3 pt-2.5"
                 >
                   <span
                     className="display text-[2rem] tabular-nums leading-none"
@@ -101,6 +104,12 @@ export default function StarterBaskets() {
                     {count ? `${count} ${count === 1 ? "thing" : "things"}, about £${b.estimate}` : "nothing left to add"}
                   </span>
                 </label>
+                <Link
+                  href={`/basket?p=${people}&b=${b.budget}`}
+                  className="flex min-h-11 items-center px-3 text-sm font-extrabold"
+                >
+                  see items<span className="sr-only"> in the &pound;{b.budget} basket</span>
+                </Link>
               </div>
             );
           })}
