@@ -4,6 +4,7 @@ import { catFor } from "@/components/checklist/cats";
 import type { Cat } from "@/components/PageIntro";
 import { checklist, startingPoint } from "@/data/checklist";
 import { faq } from "@/data/faq";
+import { nationsNote, officialChannels, officialChannelsIntro } from "@/data/official-channels";
 import { guides } from "@/data/guides";
 import { scenarios } from "@/data/scenarios";
 import { SITE_URL } from "@/lib/site";
@@ -94,6 +95,10 @@ function build() {
     .map((e) => `<div class="q"><h4>${esc(e.question)}</h4>${e.answer.map((p) => `<p>${esc(p)}</p>`).join("")}</div>`)
     .join("");
 
+  const official = officialChannels
+    .map((c) => `<li><strong>${esc(c.name)}</strong><span>${esc(c.what)}${c.url ? ` ${esc(c.url.replace("https://www.", "").replace("https://", ""))}` : ""}</span></li>`)
+    .join("");
+
   const numbers = NUMBERS.map(([n, what]) => `<li><strong>${esc(n)}</strong><span>${esc(what)}</span></li>`).join("");
 
   return `<!DOCTYPE html>
@@ -121,10 +126,11 @@ p+p{margin-top:8px}
 .box p{padding:12px 16px;margin:0}
 .sw{display:inline-block;width:14px;height:14px;border:2px solid var(--ink);flex:none;background:var(--paper)}
 ul{list-style:none;padding:0}
-.first,.numbers{border-top:3px solid var(--ink);margin-top:16px}
-.first li,.numbers li{display:flex;gap:12px;align-items:baseline;border-bottom:1px solid var(--ink);padding:10px 0}
+.first,.numbers,.official{border-top:3px solid var(--ink);margin-top:16px}
+.first li,.numbers li,.official li{display:flex;gap:12px;align-items:baseline;border-bottom:1px solid var(--ink);padding:10px 0}
 .first li div{display:flex;flex-direction:column}
-.first li span,.numbers li span{color:var(--ink-2)}
+.official li{flex-direction:column;gap:2px}
+.first li span,.numbers li span,.official li span{color:var(--ink-2)}
 .numbers strong{min-width:9.5em;font-variant-numeric:tabular-nums;font-size:19px}
 .items{border-top:3px solid var(--ink);margin-top:10px}
 .items li{border-bottom:1px solid var(--ink);padding:10px 0;display:flex;flex-direction:column}
@@ -148,6 +154,11 @@ footer{margin-top:56px;border-top:3px solid var(--ink);padding-top:14px;color:va
 <h1>offline guide</h1>
 <p class="intro">What to keep, how much, and what to do when something stops. This file works with no internet: keep it on your phone, print it, or share it.</p>
 <p class="made">Made from ${esc(SITE_URL.replace("https://", ""))} on ${esc(made)}. Check official guidance for your area too.</p>
+
+<h2>in an emergency, go to official sources</h2>
+<p style="margin-top:12px">${esc(officialChannelsIntro)}</p>
+<ul class="official">${official}</ul>
+<p class="made">${esc(nationsNote)}</p>
 
 <h2>numbers to keep</h2>
 <ul class="numbers">${numbers}</ul>
