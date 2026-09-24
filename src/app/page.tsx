@@ -67,6 +67,12 @@ export default function Home() {
               Start here instead.
             </Link>
           </p>
+          <p className="text-lg font-semibold">
+            Not ready to buy anything?{" "}
+            <Link href="/what-you-can-do-now" className="inline-flex min-h-11 items-center">
+              What you can do now, for free.
+            </Link>
+          </p>
         </div>
 
         <div className="mt-10 min-[900px]:mt-0">

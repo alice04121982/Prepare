@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 
 export const nav = [
+  { href: "/what-you-can-do-now", label: "do it now" },
   { href: "/checklist", label: "checklist" },
   { href: "/build-your-kit", label: "build your kit" },
   { href: "/why", label: "why three days?" },
