@@ -77,7 +77,7 @@ been read, so counts wait rather than flashing a zero through hydration.
 
 The client islands are `ChecklistTracker`, `KitPlanner` (with
 `kit/StillToGet`), `PrintButton` and the homepage's `home/KitShortcut`,
-`home/ReachBar` and `home/StepState`. Everything else is a server component,
+`home/ReachBar`, `home/StarterBaskets` and `home/StepState`, and `basket/BasketItems` on `/basket`. Everything else is a server component,
 including `Diagram.tsx`, which is inline SVG. The site has no photographs
 or stock illustrations.
 
@@ -146,6 +146,17 @@ for depth on shapes only. Their text labels stay solid so they pass AA.
 
 ## Environment note
 
-`.env.local` holds the Unsplash key and, later,
-`NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`. Neither is committed, and the affiliate
-tag being absent is a normal local state, not a bug.
+`.env.local` holds the Unsplash key and, optionally,
+`NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`. Neither is committed. The affiliate tag
+falls back to the site's own (`stayprepared2-21`, in `src/lib/amazon.ts`)
+because Amazon's add-to-basket form opens an empty basket without one.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

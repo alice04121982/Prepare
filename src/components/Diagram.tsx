@@ -346,7 +346,7 @@ const DIAGRAMS: Record<DiagramName, () => React.ReactElement> = {
 export default function Diagram({ name, className = "" }: Props) {
   const Drawing = DIAGRAMS[name];
   return (
-    <div className={`text-white ${className}`}>
+    <div className={className}>
       <Drawing />
     </div>
   );

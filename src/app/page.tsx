@@ -3,6 +3,7 @@ import Arrow from "@/components/home/Arrow";
 import KitShortcut from "@/components/home/KitShortcut";
 import ReachBar from "@/components/home/ReachBar";
 import Shelf, { type Tin } from "@/components/home/Shelf";
+import StarterBaskets from "@/components/home/StarterBaskets";
 import StepState from "@/components/home/StepState";
 
 const tins: Tin[] = [
@@ -47,7 +48,7 @@ export default function Home() {
         aria-labelledby="hero-h"
         className="wrap grid gap-x-16 pb-16 pt-9 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:pb-26 min-[900px]:pt-16"
       >
-        <div className="min-[900px]:sticky min-[900px]:top-10 min-[900px]:self-start">
+        <div>
           <h1
             id="hero-h"
             className="display max-w-[14ch] text-[clamp(2.6rem,11.5vw,4.75rem)]"
@@ -59,15 +60,17 @@ export default function Home() {
             What to keep, how much, how long it lasts and what to do first, if
             the power, water or shops stop for a few days.
           </p>
-          <div id="hero-actions" className="mt-7 min-[900px]:mt-10">
-            <Link href="/checklist" className="btn btn-primary btn-lg">
-              check your cupboard <Arrow />
-            </Link>
-          </div>
+          <StarterBaskets />
           <p className="mt-6 border-t-[3px] border-ink pt-4 text-lg font-semibold">
             Frightened by the news?{" "}
             <Link href="/worried" className="inline-flex min-h-11 items-center">
               Start here instead.
+            </Link>
+          </p>
+          <p className="text-lg font-semibold">
+            Not ready to buy anything?{" "}
+            <Link href="/what-you-can-do-now" className="inline-flex min-h-11 items-center">
+              What you can do now, for free.
             </Link>
           </p>
         </div>
