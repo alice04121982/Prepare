@@ -77,6 +77,26 @@ export function amazonImageUrl(image: string, width = 400) {
   return `https://m.media-amazon.com/images/I/${image}._AC_SX${width}_.jpg`;
 }
 
+/**
+ * The product's main photo by ASIN alone, through the Associates image
+ * link (the "Image" option in Amazon's SiteStripe). Used for products with no
+ * `image` id recorded. It redirects to the same m.media-amazon.com photo.
+ */
+export function amazonImageByAsin(asin: string, tag: string) {
+  const q = new URLSearchParams({
+    _encoding: "UTF8",
+    ASIN: asin,
+    Format: "_SL250_",
+    ID: "AsinImage",
+    MarketPlace: "GB",
+    ServiceVersion: "20070822",
+    WS: "1",
+    tag,
+    language: "en_GB",
+  });
+  return `https://ws-eu.amazon-adsystem.com/widgets/q?${q.toString()}`;
+}
+
 export function amazonProductUrl(asin: string, tag?: string) {
   return `https://www.amazon.co.uk/dp/${asin}${tag ? `?tag=${encodeURIComponent(tag)}` : ""}`;
 }

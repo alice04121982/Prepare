@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ExternalLink, ShoppingBasket } from "lucide-react";
 import AmazonBasketButton from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
-import { amazonImageUrl, amazonProductUrl } from "@/data/products";
+import { amazonImageByAsin, amazonImageUrl, amazonProductUrl, type Product } from "@/data/products";
 import { BOTTLED_DAYS, DURATIONS, buildPack } from "@/data/packs";
 import { catBgFor } from "@/components/kit/categories";
 import { useHave } from "@/lib/have";
@@ -14,6 +14,47 @@ import { AMAZON_TAG as TAG } from "@/lib/amazon";
 
 const externalLink =
   "mt-2 inline-flex min-h-11 items-center gap-1.5 font-extrabold underline underline-offset-4 hover:decoration-4";
+
+/**
+ * The product photo, from Amazon. Uses the recorded image id when there is
+ * one, otherwise the Associates image link by ASIN. If the photo will not
+ * load (blocked, or the listing has gone), the plain basket tile shows.
+ */
+function ProductImage({ product }: { product: Product }) {
+  const [failed, setFailed] = useState(false);
+  const img = useRef<HTMLImageElement>(null);
+  // An image that failed before hydration never fires onError for React.
+  useEffect(() => {
+    const el = img.current;
+    if (el && el.complete && el.naturalWidth === 0) setFailed(true);
+  }, []);
+  if (failed) {
+    return (
+      <div aria-hidden className="flex aspect-square items-center justify-center border border-ink bg-hush text-ink-2">
+        <ShoppingBasket size={32} strokeWidth={1.5} />
+      </div>
+    );
+  }
+  return (
+    <a
+      href={amazonProductUrl(product.asin, TAG)}
+      target="_blank"
+      rel="noopener noreferrer sponsored"
+      className="flex aspect-square items-center justify-center border border-ink bg-paper p-2"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        ref={img}
+        src={product.image ? amazonImageUrl(product.image, 400) : amazonImageByAsin(product.asin, TAG)}
+        alt={product.name}
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        onError={() => setFailed(true)}
+        className="max-h-full max-w-full object-contain"
+      />
+    </a>
+  );
+}
 
 function Swatch({ category }: { category: string }) {
   return (
@@ -74,27 +115,7 @@ export default function BasketItems({ people, days }: { people: number; days: nu
                     key={product.asin}
                     className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-x-4 border-b border-ink py-4 min-[900px]:grid-cols-[7.5rem_minmax(0,1fr)] min-[900px]:gap-x-6"
                   >
-                    {product.image ? (
-                      <a
-                        href={amazonProductUrl(product.asin, TAG)}
-                        target="_blank"
-                        rel="noopener noreferrer sponsored"
-                        className="flex aspect-square items-center justify-center border border-ink bg-paper p-2"
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={amazonImageUrl(product.image, 400)}
-                          alt={product.name}
-                          loading="lazy"
-                          referrerPolicy="no-referrer"
-                          className="max-h-full max-w-full object-contain"
-                        />
-                      </a>
-                    ) : (
-                      <div aria-hidden className="flex aspect-square items-center justify-center border border-ink bg-hush text-ink-2">
-                        <ShoppingBasket size={32} strokeWidth={1.5} />
-                      </div>
-                    )}
+                    <ProductImage product={product} />
                     <div className="min-w-0">
                       <p className="text-[0.9375rem] font-bold leading-snug text-ink-2">{line.item}</p>
                       <p className="mt-1 text-lg font-extrabold leading-snug">{product.name}</p>
