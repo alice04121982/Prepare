@@ -34,6 +34,8 @@ export default function StarterBaskets() {
   const url = chosen.buys.length > 0;
   const covers = [...new Set(chosen.buys.map((b) => b.line.category.toLowerCase()))];
   const who = `${people} ${people === 1 ? "person" : "people"}`;
+  // The planner's drinking water rule: 3 litres per person per day.
+  const litres = 3 * people * days;
 
   return (
     <div id="hero-actions" className="mt-7 border-[3px] border-ink min-[900px]:mt-10">
@@ -122,6 +124,11 @@ export default function StarterBaskets() {
                 ? ` Bottled water covers the first week. After that, you fill the containers from the tap.`
                 : ""}
             </p>
+            <p className="mt-2 text-[0.9375rem] leading-snug">
+              Drinking water: <strong className="tabular-nums">{litres} litres</strong>. That is 3 litres per person
+              per day, the figure{" "}
+              <a href="https://prepare.campaign.gov.uk/get-prepared-for-emergencies/">quoted by gov.uk</a>.
+            </p>
             <dl className="mt-3 grid gap-1 border-y border-ink py-2.5 text-[0.9375rem] tabular-nums">
               <div className="flex justify-between gap-3">
                 <dt>Food, water and supplies</dt>
@@ -158,6 +165,13 @@ export default function StarterBaskets() {
             Tick it off first
           </Link>{" "}
           and it leaves the basket.
+        </p>
+        <p className="mt-3 text-sm leading-snug">
+          Babies, pets or someone older at home?{" "}
+          <Link href={`/build-your-kit?a=${people}&c=0&d=${days}`} className="font-bold">
+            Build the full list
+          </Link>
+          , with what they need too.
         </p>
         <p className="mt-3 text-[0.8125rem] leading-snug text-ink-2">
           Some links here earn us a small commission. As an Amazon Associate we earn from qualifying purchases.

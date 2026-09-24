@@ -76,7 +76,7 @@ been read, so counts wait rather than flashing a zero through hydration.
 ### Server components by default
 
 The client islands are `ChecklistTracker`, `KitPlanner` (with
-`kit/StillToGet`), `PrintButton` and the homepage's `home/KitShortcut`,
+`kit/StillToGet`), `PrintButton` and the homepage's
 `home/ReachBar`, `home/StarterBaskets` and `home/StepState`, and `basket/BasketItems` on `/basket`. Everything else is a server component,
 including `Diagram.tsx`, which is inline SVG. The site has no photographs
 or stock illustrations.

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Arrow from "@/components/home/Arrow";
-import KitShortcut from "@/components/home/KitShortcut";
 import ReachBar from "@/components/home/ReachBar";
 import Shelf, { type Tin } from "@/components/home/Shelf";
 import StarterBaskets from "@/components/home/StarterBaskets";
@@ -139,13 +138,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How much for your household: the quantity panel */}
-      <section aria-labelledby="kit-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
-        <div className="wrap">
-          <KitShortcut />
-        </div>
-      </section>
-
       {/* Keep a copy: end on something to do, on paper */}
       <section aria-labelledby="off-h" className="border-t-[3px] border-ink bg-hush py-16 min-[900px]:py-26">
         <div className="wrap min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] min-[900px]:items-start min-[900px]:gap-16">
@@ -177,7 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ReachBar watch="hero-actions" hideOver={["kit"]} />
+      <ReachBar watch="hero-actions" />
     </main>
   );
 }
