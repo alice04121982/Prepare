@@ -25,7 +25,7 @@ export default function SiteFooter() {
               stay prepared
             </Link>
             <p className="mt-2.5 text-lg">
-              Calm, practical guidance for UK households.
+              Calm, practical guidance for households. Written in the UK, useful anywhere.
             </p>
           </div>
           <ul className="grid grid-cols-2 gap-x-5 border-t border-[#5a5a5a]">

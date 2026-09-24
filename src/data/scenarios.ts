@@ -186,7 +186,7 @@ export const scenarios: Scenario[] = [
       "Mass panic did not happen. Shops reopened within days, banks and card payments largely kept working, and people went to work. The thing that made life hard was infrastructure damage and the cold that followed, not disorder.",
       "Candles caused a wave of house fires during the blackouts. Battery lanterns and head torches are safer, and this is why the checklist keeps saying so.",
       "Sleep, routine, and limiting news intake are health measures, not luxuries. Ukrainian doctors and teachers treated them as such, especially for children.",
-      "This site is written UK-first, and this scenario is far less likely here than a storm or a power cut. It is included because readers ask, and because what people learned in Ukraine transfers directly to any long disruption of power, water, and heat.",
+      "In the UK this is far less likely than a storm or a power cut. What helps is the same kit as every other scenario, kept for longer.",
     ],
     community:
       "Ukraine is the strongest recent evidence for the central claim of this site. The response that worked was neighbourhood and volunteer networks: delivering food and medicine to older people who could not reach a shop, boarding up windows for neighbours, sharing generators and internet access, running warming and charging points in schools, churches, and cafés. Cities formalised this as thousands of public 'Points of Invincibility' with heat, power, hot drinks, and connectivity, but most of the work was done by people who already knew each other. Being one of those people, before anything happens, is the preparation that matters most.",

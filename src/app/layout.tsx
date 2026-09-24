@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Stay Prepared",
   },
   description:
-    "Calm, practical guidance for UK households: what to keep, how much, how long it lasts, and what to do first.",
+    "Calm, practical guidance for households, written in the UK and useful anywhere: what to keep, how much, how long it lasts, and what to do first.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
