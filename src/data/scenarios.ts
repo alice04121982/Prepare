@@ -35,8 +35,8 @@ export type Scenario = {
 
 // Durations and quantities are deliberately conservative and drawn from
 // public emergency-preparedness guidance (gov.uk, Red Cross, FEMA). They are
-// planning figures, not guarantees. Keep this file in sync with
-// public/offline/index.html.
+// planning figures, not guarantees. The offline guide
+// (src/app/offline-guide/route.ts) is built from this list.
 export const scenarios: Scenario[] = [
   {
     slug: "power-outage",
@@ -127,7 +127,7 @@ export const scenarios: Scenario[] = [
       "Warm layers, blankets, and a hot-water bottle for cold events; a fan, cool water, and closed curtains for heat.",
       "A battery or wind-up radio for warnings and updates if power and data go down.",
       "Knowing whether your home is at flood risk, and where you would go if you had to leave. Free flood warnings are available by postcode in the UK.",
-      "A grab bag by the door if you are in a flood-risk area: documents, medication, chargers, a change of clothes.",
+      "A bag by the door if you are in a flood-risk area: documents, medication, chargers, a change of clothes.",
       "Checking the forecast and acting on amber and red warnings rather than waiting to see.",
     ],
     worthKnowing: [
@@ -174,7 +174,7 @@ export const scenarios: Scenario[] = [
       "Ukraine has shown, in unusual detail, what conflict looks like for ordinary civilians in a country with a modern grid, supermarkets, card payments and mobile data. For most people most of the time, it looks like life continuing with recurring interruptions. Strikes on the energy system brought scheduled power cuts of four to twelve hours a day through the winter of 2022 to 2023, and with them lost heating, water pumping, lifts, and mobile signal. People adapted fast, and what they adapted with is a longer version of the same kit as every other scenario on this site, plus a plan for where to shelter and where to go.",
     whatHelps: [
       "A safe place in your home: an interior room or corridor away from windows, below ground if you have it. The rule Ukrainians teach is two walls between you and the outside. Know the nearest public shelter too, such as a basement, underground car park, or metro station.",
-      "A grab bag by the door: documents, cash in small notes, medication, chargers, a torch, water, a change of clothes, and a paper list of contacts. Electronic copies of documents on a phone as well.",
+      "A bag by the door: documents, cash in small notes, medication, chargers, a torch, water, a change of clothes, and a paper list of contacts. Electronic copies of documents on a phone as well.",
       "Power that does not depend on the grid: several power banks, and if you can afford it a portable power station with a folding solar panel. Rolling cuts mean charging everything the moment power returns. A battery or wind-up radio for when mobile data drops.",
       "More stored water than usual, because pumping stations run on electricity. Filling the bath and every large container when a cut is announced became routine.",
       "A way to stay warm in one room without mains power: sleeping bags, thermal layers, hot-water bottles, blankets. A way to cook safely without electricity, such as a camping stove used with a window open.",

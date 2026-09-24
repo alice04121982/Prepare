@@ -168,8 +168,8 @@ export default function Home() {
                 print the checklist <Arrow />
               </Link>
               <a
-                href="/offline/index.html"
-                download="stay-prepared-offline-guide.html"
+                href="/offline-guide"
+                download="Offline guide.html"
                 className="btn btn-secondary btn-lg"
               >
                 <svg width="16" height="20" viewBox="0 0 16 20" aria-hidden="true" className="flex-none">

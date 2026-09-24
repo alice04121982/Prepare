@@ -10,8 +10,6 @@ export type FaqGroup = {
   entries: FaqEntry[];
 };
 
-// Keep the first three entries in sync with the myth-busting section of
-// public/offline/index.html.
 export const faq: FaqGroup[] = [
   {
     title: "Is this prepping?",

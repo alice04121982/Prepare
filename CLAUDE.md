@@ -42,6 +42,12 @@ Guides name kinds of things, never brands: each "what to have ready" item
 links to a tagged Amazon search (`amazonSearchUrl`). Specific products stay
 in the one-click basket and on `/basket`, which shows their photos.
 
+The offline guide (`/offline-guide`, `src/app/offline-guide/route.ts`) is
+one self-contained HTML file built at build time from the same data files,
+with Archivo embedded from `src/assets/`. It downloads as "Offline
+guide.html" through a `Content-Disposition` header, has no scripts and makes
+no requests. Edit the data, not the guide.
+
 `Diagram.tsx` draws figures taken from these same files, so a change to
 `scenarios.ts` must be checked against the `duration` diagram, which plots
 it.

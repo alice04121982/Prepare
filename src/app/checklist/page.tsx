@@ -149,8 +149,8 @@ export default function ChecklistPage() {
             build your kit <Arrow />
           </Link>
           <a
-            href="/offline/index.html"
-            download="stay-prepared-offline-guide.html"
+            href="/offline-guide"
+            download="Offline guide.html"
             className="btn btn-secondary btn-lg"
           >
             download the offline guide
