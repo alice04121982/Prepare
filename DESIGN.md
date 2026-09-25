@@ -244,7 +244,9 @@ A bold underlined text link ending in the arrow, 44px tall, width 110. Hover thi
 - **Segmented tabs:** a 3px bordered strip of 48px cells split by 3px rules; the selected cell is ink.
 
 ### Logo
-Adopted 25 September 2026. The mark is an **asterisk of four square-ended bars** (each 14.651 by 71.263, rotated 0, 45, 90 and 135 degrees about one centre), the site's own mark, drawn by the owner (Figma frame "Cross"). It sits to the left of the words: **✱ stay prepared**, at 0.85em, centred on the line, 0.3em from the s. It is always one colour, `currentColor`: ink on paper, paper on the ink footer, never a category colour. `components/Wordmark.tsx` holds both the lockup and the bare `Asterisk`.
+Adopted 25 September 2026. The mark is an **asterisk of four square-ended bars** (each 14.651 by 71.263, rotated 0, 45, 90 and 135 degrees about one centre), the site's own mark, drawn by the owner (Figma frame "Cross"). It sits to the left of the words, closed up to match the web address: **✱stayprepared** (changed from two words on 25 September 2026), at 0.85em, centred on the line, 0.3em from the s. It is always one colour, `currentColor`: ink on paper, paper on the ink footer, never a category colour. `components/Wordmark.tsx` holds both the lockup and the bare `Asterisk`. The closed-up spelling is for the lockup only: in sentences, titles and metadata the name stays "Stay Prepared", and the lockup gives screen readers "Stay Prepared" as hidden text.
+
+- **Share image:** `app/opengraph-image.png`, drawn by `scripts/og.mjs`. **Pins:** `public/pins/`, drawn by `scripts/pins.mjs`. Both carry the lockup; rerun them after changing it.
 
 - **Favicon:** `app/icon.svg`, the bare asterisk in ink, switching to paper when the browser is dark. `app/favicon.ico` (16, 32, 48) and `app/icon.png` are the fallbacks, drawn by `scripts/icons.mjs` from `public/brand/mark.svg`; rerun it after changing the mark.
 - **Home screen:** `app/apple-icon.png`, 180px, ink asterisk on paper, drawn by the same script.

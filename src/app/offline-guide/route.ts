@@ -150,7 +150,7 @@ footer{margin-top:56px;border-top:3px solid var(--ink);padding-top:14px;color:va
 </head>
 <body>
 <div class="wrap">
-<p class="brand">stay prepared</p>
+<p class="brand" aria-label="Stay Prepared">stayprepared</p>
 <h1>offline guide</h1>
 <p class="intro">What to keep, how much, and what to do when something stops. This file works with no internet: keep it on your phone, print it, or share it.</p>
 <p class="made">Made from ${esc(SITE_URL.replace("https://", ""))} on ${esc(made)}. Check official guidance for your area too.</p>

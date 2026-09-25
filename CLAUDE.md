@@ -131,8 +131,10 @@ The site mark is `public/brand/mark.svg` (an eight-armed asterisk, ink).
 `scripts/icons.mjs` draws `favicon.ico`, `icon.png` and `apple-icon.png`
 in `src/app/` from it; rerun it after changing the mark.
 
-The share image is `src/app/opengraph-image.png`, drawn from the design
-system; every page uses it. The checklist emits its FAQ as schema.org
+The share image is `src/app/opengraph-image.png`, drawn by
+`scripts/og.mjs`; every page uses it. The logo lockup is closed up,
+"✱stayprepared" (`components/Wordmark.tsx`); in running text the name stays
+"Stay Prepared". The checklist emits its FAQ as schema.org
 `FAQPage` JSON-LD from `faq.ts`. `@vercel/analytics` counts page views without
 cookies, and only once Web Analytics is switched on in the Vercel project.
 

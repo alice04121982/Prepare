@@ -41,8 +41,8 @@ const pins = [
     body: ticks(["Warning of planned cuts", "Priority help and updates", "Water brought to your door", "A password for callers"]), source: "For older, disabled or unwell people, and homes with young children" },
 ];
 
-// The site mark, as in public/brand/mark.svg.
-const MARK = `<svg viewBox="0 0 100 100" width="36" height="36" fill="#141414" aria-hidden="true"><g transform="translate(50 50)">${[0, 45, 90, 135].map((r) => `<rect x="-9" y="-46" width="18" height="92" transform="rotate(${r})"/>`).join("")}</g></svg>`;
+// The site mark, as in components/Wordmark.tsx.
+const MARK = `<svg viewBox="-36 -36 72 72" width="36" height="36" fill="#141414" aria-hidden="true">${[0, 45, 90, 135].map((r) => `<rect x="-7.3255" y="-35.6315" width="14.651" height="71.263" transform="rotate(${r})"/>`).join("")}</svg>`;
 
 const css = `
 @font-face{font-family:Archivo;font-weight:100 900;font-stretch:62% 125%;src:url(data:font/woff2;base64,${font}) format("woff2")}
@@ -74,7 +74,7 @@ h1{font-weight:900;font-variation-settings:"wdth" 112;font-size:112px;line-heigh
 const b = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const p = await b.newPage({ viewport: { width: 1000, height: 1500 }, deviceScaleFactor: 1 });
 for (const pin of pins) {
-  const html = `<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body><div class="pin"><p class="brand">${MARK}stay prepared</p><h1>${esc(pin.title)}</h1>${pin.lede ? `<p class="lede">${esc(pin.lede)}</p>` : ""}<div class="main">${pin.body}</div><div class="foot"><span class="url">stayprepared.co.uk</span><span class="src">${esc(pin.source)}</span></div></div></body></html>`;
+  const html = `<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body><div class="pin"><p class="brand">${MARK}stayprepared</p><h1>${esc(pin.title)}</h1>${pin.lede ? `<p class="lede">${esc(pin.lede)}</p>` : ""}<div class="main">${pin.body}</div><div class="foot"><span class="url">stayprepared.co.uk</span><span class="src">${esc(pin.source)}</span></div></div></body></html>`;
   await p.setContent(html, { waitUntil: "load" });
   await p.evaluate(() => document.fonts.ready);
   const over = await p.evaluate(() => ({ h: document.querySelector(".pin").scrollHeight, w: document.documentElement.scrollWidth }));
