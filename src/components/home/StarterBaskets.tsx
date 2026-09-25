@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
-import { BOTTLED_DAYS, DURATIONS, buildPack, durationLabel, type PackDays } from "@/data/packs";
+import { MAX_DAYS, MIN_DAYS } from "@/data/kit-rules";
+import { DURATIONS, buildPack } from "@/data/packs";
 import { useHave } from "@/lib/have";
 
 const MAX_PEOPLE = 12;
@@ -16,41 +17,38 @@ const stepClass =
  * The hero's quick route to a complete kit: say how many people live with
  * you and for how long, and Amazon opens with everything in one basket. Each
  * pack is the planner's whole list for that household (see src/data/packs.ts),
- * less anything ticked off on the checklist.
+ * less anything ticked off on the checklist. Past the four set lengths,
+ * any whole number of days from MIN_DAYS to MAX_DAYS can be typed in.
  */
 export default function StarterBaskets() {
   const [people, setPeople] = useState(2);
-  const [days, setDays] = useState<PackDays>(3);
+  const [days, setDays] = useState(3);
+  // What is typed in the days box, kept apart from `days` so a half-typed or
+  // out-of-range number never replaces the last good choice.
+  const [typed, setTyped] = useState("");
   const { have } = useHave();
 
+  const owned = (id: string) => have.has(kitLineKey(id));
   const packs = useMemo(
     () => DURATIONS.map((d) => buildPack(people, d.days, (id) => have.has(kitLineKey(id)))),
     [people, have],
   );
-  const chosen = packs.find((p) => p.days === days) ?? packs[0];
+  const preset = packs.find((p) => p.days === days);
+  const chosen = preset ?? buildPack(people, days, owned);
   const url = chosen.buys.length > 0;
-  const who = `${people} ${people === 1 ? "person" : "people"}`;
-  // The planner's drinking water rule: 3 litres per person per day.
-  const litres = 3 * people * days;
+
+  function onTyped(value: string) {
+    setTyped(value);
+    const n = Number(value);
+    if (Number.isInteger(n) && n >= MIN_DAYS && n <= MAX_DAYS) setDays(n);
+  }
 
   return (
     <section
       id="hero-actions"
-      aria-labelledby="kit-h"
+      aria-label="Ready-made kits"
       className="mt-9 border-[3px] border-ink min-[900px]:mt-2"
     >
-      <div className="border-b-[10px] border-ink px-4.5 pb-3.5 pt-4 min-[900px]:px-6">
-        <h2
-          id="kit-h"
-          className="display text-[clamp(1.75rem,6vw,2.25rem)] leading-none"
-          style={{ fontVariationSettings: '"wdth" 115' }}
-        >
-          a ready-made kit
-        </h2>
-        <p className="mt-2 text-[0.9375rem] leading-snug">
-          Choose who it is for and how long it should last.
-        </p>
-      </div>
       <div className="flex flex-wrap items-center justify-between gap-3 border-b-[3px] border-ink px-4.5 py-3.5 min-[900px]:px-6">
         <p id="people-label" className="text-lg font-extrabold">
           People in your home
@@ -100,7 +98,10 @@ export default function StarterBaskets() {
                   id={`pack-${p.days}`}
                   value={p.days}
                   checked={days === p.days}
-                  onChange={() => setDays(d.days)}
+                  onChange={() => {
+                    setDays(d.days);
+                    setTyped("");
+                  }}
                   className="sr-only"
                 />
                 <label htmlFor={`pack-${p.days}`} className="flex flex-1 cursor-pointer flex-col justify-between px-3 pt-2.5">
@@ -122,26 +123,37 @@ export default function StarterBaskets() {
             );
           })}
         </div>
+        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <label htmlFor="kit-days" className="text-[0.9375rem] font-bold">
+            Or a number of days
+          </label>
+          <input
+            id="kit-days"
+            type="number"
+            inputMode="numeric"
+            min={MIN_DAYS}
+            max={MAX_DAYS}
+            step={1}
+            value={typed}
+            onChange={(e) => onTyped(e.target.value)}
+            aria-describedby="kit-days-hint"
+            className="field h-12 w-24 text-lg tabular-nums"
+          />
+          <span id="kit-days-hint" className="text-sm text-ink-2">
+            {MIN_DAYS} to {MAX_DAYS}
+          </span>
+          {!preset ? (
+            <Link href={`/basket?p=${people}&d=${days}`} className="flex min-h-11 items-center text-sm font-extrabold">
+              what is in it<span className="sr-only"> for {days} days</span>
+            </Link>
+          ) : null}
+        </div>
       </fieldset>
 
       <div className="border-t border-ink px-4.5 pb-4.5 pt-3.5 min-[900px]:px-6">
         {url ? (
           <>
-            <p className="font-extrabold">
-              Everything for {who} for {durationLabel(days)}
-            </p>
-            <p aria-live="polite" className="mt-1 text-[0.9375rem] leading-snug">
-              {chosen.buys.length} products.
-              {days > BOTTLED_DAYS
-                ? ` Bottled water covers the first week. After that, you fill the containers from the tap.`
-                : ""}
-            </p>
-            <p className="mt-2 text-[0.9375rem] leading-snug">
-              Drinking water: <strong className="tabular-nums">{litres} litres</strong>. That is 3 litres per person
-              per day, the figure{" "}
-              <a href="https://prepare.campaign.gov.uk/get-prepared-for-emergencies/">quoted by gov.uk</a>.
-            </p>
-            <dl className="mt-3 grid gap-1 border-y border-ink py-2.5 text-[0.9375rem] tabular-nums">
+            <dl className="grid gap-1 border-b border-ink pb-2.5 text-[0.9375rem] tabular-nums">
               <div className="flex justify-between gap-3">
                 <dt>Food, water and supplies</dt>
                 <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.supplies}</dd>
@@ -167,19 +179,7 @@ export default function StarterBaskets() {
             .
           </p>
         )}
-        <p className="mt-3 text-sm leading-snug">
-          Already have some?{" "}
-          <Link href="/checklist" className="font-bold">
-            Tick it off
-          </Link>
-        </p>
-        <p className="mt-1 text-sm leading-snug">
-          Babies, pets or older people?{" "}
-          <Link href={`/build-your-kit?a=${people}&c=0&d=${days}`} className="font-bold">
-            Plan for your household
-          </Link>
-        </p>
-        <p className="mt-2 text-[0.8125rem] leading-snug text-ink-2">
+        <p className="mt-3 text-[0.8125rem] leading-snug text-ink-2">
           As an Amazon Associate we earn from qualifying purchases.
         </p>
       </div>

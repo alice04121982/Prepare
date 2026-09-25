@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import BasketItems from "@/components/basket/BasketItems";
-import { DURATIONS, durationLabel, parseLeftOut } from "@/data/packs";
+import { MAX_DAYS, MIN_DAYS } from "@/data/kit-rules";
+import { durationLabel, parseLeftOut } from "@/data/packs";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/basket" },
@@ -22,7 +23,7 @@ export default async function BasketPage({
   const rawPeople = parseInt(first(q.p) ?? "", 10);
   const people = Number.isFinite(rawPeople) ? Math.max(1, Math.min(12, rawPeople)) : 2;
   const rawDays = parseInt(first(q.d) ?? "", 10);
-  const days = DURATIONS.find((d) => d.days === rawDays)?.days ?? 3;
+  const days = Number.isFinite(rawDays) ? Math.max(MIN_DAYS, Math.min(MAX_DAYS, rawDays)) : 3;
   const leftOut = parseLeftOut(first(q.x));
 
   return (

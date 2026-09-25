@@ -244,6 +244,10 @@
   cursor: pointer;
 }
 .field:hover { background-color: var(--hover); }
+/* Typed fields: no dropdown arrow, and no browser spinners on numbers. */
+input.field { background-image: none; padding-right: 0.875rem; cursor: text; -moz-appearance: textfield; }
+input.field::-webkit-inner-spin-button,
+input.field::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
 /* Full-bleed bands, capped content. */
 .wrap { margin-inline: auto; width: 100%; max-width: 1360px; padding-inline: 1.25rem; }
