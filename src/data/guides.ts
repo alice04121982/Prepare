@@ -630,6 +630,7 @@ export const guides: Guide[] = [
     description:
       "Make a plan now for power cuts and water outages if someone at home needs powered medical equipment or refrigerated medications. Know your backup options and safe timeframes.",
     answer: [
+      "This is preparedness guidance, not medical advice. Talk to your healthcare team now about what happens in a power cut or water outage. See the medical disclaimer for what this means.",
       "If someone at home relies on powered medical equipment (dialysis, oxygen, ventilator, feeding tube, cardiac devices) or refrigerated medication (insulin, some biologics), a power cut or water outage becomes urgent within hours or days.",
       "Your plan needs three things: knowing how long you can safely go without treatment, a backup power source, and an emergency contact list with your healthcare team and alternative treatment centers.",
     ],
@@ -669,6 +670,7 @@ export const guides: Guide[] = [
     description:
       "Dialysis depends on electricity and clean water. Without treatment, kidney patients are at risk within days. Know your backup plan and register for priority help.",
     answer: [
+      "This is preparedness guidance, not medical advice. Talk to your dialysis unit and your nephrologist now about what happens in a power cut or water outage. See the medical disclaimer for what this means.",
       "Hemodialysis patients can safely skip treatment for about 3 to 5 days; peritoneal dialysis patients for about 1 to 2 weeks. After that, potassium and fluid buildup become life-threatening.",
       "Contact your dialysis unit now to ask: Where would you go if the center lost power? Do they have a backup plan? Some regions have mutual-aid agreements with other centers.",
     ],
