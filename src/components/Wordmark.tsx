@@ -26,13 +26,15 @@ export function Asterisk({ className }: { className?: string }) {
   );
 }
 
-// The asterisk to the left of "stay prepared". The words stay real text; the
-// mark is hidden from screen readers.
+// The lockup: the asterisk, then "stayprepared" closed up to match the web
+// address. Screen readers hear the name as two words, "Stay Prepared"; the
+// mark and the closed-up spelling are hidden from them.
 export default function Wordmark() {
   return (
     <span className="inline-flex items-center gap-[0.3em] whitespace-nowrap">
       <Asterisk className="size-[0.85em] flex-none" />
-      stay prepared
+      <span aria-hidden="true">stayprepared</span>
+      <span className="sr-only">Stay Prepared</span>
     </span>
   );
 }
