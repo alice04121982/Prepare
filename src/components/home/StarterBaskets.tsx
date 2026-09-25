@@ -9,11 +9,12 @@ import { listForDays } from "@/data/lists";
 import { DURATIONS, buildPack } from "@/data/packs";
 import type { Tier } from "@/data/products";
 import { TierPicker } from "@/components/kit/TierPicker";
-import KitContents from "@/components/home/KitContents";
+import KitDrawer from "@/components/home/KitDrawer";
 import { useHave } from "@/lib/have";
 
 const MAX_PEOPLE = 12;
 const TIERS: Tier[] = ["budget", "regular", "premium"];
+const NOTE = "Amazon opens and asks you to confirm. We earn a small commission, at no extra cost to you.";
 
 /** The kits page, opened on this many people and days. */
 const kitHref = (people: number, days: number, tier: Tier) =>
@@ -43,6 +44,7 @@ export default function StarterBaskets() {
   // out-of-range number never replaces the last good choice.
   const [typed, setTyped] = useState("");
   const [tier, setTier] = useState<Tier>("regular");
+  const [drawer, setDrawer] = useState(false);
   const { have } = useHave();
 
   const owned = (id: string) => have.has(kitLineKey(id));
@@ -146,9 +148,17 @@ export default function StarterBaskets() {
                     {"note" in d ? <span className="block font-normal">{d.note}</span> : null}
                   </span>
                 </label>
-                <Link href={kitHref(people, p.days, tier)} className="flex min-h-11 items-center px-3 text-sm font-extrabold">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDays(p.days);
+                    setTyped("");
+                    setDrawer(true);
+                  }}
+                  className="flex min-h-11 items-center px-3 text-left text-sm font-extrabold underline underline-offset-4"
+                >
                   what is in it<span className="sr-only"> for {d.label}</span>
-                </Link>
+                </button>
               </div>
             );
           })}
@@ -173,9 +183,13 @@ export default function StarterBaskets() {
             {MIN_DAYS} to {MAX_DAYS}
           </span>
           {!preset ? (
-            <Link href={kitHref(people, days, tier)} className="flex min-h-11 items-center text-sm font-extrabold">
+            <button
+              type="button"
+              onClick={() => setDrawer(true)}
+              className="flex min-h-11 items-center text-sm font-extrabold underline underline-offset-4"
+            >
               what is in it<span className="sr-only"> for {days} days</span>
-            </Link>
+            </button>
           ) : null}
         </div>
       </fieldset>
@@ -197,11 +211,23 @@ export default function StarterBaskets() {
                 <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.kitOnce}</dd>
               </div>
             </dl>
-            <KitContents buys={chosen.buys} />
+            <button
+              type="button"
+              onClick={() => setDrawer(true)}
+              aria-haspopup="dialog"
+              className="flex min-h-11 w-full items-center justify-between gap-3 border-b border-ink text-left font-extrabold hover:bg-[var(--hover)]"
+            >
+              <span>
+                See what is in it <span className="font-normal tabular-nums">({chosen.buys.length} products)</span>
+              </span>
+              <span aria-hidden="true" className="text-xl leading-none">
+                &rarr;
+              </span>
+            </button>
             <AmazonBasketButton
               items={chosen.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
               className="mt-4"
-              note="Amazon opens and asks you to confirm. We earn a small commission, at no extra cost to you."
+              note={NOTE}
             >
               {basketLabel(chosen.buys.length)}
             </AmazonBasketButton>
@@ -216,6 +242,17 @@ export default function StarterBaskets() {
           </p>
         )}
       </div>
+      <KitDrawer
+        open={drawer}
+        onClose={() => setDrawer(false)}
+        title={`${DURATIONS.find((d) => d.days === days)?.label ?? `${days} days`} for ${people} ${people === 1 ? "person" : "people"}`}
+        detail={`${chosen.buys.length} products, ${tier} price range. Anything ticked on the checklist is left out.`}
+        buys={chosen.buys}
+        supplies={chosen.supplies}
+        kitOnce={chosen.kitOnce}
+        editHref={kitHref(people, days, tier)}
+        note={NOTE}
+      />
     </section>
   );
 }
