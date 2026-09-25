@@ -146,7 +146,7 @@ export const officialGuidance: GuidanceGroup[] = [
   {
     title: "The bigger picture",
     intro:
-      "What the government actually plans for, and who coordinates locally. Useful for calibrating worry.",
+      "What the government actually plans for, and who coordinates locally. It can help you judge how worried to be.",
     links: [
       {
         title: "National Risk Register 2025",

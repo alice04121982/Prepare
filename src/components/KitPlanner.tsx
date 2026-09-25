@@ -56,7 +56,7 @@ const DISCLOSURE =
 const MAKER_FIRST = {
   id: "maker",
   name: "Maker first",
-  note: "Where the maker or a specialist sells it, buy there first. Amazon is the fallback.",
+  note: "Where the maker or a specialist sells it, buy there first. If they do not, use Amazon.",
 } as const;
 
 type ShopId = typeof MAKER_FIRST.id | Retailer["id"];
