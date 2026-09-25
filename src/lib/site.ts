@@ -27,6 +27,7 @@ export const PAGES = [
   "/how-we-choose-products",
   "/privacy",
   "/medical-disclaimer",
+  "/medical-conditions",
   "/guides",
   ...guides.map((g) => `/guides/${g.slug}`),
 ];
