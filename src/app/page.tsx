@@ -48,8 +48,12 @@ const steps = [
 export default function Home() {
   return (
     <main>
-      {/* Opening: what the site is, and where to start */}
-      <section id="hero" aria-labelledby="hero-h" className="wrap pb-16 pt-9 min-[900px]:pb-26 min-[900px]:pt-16">
+      {/* Opening: what the site is on the left, the shelf of tins beside it */}
+      <section
+        id="hero"
+        aria-labelledby="hero-h"
+        className="wrap grid gap-x-16 pb-16 pt-9 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:items-start min-[900px]:pb-26 min-[900px]:pt-16"
+      >
         <div>
           <h1
             id="hero-h"
@@ -75,11 +79,14 @@ export default function Home() {
             </Link>
           </p>
         </div>
+        <div className="mt-10 min-[900px]:mt-2">
+          <Shelf tins={tins} />
+        </div>
       </section>
 
-      {/* Would you be all right: the question and the shelf of tins */}
+      {/* Would you be all right: the question and what it means */}
       <section aria-labelledby="stop-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
-        <div className="wrap grid gap-x-16 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:items-start">
+        <div className="wrap">
           <div>
             <h2 id="stop-h" className="max-w-[22ch] text-[clamp(1.75rem,7vw,3rem)]">
               if the power went off, the water stopped and the shops were shut
@@ -103,9 +110,6 @@ export default function Home() {
                 what might stop, and for how long <Arrow size={18} />
               </Link>
             </div>
-          </div>
-          <div className="mt-10 min-[900px]:mt-0">
-            <Shelf tins={tins} />
           </div>
         </div>
       </section>
