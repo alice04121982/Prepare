@@ -117,7 +117,7 @@ export default function MedicalDisclaimerPage() {
                 (mentions medication storage)
               </li>
             </ul>
-            <p className="mt-4">Each of these guides says: talk to your healthcare team for advice on your condition.</p>
+            <p className="mt-4">For advice on your own condition, always talk to your healthcare team.</p>
           </div>
         </section>
 
