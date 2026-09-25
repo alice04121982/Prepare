@@ -82,8 +82,8 @@ export default function CommunityPage() {
             <Link href="/checklist" className="btn btn-primary btn-lg">
               see the checklist <Arrow />
             </Link>
-            <Link href="/build-your-kit" className="arrow-link text-lg">
-              build your kit <Arrow size={18} />
+            <Link href="/kits" className="arrow-link text-lg">
+              see the kits <Arrow size={18} />
             </Link>
           </div>
         </div>

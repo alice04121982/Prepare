@@ -4,11 +4,16 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
-import { MAX_DAYS, MIN_DAYS } from "@/data/kit-rules";
+import { MAX_DAYS, MIN_DAYS, defaultHousehold, householdToQuery } from "@/data/kit-rules";
+import { listForDays } from "@/data/lists";
 import { DURATIONS, buildPack } from "@/data/packs";
 import { useHave } from "@/lib/have";
 
 const MAX_PEOPLE = 12;
+
+/** The kits page, opened on this many people and days. */
+const kitHref = (people: number, days: number) =>
+  `/kits${householdToQuery({ ...defaultHousehold, adults: people, days, list: listForDays(days) })}`;
 
 const stepClass =
   "grid h-12 w-12 place-items-center rounded-[4px] border-[3px] border-ink text-2xl font-extrabold leading-none hover:bg-[var(--hover)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent";
@@ -125,7 +130,7 @@ export default function StarterBaskets() {
                     {"note" in d ? <span className="block font-normal">{d.note}</span> : null}
                   </span>
                 </label>
-                <Link href={`/basket?p=${people}&d=${p.days}`} className="flex min-h-11 items-center px-3 text-sm font-extrabold">
+                <Link href={kitHref(people, p.days)} className="flex min-h-11 items-center px-3 text-sm font-extrabold">
                   what is in it<span className="sr-only"> for {d.label}</span>
                 </Link>
               </div>
@@ -152,7 +157,7 @@ export default function StarterBaskets() {
             {MIN_DAYS} to {MAX_DAYS}
           </span>
           {!preset ? (
-            <Link href={`/basket?p=${people}&d=${days}`} className="flex min-h-11 items-center text-sm font-extrabold">
+            <Link href={kitHref(people, days)} className="flex min-h-11 items-center text-sm font-extrabold">
               what is in it<span className="sr-only"> for {days} days</span>
             </Link>
           ) : null}
@@ -183,7 +188,7 @@ export default function StarterBaskets() {
         ) : (
           <p className="text-[0.9375rem]">
             You have ticked off everything a basket would hold.{" "}
-            <Link href={`/basket?p=${people}&d=${days}`} className="font-bold">
+            <Link href={kitHref(people, days)} className="font-bold">
               See what is left
             </Link>
             .

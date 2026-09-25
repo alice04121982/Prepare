@@ -2,10 +2,9 @@ import Link from "next/link";
 import Wordmark from "@/components/Wordmark";
 
 const links = [
-  { href: "/lists", label: "Ready-made lists" },
+  { href: "/kits", label: "Ready-made kits" },
   { href: "/what-you-can-do-now", label: "What you can do now" },
   { href: "/checklist", label: "Checklist" },
-  { href: "/build-your-kit", label: "Build your kit" },
   { href: "/what-might-stop", label: "What might stop" },
   { href: "/worried", label: "Worried?" },
   { href: "/community", label: "Neighbours" },

@@ -100,3 +100,16 @@ export function clampDaysForList(slug: ListSlug, n: number): number {
   if (!Number.isFinite(n)) return defaultDaysFor(slug);
   return Math.max(min, Math.min(max, Math.round(n)));
 }
+
+/**
+ * The list a plain length belongs to, for links that only know people and
+ * days (the home page kit box). Lengths no list covers, such as 5 days, get
+ * none, and the planner treats them as its own length.
+ */
+export function listForDays(days: number): ListSlug | undefined {
+  return lists.find((l) => {
+    if (l.days.kind === "none") return false;
+    const { min, max } = daysRangeFor(l.slug);
+    return days >= min && days <= max;
+  })?.slug;
+}

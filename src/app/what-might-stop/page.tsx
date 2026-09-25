@@ -163,8 +163,8 @@ export default function WhatMightStopPage() {
           <Link href="/checklist" className="btn btn-primary btn-lg">
             see the checklist <Arrow />
           </Link>
-          <Link href="/build-your-kit" className="btn btn-secondary btn-lg">
-            build your kit
+          <Link href="/kits" className="btn btn-secondary btn-lg">
+            see the kits
           </Link>
         </div>
       </section>

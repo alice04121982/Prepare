@@ -121,24 +121,3 @@ export function packTotals(buys: PackBuy[]): Pick<Pack, "estimate" | "kitOnce" |
     supplies: sum(buys.filter((b) => !KIT_ONCE.has(b.line.id))),
   };
 }
-
-const ASIN = /^[A-Z0-9]{10}$/;
-
-/**
- * Products left out of the basket, from the `x` query value: a comma list of
- * ASINs. Anything that is not a well-formed ASIN is dropped, and the list is
- * capped, so a crafted link can only untick real rows.
- */
-export function parseLeftOut(raw: string | undefined): string[] {
-  if (!raw) return [];
-  return [...new Set(raw.split(",").map((a) => a.trim().toUpperCase()))].filter((a) => ASIN.test(a)).slice(0, 40);
-}
-
-export function buyLabel(b: PackBuy): string {
-  const [one, many] = b.product.short ?? [b.product.name, b.product.name];
-  return `${b.quantity} ${b.quantity === 1 ? one : many}`;
-}
-
-export function durationLabel(days: number): string {
-  return DURATIONS.find((d) => d.days === days)?.label ?? `${days} days`;
-}

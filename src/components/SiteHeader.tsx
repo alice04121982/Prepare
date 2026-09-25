@@ -11,7 +11,7 @@ import Wordmark from "@/components/Wordmark";
 export const nav = [
   { href: "/what-might-stop", label: "why prepare" },
   { href: "/checklist", label: "what to get" },
-  { href: "/lists", label: "ready-made kits" },
+  { href: "/kits", label: "ready-made kits" },
   { href: "/worried", label: "worried?" },
 ];
 

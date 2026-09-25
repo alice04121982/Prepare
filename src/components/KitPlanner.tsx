@@ -22,28 +22,21 @@ import { kitLineKey } from "@/data/have-map";
 import { buysFor } from "@/data/packs";
 import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import { useHave } from "@/lib/have";
-import { daysRangeFor, defaultDaysFor, listBySlug, type ListSlug } from "@/data/lists";
+import { daysRangeFor, defaultDaysFor, listBySlug, listForDays, type ListSlug } from "@/data/lists";
 
 import { AMAZON_TAG as TAG } from "@/lib/amazon";
 
 /** Quick picks under the days stepper, per list. Without a list, the original three. */
-const PRESETS: Record<"none" | ListSlug, { days: number; note?: string }[]> = {
-  none: [{ days: 3, note: "the government minimum" }, { days: 7 }, { days: 14 }],
-  "72-hours": [],
-  "two-weeks-to-a-month": [{ days: 7, note: "a week" }, { days: 14, note: "2 weeks" }, { days: 30, note: "a month" }],
-  "three-months": [{ days: 31, note: "a month" }, { days: 60, note: "2 months" }, { days: 90, note: "3 months" }],
-  "grab-bag": [],
-};
-
-/** The note under a list's days stepper: its range, and where to go past either end. */
-function listDaysNote(slug: ListSlug, value: number): string {
-  const { min, max } = daysRangeFor(slug);
-  if (value <= min && slug === "two-weeks-to-a-month") return `From ${min} days on this list. For fewer, change to 72 hours.`;
-  if (value >= max && slug === "two-weeks-to-a-month") return `Up to ${max} days on this list. For longer, change to 3 months.`;
-  if (value <= min && slug === "three-months") return `From ${min} days on this list. For fewer, change to 2 weeks to a month.`;
-  if (value >= max) return `Up to ${max} days on this list.`;
-  return `Any whole number of days from ${min} to ${max}.`;
-}
+/**
+ * Quick lengths beside the days box. Any whole number from MIN_DAYS to
+ * MAX_DAYS can be typed; the kit follows the number (see setDays below).
+ */
+const PRESETS = [
+  { days: 3, note: "the government minimum" },
+  { days: 14, note: "2 weeks" },
+  { days: 30, note: "a month" },
+  { days: 90, note: "3 months" },
+];
 
 /** Small solid block of a category's label colour, or plain paper for household lines. */
 function Swatch({ category }: { category: string }) {
@@ -148,8 +141,13 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const isGrabBag = h.list === "grab-bag";
 
   // A new list keeps the days if they fit its range, otherwise starts at its default.
-  const chooseList = (slug: ListSlug) =>
+  // Typing a length moves to the kit that covers it, or to "your own length"
+  // when none does, so the kit shown always matches the days.
+  const setDays = (days: number) => setH((prev) => ({ ...prev, days, list: listForDays(days) }));
+  // "Your own length" (no list) keeps the days as they are.
+  const chooseList = (slug: ListSlug | undefined) =>
     setH((prev) => {
+      if (!slug) return { ...prev, list: undefined };
       const { min, max } = daysRangeFor(slug);
       const days = prev.days >= min && prev.days <= max ? prev.days : defaultDaysFor(slug);
       return { ...prev, list: slug, days };
@@ -197,11 +195,17 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
       {/* Inputs: the household panel, then (on wide screens) the closing count */}
       <div className="no-print min-w-0">
         <div className={fits ? "min-[900px]:sticky min-[900px]:top-6" : "contents"}>
-          {h.list ? (
-            <div ref={listRef}>
-              <ListPicker value={h.list} onChange={chooseList} />
+          <div ref={listRef}>
+            <ListPicker value={h.list} onChange={chooseList} />
+            {/* How long: straight under the kit, since the two move together */}
+            <div className="border-x-[3px] border-t-[3px] border-ink pt-2">
+              {isGrabBag ? (
+                <FixedDays label="Packed for" value="3 days" note="Enough to carry. Bottled water covers the first day and the filter bottles the rest." />
+              ) : (
+                <DaysControl value={h.days} onChange={setDays} min={MIN_DAYS} max={MAX_DAYS} presets={PRESETS} />
+              )}
             </div>
-          ) : null}
+          </div>
           <aside
             ref={asideRef}
             id="kit-household"
@@ -252,28 +256,6 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
               </div>
             </fieldset>
 
-            {isGrabBag ? (
-              <FixedDays label="Packed for" value="3 days" note="Enough to carry. Bottled water covers the first day and the filter bottles the rest." />
-            ) : h.list === "72-hours" ? (
-              <FixedDays label="Days of cover" value="3 days" note="The government minimum. For longer, change list." />
-            ) : h.list ? (
-              <DaysControl
-                value={h.days}
-                onChange={(v) => set("days", v)}
-                min={daysRangeFor(h.list).min}
-                max={daysRangeFor(h.list).max}
-                presets={PRESETS[h.list]}
-                note={listDaysNote(h.list, h.days)}
-              />
-            ) : (
-              <DaysControl
-                value={h.days}
-                onChange={(v) => set("days", v)}
-                min={MIN_DAYS}
-                max={MAX_DAYS}
-                presets={PRESETS.none}
-              />
-            )}
           </aside>
 
           <div

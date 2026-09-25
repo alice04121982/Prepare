@@ -32,8 +32,8 @@ const steps = [
   {
     title: "buy what is missing",
     body: "Say who lives with you and the quantities are worked out for you. The free option comes first on every line.",
-    href: "/build-your-kit",
-    cta: "build your kit",
+    href: "/kits",
+    cta: "see the kits",
     state: "buy" as const,
   },
   {

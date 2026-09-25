@@ -55,7 +55,7 @@ export default function ChecklistPage() {
               before you buy anything. Then get these first, over a few weeks.
               The rest can follow.
             </p>
-            <Link href="/build-your-kit" className="no-print btn btn-primary btn-lg mt-7">
+            <Link href="/kits" className="no-print btn btn-primary btn-lg mt-7">
               work out my quantities <Arrow />
             </Link>
           </div>
@@ -145,8 +145,8 @@ export default function ChecklistPage() {
         </div>
 
         <div className="no-print mt-12 flex flex-wrap items-center gap-4">
-          <Link href="/build-your-kit" className="btn btn-primary btn-lg">
-            build your kit <Arrow />
+          <Link href="/kits" className="btn btn-primary btn-lg">
+            see the kits <Arrow />
           </Link>
           <a
             href="/offline-guide"

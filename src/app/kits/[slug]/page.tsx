@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import PageIntro from "@/components/PageIntro";
 import KitPlanner from "@/components/KitPlanner";
-import { defaultHousehold, householdFromParams, householdToQuery } from "@/data/kit-rules";
+import { defaultHousehold, householdToQuery } from "@/data/kit-rules";
 import { defaultDaysFor, isListSlug, listBySlug, lists } from "@/data/lists";
+import { householdFromKitParams } from "../household";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: seoTitles[slug] ?? list.title,
     description: `${list.description} Scaled to your household, with every quantity worked out and one button to send the whole list to a basket.`,
-    alternates: { canonical: `/lists/${slug}` },
+    alternates: { canonical: `/kits/${slug}` },
   };
 }
 
@@ -38,11 +39,12 @@ export default async function ListPage({ params, searchParams }: Props) {
   if (!isListSlug(slug)) notFound();
   const list = listBySlug(slug);
 
-  const fromUrl = householdFromParams(await searchParams);
-  // The planner can switch list in place. If the address bar now names a
-  // different list, send the reader to that list's own page.
-  if (fromUrl?.list && fromUrl.list !== slug) {
-    redirect(`/lists/${fromUrl.list}${householdToQuery(fromUrl)}`);
+  const fromUrl = householdFromKitParams(await searchParams);
+  // The planner can switch kit in place. If the address bar now names a
+  // different kit, send the reader to that kit's own page; if it names none
+  // (your own length), to /kits, so a reload or a shared link keeps it.
+  if (fromUrl && fromUrl.list !== slug) {
+    redirect(fromUrl.list ? `/kits/${fromUrl.list}${householdToQuery(fromUrl)}` : `/kits${householdToQuery(fromUrl)}`);
   }
   const initial = fromUrl
     ? { ...fromUrl, list: slug }
@@ -51,7 +53,7 @@ export default async function ListPage({ params, searchParams }: Props) {
   return (
     <main>
       <PageIntro
-        title={`${list.title} list`}
+        title={`${list.title} kit`}
         lede={
           <>
             <p>{list.description}</p>
