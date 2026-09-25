@@ -172,7 +172,7 @@ Every label colour carries ink text at AA or better, so text always sits directl
 - **Footer Note Grey** (#d6d6d6, 12.7:1 on ink) and **Footer Rule Grey** (#5a5a5a): small print and hairlines inside the ink footer only.
 
 ### Named Rules
-**The Label Rule.** Each colour has one meaning on every page, and a category colour appears only where that category is named: a tin label on the homepage shelf, a checklist category band or swatch, a kit list category header or line swatch. Everything else is ink on paper. If the category name is not on screen next to the colour, the colour is wrong.
+**The Label Rule.** Each colour has one meaning on every page, and a category colour appears only where that category is named: a tin label on the homepage shelf, a checklist category band or swatch, a kit list category header or line swatch, a habit group band on /worried (news, health, people). Everything else is ink on paper. If the category name is not on screen next to the colour, the colour is wrong.
 
 **The Yolk Exception.** Yolk Yellow is the one colour allowed to mean "you are interacting": the 5px stripe on a hovered primary button, the mobile Menu button hover, the skip link, text selection, and focus outlines inside the ink footer. It is never used as a background for content.
 

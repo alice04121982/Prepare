@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageIntro from "@/components/PageIntro";
+import PageIntro, { catBg, type Cat } from "@/components/PageIntro";
 import Callout from "@/components/Callout";
 import Arrow from "@/components/home/Arrow";
 import SaferWorld from "@/components/SaferWorld";
@@ -21,38 +21,71 @@ export const metadata: Metadata = {
     "Perspective and practical help for people who feel frightened or helpless watching the news, drawing on psychologists, counsellors and people who have lived through crises before.",
 };
 
-const habits = [
+/**
+ * The habits, grouped by what they are about. Three groups wear the colour of
+ * the category they name (news, health, people), as the checklist bands do;
+ * "doing" names no category, so it stays paper.
+ */
+const habitGroups: { cat: Cat | null; name: string; line: string; habits: { title: string; body: string }[] }[] = [
   {
-    title: "Check the news at set times, not all the time",
-    body: "Twice a day is enough to know anything that matters. Not first thing in the morning and not in bed. The alerts can go off. Nothing you need to act on tonight will arrive by push notification, and if it ever did, an Emergency Alert would reach your phone anyway.",
+    cat: "news",
+    name: "news",
+    line: "How much of it you take in, and from where.",
+    habits: [
+      {
+        title: "Check the news at set times, not all the time",
+        body: "Twice a day is enough to know anything that matters. Not first thing in the morning and not in bed. The alerts can go off. Nothing you need to act on tonight will arrive by push notification, and if it ever did, an Emergency Alert would reach your phone anyway.",
+      },
+      {
+        title: "Choose two sources and stop there",
+        body: "One national broadcaster and one local source. Social feeds show you the most alarming version of every event, from everywhere, on a loop. That is their business model, not a picture of the world.",
+      },
+      {
+        title: "Tell the difference between being informed and being on watch",
+        body: "Informed is knowing a storm is forecast on Thursday. On watch is refreshing the page every ten minutes to see whether it has started. The first is useful. The second is your body preparing for a threat that is not in the room.",
+      },
+    ],
   },
   {
-    title: "Choose two sources and stop there",
-    body: "One national broadcaster and one local source. Social feeds show you the most alarming version of every event, from everywhere, on a loop. That is their business model, not a picture of the world.",
+    cat: "health",
+    name: "health",
+    line: "Your mind, and the body it lives in.",
+    habits: [
+      {
+        title: "Put the worry somewhere",
+        body: "Counsellors often suggest a worry window: fifteen minutes, same time each day, to write down what you are afraid of and what, if anything, you can do about it. Outside that window, when the thought comes, you note it and say: later. It sounds too simple. It works for a lot of people.",
+      },
+      {
+        title: "Come back into the room",
+        body: "When fear spikes, name five things you can see, four you can hear, three you can touch, two you can smell, one you can taste. It is a standard grounding exercise, and it works because fear lives in the imagined future and your senses only work in the present.",
+      },
+      {
+        title: "Look after the body that is doing the worrying",
+        body: "Sleep, a walk, food at normal times, less caffeine and alcohol than you reach for when stressed. None of it is glamorous. All of it changes how frightening the same headline feels the next morning.",
+      },
+    ],
   },
   {
-    title: "Tell the difference between being informed and being on watch",
-    body: "Informed is knowing a storm is forecast on Thursday. On watch is refreshing the page every ten minutes to see whether it has started. The first is useful. The second is your body preparing for a threat that is not in the room.",
+    cat: "people",
+    name: "people",
+    line: "Who you can say it to.",
+    habits: [
+      {
+        title: "Say it out loud to someone",
+        body: "A worry shared with a friend, a partner or a neighbour usually shrinks. A worry kept to yourself and fed with headlines usually grows. If you have no one to say it to, Samaritans and Shout are free, any time.",
+      },
+    ],
   },
   {
-    title: "Do one small, real thing",
-    body: "Anxiety is the feeling of a threat with nothing to do about it. Doing something, however small, changes that. Fill two water bottles. Write three phone numbers on a card. Check the torch works."
-  },
-  {
-    title: "Put the worry somewhere",
-    body: "Counsellors often suggest a worry window: fifteen minutes, same time each day, to write down what you are afraid of and what, if anything, you can do about it. Outside that window, when the thought comes, you note it and say: later. It sounds too simple. It works for a lot of people.",
-  },
-  {
-    title: "Come back into the room",
-    body: "When fear spikes, name five things you can see, four you can hear, three you can touch, two you can smell, one you can taste. It is a standard grounding exercise, and it works because fear lives in the imagined future and your senses only work in the present.",
-  },
-  {
-    title: "Look after the body that is doing the worrying",
-    body: "Sleep, a walk, food at normal times, less caffeine and alcohol than you reach for when stressed. None of it is glamorous. All of it changes how frightening the same headline feels the next morning.",
-  },
-  {
-    title: "Say it out loud to someone",
-    body: "A worry shared with a friend, a partner or a neighbour usually shrinks. A worry kept to yourself and fed with headlines usually grows. If you have no one to say it to, Samaritans and Shout are free, any time.",
+    cat: null,
+    name: "doing",
+    line: "Something to do today.",
+    habits: [
+      {
+        title: "Do one small, real thing",
+        body: "Anxiety is the feeling of a threat with nothing to do about it. Doing something, however small, changes that. Fill two water bottles. Write three phone numbers on a card. Check the torch works.",
+      },
+    ],
   },
 ];
 
@@ -203,7 +236,7 @@ export default function WorriedPage() {
         </div>
       </section>
 
-      <section aria-labelledby="habits-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
+      <section aria-labelledby="habits-h" className="border-t-[3px] border-ink pb-6 pt-14 min-[900px]:pb-10 min-[900px]:pt-20">
         <div className="wrap">
           <div className="measure">
             <h2 id="habits-h" className="h-sub">
@@ -215,15 +248,33 @@ export default function WorriedPage() {
               need to do all of them. Start with one or two that suit you.
             </p>
           </div>
-          <ul className="measure mt-10 border-b-[3px] border-ink">
-            {habits.map((h) => (
-              <li key={h.title} className="border-t-[3px] border-ink pb-8 pt-5">
-                <h3 className="text-[1.3125rem] leading-tight min-[900px]:text-[1.5rem]">{h.title}</h3>
-                <p className="mt-3 text-[1.125rem] leading-relaxed">{h.body}</p>
-              </li>
-            ))}
-          </ul>
         </div>
+        {habitGroups.map((g) => (
+          <div key={g.name} className="mt-10 min-[900px]:mt-14">
+            <div
+              {...(g.cat ? { "data-cat": true } : {})}
+              className={`${g.cat ? catBg[g.cat] : "bg-paper"} border-y-[3px] border-ink`}
+            >
+              <div className="wrap flex flex-wrap items-baseline gap-x-6 gap-y-1 pb-5 pt-6 min-[900px]:pb-6 min-[900px]:pt-8">
+                <h3
+                  className="display text-[clamp(2.25rem,9vw,4rem)]"
+                  style={{ fontVariationSettings: '"wdth" 115' }}
+                >
+                  {g.name}
+                </h3>
+                <p className="text-[1.125rem] font-semibold leading-snug">{g.line}</p>
+              </div>
+            </div>
+            <ul className="wrap grid gap-x-14 min-[900px]:grid-cols-2 min-[1200px]:grid-cols-3">
+              {g.habits.map((h) => (
+                <li key={h.title} className="max-w-[60ch] border-b border-ink pb-7 pt-6 last:border-b-0 min-[900px]:border-b-0 min-[900px]:only:col-span-2">
+                  <h4 className="text-[1.3125rem] font-extrabold leading-tight min-[900px]:text-[1.5rem]">{h.title}</h4>
+                  <p className="mt-3 text-[1.125rem] leading-relaxed">{h.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </section>
 
       <section aria-labelledby="children-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
