@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import BasketItems from "@/components/basket/BasketItems";
-import { DURATIONS, durationLabel } from "@/data/packs";
+import { DURATIONS, durationLabel, parseLeftOut } from "@/data/packs";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/basket" },
@@ -23,6 +23,7 @@ export default async function BasketPage({
   const people = Number.isFinite(rawPeople) ? Math.max(1, Math.min(12, rawPeople)) : 2;
   const rawDays = parseInt(first(q.d) ?? "", 10);
   const days = DURATIONS.find((d) => d.days === rawDays)?.days ?? 3;
+  const leftOut = parseLeftOut(first(q.x));
 
   return (
     <main>
@@ -30,8 +31,7 @@ export default async function BasketPage({
         title={`everything for ${people} ${people === 1 ? "person" : "people"}, ${durationLabel(days)}`}
         lede={
           <>
-            This is what the button on the home page puts in your Amazon basket, in one go. Anything you have ticked
-            off on the{" "}
+            Every product in the kit, before it goes to Amazon. Anything you have marked on the{" "}
             <Link href="/checklist" className="font-bold">
               checklist
             </Link>{" "}
@@ -39,7 +39,7 @@ export default async function BasketPage({
           </>
         }
       />
-      <BasketItems people={people} days={days} />
+      <BasketItems people={people} days={days} initialLeftOut={leftOut} />
     </main>
   );
 }

@@ -52,8 +52,8 @@ export default function ChecklistPage() {
             </h2>
             <p className="mt-5 max-w-[48ch] text-[1.1875rem] leading-normal">
               Check the cupboards, the torch drawer and the medicine cabinet
-              before you buy anything. Then these few items cover most of the
-              benefit. Get them over a few weeks and the rest can follow.
+              before you buy anything. Then get these first, over a few weeks.
+              The rest can follow.
             </p>
             <Link href="/build-your-kit" className="no-print btn btn-primary btn-lg mt-7">
               work out my quantities <Arrow />

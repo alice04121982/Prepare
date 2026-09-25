@@ -15,7 +15,7 @@ export default function GuidesPage() {
     <main>
       <PageIntro
         title="short answers"
-        lede="For when something has happened, or is on its way. Each one gives the answer first, then the steps."
+        lede="For when something has happened, or is on its way."
       />
       <section aria-label="All short answers" className="wrap py-14 min-[900px]:py-20">
         <ul className="max-w-[980px] border-t-[3px] border-ink">

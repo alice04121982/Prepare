@@ -1,7 +1,15 @@
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import { ShoppingBasket } from "lucide-react";
+import Arrow from "@/components/home/Arrow";
 
 import { AMAZON_TAG as TAG } from "@/lib/amazon";
+
+export const BASKET_NOTE = "Amazon opens and asks you to confirm. Nothing is bought until you pay.";
+
+/** "add 14 items to my Amazon basket": the count and the destination in the label. */
+export function basketLabel(count: number) {
+  return `add ${count} ${count === 1 ? "item" : "items"} to my Amazon basket`;
+}
 
 /**
  * Sends a list of products to the reader's Amazon basket.
@@ -13,6 +21,10 @@ import { AMAZON_TAG as TAG } from "@/lib/amazon";
  * browser opens Amazon's "add these items" page as intended. Tested on an
  * iPhone on 24 September 2026: the link failed in the app, the page itself
  * worked in a browser.
+ *
+ * The one line under the button says who acts next and that nothing is
+ * charged yet, as a fact (shipped hand-offs on Mobbin, 25 September 2026:
+ * Instacart, ManyChat, Spotify). Screen readers hear it with the button.
  */
 export default function AmazonBasketButton({
   items,
@@ -23,6 +35,7 @@ export default function AmazonBasketButton({
   className?: string;
   children: ReactNode;
 }) {
+  const noteId = useId();
   if (!items.length) return null;
   return (
     <form action="https://www.amazon.co.uk/gp/aws/cart/add.html" method="get" className={className}>
@@ -33,10 +46,14 @@ export default function AmazonBasketButton({
           <input type="hidden" name={`Quantity.${i + 1}`} value={Math.max(1, it.quantity)} />
         </span>
       ))}
-      <button type="submit" className="btn btn-primary btn-lg w-full">
+      <button type="submit" aria-describedby={noteId} className="btn btn-primary btn-lg w-full">
         <ShoppingBasket size={20} strokeWidth={2.25} aria-hidden="true" />
         {children}
+        <Arrow />
       </button>
+      <p id={noteId} className="mt-2 text-sm leading-snug text-ink-2">
+        {BASKET_NOTE}
+      </p>
     </form>
   );
 }

@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ExternalLink, ShoppingBasket } from "lucide-react";
-import AmazonBasketButton from "@/components/AmazonBasketButton";
+import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
 import { amazonImageByAsin, amazonImageUrl, amazonProductUrl, type Product } from "@/data/products";
-import { BOTTLED_DAYS, DURATIONS, buildPack } from "@/data/packs";
+import { BOTTLED_DAYS, DURATIONS, buildPack, packTotals } from "@/data/packs";
+import TickBox from "@/components/TickBox";
 import { catBgFor } from "@/components/kit/categories";
 import { useHave } from "@/lib/have";
 
@@ -69,12 +70,46 @@ function Swatch({ category }: { category: string }) {
  * Everything in one complete pack, grouped by category, so a reader can see
  * what the homepage button will put in their Amazon basket before pressing
  * it. Uses the same rules and the same "already have" record as the homepage.
+ *
+ * Every product starts ticked. Unticking one leaves it out of this basket
+ * only; it is not written to the "already have" record, because not wanting
+ * something is not the same as owning it. What is left out lives in the URL
+ * (`x`, a list of ASINs), like the planner, so a shared link keeps it.
  */
-export default function BasketItems({ people, days }: { people: number; days: number }) {
+export default function BasketItems({
+  people,
+  days,
+  initialLeftOut,
+}: {
+  people: number;
+  days: number;
+  initialLeftOut: string[];
+}) {
   const { have } = useHave();
   const pack = useMemo(() => buildPack(people, days, (id) => have.has(kitLineKey(id))), [people, days, have]);
-  const url = pack.buys.length > 0;
+  const [leftOut, setLeftOut] = useState<Set<string>>(() => new Set(initialLeftOut));
+  const chosen = pack.buys.filter((b) => !leftOut.has(b.product.asin));
+  const totals = packTotals(chosen);
+  // Only codes that are rows in this pack go back into links.
+  const leftOutHere = pack.buys.map((b) => b.product.asin).filter((a) => leftOut.has(a));
+  const hrefFor = (d: number, x: string[]) => `/basket?p=${people}&d=${d}${x.length ? `&x=${x.join(",")}` : ""}`;
   const categories = [...new Set(pack.buys.map((b) => b.line.category))];
+
+  const update = (next: Set<string>) => {
+    setLeftOut(next);
+    const x = pack.buys.map((b) => b.product.asin).filter((a) => next.has(a));
+    try {
+      window.history.replaceState(null, "", hrefFor(days, x));
+    } catch {
+      // The page still works; the link just will not carry the choice.
+    }
+  };
+  const toggle = (asin: string) => {
+    const next = new Set(leftOut);
+    if (next.has(asin)) next.delete(asin);
+    else next.add(asin);
+    update(next);
+  };
 
   return (
     <div className="wrap grid gap-12 pb-20 pt-10 min-[900px]:grid-cols-[minmax(0,1fr)_22rem] min-[900px]:gap-14 min-[900px]:pb-26 min-[900px]:pt-14">
@@ -83,7 +118,7 @@ export default function BasketItems({ people, days }: { people: number; days: nu
           {DURATIONS.map((d) => (
             <Link
               key={d.days}
-              href={`/basket?p=${people}&d=${d.days}`}
+              href={hrefFor(d.days, leftOutHere)}
               aria-current={d.days === days ? "page" : undefined}
               className={`btn ${d.days === days ? "btn-primary" : "btn-secondary"} min-h-11 px-4 no-underline`}
               scroll={false}
@@ -93,11 +128,14 @@ export default function BasketItems({ people, days }: { people: number; days: nu
           ))}
         </nav>
 
+        {pack.buys.length ? (
+          <p className="mt-6 max-w-[60ch]">Untick anything you do not want.</p>
+        ) : null}
+
         {days > BOTTLED_DAYS ? (
           <p className="mt-6 max-w-[60ch] border-l-4 border-ink pl-4">
-            Bottled water covers the first week: {pack.bottledLitres} litres. A month of bottled water would be
-            hundreds of litres, and water cuts rarely last that long. After the first week, fill the containers
-            from the tap while it runs. The tablets, or boiling for a minute, make any other water safe.
+            Bottled water covers the first week: {pack.bottledLitres} litres. After that, fill the containers from
+            the tap while it runs. Purifying tablets, or boiling for a minute, make other water safe to drink.
           </p>
         ) : null}
 
@@ -110,17 +148,37 @@ export default function BasketItems({ people, days }: { people: number; days: nu
             <ul className="mt-3 border-t-[3px] border-ink">
               {pack.buys
                 .filter((b) => b.line.category === c)
-                .map(({ line, product, quantity, cost }) => (
+                .map(({ line, product, quantity, cost }) => {
+                  const inBasket = !leftOut.has(product.asin);
+                  return (
                   <li
                     key={product.asin}
-                    className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-x-4 border-b border-ink py-4 min-[900px]:grid-cols-[7.5rem_minmax(0,1fr)] min-[900px]:gap-x-6"
+                    className="grid grid-cols-[2.75rem_5rem_minmax(0,1fr)] gap-x-3 border-b border-ink py-4 min-[900px]:grid-cols-[2.75rem_7.5rem_minmax(0,1fr)] min-[900px]:gap-x-6"
                   >
-                    <ProductImage product={product} />
+                    <TickBox
+                      id={`in-${product.asin}`}
+                      checked={inBasket}
+                      onChange={() => toggle(product.asin)}
+                      label={`${product.name}: in the basket`}
+                    />
+                    <div className={inBasket ? undefined : "opacity-40 grayscale"}>
+                      <ProductImage product={product} />
+                    </div>
                     <div className="min-w-0">
                       <p className="text-[0.9375rem] font-bold leading-snug text-ink-2">{line.item}</p>
-                      <p className="mt-1 text-lg font-extrabold leading-snug">{product.name}</p>
+                      <p
+                        className={`mt-1 text-lg font-extrabold leading-snug ${inBasket ? "" : "line-through decoration-2"}`}
+                      >
+                        {product.name}
+                      </p>
                       <p className="mt-1 text-ink-2 tabular-nums">
-                        {quantity} &times; {product.priceBand}, about &pound;{Math.round(cost)}
+                        {inBasket ? (
+                          <>
+                            {quantity} &times; {product.priceBand}, about &pound;{Math.round(cost)}
+                          </>
+                        ) : (
+                          <>Left out of the basket</>
+                        )}
                       </p>
                       <a
                         href={amazonProductUrl(product.asin, TAG)}
@@ -132,7 +190,8 @@ export default function BasketItems({ people, days }: { people: number; days: nu
                       </a>
                     </div>
                   </li>
-                ))}
+                  );
+                })}
             </ul>
           </section>
         ))}
@@ -171,43 +230,50 @@ export default function BasketItems({ people, days }: { people: number; days: nu
             className="display mt-1 text-[3rem] tabular-nums leading-none"
             style={{ fontVariationSettings: '"wdth" 115' }}
           >
-            &pound;{pack.estimate}
+            &pound;{totals.estimate}
           </p>
           <p className="mt-2 text-sm text-ink-2">
-            {pack.buys.length} products. From the middle of each price band. Prices change, so this is a guide.
+            {chosen.length} {chosen.length === 1 ? "product" : "products"}. From the middle of each price band. Prices change, so this is a guide.
           </p>
           <dl className="mt-3 grid gap-1 border-y border-ink py-2.5 text-[0.9375rem] tabular-nums">
             <div className="flex justify-between gap-3">
               <dt>Food, water and supplies</dt>
-              <dd className="whitespace-nowrap font-extrabold">about &pound;{pack.supplies}</dd>
+              <dd className="whitespace-nowrap font-extrabold">about &pound;{totals.supplies}</dd>
             </div>
             <div className="flex justify-between gap-3">
               <dt>Kit you buy once (torches, radio)</dt>
-              <dd className="whitespace-nowrap font-extrabold">about &pound;{pack.kitOnce}</dd>
+              <dd className="whitespace-nowrap font-extrabold">about &pound;{totals.kitOnce}</dd>
             </div>
           </dl>
         </div>
         <div className="px-4.5 py-4">
-          {url ? (
-            <AmazonBasketButton items={pack.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}>
-              send it all to my Amazon basket
+          {chosen.length ? (
+            <AmazonBasketButton items={chosen.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}>
+              {basketLabel(chosen.length)}
             </AmazonBasketButton>
+          ) : pack.buys.length ? (
+            <p>Nothing is ticked. Tick a product to add it to the basket.</p>
           ) : (
             <p>You have ticked off everything the basket would hold.</p>
           )}
-          <p className="mt-3 text-sm leading-snug text-ink-2">
-            Opens Amazon with every product on this page. Tap <strong>Add to basket</strong> to confirm, then check
-            the basket and pay there. Anything Amazon has run out of is listed on that page and left out.
-          </p>
+          {leftOutHere.length ? (
+            <button
+              type="button"
+              onClick={() => update(new Set())}
+              className="mt-3 min-h-11 font-extrabold underline underline-offset-4 hover:decoration-4"
+            >
+              Tick everything again
+            </button>
+          ) : null}
           <p className="mt-3 text-sm leading-snug">
             Already have some of this?{" "}
             <Link href="/checklist" className="font-bold">
-              Tick it off first
+              Mark it on the checklist
             </Link>{" "}
             and it leaves the basket.
           </p>
           <p className="mt-3 text-[0.8125rem] leading-snug text-ink-2">
-            Some links here earn us a small commission. As an Amazon Associate we earn from qualifying purchases.
+            As an Amazon Associate we earn from qualifying purchases.
           </p>
         </div>
       </aside>

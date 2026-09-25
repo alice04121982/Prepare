@@ -48,7 +48,7 @@ export default function SiteFooter() {
             always listed first.
           </p>
           <p>
-            Figures from gov.uk Prepare, the Met Office and the NHS. Free to
+            Figures from gov.uk, the WHO, the Met Office and the NHS. Free to
             share. Check official guidance for your region too.
           </p>
         </div>

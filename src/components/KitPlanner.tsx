@@ -18,7 +18,7 @@ import { DownArrow, goToBuy, StillToGetBar } from "@/components/kit/StillToGet";
 import { catBgFor } from "@/components/kit/categories";
 import { kitLineKey } from "@/data/have-map";
 import { buysFor } from "@/data/packs";
-import AmazonBasketButton from "@/components/AmazonBasketButton";
+import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import { useHave } from "@/lib/have";
 
 import { AMAZON_TAG as TAG } from "@/lib/amazon";
@@ -55,7 +55,7 @@ const DISCLOSURE =
 const MAKER_FIRST = {
   id: "maker",
   name: "Maker first",
-  note: "Where the maker or a specialist sells the item, that link comes first. Amazon is the fallback, shown second. Each link opens in a new tab.",
+  note: "Where the maker or a specialist sells it, buy there first. Amazon is the fallback.",
 } as const;
 
 type ShopId = typeof MAKER_FIRST.id | Retailer["id"];
@@ -163,14 +163,10 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const people = h.adults + h.children + h.babies;
 
   const basketBlock = basket ? (
-    <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+    <div className="mt-8 max-w-md">
       <AmazonBasketButton items={basketBuys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}>
-        Add {asinCount} {asinCount === 1 ? "item" : "items"} to my Amazon basket
+        {basketLabel(asinCount)}
       </AmazonBasketButton>
-      <p className="max-w-md text-[0.9375rem] leading-snug text-ink-2">
-        Opens Amazon with these {asinCount} products, in the quantities shown. Tap <strong>Add to basket</strong>
-        to confirm, then check the basket and pay there. Nothing is bought until you choose to.
-      </p>
     </div>
   ) : null;
 
@@ -379,13 +375,9 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
         <div className="no-print mt-12 border-t-8 border-ink pt-6 min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_auto] min-[900px]:items-end min-[900px]:gap-10">
           <div>
             <h3 className="h-sub">ready to buy what is left?</h3>
-            <p className="mt-3 max-w-[52ch] text-ink-2">
-              The next part of the page shows where to get each unticked item, the maker first where there is one,
-              and can fill an Amazon basket in one click.
-            </p>
           </div>
           <a href="#buy" onClick={goToBuy} className="btn btn-primary btn-lg mt-5 min-[900px]:mt-0">
-            buy it <DownArrow />
+            where to buy it <DownArrow />
           </a>
         </div>
 
@@ -594,15 +586,14 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                   ))}
               </ul>
               <p className="mt-5 max-w-2xl text-[0.9375rem] leading-snug text-ink-2">
-                {retailer.name} has no way for a website to fill your basket, so it is one click per item. Each link
-                opens the search for that item, and you add it there.
+                {retailer.name} cannot fill a basket from another site. Add each item there.
               </p>
             </>
           ) : null}
         </section>
 
         <div className="mt-12 border-t-[3px] border-ink pt-5">
-          <h3 className="text-[1.5rem]">keep it in one place.</h3>
+          <h3 className="text-[1.5rem]">check it in six months</h3>
           <p className="mt-2 max-w-[52ch] text-ink-2">
             Put a date in the calendar to check the batteries and the food dates in six months.
           </p>
@@ -620,7 +611,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                     <>
                       {" "}
                       <a href={t.url} target="_blank" rel="noopener noreferrer" className="font-extrabold hover:decoration-4">
-                        Link
+                        {t.linkText ?? "More"}
                       </a>
                     </>
                   ) : null}

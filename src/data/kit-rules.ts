@@ -58,6 +58,8 @@ export type KitTask = {
   id: string;
   text: string;
   url?: string;
+  /** Where the link goes, as its visible text. */
+  linkText?: string;
 };
 
 export const defaultHousehold: Household = {
@@ -151,7 +153,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       item: "Pasta, rice or instant mash",
       quantity: ceil((0.1 * peopleWhoDrink * d) / 0.5),
       unit: "packs of 500 g",
-      basis: `About 100 g per person per day. Needs cooking, so pair with the no-cook items below.`,
+      basis: `About 100 g per person per day. Needs cooking, so keep some no-cook food too.`,
       products: [{ name: "Own-brand pasta or rice, 500 g to 1 kg", tier: "budget", priceBand: "£1 to £2" }],
     },
     {
@@ -206,7 +208,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       quantity: people - h.babies,
       unit: "",
       basis: "One per person who can hold one. Head torches leave hands free.",
-      freeOption: "Phones work for an evening. They do not work for three.",
+      freeOption: "A phone torch lasts an evening, not three.",
       priority: true,
       products: [
         { name: "LED torch, AA batteries", tier: "budget", priceBand: "£3 to £8" },
@@ -327,7 +329,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
             ? "28 days, because you are planning for 14 days or more."
             : "14 days while you plan for under 14 days of cover. It goes up to 28 at 14 days or more."
       } Ask your GP or pharmacist to reorder a few days early each time. Builds up without anyone going without.`,
-      freeOption: "Free on prescription. It is a conversation, not a purchase.",
+      freeOption: "Free on prescription. Ask your GP or pharmacist.",
       priority: true,
     },
     {
@@ -376,7 +378,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       item: "Face masks (FFP2)",
       quantity: Math.max(1, ceil((people * Math.min(d, 7)) / 10)),
       unit: "packs of 10",
-      basis: "Covid taught most households why. Useful in a smoke or dust event too, and if someone at home is ill and the pharmacy is shut. FFP2 filters far better than a cloth or surgical mask.",
+      basis: "Useful in a smoke or dust event too, and if someone at home is ill and the pharmacy is shut. FFP2 filters far better than a cloth or surgical mask.",
       products: [{ name: "FFP2 masks, box of 10 or 20", tier: "budget", priceBand: "£5 to £12" }],
       search: "ffp2 face masks",
     },
@@ -484,16 +486,16 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
             item: "Spare hearing-aid batteries and mobility-aid chargers",
             quantity: 1,
             unit: "set, if used",
-            basis: "Small, cheap, and the thing that is missing when it matters.",
+            basis: "Small and cheap. Keep spares.",
           } satisfies KitLine,
         ]
       : []),
   ];
 
   const tasks: KitTask[] = [
-    { id: "psr", text: "Register with the Priority Services Register if anyone is older, disabled, has young children or relies on medical equipment.", url: "https://www.thepsr.co.uk/" },
-    { id: "flood", text: "Sign up for flood warnings for your postcode.", url: "https://www.gov.uk/sign-up-for-flood-warnings" },
-    { id: "alerts", text: "Check your phone can receive Emergency Alerts.", url: "https://www.gov.uk/alerts" },
+    { id: "psr", text: "Register with the Priority Services Register if anyone is older, disabled, has young children or relies on medical equipment.", url: "https://www.thepsr.co.uk/", linkText: "Priority Services Register" },
+    { id: "flood", text: "Sign up for flood warnings for your postcode.", url: "https://www.gov.uk/sign-up-for-flood-warnings", linkText: "Flood warnings" },
+    { id: "alerts", text: "Check your phone can receive Emergency Alerts.", url: "https://www.gov.uk/alerts", linkText: "Emergency Alerts" },
     { id: "plan", text: "Agree a check-in plan: who calls whom, and one out-of-area contact everyone can reach." },
     { id: "neighbours", text: "Learn two neighbours' names and numbers. Write them on the contacts sheet." },
     ...(h.homeType === "flat" ? [{ id: "lifts", text: "Know the stairs. Lifts stop in a power cut; plan for carrying water and shopping up." }] : []),
@@ -553,12 +555,12 @@ export type Retailer = {
 const enc = (q: string) => encodeURIComponent(q);
 
 export const retailers: Retailer[] = [
-  { id: "amazon", name: "Amazon", search: (q) => `https://www.amazon.co.uk/s?k=${enc(q)}`, note: "Everything on the list is here. One button can also fill a basket with everything on the list that has a product code." },
-  { id: "tesco", name: "Tesco", search: (q) => `https://www.tesco.com/groceries/en-GB/search?query=${enc(q)}`, note: "Groceries, batteries, torches and first aid. No power banks or radios. Each link opens the search for that item; add to your basket there." },
-  { id: "sainsburys", name: "Sainsbury's", search: (q) => `https://www.sainsburys.co.uk/gol-ui/SearchResults/${enc(q)}`, note: "Groceries, batteries and first aid. Each link opens the search for that item." },
-  { id: "asda", name: "Asda", search: (q) => `https://groceries.asda.com/search/${enc(q)}`, note: "Groceries, batteries, torches and some electricals. Each link opens the search for that item." },
-  { id: "morrisons", name: "Morrisons", search: (q) => `https://groceries.morrisons.com/search?entry=${enc(q)}`, note: "Groceries, batteries and first aid. Each link opens the search for that item." },
-  { id: "ocado", name: "Ocado", search: (q) => `https://www.ocado.com/search?entry=${enc(q)}`, note: "Groceries and household. Each link opens the search for that item." },
-  { id: "waitrose", name: "Waitrose", search: (q) => `https://www.waitrose.com/ecom/shop/search?&searchTerm=${enc(q)}`, note: "Groceries and household. Each link opens the search for that item." },
+  { id: "amazon", name: "Amazon", search: (q) => `https://www.amazon.co.uk/s?k=${enc(q)}`, note: "Everything on the list is here, and you can send every listed product to one Amazon basket." },
+  { id: "tesco", name: "Tesco", search: (q) => `https://www.tesco.com/groceries/en-GB/search?query=${enc(q)}`, note: "Groceries, batteries, torches and first aid. No power banks or radios." },
+  { id: "sainsburys", name: "Sainsbury's", search: (q) => `https://www.sainsburys.co.uk/gol-ui/SearchResults/${enc(q)}`, note: "Groceries, batteries and first aid." },
+  { id: "asda", name: "Asda", search: (q) => `https://groceries.asda.com/search/${enc(q)}`, note: "Groceries, batteries, torches and some electricals." },
+  { id: "morrisons", name: "Morrisons", search: (q) => `https://groceries.morrisons.com/search?entry=${enc(q)}`, note: "Groceries, batteries and first aid." },
+  { id: "ocado", name: "Ocado", search: (q) => `https://www.ocado.com/search?entry=${enc(q)}`, note: "Groceries and household." },
+  { id: "waitrose", name: "Waitrose", search: (q) => `https://www.waitrose.com/ecom/shop/search?&searchTerm=${enc(q)}`, note: "Groceries and household." },
   { id: "aldi", name: "Aldi", search: (q) => `https://www.aldi.co.uk/search?text=${enc(q)}`, note: "Aldi does not deliver groceries in the UK. Use this list in store, or check Specialbuys for torches and power banks." },
 ];

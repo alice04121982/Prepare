@@ -157,7 +157,7 @@ export const scenarios: Scenario[] = [
     worthKnowing: [
       "Disruption of this kind is rarely as widespread or as long as social media makes it appear. Check official sources before changing plans.",
       "Shops and transport in an affected area typically reopen within a day or two of the situation settling.",
-      "This scenario is included because it is realistic, not because it is likely. The preparation is identical to a bad storm.",
+      "The preparation is the same as for a bad storm.",
     ],
     community:
       "As with every scenario here, the answer is to check in with neighbours rather than isolate. Communities that know each other are markedly calmer and safer through short periods of unrest, and rumours spread less when people can ask someone they trust.",
@@ -177,19 +177,19 @@ export const scenarios: Scenario[] = [
       "A bag by the door: documents, cash in small notes, medication, chargers, a torch, water, a change of clothes, and a paper list of contacts. Electronic copies of documents on a phone as well.",
       "Power that does not depend on the grid: several power banks, and if you can afford it a portable power station with a folding solar panel. Rolling cuts mean charging everything the moment power returns. A battery or wind-up radio for when mobile data drops.",
       "More stored water than usual, because pumping stations run on electricity. Filling the bath and every large container when a cut is announced became routine.",
-      "A way to stay warm in one room without mains power: sleeping bags, thermal layers, hot-water bottles, blankets. A way to cook safely without electricity, such as a camping stove used with a window open.",
+      "A way to stay warm in one room without mains power: sleeping bags, thermal layers, hot-water bottles, blankets. A way to cook without electricity, such as a camping stove used outdoors only.",
       "A month of prescription medication rather than a fortnight, and a first aid kit you have practised with. Basic first aid courses, including bleeding control, were widely attended.",
       "An evacuation plan you hope not to use: where you would go, how you would get there, who is coming with you, and a car kept at least half full of fuel. Follow official evacuation routes and instructions.",
       "Official alert apps and national broadcasters for information. Rumour and deliberate disinformation spike sharply in conflict, and acting on the wrong message is dangerous.",
     ],
     worthKnowing: [
       "Mass panic did not happen. Shops reopened within days, banks and card payments largely kept working, and people went to work. The thing that made life hard was infrastructure damage and the cold that followed, not disorder.",
-      "Candles caused a wave of house fires during the blackouts. Battery lanterns and head torches are safer, and this is why the checklist keeps saying so.",
+      "Candles caused a wave of house fires during the blackouts. Battery lanterns and head torches are safer.",
       "Sleep, routine, and limiting news intake are health measures, not luxuries. Ukrainian doctors and teachers treated them as such, especially for children.",
       "In the UK this is far less likely than a storm or a power cut. What helps is the same kit as every other scenario, kept for longer.",
     ],
     community:
-      "Ukraine is the strongest recent evidence for the central claim of this site. The response that worked was neighbourhood and volunteer networks: delivering food and medicine to older people who could not reach a shop, boarding up windows for neighbours, sharing generators and internet access, running warming and charging points in schools, churches, and cafés. Cities formalised this as thousands of public 'Points of Invincibility' with heat, power, hot drinks, and connectivity, but most of the work was done by people who already knew each other. Being one of those people, before anything happens, is the preparation that matters most.",
+      "In Ukraine, the response that worked was neighbourhood and volunteer networks: delivering food and medicine to older people who could not reach a shop, boarding up windows for neighbours, sharing generators and internet access, running warming and charging points in schools, churches, and cafés. Cities formalised this as thousands of public 'Points of Invincibility' with heat, power, hot drinks, and connectivity, but most of the work was done by people who already knew each other. Sort your household first. Then you can help the people around you.",
   },
 ];
 
