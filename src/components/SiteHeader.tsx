@@ -7,8 +7,10 @@ import Wordmark from "@/components/Wordmark";
 
 export const nav = [
   { href: "/lists", label: "lists" },
+  { href: "/what-you-can-do-now", label: "do it now" },
   { href: "/checklist", label: "checklist" },
-  { href: "/why", label: "why prepare?" },
+  { href: "/build-your-kit", label: "build your kit" },
+  { href: "/what-might-stop", label: "what might stop" },
   { href: "/community", label: "neighbours" },
   { href: "/worried", label: "worried?" },
 ];

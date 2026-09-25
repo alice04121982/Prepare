@@ -8,15 +8,23 @@ web
 
 ## Users
 
-UK households who have decided to prepare and want to know exactly what to buy: people worried about power cuts, water outages, severe weather and climate, war in Europe, supply shortages, or losing their income, including to automation. They already know from gov.uk that they should prepare; they come here to get it done. Most arrive on a phone, often from search ("72 hour kit family of four UK") or a share. A smaller group arrives frightened by the news and needs perspective first (the /worried page).
+People in the UK who have just read or heard an alarming news story (power cuts, water notices, severe weather, cyber attacks on infrastructure, a pandemic, conflict in Europe) and want a sensible starting point, not a rabbit hole. Most arrive on a phone from a news link or a share. Many are households with limited time and money who want a short, prioritised list, and people who want realistic timeframes ("how long does three days of supplies last a family of four?") rather than a guess. A distinct group feels frightened or helpless and needs perspective before a checklist.
 
 ## Product Purpose
 
-Turn a household into a ready-made shopping list. The visitor says who lives there, picks a scenario (72 hours or a power cut, 2 weeks to 1 month, 3 months for job loss or a crisis, or a grab bag), and gets a list with the quantities worked out that they can send to an Amazon basket in one go, or buy item by item from other shops. Success is a completed basket. The site earns affiliate commission on it and is one of several online income streams for its owner. The guidance that explains the numbers stays, as a guides section that also brings in search traffic.
+**Summary (approved by the owner, 25 September 2026):**
+
+> Stay Prepared is a UK guide to getting your household ready for disruption, whether it lasts a day or months. Power cuts, water outages, storms, empty shelves, a pandemic or conflict: it tells you what to keep, how much, and what to do. Check what you already have, then order what's missing as a ready-made kit.
+
+Three days is the UK government's minimum and the planner's first option, not the limit of the site. The kit planner and basket already run from 3 days to 4 weeks. The site turns official advice into something practical: what to keep, how much, how long it lasts, and what to do first. Success is a visitor who checks what they already have, fills the gaps with sensible buys, and leaves calmer than they arrived.
+
+In public copy, kits are "ready-made kits" or "emergency kits", never "survival kits" (the tone rules ban "survive"). Events like COVID and the war in Ukraine are why the site exists; public copy names the hazard ("a pandemic", "conflict in Europe"), never countries or leaders.
 
 ## Positioning
 
 A practical prepper site for UK households (repositioned 24 September 2026). Openly about prepping and stockpiling sensibly, without the tactical and macho register of TruePrepper and its peers. What no competitor has: lists that scale to your exact household and duration, with every quantity specific and sourced, and one button that buys the lot.
+
+Open: this positioning (24 September) and the approved summary above (25 September) were written on separate branches and merged on 25 September. The summary is calmer and avoids "survive"; the tone of voice revision allows "prepper" and "stockpile". The owner should confirm which register public copy follows.
 
 ## Operating Context
 

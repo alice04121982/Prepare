@@ -6,9 +6,10 @@ import { householdFromParams } from "@/data/kit-rules";
 import { listBySlug } from "@/data/lists";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/build-your-kit" },
   title: "Build your kit",
   description:
-    "Tell us who lives with you and how many days to cover. Get a shopping list with realistic quantities, a free option for every line, and a print or copy button.",
+    "Tell us who lives with you and how many days to cover. Get a shopping list with realistic quantities, and a free option for every line. Print it or copy it.",
 };
 
 export default async function BuildYourKitPage({

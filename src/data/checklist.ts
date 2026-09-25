@@ -32,8 +32,8 @@ export type ChecklistCategory = {
 };
 
 // Quantities are conservative planning figures from public guidance (gov.uk,
-// Red Cross, FEMA), not worst-case numbers. Keep in sync with the table in
-// public/offline/index.html.
+// Red Cross, FEMA), not worst-case numbers. The offline guide
+// (src/app/offline-guide/route.ts) is built from this list.
 export const checklist: ChecklistCategory[] = [
   {
     slug: "water",
@@ -66,7 +66,7 @@ export const checklist: ChecklistCategory[] = [
     slug: "food",
     title: "Food",
     intro:
-      "Built up gradually from things your household already eats. Nothing here should need cooking, and nothing should be new to you. Complex carbohydrates and protein do the most good: wholegrain cereals, oats, rice and pasta; tinned chickpeas, lentils and kidney beans; unsalted nuts, peanut butter, and tinned oily fish such as tuna, mackerel and sardines. Choose items tinned in water rather than brine or syrup, and go easy on instant noodles, tinned soup and sugary cereal bars, which give little for the amount of salt or sugar they carry (British Nutrition Foundation guidance, reported by the BBC, September 2026).",
+      "Build it up from what your household already eats, so nothing is new to you. Keep some food that needs no cooking, for power cuts. Carbohydrates and protein do the most good: wholegrain cereals, oats, rice and pasta; tinned chickpeas, lentils and kidney beans; unsalted nuts, peanut butter, and tinned oily fish such as tuna, mackerel and sardines. Choose tins in water rather than brine or syrup. Go easy on instant noodles, tinned soup and sugary cereal bars, which carry a lot of salt or sugar (British Nutrition Foundation guidance, reported by the BBC, September 2026).",
     items: [
       {
         item: "Shelf-stable staples",
@@ -77,9 +77,9 @@ export const checklist: ChecklistCategory[] = [
       },
       {
         item: "Food that needs no cooking",
-        amount: "At least a day or two of it within the above",
+        amount: "At least 1 to 2 days of your food supply",
         notes:
-          "Matters in a power cut. Tinned fruit, crackers and nut butter, cereal bars, and ready-to-eat tins.",
+          "Matters in a power cut. Tinned fruit, crackers and nut butter, oatcakes, and ready-to-eat tins.",
       },
       {
         item: "Tinned fruit, pickled vegetables and long-life milk",
@@ -258,8 +258,8 @@ export const checklist: ChecklistCategory[] = [
           "Passport or driving licence, home and car insurance, prescriptions, bank contact details. Paper in a waterproof folder, or offline on a phone, or both.",
       },
       {
-        item: "A grab bag if you are in a flood-risk area",
-        amount: "One, kept by the door",
+        item: "A bag by the door if you are in a flood-risk area",
+        amount: "One, packed and ready",
         notes:
           "Documents, medication, chargers, a change of clothes, a torch, and a little cash.",
       },
@@ -284,7 +284,7 @@ export const checklist: ChecklistCategory[] = [
     slug: "household-specific",
     title: "Household-specific",
     intro:
-      "The generic list stops here. Everything below depends on who actually lives with you.",
+      "What you need here depends on who lives with you.",
     items: [
       {
         item: "Pets",

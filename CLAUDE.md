@@ -4,8 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Stay Prepared (stayprepared.co.uk), a UK household emergency preparedness
-site. Next.js App Router, TypeScript, Tailwind v4. The repo keeps its
+Stay Prepared (stayprepared.co.uk), a UK guide to getting a household ready
+for disruption, whether it lasts a day or months. The approved one-paragraph
+summary is in `PRODUCT.md`; three days is the government's minimum, not the
+site's scope. Next.js App Router, TypeScript, Tailwind v4. The repo keeps its
 original working name, `prepare-website`.
 
 `PLAN.md` holds the project plan and build history. `docs/` is the decision
@@ -35,7 +37,23 @@ Everything factual lives in `src/data/*.ts` and pages render from it.
 Changing a quantity, a scenario or an FAQ answer means editing data, never
 markup. `checklist.ts` (what to keep, with amounts and sourcing notes),
 `scenarios.ts` (what stops and for how long), `faq.ts`,
-`official-guidance.ts` (dated links), `products.ts` (Amazon ASINs).
+`official-guidance.ts` (dated links), `products.ts` (Amazon ASINs),
+`guides.ts` (the short answer pages at `/guides/[slug]`, one question each,
+answer first, sources listed, `verified: false` until checked by hand).
+Guides name kinds of things, never brands: each "what to have ready" item
+links to a tagged Amazon search (`amazonSearchUrl`). Specific products stay
+in the one-click basket and on `/basket`, which shows their photos.
+
+The offline guide (`/offline-guide`, `src/app/offline-guide/route.ts`) is
+one self-contained HTML file built at build time from the same data files,
+with Archivo embedded from `src/assets/`. It downloads as "Offline
+guide.html" through a `Content-Disposition` header, has no scripts and makes
+no requests. Edit the data, not the guide.
+
+`official-channels.ts` lists where to go for instructions during an
+emergency (Emergency Alerts, gov.uk, BBC, the council, 999 and 111). It
+shows on the home page and in the offline guide. The site prepares people
+beforehand; it publishes no live updates and takes no political view.
 
 `Diagram.tsx` draws figures taken from these same files, so a change to
 `scenarios.ts` must be checked against the `duration` diagram, which plots
@@ -67,7 +85,14 @@ record is deliberately kept at the checklist's coarser granularity.
 
 **Keys are derived, not stored.** `haveKey(categorySlug, item)` slugifies
 the item's display name, so renaming an item in `checklist.ts` silently
-clears that one tick. Accept that or add explicit ids, but know it.
+clears that one tick, unless the old key is added to `RENAMED` in
+`have.ts`, which maps it to the new one when the record is read.
+
+`/basket` adds its own choice on top: every product starts ticked, and
+unticking one leaves it out of that basket only. It is never written to the
+record (not wanting something is not owning it). What is left out rides in
+the query string as `x`, a list of ASINs parsed by `parseLeftOut` in
+`packs.ts`, so a shared link keeps it.
 
 Every `localStorage` access is wrapped and every page must render correctly
 when it throws or returns nothing. `ready` is false until the record has
@@ -76,11 +101,31 @@ been read, so counts wait rather than flashing a zero through hydration.
 ### Server components by default
 
 The client islands are `ChecklistTracker`, `KitPlanner` (with
-`kit/StillToGet` and `kit/ListPicker`), `PrintButton` and the homepage's
-`home/StepState`. The homepage and `/lists` start from `home/StartForm`, a
-plain GET form whose four submit buttons each open `/lists/[slug]`. Everything else is a server component,
+`kit/StillToGet` and `kit/ListPicker`), `PrintButton`, the homepage's
+`home/ReachBar`, `home/StarterBaskets` and `home/StepState`, `basket/BasketItems` on `/basket`, and `SaferWorld` on `/worried`.
+`/lists` starts from `home/StartForm`, a plain GET form whose four submit
+buttons each open `/lists/[slug]`. Everything else is a server component,
 including `Diagram.tsx`, which is inline SVG. The site has no photographs
 or stock illustrations.
+
+### Search and sharing
+
+`src/lib/site.ts` holds the public address and `PAGES`, the list the sitemap
+is built from. A new page needs three things: an entry in `PAGES`, and in its
+`metadata` a `title`, a `description` and `alternates: { canonical: "/path" }`.
+The canonical is per page on purpose; setting it in the layout would point
+every page at the home page. `metadataBase` in the layout makes these paths
+absolute. `/basket` is left out of the sitemap because it is driven by the
+query string.
+
+The site mark is `public/brand/mark.svg` (an eight-armed asterisk, ink).
+`scripts/icons.mjs` draws `favicon.ico`, `icon.png` and `apple-icon.png`
+in `src/app/` from it; rerun it after changing the mark.
+
+The share image is `src/app/opengraph-image.png`, drawn from the design
+system; every page uses it. The checklist emits its FAQ as schema.org
+`FAQPage` JSON-LD from `faq.ts`. `@vercel/analytics` counts page views without
+cookies, and only once Web Analytics is switched on in the Vercel project.
 
 ## Styling
 
@@ -108,8 +153,10 @@ own side padding), `.measure` (65ch), `.display`, `.h-section`, `.h-sub`,
 `.field`, `.no-print`. Page openers use `PageIntro`, which takes an optional
 `aside` for a diagram.
 
-Diagrams are monochrome `currentColor`, drawn in ink on paper, with opacity
-for depth on shapes only. Their text labels stay solid so they pass AA.
+Diagrams are "back of the pack" figures: the headline number in HTML, then
+flat ink pictograms on a shelf rule, category colour only where the figure
+names the category (see DESIGN.md, Diagrams and Charts). The `duration`
+chart reads its rows from the `chart` fields in `scenarios.ts`.
 
 ## The docs are rules
 
@@ -121,6 +168,10 @@ for depth on shapes only. Their text labels stay solid so they pass AA.
 - **`docs/monetisation-plan.md`** (revised 24 September 2026): the product
   is the ready-made list and the one-click basket. Disclosure, Amazon's
   wording, price bands and no fake urgency are binding.
+- **Marketing skills yield to these docs.** `.claude/skills/` holds
+  Corey Haines' marketing skills (`skills-lock.json`, update with
+  `npx skills update -p`). Use them for structure and SEO; never take
+  urgency, scarcity, fear or loss framing from them into copy.
 - **`docs/copy-audit.md`** holds the four tests every line has to pass,
   including "would gov.uk say it" and "no flourish at the end of the
   paragraph".
@@ -130,6 +181,12 @@ for depth on shapes only. Their text labels stay solid so they pass AA.
 - **`docs/research-*.md`** record what was built from each design research
   run, what was rejected and why, and two corrections to earlier findings.
   Read the relevant one before revisiting a decision it covers.
+- **`docs/product-policy.md`** (approved 24 September 2026) sets how a product
+  is chosen, verified and rechecked. `verified: true` is set only by a
+  person who has opened the listing, never from search results. Its public
+  version is `/how-we-choose-products`, which counts verified products from
+  `products.ts`; keep the rules in step. `/privacy` must change whenever
+  what the site collects changes (analytics events, email, forms).
 - **`docs/look-and-feel.md`** is superseded on palette and styling by
   `DESIGN.md`. Its diagram rationale still stands.
 
@@ -147,10 +204,21 @@ for depth on shapes only. Their text labels stay solid so they pass AA.
 - **Figures cite their source where they appear.** Water and food
   quantities come from gov.uk and WHO, and the notes say so.
 - `products.ts` entries carry `verified: false` until someone has opened
-  the listing by hand.
+  the listing by hand, and `checked` holds the date of that check.
 
 ## Environment note
 
-`.env.local` holds the Unsplash key and, later,
-`NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`. Neither is committed, and the affiliate
-tag being absent is a normal local state, not a bug.
+`.env.local` holds the Unsplash key and, optionally,
+`NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`. Neither is committed. The affiliate tag
+falls back to the site's own (`stayprepared2-21`, in `src/lib/amazon.ts`)
+because Amazon's add-to-basket form opens an empty basket without one.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

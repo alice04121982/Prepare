@@ -10,9 +10,26 @@ import { checklist, startingPoint } from "@/data/checklist";
 import { faq } from "@/data/faq";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/checklist" },
   title: "Essentials checklist",
   description:
     "What to keep on hand, with realistic quantities and how long each item lasts, plus the questions people ask.",
+};
+
+/**
+ * The questions below as schema.org FAQPage data, so search results can show
+ * the answers. Built from faq.ts, the same source the page renders.
+ */
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq
+    .flatMap((group) => group.entries)
+    .map((e) => ({
+      "@type": "Question",
+      name: e.question,
+      acceptedAnswer: { "@type": "Answer", text: e.answer.join("\n\n") },
+    })),
 };
 
 export default function ChecklistPage() {
@@ -35,8 +52,8 @@ export default function ChecklistPage() {
             </h2>
             <p className="mt-5 max-w-[48ch] text-[1.1875rem] leading-normal">
               Check the cupboards, the torch drawer and the medicine cabinet
-              before you buy anything. Then these few items cover most of the
-              benefit. Get them over a few weeks and the rest can follow.
+              before you buy anything. Then get these first, over a few weeks.
+              The rest can follow.
             </p>
             <Link href="/build-your-kit" className="no-print btn btn-primary btn-lg mt-7">
               work out my quantities <Arrow />
@@ -94,6 +111,11 @@ export default function ChecklistPage() {
       </div>
 
       {/* Questions */}
+      <script
+        type="application/ld+json"
+        // Escaping "<" keeps the data from ever closing the script tag.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
+      />
       <section id="questions" aria-labelledby="questions-h" className="wrap scroll-mt-24 pb-16 pt-16 min-[900px]:pb-24 min-[900px]:pt-24">
         <h2 id="questions-h" className="h-section">
           the questions people ask
@@ -127,8 +149,8 @@ export default function ChecklistPage() {
             build your kit <Arrow />
           </Link>
           <a
-            href="/offline/index.html"
-            download="stay-prepared-offline-guide.html"
+            href="/offline-guide"
+            download="Offline guide.html"
             className="btn btn-secondary btn-lg"
           >
             download the offline guide

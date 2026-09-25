@@ -3,11 +3,16 @@ import Wordmark from "@/components/Wordmark";
 
 const links = [
   { href: "/lists", label: "Ready-made lists" },
+  { href: "/what-you-can-do-now", label: "What you can do now" },
   { href: "/checklist", label: "Checklist" },
-  { href: "/why", label: "Why prepare?" },
-  { href: "/community", label: "Neighbours" },
+  { href: "/build-your-kit", label: "Build your kit" },
+  { href: "/what-might-stop", label: "What might stop" },
   { href: "/worried", label: "Worried?" },
+  { href: "/community", label: "Neighbours" },
+  { href: "/guides", label: "Short answers" },
   { href: "/sources", label: "Sources" },
+  { href: "/how-we-choose-products", label: "How we choose products" },
+  { href: "/privacy", label: "Privacy" },
 ];
 
 
@@ -25,7 +30,7 @@ export default function SiteFooter() {
               <Wordmark />
             </Link>
             <p className="mt-2.5 text-lg">
-              Ready-made prepping lists for UK households.
+              A UK guide to getting your household ready for disruption, whether it lasts a day or months.
             </p>
           </div>
           <ul className="grid grid-cols-2 gap-x-5 border-t border-[#5a5a5a]">
@@ -47,7 +52,7 @@ export default function SiteFooter() {
             you. As an Amazon Associate we earn from qualifying purchases.
           </p>
           <p>
-            Figures from gov.uk Prepare, the Met Office and the NHS. Free to
+            Figures from gov.uk, the WHO, the Met Office and the NHS. Free to
             share. Check official guidance for your region too.
           </p>
         </div>

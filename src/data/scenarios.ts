@@ -13,15 +13,34 @@ export type Scenario = {
   worthKnowing: string[];
   /** The mutual-aid thread: how neighbours and community fit this scenario. */
   community: string;
+  /**
+   * Where this scenario sits on the duration chart on /what-might-stop, in days. Planning
+   * figures read from typicalDuration above; keep the two in step. A scenario
+   * with no chart entry is left off the chart.
+   */
+  chart?: {
+    label: string;
+    from: number;
+    to: number;
+    /** Sometimes runs past `to`: drawn as dashes. */
+    openEnded?: boolean;
+    /** The range in words, printed beside the bar. */
+    range: string;
+    /** Category colour for the row's swatch, where the scenario is one. */
+    cat?: "water" | "food" | "power";
+  };
+  /** A line printed under the chart instead of a bar, for the worst case. */
+  chartNote?: string;
 };
 
 // Durations and quantities are deliberately conservative and drawn from
 // public emergency-preparedness guidance (gov.uk, Red Cross, FEMA). They are
-// planning figures, not guarantees. Keep this file in sync with
-// public/offline/index.html.
+// planning figures, not guarantees. The offline guide
+// (src/app/offline-guide/route.ts) is built from this list.
 export const scenarios: Scenario[] = [
   {
     slug: "power-outage",
+    chart: { label: "power cut", from: 0, to: 3, range: "hours, sometimes 1 to 3 days", cat: "power" },
     title: "Power outage",
     summary:
       "Loss of mains electricity, from a storm, grid fault, or planned load shedding.",
@@ -46,6 +65,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "water-disruption",
+    chart: { label: "water off", from: 0, to: 2, range: "usually under 2 days", cat: "water" },
     title: "Water supply disruption",
     summary:
       "Mains water cut off or advised unsafe to drink, such as a burst main or a contamination notice.",
@@ -69,6 +89,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "supply-delays",
+    chart: { label: "shelves thin", from: 2, to: 14, range: "days to 2 weeks", cat: "food" },
     title: "Supply chain and delivery delays",
     summary:
       "Shops or deliveries disrupted by weather, fuel shortages, industrial action, or logistics problems.",
@@ -93,6 +114,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "extreme-weather",
+    chart: { label: "storm or flood", from: 0, to: 4, openEnded: true, range: "hours to a few days" },
     title: "Extreme weather event",
     summary:
       "Storms, flooding, heatwaves, or heavy snow that make it hard or unsafe to leave home or reach shops.",
@@ -105,7 +127,7 @@ export const scenarios: Scenario[] = [
       "Warm layers, blankets, and a hot-water bottle for cold events; a fan, cool water, and closed curtains for heat.",
       "A battery or wind-up radio for warnings and updates if power and data go down.",
       "Knowing whether your home is at flood risk, and where you would go if you had to leave. Free flood warnings are available by postcode in the UK.",
-      "A grab bag by the door if you are in a flood-risk area: documents, medication, chargers, a change of clothes.",
+      "A bag by the door if you are in a flood-risk area: documents, medication, chargers, a change of clothes.",
       "Checking the forecast and acting on amber and red warnings rather than waiting to see.",
     ],
     worthKnowing: [
@@ -118,6 +140,7 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "civil-disruption",
+    chart: { label: "local disruption", from: 0, to: 4, range: "usually a few days" },
     title: "Local civil disruption",
     summary:
       "Periods of local unrest, protest, or infrastructure strain that briefly affect movement, shops, or transport in an area.",
@@ -134,13 +157,14 @@ export const scenarios: Scenario[] = [
     worthKnowing: [
       "Disruption of this kind is rarely as widespread or as long as social media makes it appear. Check official sources before changing plans.",
       "Shops and transport in an affected area typically reopen within a day or two of the situation settling.",
-      "This scenario is included because it is realistic, not because it is likely. The preparation is identical to a bad storm.",
+      "The preparation is the same as for a bad storm.",
     ],
     community:
       "As with every scenario here, the answer is to check in with neighbours rather than isolate. Communities that know each other are markedly calmer and safer through short periods of unrest, and rumours spread less when people can ask someone they trust.",
   },
   {
     slug: "armed-conflict",
+    chartNote: "Armed conflict: months, lived as repeated cuts of a few hours.",
     title: "Armed conflict",
     summary:
       "War or sustained attacks on infrastructure in a modern, connected country, as Ukraine has experienced since 2022.",
@@ -150,22 +174,22 @@ export const scenarios: Scenario[] = [
       "Ukraine has shown, in unusual detail, what conflict looks like for ordinary civilians in a country with a modern grid, supermarkets, card payments and mobile data. For most people most of the time, it looks like life continuing with recurring interruptions. Strikes on the energy system brought scheduled power cuts of four to twelve hours a day through the winter of 2022 to 2023, and with them lost heating, water pumping, lifts, and mobile signal. People adapted fast, and what they adapted with is a longer version of the same kit as every other scenario on this site, plus a plan for where to shelter and where to go.",
     whatHelps: [
       "A safe place in your home: an interior room or corridor away from windows, below ground if you have it. The rule Ukrainians teach is two walls between you and the outside. Know the nearest public shelter too, such as a basement, underground car park, or metro station.",
-      "A grab bag by the door: documents, cash in small notes, medication, chargers, a torch, water, a change of clothes, and a paper list of contacts. Electronic copies of documents on a phone as well.",
+      "A bag by the door: documents, cash in small notes, medication, chargers, a torch, water, a change of clothes, and a paper list of contacts. Electronic copies of documents on a phone as well.",
       "Power that does not depend on the grid: several power banks, and if you can afford it a portable power station with a folding solar panel. Rolling cuts mean charging everything the moment power returns. A battery or wind-up radio for when mobile data drops.",
       "More stored water than usual, because pumping stations run on electricity. Filling the bath and every large container when a cut is announced became routine.",
-      "A way to stay warm in one room without mains power: sleeping bags, thermal layers, hot-water bottles, blankets. A way to cook safely without electricity, such as a camping stove used with a window open.",
+      "A way to stay warm in one room without mains power: sleeping bags, thermal layers, hot-water bottles, blankets. A way to cook without electricity, such as a camping stove used outdoors only.",
       "A month of prescription medication rather than a fortnight, and a first aid kit you have practised with. Basic first aid courses, including bleeding control, were widely attended.",
       "An evacuation plan you hope not to use: where you would go, how you would get there, who is coming with you, and a car kept at least half full of fuel. Follow official evacuation routes and instructions.",
       "Official alert apps and national broadcasters for information. Rumour and deliberate disinformation spike sharply in conflict, and acting on the wrong message is dangerous.",
     ],
     worthKnowing: [
       "Mass panic did not happen. Shops reopened within days, banks and card payments largely kept working, and people went to work. The thing that made life hard was infrastructure damage and the cold that followed, not disorder.",
-      "Candles caused a wave of house fires during the blackouts. Battery lanterns and head torches are safer, and this is why the checklist keeps saying so.",
+      "Candles caused a wave of house fires during the blackouts. Battery lanterns and head torches are safer.",
       "Sleep, routine, and limiting news intake are health measures, not luxuries. Ukrainian doctors and teachers treated them as such, especially for children.",
-      "This site is written UK-first, and this scenario is far less likely here than a storm or a power cut. It is included because readers ask, and because what people learned in Ukraine transfers directly to any long disruption of power, water, and heat.",
+      "In the UK this is far less likely than a storm or a power cut. What helps is the same kit as every other scenario, kept for longer.",
     ],
     community:
-      "Ukraine is the strongest recent evidence for the central claim of this site. The response that worked was neighbourhood and volunteer networks: delivering food and medicine to older people who could not reach a shop, boarding up windows for neighbours, sharing generators and internet access, running warming and charging points in schools, churches, and cafés. Cities formalised this as thousands of public 'Points of Invincibility' with heat, power, hot drinks, and connectivity, but most of the work was done by people who already knew each other. Being one of those people, before anything happens, is the preparation that matters most.",
+      "In Ukraine, the response that worked was neighbourhood and volunteer networks: delivering food and medicine to older people who could not reach a shop, boarding up windows for neighbours, sharing generators and internet access, running warming and charging points in schools, churches, and cafés. Cities formalised this as thousands of public 'Points of Invincibility' with heat, power, hot drinks, and connectivity, but most of the work was done by people who already knew each other. Sort your household first. Then you can help the people around you.",
   },
 ];
 

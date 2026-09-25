@@ -10,8 +10,6 @@ export type FaqGroup = {
   entries: FaqEntry[];
 };
 
-// Keep the first three entries in sync with the myth-busting section of
-// public/offline/index.html.
 export const faq: FaqGroup[] = [
   {
     title: "Is this prepping?",
@@ -26,10 +24,10 @@ export const faq: FaqGroup[] = [
       },
       {
         slug: "why-not-alarmist",
-        question: "Why is the site so calm about it?",
+        question: "Why stay calm about it?",
         answer: [
           "Because fear leads to the wrong actions. Frightened households panic-buy, which empties shelves for everyone. Frightened people keep to themselves, which is how vulnerable neighbours go unchecked. Calm preparation, done slowly, is both more effective and more considerate, and it is the register the government and the Red Cross use for the same reason.",
-          "It is also simply more accurate. Most disruptions are short, local, and dull. Describing them that way is not complacency. It is the truth, and it is what makes the preparation feel doable.",
+          "It is also simply more accurate. Most disruptions are short, local, and dull. Describing them that way is not complacency.",
         ],
       },
       {
@@ -57,7 +55,7 @@ export const faq: FaqGroup[] = [
         slug: "first-thing",
         question: "What's the single most useful thing to do first?",
         answer: [
-          "Build a 3-day supply of water, food, and any essential medication, and know two neighbours by name. Everything else on this site builds outward from that.",
+          "Build a 3-day supply of water, food, and any essential medication, and know two neighbours by name.",
         ],
       },
       {
@@ -148,7 +146,7 @@ export const faq: FaqGroup[] = [
         question: "I'm fine. How do I help people who aren't?",
         answer: [
           "Start on your own street. Knock on the doors of anyone you know to be older, disabled, or alone, and ask whether they have what they need. Offer to carry water, collect a prescription, or share a charger. Then find or join a local mutual aid or neighbourhood group, which will already know where the gaps are.",
-          "If you have skills, share them: a first aid session, a repair afternoon, a cooked meal for a floor of a block. Skills and relationships are the part of preparation that does not run out.",
+          "If you have skills, share them: a first aid session, a repair afternoon, a cooked meal for a floor of a block.",
         ],
       },
     ],
