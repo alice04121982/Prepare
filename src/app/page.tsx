@@ -48,7 +48,7 @@ const steps = [
 export default function Home() {
   return (
     <main>
-      {/* Opening: what the site is on the left, the shelf of tins beside it */}
+      {/* Opening: what the site is on the left, the ready-made kit beside it */}
       <section
         id="hero"
         aria-labelledby="hero-h"
@@ -80,13 +80,13 @@ export default function Home() {
           </p>
         </div>
         <div className="mt-10 min-[900px]:mt-2">
-          <Shelf tins={tins} />
+          <StarterBaskets />
         </div>
       </section>
 
-      {/* Would you be all right: the question and what it means */}
+      {/* Would you be all right: the shelf of tins on the left, the question beside it */}
       <section aria-labelledby="stop-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
-        <div className="wrap">
+        <div className="wrap grid gap-x-16 gap-y-10 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:items-start">
           <div>
             <h2 id="stop-h" className="max-w-[22ch] text-[clamp(1.75rem,7vw,3rem)]">
               if the power went off, the water stopped and the shops were shut
@@ -110,6 +110,9 @@ export default function Home() {
                 what might stop, and for how long <Arrow size={18} />
               </Link>
             </div>
+          </div>
+          <div className="min-[900px]:order-first">
+            <Shelf tins={tins} />
           </div>
         </div>
       </section>
@@ -148,22 +151,6 @@ export default function Home() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* The ready-made kit: after checking what you have, order the rest */}
-      <section aria-label="Order a ready-made kit" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
-        <div className="wrap grid gap-x-16 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:items-start">
-          <div className="max-w-[44ch] text-lg min-[900px]:pt-3">
-            <p>
-              Checked what you have? Order the rest in one go. Anything you have
-              ticked on the checklist is left out.
-            </p>
-            <Link href="/build-your-kit" className="arrow-link mt-4">
-              or plan it item by item <Arrow size={18} />
-            </Link>
-          </div>
-          <StarterBaskets />
         </div>
       </section>
 
