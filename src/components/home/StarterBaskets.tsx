@@ -46,9 +46,18 @@ export default function StarterBaskets() {
   return (
     <section
       id="hero-actions"
-      aria-label="Ready-made kits"
+      aria-labelledby="kit-h"
       className="mt-9 border-[3px] border-ink min-[900px]:mt-2"
     >
+      <div className="border-b-[10px] border-ink px-4.5 pb-3.5 pt-4 min-[900px]:px-6">
+        <h2
+          id="kit-h"
+          className="display text-[clamp(1.75rem,6vw,2.25rem)] leading-none"
+          style={{ fontVariationSettings: '"wdth" 115' }}
+        >
+          buy a ready-made kit
+        </h2>
+      </div>
       <div className="flex flex-wrap items-center justify-between gap-3 border-b-[3px] border-ink px-4.5 py-3.5 min-[900px]:px-6">
         <p id="people-label" className="text-lg font-extrabold">
           People in your home
