@@ -623,6 +623,82 @@ export const guides: Guide[] = [
     verified: false,
     related: ["food-that-needs-no-cooking", "power-cut", "keep-warm-without-heating"],
   },
+  {
+    slug: "medical-equipment-and-outages",
+    title: "if someone at home depends on medical equipment or medications",
+    metaTitle: "Preparing for outages when you depend on medical equipment",
+    description:
+      "Make a plan now for power cuts and water outages if someone at home needs powered medical equipment or refrigerated medications. Know your backup options and safe timeframes.",
+    answer: [
+      "If someone at home relies on powered medical equipment (dialysis, oxygen, ventilator, feeding tube, cardiac devices) or refrigerated medication (insulin, some biologics), a power cut or water outage becomes urgent within hours or days.",
+      "Your plan needs three things: knowing how long you can safely go without treatment, a backup power source, and an emergency contact list with your healthcare team and alternative treatment centers.",
+    ],
+    stepsTitle: "what to do now",
+    steps: [
+      { title: "Ask your healthcare team three questions", body: "How long can treatment or medication safely be delayed? What is the earliest sign something is wrong? Where would you go if this center lost power or water?" },
+      { title: "Register with the Priority Services Register", body: "You qualify because someone at home relies on medical equipment. This gets early warning of planned outages and priority support if one happens." },
+      { title: "Write down your safe timeframe", body: "Some equipment can pause for hours, some for days, some not at all. Write it down and keep it somewhere you can find it in a crisis (your phone, your bag, the fridge door)." },
+      { title: "Know how to recognize trouble early", body: "Ask your healthcare team what symptoms mean you need help right now, not tomorrow. Know the phone numbers for NHS 111 (urgent), 999 (emergency), and your GP." },
+      { title: "Explore backup power quietly now", body: "A generator, a battery backup, or inverter in the car can buy time. Generators need fuel storage and safe outdoor use only. Battery backups are expensive but silent." },
+      { title: "Keep an extra supply of medications at home", body: "Ask your pharmacy and your doctor about keeping a 5 to 7 day supply for emergencies. Store it safely (not in the bathroom where humidity harms some drugs)." },
+      { title: "Make a card with your medical information", body: "Blood type, current medications, your condition, who to call, and your nearest hospital. Carry it with you and keep a copy at home." },
+    ],
+    warning: {
+      title: "Know what you can and cannot do",
+      body: "Do not skip doses or ration medication to make supplies last longer without talking to your doctor first. Some medications and equipment have no safe delay; plan around that, not around hoping.",
+    },
+    ready: [
+      { item: "Backup power for equipment", tip: "A battery backup (UPS), a power inverter in your car, or a small generator if you can store and safely use fuel outdoors.", search: "uninterruptible power supply UPS" },
+      { item: "Medical summary card", tip: "Your blood type, current medications, condition, and emergency contacts to carry always.", search: "medical alert card holder" },
+      { item: "Extra supply of medications", tip: "Ask your pharmacy and doctor about keeping a 5 to 7 day emergency supply.", search: "medication storage box" },
+      { item: "Thermos or cool box", tip: "If medication needs to stay cool but the fridge is off, a cool box with ice packs buys time.", search: "medical cool box insulin" },
+    ],
+    sources: [
+      { label: "Priority Services Register: who can join", publisher: "Energy networks and water companies", url: "https://www.thepsr.co.uk/" },
+      { label: "NHS 111: urgent care", publisher: "NHS", url: "https://111.nhs.uk/" },
+      { label: "Ready.gov: people with disabilities and access and functional needs", publisher: "US FEMA (principles apply in the UK)", url: "https://www.ready.gov/" },
+    ],
+    checked: "2026-09-25",
+    verified: false,
+    related: ["priority-services-register", "power-cut", "no-water"],
+  },
+  {
+    slug: "dialysis-in-an-outage",
+    title: "if you are on dialysis and there is a power cut or water outage",
+    metaTitle: "Dialysis during a power cut or water outage",
+    description:
+      "Dialysis depends on electricity and clean water. Without treatment, kidney patients are at risk within days. Know your backup plan and register for priority help.",
+    answer: [
+      "Hemodialysis patients can safely skip treatment for about 3 to 5 days; peritoneal dialysis patients for about 1 to 2 weeks. After that, potassium and fluid buildup become life-threatening.",
+      "Contact your dialysis unit now to ask: Where would you go if the center lost power? Do they have a backup plan? Some regions have mutual-aid agreements with other centers.",
+    ],
+    stepsTitle: "what to do now",
+    steps: [
+      { title: "Register with the Priority Services Register", body: "You rely on powered medical equipment. This gets you early warning of planned cuts and priority help if one happens." },
+      { title: "Ask your dialysis unit their backup plan", body: "Which other center would you go to? How do they handle fuel for generators? Does water come from mains only?" },
+      { title: "Keep your medical history written down", body: "Your blood type, fistula arm, current medications, and your nephrologist's name and number. A copy in your bag and one at home." },
+      { title: "Know the symptoms of hyperkalemia", body: "High potassium after a missed session causes a fast or irregular heartbeat, shortness of breath, chest pain or muscle weakness. Call 999 if any start." },
+      { title: "Have contact details for your center and backup centers", body: "Phone numbers for the unit, your nephrologist, and the Regional Renal Unit if your center is damaged." },
+      { title: "Keep a few days of medications at home", body: "Phosphate binders, potassium-lowering drugs and blood pressure medicines. Ask your pharmacist for an extra supply." },
+    ],
+    warning: {
+      title: "Never skip dialysis without a plan",
+      body: "Potassium rises fast without treatment. Even one missed session puts you at risk of heart arrhythmia. If you cannot reach your unit, call NHS 111 or your GP.",
+    },
+    ready: [
+      { item: "Medical summary card", tip: "Written summary of your condition, medications and blood type to carry always.", search: "medical alert card holder" },
+      { item: "Prescribed medications kept at home", tip: "Ask your dialysis team and pharmacist about keeping a 5 day supply for emergencies.", search: "medication storage box" },
+      { item: "List of backup dialysis centers", tip: "Phone numbers for your unit, your nephrologist, and the nearest Regional Renal Unit.", search: "business card holder" },
+    ],
+    sources: [
+      { label: "UK Renal Association: emergency preparedness for dialysis patients", publisher: "Renal Association", url: "https://renal.org/" },
+      { label: "What to do if you miss a dialysis session", publisher: "NHS", url: "https://www.nhs.uk/conditions/kidney-disease/" },
+      { label: "Hyperkalemia (high potassium): symptoms and treatment", publisher: "NHS", url: "https://www.nhs.uk/conditions/high-potassium/" },
+    ],
+    checked: "2026-09-25",
+    verified: false,
+    related: ["medical-equipment-and-outages", "priority-services-register", "power-cut"],
+  },
 ];
 
 export function getGuide(slug: string): Guide | undefined {
