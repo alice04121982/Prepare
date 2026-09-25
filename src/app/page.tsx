@@ -62,8 +62,8 @@ export default function Home() {
             a practical guide to being ready at home
           </h1>
           <p className="mt-6 max-w-[40ch] text-[1.1875rem] leading-normal min-[900px]:mt-9 min-[900px]:text-[1.375rem]">
-            What to keep, how much, how long it lasts and what to do first, if
-            the power, water or shops stop for a few days.
+            What to keep, how much and what to do first when the power, water
+            or shops stop, for a day or for months.
           </p>
           <p className="mt-6 border-t-[3px] border-ink pt-4 text-lg font-semibold">
             Frightened by the news?{" "}
@@ -98,11 +98,11 @@ export default function Home() {
                 elsewhere in Europe can all have the same effect at home.
               </p>
               <p>
-                Most of these last hours or days, not weeks. All of them are
+                Most of these last hours or days. A pandemic can last months. All are
                 easier with a few things in the cupboard and a plan you made
                 while everything worked. For the very worst cases, there is
-                little any household can do. For everything else, three days of
-                supplies helps.
+                little any household can do. For everything else, start with three
+                days of supplies and build from there.
               </p>
               <Link href="/what-might-stop" className="arrow-link">
                 what might stop, and for how long <Arrow size={18} />

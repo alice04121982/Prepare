@@ -4,8 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Stay Prepared (stayprepared.co.uk), a UK household emergency preparedness
-site. Next.js App Router, TypeScript, Tailwind v4. The repo keeps its
+Stay Prepared (stayprepared.co.uk), a UK guide to getting a household ready
+for disruption, whether it lasts a day or months. The approved one-paragraph
+summary is in `PRODUCT.md`; three days is the government's minimum, not the
+site's scope. Next.js App Router, TypeScript, Tailwind v4. The repo keeps its
 original working name, `prepare-website`.
 
 `PLAN.md` holds the project plan and build history. `docs/` is the decision
