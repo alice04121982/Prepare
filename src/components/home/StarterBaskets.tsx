@@ -9,6 +9,7 @@ import { listForDays } from "@/data/lists";
 import { DURATIONS, buildPack } from "@/data/packs";
 import type { Tier } from "@/data/products";
 import { TierPicker } from "@/components/kit/TierPicker";
+import KitContents from "@/components/home/KitContents";
 import { useHave } from "@/lib/have";
 
 const MAX_PEOPLE = 12;
@@ -196,6 +197,7 @@ export default function StarterBaskets() {
                 <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.kitOnce}</dd>
               </div>
             </dl>
+            <KitContents buys={chosen.buys} />
             <AmazonBasketButton
               items={chosen.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
               className="mt-4"
