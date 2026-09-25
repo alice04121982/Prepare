@@ -42,7 +42,7 @@ markup. `checklist.ts` (what to keep, with amounts and sourcing notes),
 answer first, sources listed, `verified: false` until checked by hand).
 Guides name kinds of things, never brands: each "what to have ready" item
 links to a tagged Amazon search (`amazonSearchUrl`). Specific products stay
-in the one-click basket and on `/basket`, which shows their photos.
+in the one-click basket and on `/kits`, whose Amazon tab shows their photos.
 
 The offline guide (`/offline-guide`, `src/app/offline-guide/route.ts`) is
 one self-contained HTML file built at build time from the same data files,
@@ -60,6 +60,23 @@ beforehand; it publishes no live updates and takes no political view.
 it.
 
 ### The planner is a pure function over a URL
+
+Every way to order a kit lives on `/kits` (merged 25 September 2026). It is
+`KitPlanner` opened on a kit from `lists.ts`, or on "your own length" (no
+list, 1 to 90 days). Typing a number of days moves to the kit that covers it
+(`listForDays`). `/kits/[slug]` is the same page opened on one kit, kept for
+search; if its address names a different kit, or none, it redirects. The old
+`/lists`, `/build-your-kit` and `/basket` redirect here in `next.config.ts`,
+and `/kits` reads the old `p` (people) as adults. The home page kit box
+(`home/StarterBaskets`) is the quick route: people, days and price range, straight to an
+Amazon basket, with "what is in it" opening `/kits`.
+
+Under the days box, a price range picker (budget, regular, premium) chooses
+which products fill the basket, showing each range's rough total for the
+household. It rides in the URL as `t` (absent means regular). Products carry
+an optional `tier` in `products.ts`; `productsFor(line, tier)` falls back to
+the regular pick where a line has nothing in that tier. The budget and
+premium products are unverified: `docs/product-tiers.md` lists them.
 
 `src/data/kit-rules.ts` is the engine. `buildKit(household)` turns a
 `Household` into `KitLine[]` plus `KitTask[]`. `householdFromParams` parses
@@ -88,12 +105,6 @@ the item's display name, so renaming an item in `checklist.ts` silently
 clears that one tick, unless the old key is added to `RENAMED` in
 `have.ts`, which maps it to the new one when the record is read.
 
-`/basket` adds its own choice on top: every product starts ticked, and
-unticking one leaves it out of that basket only. It is never written to the
-record (not wanting something is not owning it). What is left out rides in
-the query string as `x`, a list of ASINs parsed by `parseLeftOut` in
-`packs.ts`, so a shared link keeps it.
-
 Every `localStorage` access is wrapped and every page must render correctly
 when it throws or returns nothing. `ready` is false until the record has
 been read, so counts wait rather than flashing a zero through hydration.
@@ -102,9 +113,8 @@ been read, so counts wait rather than flashing a zero through hydration.
 
 The client islands are `ChecklistTracker`, `KitPlanner` (with
 `kit/StillToGet` and `kit/ListPicker`), `PrintButton`, the homepage's
-`home/ReachBar`, `home/StarterBaskets` and `home/StepState`, `basket/BasketItems` on `/basket`, and `SaferWorld` on `/worried`.
-`/lists` starts from `home/StartForm`, a plain GET form whose four submit
-buttons each open `/lists/[slug]`. Everything else is a server component,
+`home/ReachBar`, `home/StarterBaskets` and `home/StepState`, and `SaferWorld` on `/worried`.
+Everything else is a server component,
 including `Diagram.tsx`, which is inline SVG. The site has no photographs
 or stock illustrations.
 
@@ -115,8 +125,7 @@ is built from. A new page needs three things: an entry in `PAGES`, and in its
 `metadata` a `title`, a `description` and `alternates: { canonical: "/path" }`.
 The canonical is per page on purpose; setting it in the layout would point
 every page at the home page. `metadataBase` in the layout makes these paths
-absolute. `/basket` is left out of the sitemap because it is driven by the
-query string.
+absolute.
 
 The site mark is `public/brand/mark.svg` (an eight-armed asterisk, ink).
 `scripts/icons.mjs` draws `favicon.ico`, `icon.png` and `apple-icon.png`

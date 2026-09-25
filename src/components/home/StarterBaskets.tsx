@@ -4,11 +4,27 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
-import { MAX_DAYS, MIN_DAYS } from "@/data/kit-rules";
+import { MAX_DAYS, MIN_DAYS, defaultHousehold, householdToQuery } from "@/data/kit-rules";
+import { listForDays } from "@/data/lists";
 import { DURATIONS, buildPack } from "@/data/packs";
+import type { Tier } from "@/data/products";
+import { TierPicker } from "@/components/kit/TierPicker";
+import KitDrawer from "@/components/home/KitDrawer";
 import { useHave } from "@/lib/have";
 
 const MAX_PEOPLE = 12;
+const TIERS: Tier[] = ["budget", "regular", "premium"];
+const NOTE = "Amazon opens and asks you to confirm. We earn a small commission, at no extra cost to you.";
+
+/** The kits page, opened on this many people and days. */
+const kitHref = (people: number, days: number, tier: Tier) =>
+  `/kits${householdToQuery({
+    ...defaultHousehold,
+    adults: people,
+    days,
+    list: listForDays(days),
+    ...(tier === "regular" ? {} : { tier }),
+  })}`;
 
 const stepClass =
   "grid h-12 w-12 place-items-center rounded-[4px] border-[3px] border-ink text-2xl font-extrabold leading-none hover:bg-[var(--hover)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent";
@@ -18,7 +34,8 @@ const stepClass =
  * you and for how long, and Amazon opens with everything in one basket. Each
  * pack is the planner's whole list for that household (see src/data/packs.ts),
  * less anything ticked off on the checklist. Past the four set lengths,
- * any whole number of days from MIN_DAYS to MAX_DAYS can be typed in.
+ * any whole number of days from MIN_DAYS to MAX_DAYS can be typed in. The
+ * price range (budget, regular, premium) picks which products fill it.
  */
 export default function StarterBaskets() {
   const [people, setPeople] = useState(2);
@@ -26,15 +43,21 @@ export default function StarterBaskets() {
   // What is typed in the days box, kept apart from `days` so a half-typed or
   // out-of-range number never replaces the last good choice.
   const [typed, setTyped] = useState("");
+  const [tier, setTier] = useState<Tier>("regular");
+  const [drawer, setDrawer] = useState(false);
   const { have } = useHave();
 
   const owned = (id: string) => have.has(kitLineKey(id));
   const packs = useMemo(
-    () => DURATIONS.map((d) => buildPack(people, d.days, (id) => have.has(kitLineKey(id)))),
-    [people, have],
+    () => DURATIONS.map((d) => buildPack(people, d.days, (id) => have.has(kitLineKey(id)), tier)),
+    [people, have, tier],
   );
   const preset = packs.find((p) => p.days === days);
-  const chosen = preset ?? buildPack(people, days, owned);
+  const chosen = preset ?? buildPack(people, days, owned, tier);
+  // The same household and length in each range, for the picker's totals.
+  const estimates = Object.fromEntries(
+    TIERS.map((t) => [t, t === tier ? chosen.estimate : buildPack(people, days, owned, t).estimate]),
+  ) as Record<Tier, number>;
   const url = chosen.buys.length > 0;
 
   function onTyped(value: string) {
@@ -125,9 +148,17 @@ export default function StarterBaskets() {
                     {"note" in d ? <span className="block font-normal">{d.note}</span> : null}
                   </span>
                 </label>
-                <Link href={`/basket?p=${people}&d=${p.days}`} className="flex min-h-11 items-center px-3 text-sm font-extrabold">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDays(p.days);
+                    setTyped("");
+                    setDrawer(true);
+                  }}
+                  className="flex min-h-11 items-center px-3 text-left text-sm font-extrabold underline underline-offset-4"
+                >
                   what is in it<span className="sr-only"> for {d.label}</span>
-                </Link>
+                </button>
               </div>
             );
           })}
@@ -152,12 +183,20 @@ export default function StarterBaskets() {
             {MIN_DAYS} to {MAX_DAYS}
           </span>
           {!preset ? (
-            <Link href={`/basket?p=${people}&d=${days}`} className="flex min-h-11 items-center text-sm font-extrabold">
+            <button
+              type="button"
+              onClick={() => setDrawer(true)}
+              className="flex min-h-11 items-center text-sm font-extrabold underline underline-offset-4"
+            >
               what is in it<span className="sr-only"> for {days} days</span>
-            </Link>
+            </button>
           ) : null}
         </div>
       </fieldset>
+
+      <div className="border-t border-ink">
+        <TierPicker value={tier} onChange={setTier} estimates={estimates} />
+      </div>
 
       <div className="border-t border-ink px-4.5 pb-4.5 pt-3.5 min-[900px]:px-6">
         {url ? (
@@ -172,10 +211,23 @@ export default function StarterBaskets() {
                 <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.kitOnce}</dd>
               </div>
             </dl>
+            <button
+              type="button"
+              onClick={() => setDrawer(true)}
+              aria-haspopup="dialog"
+              className="flex min-h-11 w-full items-center justify-between gap-3 border-b border-ink text-left font-extrabold hover:bg-[var(--hover)]"
+            >
+              <span>
+                See what is in it <span className="font-normal tabular-nums">({chosen.buys.length} products)</span>
+              </span>
+              <span aria-hidden="true" className="text-xl leading-none">
+                &rarr;
+              </span>
+            </button>
             <AmazonBasketButton
               items={chosen.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
               className="mt-4"
-              note="Amazon opens and asks you to confirm. We earn a small commission, at no extra cost to you."
+              note={NOTE}
             >
               {basketLabel(chosen.buys.length)}
             </AmazonBasketButton>
@@ -183,13 +235,24 @@ export default function StarterBaskets() {
         ) : (
           <p className="text-[0.9375rem]">
             You have ticked off everything a basket would hold.{" "}
-            <Link href={`/basket?p=${people}&d=${days}`} className="font-bold">
+            <Link href={kitHref(people, days, tier)} className="font-bold">
               See what is left
             </Link>
             .
           </p>
         )}
       </div>
+      <KitDrawer
+        open={drawer}
+        onClose={() => setDrawer(false)}
+        title={`${DURATIONS.find((d) => d.days === days)?.label ?? `${days} days`} for ${people} ${people === 1 ? "person" : "people"}`}
+        detail={`${chosen.buys.length} products, ${tier} price range. Anything ticked on the checklist is left out.`}
+        buys={chosen.buys}
+        supplies={chosen.supplies}
+        kitOnce={chosen.kitOnce}
+        editHref={kitHref(people, days, tier)}
+        note={NOTE}
+      />
     </section>
   );
 }

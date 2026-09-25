@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import Wordmark from "@/components/Wordmark";
 
+// Four links, in the order a visitor needs them: why, what and how much, then
+// the ready-made kits. Worried stays for anyone the news has frightened. The
+// other pages are linked from the home page, the checklist and the footer.
 export const nav = [
-  { href: "/lists", label: "lists" },
-  { href: "/what-you-can-do-now", label: "do it now" },
-  { href: "/checklist", label: "checklist" },
-  { href: "/build-your-kit", label: "build your kit" },
-  { href: "/what-might-stop", label: "what might stop" },
-  { href: "/community", label: "neighbours" },
+  { href: "/what-might-stop", label: "why prepare" },
+  { href: "/checklist", label: "what to get" },
+  { href: "/kits", label: "ready-made kits" },
   { href: "/worried", label: "worried?" },
 ];
 

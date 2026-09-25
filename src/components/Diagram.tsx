@@ -303,7 +303,6 @@ function CheckIn() {
 
 function Duration() {
   const rows = scenarios.flatMap((s) => (s.chart ? [s.chart] : []));
-  const note = scenarios.find((s) => s.chartNote)?.chartNote;
 
   const X0 = 8;
   const X1 = 352;
@@ -318,7 +317,6 @@ function Duration() {
     <Figure
       head="3 days"
       sub="covers most of what usually stops"
-      foot={note}
     >
       <svg viewBox={`0 0 360 ${height}`} role="img" aria-labelledby="dg-dur-t dg-dur-d" className="block w-full">
         <title id="dg-dur-t">How long disruption usually lasts</title>

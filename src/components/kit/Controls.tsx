@@ -97,7 +97,7 @@ export function OptionRow({
       />
       <label
         htmlFor={id}
-        className="flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-[4px] border-2 border-ink px-3.5 py-2 font-bold leading-tight hover:bg-[var(--hover)] peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-3 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-ink"
+        className="flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-[4px] border-2 border-ink px-3.5 py-2 font-bold leading-tight hover:bg-[var(--hover)] peer-checked:bg-ink peer-checked:text-paper peer-checked:hover:bg-[var(--hover)] peer-checked:hover:text-ink peer-focus-visible:outline-3 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-ink"
       >
         <span>{children}</span>
         {note ? <small className="text-right text-sm font-normal opacity-80">{note}</small> : null}
@@ -225,7 +225,7 @@ export function DaysControl({
         </div>
       </div>
 
-      <div role="group" aria-label="Common lengths" className="mt-3 grid grid-cols-3 gap-2">
+      <div role="group" aria-label="Common lengths" className="mt-3 grid grid-cols-2 gap-2">
         {presets.map((p) => {
           const on = value === p.days;
           return (

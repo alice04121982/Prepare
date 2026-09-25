@@ -39,7 +39,7 @@ export default function WhatMightStopPage() {
     <main>
       <PageIntro
         title="what might stop, and for how long"
-        lede="What can stop at home, and how long it usually lasts. Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked people to keep a few days of supplies. Their reasons are the same: severe weather, attacks on power and water, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent."
+        lede="Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked people to keep a few days of supplies. Their reasons are the same: severe weather, attacks on power and water, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent."
         aside={<Diagram name="duration" />}
       />
 
@@ -163,8 +163,8 @@ export default function WhatMightStopPage() {
           <Link href="/checklist" className="btn btn-primary btn-lg">
             see the checklist <Arrow />
           </Link>
-          <Link href="/build-your-kit" className="btn btn-secondary btn-lg">
-            build your kit
+          <Link href="/kits" className="btn btn-secondary btn-lg">
+            see the kits
           </Link>
         </div>
       </section>

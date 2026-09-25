@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
-import { products } from "@/data/products";
+import { products as allProducts } from "@/data/products";
+
+// Only the products the site shows today; tiered alternatives wait for the
+// tier picker and are not yet on any page.
+const products = allProducts.filter((p) => !p.tier);
 
 export const metadata: Metadata = {
   alternates: { canonical: "/how-we-choose-products" },

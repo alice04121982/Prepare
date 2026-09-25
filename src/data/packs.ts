@@ -1,5 +1,5 @@
 import { buildKit, defaultHousehold, type KitLine } from "@/data/kit-rules";
-import { productsFor, type Product } from "@/data/products";
+import { productsFor, type Product, type Tier } from "@/data/products";
 
 /**
  * Complete packs for the homepage: everything on the planner's list for a
@@ -71,12 +71,13 @@ function packUnits(line: KitLine, product: Product, people: number): number {
 }
 
 /**
- * The products that cover a set of planner lines. A line split across
- * products (share) buys each part; otherwise the first product is the buy.
+ * The products that cover a set of planner lines, in one price tier. A line
+ * split across products (share) buys each part; otherwise the first product
+ * is the buy.
  */
-export function buysFor(lines: KitLine[], people: number): PackBuy[] {
+export function buysFor(lines: KitLine[], people: number, tier: Tier = "regular"): PackBuy[] {
   return lines.flatMap((line) => {
-    const options = productsFor(line.id);
+    const options = productsFor(line.id, tier);
     const shared = options.filter((p) => p.share);
     const chosen = shared.length ? shared : options.slice(0, 1);
     return chosen.map((product) => {
@@ -90,14 +91,19 @@ export function buysFor(lines: KitLine[], people: number): PackBuy[] {
  * The pack for `people` over `days`, leaving out anything the reader has
  * already ticked (`owned` returns true for a line id they have).
  */
-export function buildPack(people: number, days: number, owned: (lineId: string) => boolean = () => false): Pack {
+export function buildPack(
+  people: number,
+  days: number,
+  owned: (lineId: string) => boolean = () => false,
+  tier: Tier = "regular",
+): Pack {
   const household = { ...defaultHousehold, adults: Math.max(1, people), days };
   const { lines } = buildKit(household);
   const bottledDays = Math.min(days, BOTTLED_DAYS);
   const bottled = buildKit({ ...household, days: bottledDays }).lines.find((l) => l.id === "water");
   const adjusted = lines.map((line) => (line.id === "water" && bottled ? bottled : line));
   const needed = adjusted.filter((l) => !owned(l.id));
-  const buys = buysFor(needed, household.adults);
+  const buys = buysFor(needed, household.adults, tier);
   const bought = new Set(buys.map((b) => b.line.id));
   const waterBuy = buys.find((b) => b.line.id === "water");
 
@@ -120,25 +126,4 @@ export function packTotals(buys: PackBuy[]): Pick<Pack, "estimate" | "kitOnce" |
     kitOnce: sum(buys.filter((b) => KIT_ONCE.has(b.line.id))),
     supplies: sum(buys.filter((b) => !KIT_ONCE.has(b.line.id))),
   };
-}
-
-const ASIN = /^[A-Z0-9]{10}$/;
-
-/**
- * Products left out of the basket, from the `x` query value: a comma list of
- * ASINs. Anything that is not a well-formed ASIN is dropped, and the list is
- * capped, so a crafted link can only untick real rows.
- */
-export function parseLeftOut(raw: string | undefined): string[] {
-  if (!raw) return [];
-  return [...new Set(raw.split(",").map((a) => a.trim().toUpperCase()))].filter((a) => ASIN.test(a)).slice(0, 40);
-}
-
-export function buyLabel(b: PackBuy): string {
-  const [one, many] = b.product.short ?? [b.product.name, b.product.name];
-  return `${b.quantity} ${b.quantity === 1 ? one : many}`;
-}
-
-export function durationLabel(days: number): string {
-  return DURATIONS.find((d) => d.days === days)?.label ?? `${days} days`;
 }

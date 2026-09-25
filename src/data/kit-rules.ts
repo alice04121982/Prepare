@@ -33,6 +33,8 @@ export type Household = {
   days: number;
   /** The ready-made list, if the reader picked one. Its range bounds `days`. */
   list?: ListSlug;
+  /** Price range for the basket; absent means regular (see products.ts). */
+  tier?: "budget" | "premium";
 };
 
 export type ProductOption = {
@@ -962,6 +964,7 @@ export function householdFromParams(q: Record<string, string | string[] | undefi
     homeType: get("home") === "flat" ? "flat" : "house",
     days,
     ...(list ? { list } : {}),
+    ...(get("t") === "budget" || get("t") === "premium" ? { tier: get("t") as "budget" | "premium" } : {}),
   };
 }
 
@@ -978,6 +981,7 @@ export function householdToQuery(h: Household): string {
     med: h.medicalNeeds ? "1" : "0",
     home: h.homeType,
     d: String(h.list ? clampDaysForList(h.list, h.days) : h.days),
+    ...(h.tier ? { t: h.tier } : {}),
   });
   return `?${q.toString()}`;
 }
