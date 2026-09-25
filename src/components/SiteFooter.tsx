@@ -28,7 +28,7 @@ export default function SiteFooter() {
               stay prepared
             </Link>
             <p className="mt-2.5 text-lg">
-              Calm, practical guidance for households. Written in the UK, useful anywhere.
+              A UK guide to getting your household ready for disruption, whether it lasts a day or months.
             </p>
           </div>
           <ul className="grid grid-cols-2 gap-x-5 border-t border-[#5a5a5a]">
