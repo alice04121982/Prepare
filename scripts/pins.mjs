@@ -23,7 +23,7 @@ const ticks = (items) => `<ul class="list">${items.map((t) => `<li><span class="
 const big = (n, sub, colour) => `<div class="big"${colour ? ` style="--c:${colour}"` : ""}><span class="num">${esc(n)}</span><span class="sub">${esc(sub)}</span></div>`;
 
 const pins = [
-  { file: "01-checklist", title: "what to keep at home for 3 days", lede: "A UK checklist. Tick off what you already have first.",
+  { file: "01-checklist", title: "what to keep at home", lede: "A UK checklist for power cuts, water outages and storms. Tick off what you have first.",
     body: tins([["water", C.water], ["food", C.food], ["light", C.power], ["first aid", C.health], ["cash", C.money], ["radio", C.news]]), source: "Amounts from gov.uk and the WHO" },
   { file: "02-water", title: "how much water to store", lede: "",
     body: big("3 litres", "per person, per day. For 3 days, that is 9 litres each.", C.water), source: "gov.uk, from the World Health Organisation" },
@@ -41,12 +41,15 @@ const pins = [
     body: ticks(["Warning of planned cuts", "Priority help and updates", "Water brought to your door", "A password for callers"]), source: "For older, disabled or unwell people, and homes with young children" },
 ];
 
+// The site mark, as in public/brand/mark.svg.
+const MARK = `<svg viewBox="0 0 100 100" width="36" height="36" fill="#141414" aria-hidden="true"><g transform="translate(50 50)">${[0, 45, 90, 135].map((r) => `<rect x="-9" y="-46" width="18" height="92" transform="rotate(${r})"/>`).join("")}</g></svg>`;
+
 const css = `
 @font-face{font-family:Archivo;font-weight:100 900;font-stretch:62% 125%;src:url(data:font/woff2;base64,${font}) format("woff2")}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:1000px;height:1500px;background:#fff;color:#141414;font-family:Archivo,Arial,sans-serif}
 .pin{width:1000px;height:1500px;padding:72px 72px 0;display:flex;flex-direction:column}
-.brand{font-weight:900;font-variation-settings:"wdth" 118;font-size:40px;border-bottom:5px solid #141414;padding-bottom:18px;letter-spacing:-.01em}
+.brand{display:flex;align-items:center;gap:16px;font-weight:900;font-variation-settings:"wdth" 118;font-size:40px;border-bottom:5px solid #141414;padding-bottom:18px;letter-spacing:-.01em}
 h1{font-weight:900;font-variation-settings:"wdth" 112;font-size:112px;line-height:.9;letter-spacing:-.025em;margin-top:56px}
 .lede{font-size:40px;line-height:1.25;margin-top:30px;font-weight:500;max-width:22ch}
 .main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:44px}
@@ -71,7 +74,7 @@ h1{font-weight:900;font-variation-settings:"wdth" 112;font-size:112px;line-heigh
 const b = await chromium.launch(process.env.CHROMIUM ? { executablePath: process.env.CHROMIUM } : {});
 const p = await b.newPage({ viewport: { width: 1000, height: 1500 }, deviceScaleFactor: 1 });
 for (const pin of pins) {
-  const html = `<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body><div class="pin"><p class="brand">stay prepared</p><h1>${esc(pin.title)}</h1>${pin.lede ? `<p class="lede">${esc(pin.lede)}</p>` : ""}<div class="main">${pin.body}</div><div class="foot"><span class="url">stayprepared.co.uk</span><span class="src">${esc(pin.source)}</span></div></div></body></html>`;
+  const html = `<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body><div class="pin"><p class="brand">${MARK}stay prepared</p><h1>${esc(pin.title)}</h1>${pin.lede ? `<p class="lede">${esc(pin.lede)}</p>` : ""}<div class="main">${pin.body}</div><div class="foot"><span class="url">stayprepared.co.uk</span><span class="src">${esc(pin.source)}</span></div></div></body></html>`;
   await p.setContent(html, { waitUntil: "load" });
   await p.evaluate(() => document.fonts.ready);
   const over = await p.evaluate(() => ({ h: document.querySelector(".pin").scrollHeight, w: document.documentElement.scrollWidth }));
