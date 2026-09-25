@@ -63,13 +63,18 @@ it.
 
 Every way to order a kit lives on `/kits` (merged 25 September 2026). It is
 `KitPlanner` opened on a kit from `lists.ts`, or on "your own length" (no
-list, 1 to 90 days). Typing a number of days moves to the kit that covers it
-(`listForDays`). `/kits/[slug]` is the same page opened on one kit, kept for
+list, 1 to 90 days). Both pages ask "how long for" with the same
+`kit/LengthTiles`: 3 days, 2 weeks, 1 month and 3 months as priced tiles,
+with any other length behind "Or a number of days". Choosing a length moves
+to the kit that covers it (`listForDays`); the grab bag is a row of its own.
+Both price and fill the basket through `packFor` in `packs.ts` (bottled
+water for the first week only), so a length costs the same on either page. `/kits/[slug]` is the same page opened on one kit, kept for
 search; if its address names a different kit, or none, it redirects. The old
 `/lists`, `/build-your-kit` and `/basket` redirect here in `next.config.ts`,
 and `/kits` reads the old `p` (people) as adults. The home page kit box
 (`home/StarterBaskets`) is the quick route: people, days and price range, straight to an
-Amazon basket, with "what is in it" opening `/kits`.
+Amazon basket. On `/kits` the basket button sits in the sticky "still to
+get" box on wide screens and in the reach bar on phones.
 
 Under the days box, a price range picker (budget, regular, premium) chooses
 which products fill the basket, showing each range's rough total for the
@@ -112,7 +117,7 @@ been read, so counts wait rather than flashing a zero through hydration.
 ### Server components by default
 
 The client islands are `ChecklistTracker`, `KitPlanner` (with
-`kit/StillToGet` and `kit/ListPicker`), `PrintButton`, the homepage's
+`kit/StillToGet` and `kit/LengthTiles`), `PrintButton`, the homepage's
 `home/ReachBar`, `home/StarterBaskets` and `home/StepState`, and `SaferWorld` on `/worried`.
 Everything else is a server component,
 including `Diagram.tsx`, which is inline SVG. The site has no photographs
