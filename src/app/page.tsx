@@ -48,11 +48,8 @@ const steps = [
 export default function Home() {
   return (
     <main>
-      {/* Opening: what the site is on the left, the kit picker beside it */}
-      <section
-        aria-labelledby="hero-h"
-        className="wrap grid gap-x-16 pb-16 pt-9 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:items-start min-[900px]:pb-26 min-[900px]:pt-16"
-      >
+      {/* Opening: what the site is, and where to start */}
+      <section id="hero" aria-labelledby="hero-h" className="wrap pb-16 pt-9 min-[900px]:pb-26 min-[900px]:pt-16">
         <div>
           <h1
             id="hero-h"
@@ -78,8 +75,6 @@ export default function Home() {
             </Link>
           </p>
         </div>
-
-        <StarterBaskets />
       </section>
 
       {/* Would you be all right: the question and the shelf of tins */}
@@ -152,6 +147,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* The ready-made kit: after checking what you have, order the rest */}
+      <section aria-label="Order a ready-made kit" className="border-t-[3px] border-ink py-16 min-[900px]:py-26">
+        <div className="wrap grid gap-x-16 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:items-start">
+          <div className="max-w-[44ch] text-lg min-[900px]:pt-3">
+            <p>
+              Checked what you have? Order the rest in one go. Anything you have
+              ticked on the checklist is left out.
+            </p>
+            <Link href="/build-your-kit" className="arrow-link mt-4">
+              or plan it item by item <Arrow size={18} />
+            </Link>
+          </div>
+          <StarterBaskets />
+        </div>
+      </section>
+
       <OfficialChannels />
 
       {/* Keep a copy: end on something to do, on paper */}
@@ -185,7 +196,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ReachBar watch="hero-actions" />
+      <ReachBar watch="hero" hideOver={["hero-actions"]} />
     </main>
   );
 }
