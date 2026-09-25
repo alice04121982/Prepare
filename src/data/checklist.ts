@@ -97,7 +97,7 @@ export const checklist: ChecklistCategory[] = [
         item: "A way to heat food without mains power",
         amount: "Optional: a gas hob, or a camping stove used outdoors only",
         notes:
-          "Never use a camping stove, barbecue, or generator indoors. Carbon monoxide is the leading cause of outage-related deaths.",
+          "Never use a camping stove, barbecue, or generator indoors. Never use indoors: carbon monoxide from these devices causes poisoning and death.",
       },
     ],
   },

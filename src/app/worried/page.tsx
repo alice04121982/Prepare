@@ -22,71 +22,104 @@ export const metadata: Metadata = {
 };
 
 /**
- * The habits, grouped by what they are about. Three groups wear the colour of
- * the category they name (news, health, people), as the checklist bands do;
- * "doing" names no category, so it stays paper.
+ * The habits, grouped by what they are about. Each group wears the colour of
+ * the category it names (news, health, people), as the checklist bands do.
+ * Each habit shows its first line; the reasoning waits behind "why this helps".
  */
-const habitGroups: { cat: Cat | null; name: string; line: string; habits: { title: string; body: string }[] }[] = [
+const habitGroups: { cat: Cat; line: string; habits: { title: string; lead: string; more: string }[] }[] = [
   {
     cat: "news",
-    name: "news",
     line: "How much of it you take in, and from where.",
     habits: [
       {
         title: "Check the news at set times, not all the time",
-        body: "Twice a day is enough to know anything that matters. Not first thing in the morning and not in bed. The alerts can go off. Nothing you need to act on tonight will arrive by push notification, and if it ever did, an Emergency Alert would reach your phone anyway.",
+        lead: "Twice a day is enough to know anything that matters.",
+        more: "Not first thing in the morning and not in bed. The alerts can go off. Nothing you need to act on tonight will arrive by push notification, and if it ever did, an Emergency Alert would reach your phone anyway.",
       },
       {
         title: "Choose two sources and stop there",
-        body: "One national broadcaster and one local source. Social feeds show you the most alarming version of every event, from everywhere, on a loop. That is their business model, not a picture of the world.",
+        lead: "One national broadcaster and one local source.",
+        more: "Social feeds show you the most alarming version of every event, from everywhere, on a loop. That is their business model, not a picture of the world.",
       },
       {
         title: "Tell the difference between being informed and being on watch",
-        body: "Informed is knowing a storm is forecast on Thursday. On watch is refreshing the page every ten minutes to see whether it has started. The first is useful. The second is your body preparing for a threat that is not in the room.",
+        lead: "Informed is knowing a storm is forecast on Thursday. On watch is refreshing the page every ten minutes to see whether it has started.",
+        more: "The first is useful. The second is your body preparing for a threat that is not in the room.",
+      },
+      {
+        title: "Pause before you share",
+        lead: "A story that makes you angry or afraid is worth a second look before you pass it on.",
+        more: "False and misleading stories are designed to provoke a quick reaction. Check: Is there a named source? Does a national news outlet report the same thing? When did it happen (today, or five years ago)? Are the people quoted real (search their name). If you cannot verify it in thirty seconds, it is probably not urgent.",
       },
     ],
   },
   {
     cat: "health",
-    name: "health",
     line: "Your mind, and the body it lives in.",
     habits: [
       {
         title: "Put the worry somewhere",
-        body: "Counsellors often suggest a worry window: fifteen minutes, same time each day, to write down what you are afraid of and what, if anything, you can do about it. Outside that window, when the thought comes, you note it and say: later. It sounds too simple. It works for a lot of people.",
+        lead: "Counsellors often suggest a worry window: fifteen minutes, same time each day, to write down what you are afraid of and what, if anything, you can do about it.",
+        more: "Outside that window, when the thought comes, you note it and say: later. It sounds too simple. It works for a lot of people.",
       },
       {
         title: "Come back into the room",
-        body: "When fear spikes, name five things you can see, four you can hear, three you can touch, two you can smell, one you can taste. It is a standard grounding exercise, and it works because fear lives in the imagined future and your senses only work in the present.",
+        lead: "When fear spikes, name five things you can see, four you can hear, three you can touch, two you can smell, one you can taste.",
+        more: "It is a standard grounding exercise, and it works because fear lives in the imagined future and your senses only work in the present.",
       },
       {
         title: "Look after the body that is doing the worrying",
-        body: "Sleep, a walk, food at normal times, less caffeine and alcohol than you reach for when stressed. None of it is glamorous. All of it changes how frightening the same headline feels the next morning.",
+        lead: "Sleep, a walk, food at normal times, less caffeine and alcohol than you reach for when stressed.",
+        more: "None of it is glamorous. All of it changes how frightening the same headline feels the next morning.",
+      },
+      {
+        title: "Pause before you share",
+        lead: "A story that makes you angry or afraid is worth a second look before you pass it on.",
+        more: "False and misleading stories are designed to provoke a quick reaction. Check: Is there a named source? Does a national news outlet report the same thing? When did it happen (today, or five years ago)? Are the people quoted real (search their name). If you cannot verify it in thirty seconds, it is probably not urgent.",
       },
     ],
   },
   {
     cat: "people",
-    name: "people",
     line: "Who you can say it to.",
     habits: [
       {
         title: "Say it out loud to someone",
-        body: "A worry shared with a friend, a partner or a neighbour usually shrinks. A worry kept to yourself and fed with headlines usually grows. If you have no one to say it to, Samaritans and Shout are free, any time.",
+        lead: "A worry shared with a friend, a partner or a neighbour usually shrinks.",
+        more: "A worry kept to yourself and fed with headlines usually grows. If you have no one to say it to, Samaritans and Shout are free, any time.",
+      },
+      {
+        title: "Pause before you share",
+        lead: "A story that makes you angry or afraid is worth a second look before you pass it on.",
+        more: "False and misleading stories are designed to provoke a quick reaction. Check: Is there a named source? Does a national news outlet report the same thing? When did it happen (today, or five years ago)? Are the people quoted real (search their name). If you cannot verify it in thirty seconds, it is probably not urgent.",
       },
     ],
+  },
+];
+
+/** The two survey figures that open the page, set like the charts' headline numbers. */
+const figures = [
+  {
+    qualifier: "nearly",
+    number: "3 in 4",
+    label: "adults said they felt overwhelmed by the number of crises facing the world.",
+    source: "American Psychological Association, 2022",
   },
   {
-    cat: null,
-    name: "doing",
-    line: "Something to do today.",
-    habits: [
-      {
-        title: "Do one small, real thing",
-        body: "Anxiety is the feeling of a threat with nothing to do about it. Doing something, however small, changes that. Fill two water bottles. Write three phone numbers on a card. Check the torch works.",
-      },
-    ],
+    qualifier: "about",
+    number: "1 in 6",
+    label:
+      "adults in one study followed the news so closely it harmed them. Nearly three quarters of those reported poor mental health.",
+    source: "McLaughlin, Gotlieb and Mills, 2022",
   },
+];
+
+/** Where the page goes, for a reader who wants one part of it. */
+const onThisPage = [
+  { href: "#perspective", label: "perspective" },
+  { href: "#figures", label: "the figures" },
+  { href: "#habits", label: "what helps" },
+  { href: "#help", label: "if it is more than worry" },
 ];
 
 const children = [
@@ -110,6 +143,7 @@ const help = [
 ];
 
 const sources = [
+  { label: "American Psychological Association, Stress in America: money, inflation, war pile on to nation stuck in COVID-19 survival mode, March 2022", url: "https://www.apa.org/news/press/releases/stress/2022/march-2022-survival-mode" },
   { label: "Our World in Data: child mortality, life expectancy, extreme poverty and natural disaster deaths (world series fetched 19 September 2026)", url: "https://ourworldindata.org/" },
   { label: "Gapminder and the UN Population Division: population by country, used to turn disaster deaths into a rate", url: "https://www.gapminder.org/data/documentation/gd003/" },
   { label: "World Bank World Development Indicators: access to electricity, and basic drinking water from the WHO and UNICEF Joint Monitoring Programme", url: "https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS" },
@@ -123,6 +157,21 @@ const sources = [
   { label: "Action for Children, Talking to your child about upsetting news stories", url: "https://parents.actionforchildren.org.uk/feelings-behaviour/talking-about-feelings/talk-to-child-news/" },
 ];
 
+/** The plus that turns to a cross when a disclosure opens, as in the checklist questions. */
+function Plus() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 18 18"
+      aria-hidden="true"
+      className="no-print flex-none transition-transform duration-300 group-open:rotate-45"
+    >
+      <path d="M9 0v18M0 9h18" fill="none" stroke="currentColor" strokeWidth="3" />
+    </svg>
+  );
+}
+
 export default function WorriedPage() {
   return (
     <main>
@@ -131,68 +180,108 @@ export default function WorriedPage() {
         lede="This page is for the moment when the headlines have got to you and the rest of the site feels like too much. Nothing here is a substitute for a doctor or a counsellor. It is what they, and people who have lived through worse, tend to say."
       />
 
+      <div className="border-b-[3px] border-ink bg-hush">
+        <p className="wrap py-3.5 text-[1.0625rem] leading-snug">
+          <span className="font-extrabold">If it is more than worry:</span> call Samaritans on{" "}
+          <a href="tel:116123" className="font-extrabold">
+            116&nbsp;123
+          </a>{" "}
+          or text SHOUT to{" "}
+          <a href="sms:85258?body=SHOUT" className="font-extrabold">
+            85258
+          </a>
+          , free, any time.{" "}
+          <a href="#help" className="font-bold">
+            More places to turn
+          </a>
+        </p>
+      </div>
+
+      <nav aria-label="On this page" className="wrap no-print pt-8">
+        <ul className="flex flex-wrap gap-x-6 gap-y-1">
+          {onThisPage.map((l) => (
+            <li key={l.href}>
+              <a href={l.href} className="arrow-link inline-flex min-h-11 items-center">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
       <div className="wrap">
         <section
+          id="perspective"
           aria-labelledby="weakness-h"
-          className="measure prose-plain py-14 text-[1.125rem] leading-relaxed min-[900px]:py-20 min-[900px]:text-[1.1875rem]"
+          className="py-12 text-[1.125rem] leading-relaxed min-[900px]:py-16 min-[900px]:text-[1.1875rem]"
         >
-          <h2 id="weakness-h" className="h-sub">
+          <h2 id="weakness-h" className="h-sub measure">
             first, this is not weakness
           </h2>
-          <p className="mt-5">
-            Sweden&rsquo;s civil defence agency opens its national booklet with
-            one line: &ldquo;Many people may feel a sense of anxiety when faced
-            with an uncertain world.&rdquo; A government does not print that on
-            five million copies unless it is true of most of the people
-            receiving it. In a 2022 survey by the American Psychological
-            Association, almost three quarters of adults said they felt
-            overwhelmed by the number of crises facing the world. If you feel
-            frightened, you are in the majority, and the majority are not
-            unwell. They are paying attention in a way human beings were never
-            built for.
-          </p>
+          <ul className="mt-8 grid max-w-[60rem] gap-4 min-[700px]:grid-cols-2">
+            {figures.map((f) => (
+              <li key={f.number} className="border-[3px] border-ink">
+                <p className="border-b-[10px] border-ink px-4 pb-3 pt-3">
+                  <span className="mr-2 text-lg font-bold">{f.qualifier}</span>
+                  <span
+                    className="display text-[clamp(2.5rem,10vw,3.5rem)] leading-none tabular-nums"
+                    style={{ fontVariationSettings: '"wdth" 115' }}
+                  >
+                    {f.number}
+                  </span>
+                </p>
+                <p className="px-4 pt-3 font-semibold leading-snug">{f.label}</p>
+                <p className="px-4 pb-3 pt-2 text-sm text-ink-2">{f.source}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="measure prose-plain mt-10">
+            <p>
+              If you feel frightened, you are in the majority, and the majority are not unwell. They are paying
+              attention in a way human beings were never built for. Sweden&rsquo;s civil defence agency opens its
+              national booklet with one line: &ldquo;Many people may feel a sense of anxiety when faced with an
+              uncertain world.&rdquo;
+            </p>
 
-          <h2 className="h-sub mt-14">why it feels worse than it is</h2>
-          <p className="mt-5">
-            A hundred years ago you would not have known about a flood in New
-            Zealand, a shooting in another country, or, most days, a fire in
-            the next town. You would have known what happened to the people you
-            could see. Your sense of how dangerous the world was came from
-            your street.
-          </p>
-          <p>
-            Now the worst thing that happens to any of eight billion people,
-            anywhere, arrives in your hand within minutes, and then again from
-            another angle, and then with the comments. Your brain has no way to
-            file that as far away. It responds as if the danger were nearby,
-            because for all of human history it was. Researchers who study
-            this have a name for the result. In one study of American adults,
-            about one in six had what the authors called severely problematic
-            news consumption, and of those nearly three quarters reported poor
-            mental health and more than half reported physical symptoms, against
-            fewer than one in ten of everyone else. The news did not make the
-            world more dangerous. It made it feel that way, all day.
-          </p>
-          <p>
-            None of this means the risks are imaginary. It means the feeling
-            and the risk have come apart, and it is the feeling that is making
-            you miserable.
-          </p>
+            <h2 className="h-sub mt-14">why it feels worse than it is</h2>
+            <p className="mt-5">
+              The news did not make the world more dangerous. It made it feel that way, all day. None of this means
+              the risks are imaginary. It means the feeling and the risk have come apart, and it is the feeling that
+              is making you miserable.
+            </p>
+            <details className="group mt-4 border-y-2 border-ink">
+              <summary className="flex min-h-11 cursor-pointer items-center list-none gap-2.5 [&::-webkit-details-marker]:hidden font-bold">
+                how the news does this <Plus />
+              </summary>
+              <div className="pb-4">
+                <p>
+                  A hundred years ago you would not have known about a flood in New Zealand, a shooting in another
+                  country, or, most days, a fire in the next town. Your sense of how dangerous the world was came
+                  from your street.
+                </p>
+                <p>
+                  Now the worst thing that happens to any of eight billion people, anywhere, arrives in your hand
+                  within minutes, and then again from another angle, and then with the comments. Your brain has no
+                  way to file that as far away. It responds as if the danger were nearby, because for all of human
+                  history it was.
+                </p>
+              </div>
+            </details>
 
-          <div className="mt-12">
-            <Callout title="The one idea to keep">
-              <p>
-                Fear is the feeling of a threat with nothing to do about it.
-                Preparation is the doing. That is why people who fill two bottles
-                and write three phone numbers on a card feel calmer afterwards,
-                and why people who scroll for another hour do not.
-              </p>
-            </Callout>
+            <div className="mt-12">
+              <Callout title="The one idea to keep">
+                <p>
+                  Fear is the feeling of a threat with nothing to do about it. Preparation is the doing. Fill two
+                  water bottles. Write three phone numbers on a card. Check the torch works. People who do something
+                  small feel calmer afterwards; people who scroll for another hour do not.
+                </p>
+              </Callout>
+            </div>
           </div>
         </section>
       </div>
 
-      <section aria-labelledby="safest-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
+      <section id="figures" aria-labelledby="safest-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
         <div className="wrap">
           <div className="measure text-[1.125rem] leading-relaxed">
             <h2 id="safest-h" className="h-sub">
@@ -236,7 +325,7 @@ export default function WorriedPage() {
         </div>
       </section>
 
-      <section aria-labelledby="habits-h" className="border-t-[3px] border-ink pb-6 pt-14 min-[900px]:pb-10 min-[900px]:pt-20">
+      <section id="habits" aria-labelledby="habits-h" className="border-t-[3px] border-ink pb-6 pt-14 min-[900px]:pb-10 min-[900px]:pt-20">
         <div className="wrap">
           <div className="measure">
             <h2 id="habits-h" className="h-sub">
@@ -250,26 +339,29 @@ export default function WorriedPage() {
           </div>
         </div>
         {habitGroups.map((g) => (
-          <div key={g.name} className="mt-10 min-[900px]:mt-14">
-            <div
-              {...(g.cat ? { "data-cat": true } : {})}
-              className={`${g.cat ? catBg[g.cat] : "bg-paper"} border-y-[3px] border-ink`}
-            >
+          <div key={g.cat} className="mt-10 min-[900px]:mt-14">
+            <div data-cat className={`${catBg[g.cat]} border-y-[3px] border-ink`}>
               <div className="wrap flex flex-wrap items-baseline gap-x-6 gap-y-1 pb-5 pt-6 min-[900px]:pb-6 min-[900px]:pt-8">
                 <h3
                   className="display text-[clamp(2.25rem,9vw,4rem)]"
                   style={{ fontVariationSettings: '"wdth" 115' }}
                 >
-                  {g.name}
+                  {g.cat}
                 </h3>
                 <p className="text-[1.125rem] font-semibold leading-snug">{g.line}</p>
               </div>
             </div>
             <ul className="wrap grid gap-x-14 min-[900px]:grid-cols-2 min-[1200px]:grid-cols-3">
               {g.habits.map((h) => (
-                <li key={h.title} className="max-w-[60ch] border-b border-ink pb-7 pt-6 last:border-b-0 min-[900px]:border-b-0 min-[900px]:only:col-span-2">
+                <li key={h.title} className="max-w-[60ch] border-b border-ink pb-5 pt-6 last:border-b-0 min-[900px]:border-b-0 min-[900px]:only:col-span-2">
                   <h4 className="text-[1.3125rem] font-extrabold leading-tight min-[900px]:text-[1.5rem]">{h.title}</h4>
-                  <p className="mt-3 text-[1.125rem] leading-relaxed">{h.body}</p>
+                  <p className="mt-3 text-[1.125rem] leading-relaxed">{h.lead}</p>
+                  <details className="group mt-1 text-[1.125rem] leading-relaxed">
+                    <summary className="flex min-h-11 cursor-pointer items-center list-none gap-2.5 [&::-webkit-details-marker]:hidden font-bold">
+                      why this helps <Plus />
+                    </summary>
+                    <p className="pb-1">{h.more}</p>
+                  </details>
                 </li>
               ))}
             </ul>
@@ -293,6 +385,7 @@ export default function WorriedPage() {
       </section>
 
       <section
+        id="help"
         aria-labelledby="help-h"
         className="border-t-[3px] border-ink bg-hush py-14 min-[900px]:py-20"
       >
@@ -329,7 +422,33 @@ export default function WorriedPage() {
         </div>
       </section>
 
-      <section aria-labelledby="ready-h" className="border-t-[3px] border-ink py-14 min-[900px]:py-20">
+      <section aria-labelledby="sources-h" className="border-t-[3px] border-ink py-8">
+        <details className="group wrap">
+          <summary className="flex min-h-11 cursor-pointer items-center list-none gap-2.5 [&::-webkit-details-marker]:hidden">
+            <h2 id="sources-h" className="text-[1.3125rem]">
+              sources
+            </h2>
+            <span className="text-ink-2">{sources.length} studies and guides</span>
+            <Plus />
+          </summary>
+          <ul className="measure mt-4 border-b border-ink text-[0.9375rem] leading-snug text-ink-2">
+            {sources.map((s) => (
+              <li key={s.url} className="border-t border-ink">
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block py-3 text-ink-2 hover:text-ink"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </section>
+
+      <section aria-labelledby="ready-h" className="border-t-[3px] border-ink pb-16 pt-14 min-[900px]:pb-24 min-[900px]:pt-20">
         <div className="wrap">
           <div className="measure">
             <h2 id="ready-h" className="h-sub">
@@ -353,27 +472,6 @@ export default function WorriedPage() {
         </div>
       </section>
 
-      <section aria-labelledby="sources-h" className="border-t-[3px] border-ink pb-16 pt-10 min-[900px]:pb-24">
-        <div className="wrap">
-          <h2 id="sources-h" className="text-[1.3125rem]">
-            sources
-          </h2>
-          <ul className="measure mt-4 border-b border-ink text-[0.9375rem] leading-snug text-ink-2">
-            {sources.map((s) => (
-              <li key={s.url} className="border-t border-ink">
-                <a
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block py-3 text-ink-2 hover:text-ink"
-                >
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
     </main>
   );
 }

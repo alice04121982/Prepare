@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type KeyboardEvent, type PointerEvent } from "react";
 import type { Point } from "@/data/safer-world";
+import { catBg, type Cat } from "@/components/PageIntro";
 
 type Country = { code: string; name: string };
 type Series = {
@@ -39,6 +40,18 @@ type Measure = {
   countryNote?: string;
   /** Charted for the world only; a country gets this reason instead. */
   worldOnly?: string;
+  /**
+   * The kit category this measure is about, named in the chart head and
+   * filling the area under the line. Measures that name no category stay ink.
+   */
+  cat?: Cat;
+};
+
+/** Area fill for each category that a chart can name. */
+const catFill: Partial<Record<Cat, string>> = {
+  water: "fill-cat-water",
+  power: "fill-cat-power",
+  health: "fill-cat-health",
 };
 
 /** "12 in 100", or "everyone" once the share rounds to 100. */
@@ -57,6 +70,7 @@ const MEASURES: Measure[] = [
     axis: (v) => `${v} in 100`,
     kind: "line",
     minTop: 5,
+    cat: "health",
   },
   {
     key: "life",
@@ -64,6 +78,7 @@ const MEASURES: Measure[] = [
     say: (v) => `${Math.round(v)} years`,
     axis: (v) => `${v} years`,
     kind: "line",
+    cat: "health",
   },
   {
     key: "poverty",
@@ -82,6 +97,7 @@ const MEASURES: Measure[] = [
     axis: (v) => `${v} in 100`,
     kind: "line",
     minTop: 100,
+    cat: "water",
     definition:
       "At least a basic supply: a safe source no more than a 30-minute round trip away. WHO and UNICEF figures.",
   },
@@ -92,6 +108,7 @@ const MEASURES: Measure[] = [
     axis: (v) => `${v} in 100`,
     kind: "line",
     minTop: 100,
+    cat: "power",
     definition: "World Bank figures, from household surveys.",
   },
   {
@@ -243,7 +260,15 @@ function Chart({ m, points, place, isWorld }: { m: Measure; points: Point[]; pla
   return (
     <figure className="border-[3px] border-ink bg-paper">
       <div className="border-b-[10px] border-ink px-4 pb-3 pt-3">
-        <figcaption className="text-[0.9375rem] font-extrabold">{m.title}</figcaption>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+          <figcaption className="text-[0.9375rem] font-extrabold">{m.title}</figcaption>
+          {m.cat ? (
+            <span className="inline-flex items-center gap-1.5 text-sm font-extrabold">
+              <span data-cat aria-hidden="true" className={`size-3.5 border-2 border-ink ${catBg[m.cat]}`} />
+              {m.cat}
+            </span>
+          ) : null}
+        </div>
         <p className="mt-1.5 flex flex-wrap items-baseline gap-x-2.5 tabular-nums">
           {m.say(first[1]) === m.say(last[1]) ? (
             <span className="sr-only">in {first[0]}{s} and now</span>
@@ -308,7 +333,8 @@ function Chart({ m, points, place, isWorld }: { m: Measure; points: Point[]; pla
                   {run.length > 1 ? (
                     <polygon
                       points={`${X(run[0][0])},${base} ${pts(run)} ${X(run[run.length - 1][0])},${base}`}
-                      className="fill-hush"
+                      {...(m.cat ? { "data-cat": true } : {})}
+                      className={(m.cat && catFill[m.cat]) || "fill-hush"}
                     />
                   ) : null}
                   {run.length > 1 ? (
@@ -385,7 +411,9 @@ function Chart({ m, points, place, isWorld }: { m: Measure; points: Point[]; pla
       {!isWorld && m.countryNote ? <p className="px-4 pb-2 text-sm leading-snug text-ink-2">{m.countryNote}</p> : null}
       {decades && place === "United Kingdom" ? <HeatNote /> : null}
       <details className="mt-1 border-t-2 border-ink px-4 py-2.5 text-sm">
-        <summary className="cursor-pointer font-bold">Show the figures</summary>
+        <summary className="cursor-pointer font-bold">
+          Show the figures<span className="sr-only"> for {m.title}</span>
+        </summary>
         <table className="mt-2 w-full tabular-nums">
           <thead>
             <tr className="text-left">
@@ -411,11 +439,12 @@ function Chart({ m, points, place, isWorld }: { m: Measure; points: Point[]; pla
 }
 
 /**
- * The "safest time there has ever been" figures on /worried: four measures
+ * The "safest time there has ever been" figures on /worried: seven measures
  * from Our World in Data as small multiples, with a country selector. The
  * world series is bundled; other countries load from /data/safer/<code>.json.
- * Drawn to DESIGN.md: ink on paper, no category colour (these are not kit
- * categories), 3px frames, quantity type for the numbers.
+ * Drawn to DESIGN.md: ink on paper, 3px frames, quantity type for the
+ * numbers. A measure about a kit category (water, power, health) names it in
+ * the head and fills its area with that colour; the rest stay ink on Hush.
  */
 export default function SaferWorld({ world }: { world: Series }) {
   const [countries, setCountries] = useState<Country[]>([]);

@@ -55,7 +55,7 @@ export const scenarios: Scenario[] = [
     ],
     worthKnowing: [
       "Candles cause fires every year during outages. Torches and battery lanterns are safer and brighter.",
-      "Never run a generator, camping stove, or barbecue indoors or in a garage. Carbon monoxide is the leading cause of outage-related deaths.",
+      "Never run a generator, camping stove, or barbecue indoors or in a garage. Never use indoors: carbon monoxide from these devices causes poisoning and death.",
       "If someone at home relies on powered medical equipment, register with your network operator's Priority Services Register now, while the power is on.",
     ],
     community:
