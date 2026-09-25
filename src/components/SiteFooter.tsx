@@ -52,8 +52,8 @@ export default function SiteFooter() {
             you. As an Amazon Associate we earn from qualifying purchases.
           </p>
           <p>
-            Figures from gov.uk, the WHO, the Met Office and the NHS. Free to
-            share. Check official guidance for your region too.
+            Figures from gov.uk, the WHO, the Met Office and the NHS. Check
+            official guidance for your region too.
           </p>
         </div>
       </div>
