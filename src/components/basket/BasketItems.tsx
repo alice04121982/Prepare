@@ -273,7 +273,11 @@ export default function BasketItems({
             and it leaves the basket.
           </p>
           <p className="mt-3 text-[0.8125rem] leading-snug text-ink-2">
-            As an Amazon Associate we earn from qualifying purchases.
+            Every product is checked by hand against{" "}
+            <Link href="/how-we-choose-products" className="font-bold text-ink">
+              our rules
+            </Link>
+            . As an Amazon Associate we earn from qualifying purchases.
           </p>
         </div>
       </aside>

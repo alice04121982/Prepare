@@ -171,7 +171,10 @@ chart reads its rows from the `chart` fields in `scenarios.ts`.
   Read the relevant one before revisiting a decision it covers.
 - **`docs/product-policy.md`** (approved 24 September 2026) sets how a product
   is chosen, verified and rechecked. `verified: true` is set only by a
-  person who has opened the listing, never from search results.
+  person who has opened the listing, never from search results. Its public
+  version is `/how-we-choose-products`, which counts verified products from
+  `products.ts`; keep the rules in step. `/privacy` must change whenever
+  what the site collects changes (analytics events, email, forms).
 - **`docs/look-and-feel.md`** is superseded on palette and styling by
   `DESIGN.md`. Its diagram rationale still stands.
 

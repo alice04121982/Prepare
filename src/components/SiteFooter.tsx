@@ -9,6 +9,8 @@ const links = [
   { href: "/community", label: "Neighbours" },
   { href: "/guides", label: "Short answers" },
   { href: "/sources", label: "Sources" },
+  { href: "/how-we-choose-products", label: "How we choose products" },
+  { href: "/privacy", label: "Privacy" },
 ];
 
 
