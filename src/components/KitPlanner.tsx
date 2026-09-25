@@ -6,38 +6,24 @@ import {
   daysLabel,
   defaultHousehold,
   householdToQuery,
-  MAX_DAYS,
-  MIN_DAYS,
   retailers,
   type Household,
   type Retailer,
 } from "@/data/kit-rules";
 import { ExternalLink, ShoppingBasket } from "lucide-react";
 import { amazonImageUrl, amazonProductUrl, productsFor, type Tier } from "@/data/products";
-import { Counter, DaysControl, FixedDays, OptionRow, TickBox } from "@/components/kit/Controls";
-import { ListPicker } from "@/components/kit/ListPicker";
+import { Counter, OptionRow, TickBox } from "@/components/kit/Controls";
+import { LengthTiles, tileClass } from "@/components/kit/LengthTiles";
 import { TierPicker } from "@/components/kit/TierPicker";
 import { DownArrow, goToBuy, StillToGetBar } from "@/components/kit/StillToGet";
 import { catBgFor } from "@/components/kit/categories";
 import { kitLineKey } from "@/data/have-map";
-import { buysFor, packTotals } from "@/data/packs";
-import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
+import { DURATIONS, packFor } from "@/data/packs";
+import AmazonBasketButton, { basketLabel, COMMISSION_NOTE } from "@/components/AmazonBasketButton";
 import { useHave } from "@/lib/have";
-import { daysRangeFor, defaultDaysFor, listBySlug, listForDays, type ListSlug } from "@/data/lists";
+import { listBySlug, listForDays } from "@/data/lists";
 
 import { AMAZON_TAG as TAG } from "@/lib/amazon";
-
-/** Quick picks under the days stepper, per list. Without a list, the original three. */
-/**
- * Quick lengths beside the days box. Any whole number from MIN_DAYS to
- * MAX_DAYS can be typed; the kit follows the number (see setDays below).
- */
-const PRESETS = [
-  { days: 3, note: "the government minimum" },
-  { days: 14, note: "2 weeks" },
-  { days: 30, note: "a month" },
-  { days: 90, note: "3 months" },
-];
 
 /** Small solid block of a category's label colour, or plain paper for household lines. */
 function Swatch({ category }: { category: string }) {
@@ -123,22 +109,28 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const ticked = total - toBuy.length;
   const remaining = toBuy.length;
   const tier: Tier = h.tier ?? "regular";
-  // Babies do not change pack sizes; the basket counts adults and children.
-  const basketPeople = h.adults + h.children;
+  const owned = (id: string) => have.has(kitLineKey(id));
+  // The basket, priced and filled by the same rules as the home page.
+  const pack = useMemo(() => packFor(h, (id) => have.has(kitLineKey(id)), tier), [h, have, tier]);
+  const packQty = new Map(pack.buys.map((b) => [`${b.line.id}|${b.product.asin}`, b.quantity]));
   const picks = toBuy
     .map((l) => ({ line: l, product: productsFor(l.productsFrom ?? l.id, tier)[0] }))
     .map(({ line, product }) => ({
       line,
       product,
-      buyQty: product ? Math.max(1, Math.ceil(line.quantity / (product.unitsPerProduct ?? 1))) : 0,
+      buyQty: product
+        ? (packQty.get(`${line.id}|${product.asin}`) ?? Math.max(1, Math.ceil(line.quantity / (product.unitsPerProduct ?? 1))))
+        : 0,
     }));
-  // The basket shares its rules with the homepage packs, so a line split
-  // across products (tins as beans and soup) buys each part.
-  const basketBuys = buysFor(toBuy, basketPeople, tier);
+  const basketBuys = pack.buys;
   // What the same basket would roughly cost in each range, for the picker.
   const estimates = Object.fromEntries(
-    (["budget", "regular", "premium"] as const).map((t) => [t, packTotals(buysFor(toBuy, basketPeople, t)).estimate]),
+    (["budget", "regular", "premium"] as const).map((t) => [t, t === tier ? pack.estimate : packFor(h, owned, t).estimate]),
   ) as Record<Tier, number>;
+  // And at each of the four lengths, for the tiles.
+  const lengthEstimates = Object.fromEntries(
+    DURATIONS.map((d) => [d.days, packFor({ ...h, days: d.days, list: listForDays(d.days) }, owned, tier).estimate]),
+  );
   const setTier = (t: Tier) => setH((prev) => ({ ...prev, tier: t === "regular" ? undefined : t }));
   const basket = basketBuys.length > 0;
   const asinCount = basketBuys.length;
@@ -149,18 +141,10 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const list = h.list ? listBySlug(h.list) : undefined;
   const isGrabBag = h.list === "grab-bag";
 
-  // A new list keeps the days if they fit its range, otherwise starts at its default.
-  // Typing a length moves to the kit that covers it, or to "your own length"
-  // when none does, so the kit shown always matches the days.
+  // A length opens the kit that covers it, or "your own length" when none
+  // does, so the kit shown always matches the days.
   const setDays = (days: number) => setH((prev) => ({ ...prev, days, list: listForDays(days) }));
-  // "Your own length" (no list) keeps the days as they are.
-  const chooseList = (slug: ListSlug | undefined) =>
-    setH((prev) => {
-      if (!slug) return { ...prev, list: undefined };
-      const { min, max } = daysRangeFor(slug);
-      const days = prev.days >= min && prev.days <= max ? prev.days : defaultDaysFor(slug);
-      return { ...prev, list: slug, days };
-    });
+  const chooseGrabBag = () => setH((prev) => ({ ...prev, list: "grab-bag", days: 3 }));
 
   const plainText = () => {
     const people = h.adults + h.children + h.babies;
@@ -191,8 +175,9 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
 
   const people = h.adults + h.children + h.babies;
 
+  // Phones only: on wide screens the sticky "still to get" box carries it.
   const basketBlock = basket ? (
-    <div className="mt-8 max-w-md">
+    <div className="mt-8 max-w-md min-[900px]:hidden">
       <AmazonBasketButton items={basketBuys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}>
         {basketLabel(asinCount)}
       </AmazonBasketButton>
@@ -205,15 +190,35 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
       <div className="no-print min-w-0">
         <div className={fits ? "min-[900px]:sticky min-[900px]:top-6" : "contents"}>
           <div ref={listRef}>
-            <ListPicker value={h.list} onChange={chooseList} />
-            {/* How long: straight under the kit, since the two move together */}
-            <div className="border-x-[3px] border-t-[3px] border-ink pt-2">
-              {isGrabBag ? (
-                <FixedDays label="Packed for" value="3 days" note="Enough to carry. Bottled water covers the first day and the filter bottles the rest." />
-              ) : (
-                <DaysControl value={h.days} onChange={setDays} min={MIN_DAYS} max={MAX_DAYS} presets={PRESETS} />
-              )}
-            </div>
+            <fieldset className="border-x-[3px] border-t-[3px] border-ink px-4.5 pb-4 pt-3.5 min-[900px]:px-6">
+              <legend className="float-left mb-3 w-full text-lg font-extrabold">How long for</legend>
+              <div className="clear-both">
+                <LengthTiles days={h.days} onChange={setDays} estimates={lengthEstimates} active={!isGrabBag} />
+              </div>
+              <div className={`${tileClass} mt-2`}>
+                <input
+                  type="radio"
+                  name="kit-grab-bag"
+                  id="kit-grab-bag"
+                  checked={isGrabBag}
+                  onChange={chooseGrabBag}
+                  className="sr-only"
+                />
+                <label
+                  htmlFor="kit-grab-bag"
+                  className="flex cursor-pointer items-baseline justify-between gap-3 px-3 py-2.5"
+                >
+                  <span className="display text-[1.5rem] leading-none" style={{ fontVariationSettings: '"wdth" 115' }}>
+                    grab bag
+                  </span>
+                  <span className="text-sm font-bold">to carry, 3 days</span>
+                </label>
+              </div>
+              <p className="mt-3 text-[0.9375rem] leading-snug text-ink-2">
+                {list ? list.description : `Your own length: the home list, scaled to ${daysLabel(h.days)}.`}
+                {isGrabBag ? " Bottled water covers the first day and the filter bottles the rest." : null}
+              </p>
+            </fieldset>
             <div className="border-x-[3px] border-t-[3px] border-ink">
               <TierPicker value={tier} onChange={setTier} estimates={estimates} />
             </div>
@@ -286,8 +291,17 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             <p className={`mt-1.5 text-ink-2 ${haveReady ? "" : "invisible"}`}>
               <span className="tabular-nums">{ticked}</span> already ticked
             </p>
+            {basket ? (
+              <AmazonBasketButton
+                items={basketBuys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
+                className="mt-4"
+                note={COMMISSION_NOTE}
+              >
+                {basketLabel(asinCount)}
+              </AmazonBasketButton>
+            ) : null}
             <a href="#buy" onClick={goToBuy} className="arrow-link mt-1">
-              where to buy <DownArrow />
+              {basket ? "or each item and where to buy it" : "where to buy"} <DownArrow />
             </a>
           </div>
         </div>
@@ -310,6 +324,16 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
               Tick what you already have. Ticked lines stay on the list and drop out of what to buy. Ticks are kept
               in this browser, and the link in your address bar carries your household.
             </p>
+            {basket ? (
+              // First screen on wide screens; hidden when the pinned column already shows the basket.
+              <AmazonBasketButton
+                items={basketBuys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
+                className={`no-print mt-5 max-w-lg ${fits ? "min-[900px]:hidden" : ""}`}
+                note={COMMISSION_NOTE}
+              >
+                {basketLabel(asinCount)}
+              </AmazonBasketButton>
+            ) : null}
             {haveReady && ticked > 0 ? (
               <button
                 type="button"
@@ -416,7 +440,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
           <div>
             <h3 className="h-sub">ready to buy what is left?</h3>
           </div>
-          <a href="#buy" onClick={goToBuy} className="btn btn-primary btn-lg mt-5 min-[900px]:mt-0">
+          <a href="#buy" onClick={goToBuy} className="btn btn-secondary btn-lg mt-5 min-[900px]:mt-0">
             where to buy it <DownArrow />
           </a>
         </div>
@@ -662,7 +686,17 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
         </div>
       </section>
 
-      <StillToGetBar remaining={remaining} watch="kit-stage-1" hideOver={["kit-household", "kit-buy"]} />
+      <StillToGetBar remaining={remaining} watch="kit-stage-1" hideOver={["kit-household", "kit-buy"]}>
+        {basket ? (
+          <AmazonBasketButton
+            items={basketBuys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
+            className="mt-1"
+            note="We earn a small commission, at no extra cost to you."
+          >
+            {basketLabel(asinCount)}
+          </AmazonBasketButton>
+        ) : null}
+      </StillToGetBar>
     </div>
   );
 }

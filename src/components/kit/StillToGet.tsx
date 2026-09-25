@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 import Arrow from "@/components/home/Arrow";
 
 /** The heavy arrow turned to point down the page. */
@@ -27,7 +27,8 @@ export function goToBuy(e: MouseEvent<HTMLAnchorElement>) {
 
 /**
  * Phone only. The reach bar grammar from the homepage, carrying the count
- * of unticked lines and a way down to the buy stage. It slides up once the
+ * of unticked lines, a way down to the buy stage and, as `children`, the
+ * basket button. It slides up once the
  * list heading reaches the top of the screen and tucks away over the
  * household panel, the buy stage and the footer.
  */
@@ -35,10 +36,12 @@ export function StillToGetBar({
   remaining,
   watch,
   hideOver,
+  children,
 }: {
   remaining: number;
   watch: string;
   hideOver: string[];
+  children?: ReactNode;
 }) {
   const [show, setShow] = useState(false);
   const hideKey = hideOver.join(" ");
@@ -91,10 +94,15 @@ export function StillToGetBar({
             <span>nothing left to get</span>
           )}
         </p>
-        <a href="#buy" onClick={goToBuy} className="btn btn-secondary flex-none">
-          where to buy <DownArrow />
+        <a
+          href="#buy"
+          onClick={goToBuy}
+          className={children ? "inline-flex min-h-11 flex-none items-center gap-1.5 font-bold underline underline-offset-4" : "btn btn-secondary flex-none"}
+        >
+          where to buy <DownArrow size={children ? 16 : 20} />
         </a>
       </div>
+      {children}
     </div>
   );
 }

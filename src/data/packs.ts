@@ -1,9 +1,10 @@
-import { buildKit, defaultHousehold, type KitLine } from "@/data/kit-rules";
+import { buildKit, defaultHousehold, type Household, type KitLine } from "@/data/kit-rules";
 import { productsFor, type Product, type Tier } from "@/data/products";
 
 /**
- * Complete packs for the homepage: everything on the planner's list for a
- * household and a length of time, in one Amazon basket.
+ * Complete packs: everything on the planner's list for a household and a
+ * length of time, in one Amazon basket. The home page and /kits both price
+ * and fill their baskets here, so a length costs the same on either page.
  *
  * A pack never leaves things out to hit a price. The price is what the
  * household's list costs, estimated from the middle of each product's price
@@ -18,11 +19,10 @@ import { productsFor, type Product, type Tier } from "@/data/products";
  */
 export const DURATIONS = [
   { days: 3, label: "3 days", note: "the government's advice" },
-  { days: 7, label: "1 week" },
   { days: 14, label: "2 weeks" },
-  { days: 28, label: "4 weeks" },
+  { days: 30, label: "1 month" },
+  { days: 90, label: "3 months" },
 ] as const;
-export type PackDays = (typeof DURATIONS)[number]["days"];
 
 export const BOTTLED_DAYS = 7;
 
@@ -88,34 +88,47 @@ export function buysFor(lines: KitLine[], people: number, tier: Tier = "regular"
 }
 
 /**
- * The pack for `people` over `days`, leaving out anything the reader has
+ * The pack for a whole household, leaving out anything the reader has
  * already ticked (`owned` returns true for a line id they have).
  */
-export function buildPack(
-  people: number,
-  days: number,
+export function packFor(
+  household: Household,
   owned: (lineId: string) => boolean = () => false,
   tier: Tier = "regular",
 ): Pack {
-  const household = { ...defaultHousehold, adults: Math.max(1, people), days };
   const { lines } = buildKit(household);
-  const bottledDays = Math.min(days, BOTTLED_DAYS);
-  const bottled = buildKit({ ...household, days: bottledDays }).lines.find((l) => l.id === "water");
+  // Worked out without the list, whose range would pull 7 days back up to its minimum.
+  const bottled =
+    household.days > BOTTLED_DAYS
+      ? buildKit({ ...household, list: undefined, days: BOTTLED_DAYS }).lines.find((l) => l.id === "water")
+      : undefined;
   const adjusted = lines.map((line) => (line.id === "water" && bottled ? bottled : line));
   const needed = adjusted.filter((l) => !owned(l.id));
-  const buys = buysFor(needed, household.adults, tier);
+  // Babies do not change pack sizes; the basket counts adults and children.
+  const people = household.adults + household.children;
+  const buys = buysFor(needed, people, tier);
   const bought = new Set(buys.map((b) => b.line.id));
   const waterBuy = buys.find((b) => b.line.id === "water");
 
   return {
-    people: household.adults,
-    days,
+    people,
+    days: household.days,
     buys,
     ...packTotals(buys),
     elsewhere: needed.filter((l) => !bought.has(l.id)),
     // A planner unit of water is a six-pack of 1.5 litres: 9 litres.
     bottledLitres: waterBuy ? Math.round(waterBuy.quantity * (waterBuy.product.unitsPerProduct ?? 1) * 9) : 0,
   };
+}
+
+/** The pack for `people` adults over `days`, as the home page asks for it. */
+export function buildPack(
+  people: number,
+  days: number,
+  owned: (lineId: string) => boolean = () => false,
+  tier: Tier = "regular",
+): Pack {
+  return packFor({ ...defaultHousehold, adults: Math.max(1, people), days }, owned, tier);
 }
 
 /** The estimate and its two parts, for any set of buys: all of a pack, or what the reader has left ticked. */

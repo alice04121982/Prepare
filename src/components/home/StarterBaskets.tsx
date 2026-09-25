@@ -2,19 +2,19 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
+import AmazonBasketButton, { basketLabel, COMMISSION_NOTE as NOTE } from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
-import { MAX_DAYS, MIN_DAYS, defaultHousehold, householdToQuery } from "@/data/kit-rules";
+import { defaultHousehold, householdToQuery } from "@/data/kit-rules";
 import { listForDays } from "@/data/lists";
 import { DURATIONS, buildPack } from "@/data/packs";
 import type { Tier } from "@/data/products";
 import { TierPicker } from "@/components/kit/TierPicker";
+import { LengthTiles } from "@/components/kit/LengthTiles";
 import KitDrawer from "@/components/home/KitDrawer";
 import { useHave } from "@/lib/have";
 
 const MAX_PEOPLE = 12;
 const TIERS: Tier[] = ["budget", "regular", "premium"];
-const NOTE = "Amazon opens and asks you to confirm. We earn a small commission, at no extra cost to you.";
 
 /** The kits page, opened on this many people and days. */
 const kitHref = (people: number, days: number, tier: Tier) =>
@@ -40,12 +40,8 @@ const stepClass =
 export default function StarterBaskets() {
   const [people, setPeople] = useState(2);
   const [days, setDays] = useState(3);
-  // What is typed in the days box, kept apart from `days` so a half-typed or
-  // out-of-range number never replaces the last good choice.
-  const [typed, setTyped] = useState("");
   const [tier, setTier] = useState<Tier>("regular");
   const [drawer, setDrawer] = useState(false);
-  const [askDays, setAskDays] = useState(false);
   const { have } = useHave();
 
   const owned = (id: string) => have.has(kitLineKey(id));
@@ -53,6 +49,7 @@ export default function StarterBaskets() {
     () => DURATIONS.map((d) => buildPack(people, d.days, (id) => have.has(kitLineKey(id)), tier)),
     [people, have, tier],
   );
+  const lengthEstimates = Object.fromEntries(packs.map((p) => [p.days, p.estimate]));
   const preset = packs.find((p) => p.days === days);
   const chosen = preset ?? buildPack(people, days, owned, tier);
   // The same household and length in each range, for the picker's totals.
@@ -60,12 +57,6 @@ export default function StarterBaskets() {
     TIERS.map((t) => [t, t === tier ? chosen.estimate : buildPack(people, days, owned, t).estimate]),
   ) as Record<Tier, number>;
   const url = chosen.buys.length > 0;
-
-  function onTyped(value: string) {
-    setTyped(value);
-    const n = Number(value);
-    if (Number.isInteger(n) && n >= MIN_DAYS && n <= MAX_DAYS) setDays(n);
-  }
 
   return (
     <section id="hero-actions" aria-labelledby="kit-h" className="border-[3px] border-ink">
@@ -115,74 +106,8 @@ export default function StarterBaskets() {
 
         <fieldset className="px-4.5 pb-4 pt-3.5 min-[900px]:border-r min-[900px]:border-ink min-[900px]:px-6">
           <legend className="float-left mb-3 w-full text-lg font-extrabold">How long for</legend>
-          <div className="clear-both grid grid-cols-2 gap-2 min-[1200px]:grid-cols-4">
-            {packs.map((p) => {
-              const d = DURATIONS.find((x) => x.days === p.days)!;
-              return (
-                <div
-                  key={p.days}
-                  className="rounded-[4px] border-2 border-ink hover:bg-[var(--hover)] has-checked:bg-hush has-checked:shadow-[inset_0_0_0_2px_var(--ink)] has-focus-visible:outline-3 has-focus-visible:outline-offset-3 has-focus-visible:outline-ink"
-                >
-                  <input
-                    type="radio"
-                    name="days"
-                    id={`pack-${p.days}`}
-                    value={p.days}
-                    checked={days === p.days}
-                    onChange={() => {
-                      setDays(d.days);
-                      setTyped("");
-                    }}
-                    className="sr-only"
-                  />
-                  <label htmlFor={`pack-${p.days}`} className="flex h-full cursor-pointer flex-col px-3 py-2.5">
-                    <span
-                      className="display text-[1.75rem] leading-none min-[1200px]:whitespace-nowrap min-[1200px]:text-[1.5rem]"
-                      style={{ fontVariationSettings: '"wdth" 115' }}
-                    >
-                      {d.label}
-                    </span>
-                    <span className="mt-1.5 text-sm font-bold leading-snug">
-                      {p.buys.length ? `about £${p.estimate}` : "nothing left to add"}
-                      {"note" in d ? <span className="block font-normal">{d.note}</span> : null}
-                    </span>
-                  </label>
-                </div>
-              );
-            })}
-          </div>
-          <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
-            {askDays || typed ? (
-              <>
-                <label htmlFor="kit-days" className="text-[0.9375rem] font-bold">
-                  Or a number of days
-                </label>
-                <input
-                  id="kit-days"
-                  type="number"
-                  inputMode="numeric"
-                  min={MIN_DAYS}
-                  max={MAX_DAYS}
-                  step={1}
-                  value={typed}
-                  onChange={(e) => onTyped(e.target.value)}
-                  aria-describedby="kit-days-hint"
-                  className="field h-12 w-24 text-lg tabular-nums"
-                  autoFocus
-                />
-                <span id="kit-days-hint" className="text-sm text-ink-2">
-                  {MIN_DAYS} to {MAX_DAYS}
-                </span>
-              </>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setAskDays(true)}
-                className="flex min-h-11 items-center text-[0.9375rem] font-bold underline underline-offset-4"
-              >
-                Or a number of days
-              </button>
-            )}
+          <div className="clear-both">
+            <LengthTiles days={days} onChange={setDays} estimates={lengthEstimates} wide />
           </div>
         </fieldset>
 

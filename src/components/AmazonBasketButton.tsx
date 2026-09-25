@@ -5,6 +5,8 @@ import Arrow from "@/components/home/Arrow";
 import { AMAZON_TAG as TAG } from "@/lib/amazon";
 
 export const BASKET_NOTE = "Amazon opens and asks you to confirm. Nothing is bought until you pay.";
+/** For a basket button with no disclosure nearby. */
+export const COMMISSION_NOTE = "Amazon opens and asks you to confirm. We earn a small commission, at no extra cost to you.";
 
 /** "add 14 items to my Amazon basket": the count and the destination in the label. */
 export function basketLabel(count: number) {
