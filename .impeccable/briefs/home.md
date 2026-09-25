@@ -25,4 +25,4 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 - Resolved: seven distinct category colours, one per tin; colour appears only where a category is named (second critique, 23 September 2026).
 - Print version is untested; checklist and kit pages must print in black and white on A4.
 - Imagery: none; old photos and illustrations deleted. See docs/photo-brief.md.
-- Resolved: logo is the owner's asterisk, set against "stay" in the wordmark (25 September 2026, DESIGN.md, Logo).
+- Resolved: logo is the owner's asterisk, set to the left of "stay prepared" in the wordmark (25 September 2026, DESIGN.md, Logo).

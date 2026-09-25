@@ -26,14 +26,13 @@ export function Asterisk({ className }: { className?: string }) {
   );
 }
 
-// "stay" with the asterisk set against it like a footnote mark, then
-// "prepared". The words stay real text; the mark is hidden from screen readers.
+// The asterisk to the left of "stay prepared". The words stay real text; the
+// mark is hidden from screen readers.
 export default function Wordmark() {
   return (
-    <span className="whitespace-nowrap">
-      stay
-      <Asterisk className="ml-[0.06em] inline-block size-[0.5em] align-[0.42em]" />{" "}
-      prepared
+    <span className="inline-flex items-center gap-[0.3em] whitespace-nowrap">
+      <Asterisk className="size-[0.85em] flex-none" />
+      stay prepared
     </span>
   );
 }

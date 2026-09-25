@@ -244,7 +244,7 @@ A bold underlined text link ending in the arrow, 44px tall, width 110. Hover thi
 - **Segmented tabs:** a 3px bordered strip of 48px cells split by 3px rules; the selected cell is ink.
 
 ### Logo
-Adopted 25 September 2026. The mark is an **asterisk of four square-ended bars** (each 14.651 by 71.263, rotated 0, 45, 90 and 135 degrees about one centre), the site's own mark, drawn by the owner (Figma frame "Cross"). It sits against "stay" like a footnote mark: **stay✱ prepared**, at 0.5em, raised 0.42em, 0.06em from the y. It is always one colour, `currentColor`: ink on paper, paper on the ink footer, never a category colour. `components/Wordmark.tsx` holds both the lockup and the bare `Asterisk`.
+Adopted 25 September 2026. The mark is an **asterisk of four square-ended bars** (each 14.651 by 71.263, rotated 0, 45, 90 and 135 degrees about one centre), the site's own mark, drawn by the owner (Figma frame "Cross"). It sits to the left of the words: **✱ stay prepared**, at 0.85em, centred on the line, 0.3em from the s. It is always one colour, `currentColor`: ink on paper, paper on the ink footer, never a category colour. `components/Wordmark.tsx` holds both the lockup and the bare `Asterisk`.
 
 - **Favicon:** `app/icon.svg`, the bare asterisk in ink, switching to paper when the browser is dark. `app/favicon.ico` (16, 32, 48) and `app/icon.png` are the fallbacks, drawn by `scripts/icons.mjs` from `public/brand/mark.svg`; rerun it after changing the mark.
 - **Home screen:** `app/apple-icon.png`, 180px, ink asterisk on paper, drawn by the same script.
