@@ -86,6 +86,12 @@ the item's display name, so renaming an item in `checklist.ts` silently
 clears that one tick, unless the old key is added to `RENAMED` in
 `have.ts`, which maps it to the new one when the record is read.
 
+`/basket` adds its own choice on top: every product starts ticked, and
+unticking one leaves it out of that basket only. It is never written to the
+record (not wanting something is not owning it). What is left out rides in
+the query string as `x`, a list of ASINs parsed by `parseLeftOut` in
+`packs.ts`, so a shared link keeps it.
+
 Every `localStorage` access is wrapped and every page must render correctly
 when it throws or returns nothing. `ready` is false until the record has
 been read, so counts wait rather than flashing a zero through hydration.

@@ -105,13 +105,33 @@ export function buildPack(people: number, days: number, owned: (lineId: string) 
     people: household.adults,
     days,
     buys,
-    estimate: Math.round(buys.reduce((sum, b) => sum + b.cost, 0)),
-    kitOnce: Math.round(buys.filter((b) => KIT_ONCE.has(b.line.id)).reduce((sum, b) => sum + b.cost, 0)),
-    supplies: Math.round(buys.filter((b) => !KIT_ONCE.has(b.line.id)).reduce((sum, b) => sum + b.cost, 0)),
+    ...packTotals(buys),
     elsewhere: needed.filter((l) => !bought.has(l.id)),
     // A planner unit of water is a six-pack of 1.5 litres: 9 litres.
     bottledLitres: waterBuy ? Math.round(waterBuy.quantity * (waterBuy.product.unitsPerProduct ?? 1) * 9) : 0,
   };
+}
+
+/** The estimate and its two parts, for any set of buys: all of a pack, or what the reader has left ticked. */
+export function packTotals(buys: PackBuy[]): Pick<Pack, "estimate" | "kitOnce" | "supplies"> {
+  const sum = (list: PackBuy[]) => Math.round(list.reduce((total, b) => total + b.cost, 0));
+  return {
+    estimate: sum(buys),
+    kitOnce: sum(buys.filter((b) => KIT_ONCE.has(b.line.id))),
+    supplies: sum(buys.filter((b) => !KIT_ONCE.has(b.line.id))),
+  };
+}
+
+const ASIN = /^[A-Z0-9]{10}$/;
+
+/**
+ * Products left out of the basket, from the `x` query value: a comma list of
+ * ASINs. Anything that is not a well-formed ASIN is dropped, and the list is
+ * capped, so a crafted link can only untick real rows.
+ */
+export function parseLeftOut(raw: string | undefined): string[] {
+  if (!raw) return [];
+  return [...new Set(raw.split(",").map((a) => a.trim().toUpperCase()))].filter((a) => ASIN.test(a)).slice(0, 40);
 }
 
 export function buyLabel(b: PackBuy): string {
