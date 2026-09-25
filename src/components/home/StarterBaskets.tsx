@@ -166,6 +166,7 @@ export default function StarterBaskets() {
             <AmazonBasketButton
               items={chosen.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
               className="mt-4"
+              note="Amazon opens and asks you to confirm. We earn a small commission, at no extra cost to you."
             >
               {basketLabel(chosen.buys.length)}
             </AmazonBasketButton>
@@ -179,9 +180,6 @@ export default function StarterBaskets() {
             .
           </p>
         )}
-        <p className="mt-3 text-[0.8125rem] leading-snug text-ink-2">
-          As an Amazon Associate we earn from qualifying purchases.
-        </p>
       </div>
     </section>
   );

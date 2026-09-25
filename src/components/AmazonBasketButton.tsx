@@ -25,14 +25,17 @@ export function basketLabel(count: number) {
  * The one line under the button says who acts next and that nothing is
  * charged yet, as a fact (shipped hand-offs on Mobbin, 25 September 2026:
  * Instacart, ManyChat, Spotify). Screen readers hear it with the button.
+ * `note` replaces it where the line also has to carry the disclosure.
  */
 export default function AmazonBasketButton({
   items,
   className = "",
+  note = BASKET_NOTE,
   children,
 }: {
   items: { asin: string; quantity: number }[];
   className?: string;
+  note?: string;
   children: ReactNode;
 }) {
   const noteId = useId();
@@ -52,7 +55,7 @@ export default function AmazonBasketButton({
         <Arrow />
       </button>
       <p id={noteId} className="mt-2 text-sm leading-snug text-ink-2">
-        {BASKET_NOTE}
+        {note}
       </p>
     </form>
   );
