@@ -77,9 +77,10 @@ export default function WhatMightStopPage() {
             how long it usually lasts
           </h2>
           <p className="measure mt-5 text-lg">
-            Six realistic situations, how long each usually lasts, and the
+            Seven realistic situations, how long each usually lasts, and the
             things that make the most difference. Five are about a difficult
-            day or week. The sixth is longer and rarer.
+            day or week. The last two, a pandemic and armed conflict, last
+            longer.
           </p>
           <ol className="mt-9 border-y-[3px] border-ink">
             {scenarios.map((s) => (
@@ -105,8 +106,8 @@ export default function WhatMightStopPage() {
             <p>
               A few days of water, food, light, medication, and a way to hear
               the news covers the first five, and is the foundation for the
-              sixth. Armed conflict extends the same kit rather than replacing
-              it.
+              last two. A pandemic and armed conflict extend the same kit
+              rather than replacing it.
             </p>
           </Callout>
         </div>
