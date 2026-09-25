@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import AmazonBasketButton from "@/components/AmazonBasketButton";
+import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
 import { BOTTLED_DAYS, DURATIONS, buildPack, durationLabel, type PackDays } from "@/data/packs";
 import { useHave } from "@/lib/have";
@@ -48,7 +48,7 @@ export default function StarterBaskets() {
           a ready-made kit
         </h2>
         <p className="mt-2 text-[0.9375rem] leading-snug">
-          Choose who and for how long. It all goes into one Amazon basket.
+          Choose who it is for and how long it should last.
         </p>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3 border-b-[3px] border-ink px-4.5 py-3.5 min-[900px]:px-6">
@@ -116,7 +116,7 @@ export default function StarterBaskets() {
                   </span>
                 </label>
                 <Link href={`/basket?p=${people}&d=${p.days}`} className="flex min-h-11 items-center px-3 text-sm font-extrabold">
-                  see items<span className="sr-only"> for {d.label}</span>
+                  what is in it<span className="sr-only"> for {d.label}</span>
                 </Link>
               </div>
             );
@@ -131,7 +131,7 @@ export default function StarterBaskets() {
               Everything for {who} for {durationLabel(days)}
             </p>
             <p aria-live="polite" className="mt-1 text-[0.9375rem] leading-snug">
-              {chosen.buys.length} products, in one Amazon basket.
+              {chosen.buys.length} products.
               {days > BOTTLED_DAYS
                 ? ` Bottled water covers the first week. After that, you fill the containers from the tap.`
                 : ""}
@@ -155,11 +155,8 @@ export default function StarterBaskets() {
               items={chosen.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
               className="mt-4"
             >
-              send it all to my Amazon basket
+              {basketLabel(chosen.buys.length)}
             </AmazonBasketButton>
-            <p className="mt-3 text-sm leading-snug text-ink-2">
-              On Amazon, tap <strong>Add to basket</strong>. Nothing is bought until you pay.
-            </p>
           </>
         ) : (
           <p className="text-[0.9375rem]">
@@ -179,7 +176,7 @@ export default function StarterBaskets() {
         <p className="mt-1 text-sm leading-snug">
           Babies, pets or older people?{" "}
           <Link href={`/build-your-kit?a=${people}&c=0&d=${days}`} className="font-bold">
-            Full list
+            Plan for your household
           </Link>
         </p>
         <p className="mt-2 text-[0.8125rem] leading-snug text-ink-2">

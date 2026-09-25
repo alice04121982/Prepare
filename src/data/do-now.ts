@@ -95,7 +95,7 @@ export const doNow: NowGroup[] = [
       {
         id: "plan",
         title: "Agree a plan with your household",
-        body: "Who checks on whom, where you would meet if you could not get home, and one contact outside your area everyone can reach. Ten minutes over dinner does it.",
+        body: "Who checks on whom, where you would meet if you could not get home, and one contact outside your area everyone can reach.",
         link: {
           label: "The government's household plan template",
           url: "https://www.gov.uk/government/publications/preparing-for-emergencies",

@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 const firstSteps = [
   {
     title: "Know a few neighbours by name",
-    body: "Two or three is enough to start. Pay particular attention to anyone older, disabled, living alone, or with young children, because they are the people most affected when routine breaks down and the people most likely to be missed.",
+    body: "Two or three is enough to start. Start with anyone older, disabled, living alone or with young children. They are most likely to be missed.",
   },
   {
     title: "Agree a simple check-in habit",
-    body: "With a couple of neighbours or family members: if something disrupts normal life, who knocks on whose door, and by when? A plan this small is what turns a street of strangers into a network.",
+    body: "With a couple of neighbours or family members: if something disrupts normal life, who knocks on whose door, and by when?",
   },
   {
     title: "Find the network that already exists",
@@ -26,7 +26,7 @@ const firstSteps = [
   },
   {
     title: "If nothing exists, start small",
-    body: "A note through a dozen doors with your name, number, and an offer to set up a street group chat is how most neighbourhood networks begin. You do not need a constitution or a committee. You need one person willing to be the first to say hello.",
+    body: "A note through a dozen doors with your name, number, and an offer to set up a street group chat is how most neighbourhood networks begin. You do not need a constitution or a committee.",
   },
 ];
 
@@ -35,13 +35,13 @@ export default function CommunityPage() {
     <main>
       <PageIntro
         title="once your own household has what it needs, look around you"
-        lede="In an emergency, help goes first to the people who need it most. Everyone else is expected to manage for a while. The better prepared your household is, the more you can do for the people near you, and a street that knows itself gets through a bad week faster."
+        lede="In an emergency, help goes first to the people who need it most. Everyone else is expected to manage for a while. The better prepared your household is, the more you can do for the people near you."
         aside={<Diagram name="checkin" />}
       />
 
       <div className="wrap py-14 min-[900px]:py-20">
         <p className="measure text-[1.1875rem] leading-relaxed min-[900px]:text-[1.3125rem]">
-          The evidence from decades of disasters says ordinary people are the
+          Research on disasters shows ordinary people are the
           first responders: they share generators, cook for strangers and
           check on people they have never spoken to. The people who come to
           harm are the ones nobody thought to check on. So sort your own

@@ -39,7 +39,7 @@ export default function WhatMightStopPage() {
     <main>
       <PageIntro
         title="what might stop, and for how long"
-        lede="Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked their citizens to keep a few days of supplies at home. The reasons they give are the same: severe weather, attacks on power and water systems, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent. All of them have decided it is no longer sensible to assume it cannot happen."
+        lede="What can stop at home, and how long it usually lasts. Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked people to keep a few days of supplies. Their reasons are the same: severe weather, attacks on power and water, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent."
         aside={<Diagram name="duration" />}
       />
 
@@ -74,7 +74,7 @@ export default function WhatMightStopPage() {
       <section aria-labelledby="long-h" className="border-t-[3px] border-ink py-16 min-[900px]:py-24">
         <div className="wrap">
           <h2 id="long-h" className="h-section">
-            what it usually looks like
+            how long it usually lasts
           </h2>
           <p className="measure mt-5 text-lg">
             Six realistic situations, how long each usually lasts, and the
@@ -119,9 +119,9 @@ export default function WhatMightStopPage() {
             what the government says
           </h2>
           <p className="measure mt-5 text-lg">
-            The UK government&rsquo;s own site is called Prepare. It is short,
-            calm and worth ten minutes, and everything here is consistent with
-            it. Every link below was opened and checked on{" "}
+            The UK government&rsquo;s own site is called Prepare. It is short
+            and calm, and takes about ten minutes to read. We checked every
+            link on{" "}
             <span className="tabular-nums">{formatDate(guidanceLastChecked)}</span>.
           </p>
           <div className="mt-6">

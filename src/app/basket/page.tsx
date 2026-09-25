@@ -31,8 +31,7 @@ export default async function BasketPage({
         title={`everything for ${people} ${people === 1 ? "person" : "people"}, ${durationLabel(days)}`}
         lede={
           <>
-            This is what the button on the home page puts in your Amazon basket, in one go. Anything you have ticked
-            off on the{" "}
+            Every product in the kit, before it goes to Amazon. Anything you have marked on the{" "}
             <Link href="/checklist" className="font-bold">
               checklist
             </Link>{" "}

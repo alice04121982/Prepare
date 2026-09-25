@@ -92,8 +92,7 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
             what to have ready
           </h2>
           <p className="measure mt-4 text-[1.125rem] leading-relaxed">
-            Check what you already have first. The checklist keeps count, and the kit on the home page puts
-            everything for your household in one Amazon basket.
+            Check what you already have first, then buy only what is missing.
           </p>
           {guide.ready.length ? (
           <ul className="mt-8 grid gap-3 min-[700px]:grid-cols-2 min-[1100px]:grid-cols-3">

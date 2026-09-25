@@ -78,7 +78,7 @@ export const guides: Guide[] = [
       },
       {
         title: "Switch appliances off at the wall",
-        body: "Leave one light switched on, so you know when power is back. This protects them from a surge when it returns.",
+        body: "This protects them from a surge when power returns. Leave one light on, so you know when it is back.",
       },
       {
         title: "Stay warm in one room",
@@ -491,6 +491,7 @@ export const guides: Guide[] = [
     answer: [
       "An Emergency Alert means there is a danger to life nearby. Read it and follow what it says.",
       "Your phone makes a loud, siren-like sound and vibrates, even on silent. You do not need to sign up.",
+      "Alerts go to every phone in an area and do not track you. Keep them switched on, or you would miss real warnings.",
     ],
     stepsTitle: "when one arrives",
     steps: [
@@ -499,8 +500,6 @@ export const guides: Guide[] = [
       { title: "Do what it says", body: "That might be to stay indoors, to leave an area, or to avoid a road." },
       { title: "Tell people nearby who may not have it", body: "Older relatives, neighbours, or anyone without a smartphone." },
       { title: "Check local radio for updates", body: "A battery or wind-up radio keeps working if mobile networks are busy." },
-      { title: "It does not track you", body: "Alerts go to every phone in an area. The government does not know your number or location." },
-      { title: "Keep them switched on", body: "You can turn them off in your phone's settings, but you would miss real warnings." },
     ],
     ready: [
       { item: "Wind-up or battery radio", tip: "For updates when the mobile network is busy or down.", search: "wind up radio FM" },
@@ -536,7 +535,7 @@ export const guides: Guide[] = [
     ],
     ready: [
       { item: "Manual tin opener", tip: "Does not need power. Keep it with the tins.", search: "manual tin opener" },
-      { item: "Cereal bars", tip: "A box keeps for months, and needs nothing.", search: "cereal bars multipack" },
+      { item: "Oatcakes", tip: "A box keeps for months and needs no cooking.", search: "oatcakes" },
       { item: "Long-life milk", tip: "UHT cartons keep for months unopened.", search: "UHT semi skimmed milk" },
       { item: "Tinned fish", tip: "Protein that is cooked in the tin and eaten cold.", search: "tinned tuna multipack" },
     ],
@@ -562,7 +561,7 @@ export const guides: Guide[] = [
       "The Priority Services Register is free. It gets you extra help from your energy network and water company in a cut.",
       "You can join if anyone at home is older, disabled, unwell, pregnant, has young children, or relies on power for medical equipment.",
     ],
-    stepsTitle: "what it gives you",
+    stepsTitle: "what it gives you, and how to join",
     steps: [
       { title: "Warning of planned cuts", body: "You hear in advance when power or water will be switched off for work." },
       { title: "Priority help in a cut", body: "Updates and support come to you first, and sometimes a visit." },

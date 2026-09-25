@@ -100,9 +100,9 @@ export default function Home() {
               <p>
                 Most of these last hours or days, not weeks. All of them are
                 easier with a few things in the cupboard and a plan you made
-                while everything worked. For the very worst cases there is little
-                any household can do; for everything short of that, three days
-                of supplies make a real difference.
+                while everything worked. For the very worst cases, there is
+                little any household can do. For everything else, three days of
+                supplies helps.
               </p>
               <Link href="/what-might-stop" className="arrow-link">
                 what might stop, and for how long <Arrow size={18} />

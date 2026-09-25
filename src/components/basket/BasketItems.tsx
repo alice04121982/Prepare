@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ExternalLink, ShoppingBasket } from "lucide-react";
-import AmazonBasketButton from "@/components/AmazonBasketButton";
+import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import { kitLineKey } from "@/data/have-map";
 import { amazonImageByAsin, amazonImageUrl, amazonProductUrl, type Product } from "@/data/products";
 import { BOTTLED_DAYS, DURATIONS, buildPack, packTotals } from "@/data/packs";
@@ -129,14 +129,13 @@ export default function BasketItems({
         </nav>
 
         {pack.buys.length ? (
-          <p className="mt-6 max-w-[60ch]">Untick anything you do not want. The total changes as you go.</p>
+          <p className="mt-6 max-w-[60ch]">Untick anything you do not want.</p>
         ) : null}
 
         {days > BOTTLED_DAYS ? (
           <p className="mt-6 max-w-[60ch] border-l-4 border-ink pl-4">
-            Bottled water covers the first week: {pack.bottledLitres} litres. A month of bottled water would be
-            hundreds of litres, and water cuts rarely last that long. After the first week, fill the containers
-            from the tap while it runs. The tablets, or boiling for a minute, make any other water safe.
+            Bottled water covers the first week: {pack.bottledLitres} litres. After that, fill the containers from
+            the tap while it runs. Purifying tablets, or boiling for a minute, make other water safe to drink.
           </p>
         ) : null}
 
@@ -250,7 +249,7 @@ export default function BasketItems({
         <div className="px-4.5 py-4">
           {chosen.length ? (
             <AmazonBasketButton items={chosen.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}>
-              {leftOutHere.length ? `send ${chosen.length} to my Amazon basket` : "send it all to my Amazon basket"}
+              {basketLabel(chosen.length)}
             </AmazonBasketButton>
           ) : pack.buys.length ? (
             <p>Nothing is ticked. Tick a product to add it to the basket.</p>
@@ -266,19 +265,15 @@ export default function BasketItems({
               Tick everything again
             </button>
           ) : null}
-          <p className="mt-3 text-sm leading-snug text-ink-2">
-            Opens Amazon with every ticked product on this page. Tap <strong>Add to basket</strong> to confirm, then check
-            the basket and pay there. Anything Amazon has run out of is listed on that page and left out.
-          </p>
           <p className="mt-3 text-sm leading-snug">
             Already have some of this?{" "}
             <Link href="/checklist" className="font-bold">
-              Tick it off first
+              Mark it on the checklist
             </Link>{" "}
             and it leaves the basket.
           </p>
           <p className="mt-3 text-[0.8125rem] leading-snug text-ink-2">
-            Some links here earn us a small commission. As an Amazon Associate we earn from qualifying purchases.
+            As an Amazon Associate we earn from qualifying purchases.
           </p>
         </div>
       </aside>

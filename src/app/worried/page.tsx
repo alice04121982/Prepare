@@ -36,7 +36,7 @@ const habits = [
   },
   {
     title: "Do one small, real thing",
-    body: "Anxiety is the feeling of a threat with nothing to do about it. Doing something, however small, changes that. Fill two water bottles. Write three phone numbers on a card. Check the torch works. This is why the rest of this site exists, and it is why preparation calms people down rather than winding them up.",
+    body: "Anxiety is the feeling of a threat with nothing to do about it. Doing something, however small, changes that. Fill two water bottles. Write three phone numbers on a card. Check the torch works."
   },
   {
     title: "Put the worry somewhere",
@@ -52,7 +52,7 @@ const habits = [
   },
   {
     title: "Say it out loud to someone",
-    body: "A worry shared with a friend, a partner or a neighbour usually shrinks. A worry kept to yourself and fed with headlines usually grows. If you have no one to say it to, the numbers at the bottom of this page are there for exactly that.",
+    body: "A worry shared with a friend, a partner or a neighbour usually shrinks. A worry kept to yourself and fed with headlines usually grows. If you have no one to say it to, Samaritans and Shout are free, any time.",
   },
 ];
 
@@ -141,10 +141,9 @@ export default function WorriedPage() {
             world more dangerous. It made it feel that way, all day.
           </p>
           <p>
-            None of this means the risks are imaginary. The government would
-            not be asking households to keep three days of supplies if they
-            were. It means the feeling and the risk have come apart, and it is
-            the feeling that is making you miserable.
+            None of this means the risks are imaginary. It means the feeling
+            and the risk have come apart, and it is the feeling that is making
+            you miserable.
           </p>
 
           <div className="mt-12">
@@ -287,13 +286,13 @@ export default function WorriedPage() {
             <p className="mt-5 text-[1.125rem] leading-relaxed">
               Not today, necessarily. But the calmest thing you can do about a
               frightening world is to sort out the small part of it that is
-              yours. Nine things, over a few weeks, from the shop you already
+              yours. A short list, over a few weeks, from the shop you already
               use.
             </p>
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
             <Link href="/checklist" className="btn btn-primary btn-lg">
-              the nine things to get first <Arrow />
+              what to get first <Arrow />
             </Link>
             <Link href="/what-might-stop" className="inline-flex min-h-11 items-center font-bold">
               what might stop, and for how long
