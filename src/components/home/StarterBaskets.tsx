@@ -45,6 +45,7 @@ export default function StarterBaskets() {
   const [typed, setTyped] = useState("");
   const [tier, setTier] = useState<Tier>("regular");
   const [drawer, setDrawer] = useState(false);
+  const [askDays, setAskDays] = useState(false);
   const { have } = useHave();
 
   const owned = (id: string) => have.has(kitLineKey(id));
@@ -67,11 +68,7 @@ export default function StarterBaskets() {
   }
 
   return (
-    <section
-      id="hero-actions"
-      aria-labelledby="kit-h"
-      className="mt-9 border-[3px] border-ink min-[900px]:mt-2"
-    >
+    <section id="hero-actions" aria-labelledby="kit-h" className="border-[3px] border-ink">
       <div className="border-b-[10px] border-ink px-4.5 pb-3.5 pt-4 min-[900px]:px-6">
         <h2
           id="kit-h"
@@ -81,159 +78,157 @@ export default function StarterBaskets() {
           buy a ready-made kit
         </h2>
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b-[3px] border-ink px-4.5 py-3.5 min-[900px]:px-6">
-        <p id="people-label" className="text-lg font-extrabold">
-          People in your home
-        </p>
-        <div role="group" aria-labelledby="people-label" className="flex items-center gap-2">
-          <button
-            type="button"
-            className={stepClass}
-            onClick={() => setPeople((n) => Math.max(1, n - 1))}
-            disabled={people <= 1}
-            aria-label="One fewer person"
-          >
-            &minus;
-          </button>
-          <output
-            aria-live="polite"
-            className="display w-12 text-center text-[2.25rem] tabular-nums"
-            style={{ fontVariationSettings: '"wdth" 115' }}
-          >
-            {people}
-          </output>
-          <button
-            type="button"
-            className={stepClass}
-            onClick={() => setPeople((n) => Math.min(MAX_PEOPLE, n + 1))}
-            disabled={people >= MAX_PEOPLE}
-            aria-label="One more person"
-          >
-            +
-          </button>
-        </div>
-      </div>
 
-      <fieldset className="px-4.5 pb-4 pt-3.5 min-[900px]:px-6">
-        <legend className="float-left mb-3 w-full text-lg font-extrabold">How long for</legend>
-        <div className="clear-both grid grid-cols-2 gap-2">
-          {packs.map((p) => {
-            const d = DURATIONS.find((x) => x.days === p.days)!;
-            return (
-              <div
-                key={p.days}
-                className="flex h-full flex-col rounded-[4px] border-2 border-ink hover:bg-[var(--hover)] has-checked:bg-hush has-checked:shadow-[inset_0_0_0_2px_var(--ink)] has-focus-visible:outline-3 has-focus-visible:outline-offset-3 has-focus-visible:outline-ink"
-              >
-                <input
-                  type="radio"
-                  name="days"
-                  id={`pack-${p.days}`}
-                  value={p.days}
-                  checked={days === p.days}
-                  onChange={() => {
-                    setDays(d.days);
-                    setTyped("");
-                  }}
-                  className="sr-only"
-                />
-                <label htmlFor={`pack-${p.days}`} className="flex flex-1 cursor-pointer flex-col justify-between px-3 pt-2.5">
-                  <span
-                    className="display text-[1.75rem] leading-none"
-                    style={{ fontVariationSettings: '"wdth" 115' }}
-                  >
-                    {d.label}
-                  </span>
-                  <span className="mt-1.5 text-sm font-bold leading-snug">
-                    {p.buys.length ? `about £${p.estimate}` : "nothing left to add"}
-                    {"note" in d ? <span className="block font-normal">{d.note}</span> : null}
-                  </span>
-                </label>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setDays(p.days);
-                    setTyped("");
-                    setDrawer(true);
-                  }}
-                  className="flex min-h-11 items-center px-3 text-left text-sm font-extrabold underline underline-offset-4"
-                >
-                  what is in it<span className="sr-only"> for {d.label}</span>
-                </button>
-              </div>
-            );
-          })}
-        </div>
-        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
-          <label htmlFor="kit-days" className="text-[0.9375rem] font-bold">
-            Or a number of days
-          </label>
-          <input
-            id="kit-days"
-            type="number"
-            inputMode="numeric"
-            min={MIN_DAYS}
-            max={MAX_DAYS}
-            step={1}
-            value={typed}
-            onChange={(e) => onTyped(e.target.value)}
-            aria-describedby="kit-days-hint"
-            className="field h-12 w-24 text-lg tabular-nums"
-          />
-          <span id="kit-days-hint" className="text-sm text-ink-2">
-            {MIN_DAYS} to {MAX_DAYS}
-          </span>
-          {!preset ? (
+      <div className="min-[900px]:grid min-[900px]:grid-cols-[auto_minmax(0,2fr)_minmax(0,1.2fr)] min-[1200px]:grid-cols-[auto_minmax(0,2.6fr)_minmax(0,1fr)]">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b-[3px] border-ink px-4.5 py-3.5 min-[900px]:flex-col min-[900px]:flex-nowrap min-[900px]:items-start min-[900px]:justify-start min-[900px]:border-b-0 min-[900px]:border-r min-[900px]:px-6">
+          <p id="people-label" className="text-lg font-extrabold">
+            People in your home
+          </p>
+          <div role="group" aria-labelledby="people-label" className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => setDrawer(true)}
-              className="flex min-h-11 items-center text-sm font-extrabold underline underline-offset-4"
+              className={stepClass}
+              onClick={() => setPeople((n) => Math.max(1, n - 1))}
+              disabled={people <= 1}
+              aria-label="One fewer person"
             >
-              what is in it<span className="sr-only"> for {days} days</span>
+              &minus;
             </button>
-          ) : null}
+            <output
+              aria-live="polite"
+              className="display w-12 text-center text-[2.25rem] tabular-nums"
+              style={{ fontVariationSettings: '"wdth" 115' }}
+            >
+              {people}
+            </output>
+            <button
+              type="button"
+              className={stepClass}
+              onClick={() => setPeople((n) => Math.min(MAX_PEOPLE, n + 1))}
+              disabled={people >= MAX_PEOPLE}
+              aria-label="One more person"
+            >
+              +
+            </button>
+          </div>
         </div>
-      </fieldset>
 
-      <div className="border-t border-ink">
-        <TierPicker value={tier} onChange={setTier} estimates={estimates} />
+        <fieldset className="px-4.5 pb-4 pt-3.5 min-[900px]:border-r min-[900px]:border-ink min-[900px]:px-6">
+          <legend className="float-left mb-3 w-full text-lg font-extrabold">How long for</legend>
+          <div className="clear-both grid grid-cols-2 gap-2 min-[1200px]:grid-cols-4">
+            {packs.map((p) => {
+              const d = DURATIONS.find((x) => x.days === p.days)!;
+              return (
+                <div
+                  key={p.days}
+                  className="rounded-[4px] border-2 border-ink hover:bg-[var(--hover)] has-checked:bg-hush has-checked:shadow-[inset_0_0_0_2px_var(--ink)] has-focus-visible:outline-3 has-focus-visible:outline-offset-3 has-focus-visible:outline-ink"
+                >
+                  <input
+                    type="radio"
+                    name="days"
+                    id={`pack-${p.days}`}
+                    value={p.days}
+                    checked={days === p.days}
+                    onChange={() => {
+                      setDays(d.days);
+                      setTyped("");
+                    }}
+                    className="sr-only"
+                  />
+                  <label htmlFor={`pack-${p.days}`} className="flex h-full cursor-pointer flex-col px-3 py-2.5">
+                    <span
+                      className="display text-[1.75rem] leading-none min-[1200px]:whitespace-nowrap min-[1200px]:text-[1.5rem]"
+                      style={{ fontVariationSettings: '"wdth" 115' }}
+                    >
+                      {d.label}
+                    </span>
+                    <span className="mt-1.5 text-sm font-bold leading-snug">
+                      {p.buys.length ? `about £${p.estimate}` : "nothing left to add"}
+                      {"note" in d ? <span className="block font-normal">{d.note}</span> : null}
+                    </span>
+                  </label>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+            {askDays || typed ? (
+              <>
+                <label htmlFor="kit-days" className="text-[0.9375rem] font-bold">
+                  Or a number of days
+                </label>
+                <input
+                  id="kit-days"
+                  type="number"
+                  inputMode="numeric"
+                  min={MIN_DAYS}
+                  max={MAX_DAYS}
+                  step={1}
+                  value={typed}
+                  onChange={(e) => onTyped(e.target.value)}
+                  aria-describedby="kit-days-hint"
+                  className="field h-12 w-24 text-lg tabular-nums"
+                  autoFocus
+                />
+                <span id="kit-days-hint" className="text-sm text-ink-2">
+                  {MIN_DAYS} to {MAX_DAYS}
+                </span>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setAskDays(true)}
+                className="flex min-h-11 items-center text-[0.9375rem] font-bold underline underline-offset-4"
+              >
+                Or a number of days
+              </button>
+            )}
+          </div>
+        </fieldset>
+
+        <div className="border-t border-ink min-[900px]:border-t-0">
+          <TierPicker value={tier} onChange={setTier} estimates={estimates} />
+        </div>
       </div>
 
-      <div className="border-t border-ink px-4.5 pb-4.5 pt-3.5 min-[900px]:px-6">
+      <div className="border-t border-ink px-4.5 pb-4.5 pt-3.5 min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] min-[900px]:items-start min-[900px]:gap-x-10 min-[900px]:px-6 min-[900px]:pt-4.5">
         {url ? (
           <>
-            <dl className="grid gap-1 border-b border-ink pb-2.5 text-[0.9375rem] tabular-nums">
-              <div className="flex justify-between gap-3">
-                <dt>Food, water and supplies</dt>
-                <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.supplies}</dd>
-              </div>
-              <div className="flex justify-between gap-3">
-                <dt>Kit you buy once (torches, radio)</dt>
-                <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.kitOnce}</dd>
-              </div>
-            </dl>
-            <button
-              type="button"
-              onClick={() => setDrawer(true)}
-              aria-haspopup="dialog"
-              className="flex min-h-11 w-full items-center justify-between gap-3 border-b border-ink text-left font-extrabold hover:bg-[var(--hover)]"
-            >
-              <span>
-                See what is in it <span className="font-normal tabular-nums">({chosen.buys.length} products)</span>
-              </span>
-              <span aria-hidden="true" className="text-xl leading-none">
-                &rarr;
-              </span>
-            </button>
+            <div>
+              <dl className="grid gap-1 border-b border-ink pb-2.5 text-[0.9375rem] tabular-nums">
+                <div className="flex justify-between gap-3">
+                  <dt>Food, water and supplies</dt>
+                  <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.supplies}</dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt>Kit you buy once (torches, radio)</dt>
+                  <dd className="whitespace-nowrap font-extrabold">about &pound;{chosen.kitOnce}</dd>
+                </div>
+              </dl>
+              <button
+                type="button"
+                onClick={() => setDrawer(true)}
+                aria-haspopup="dialog"
+                className="flex min-h-11 w-full items-center justify-between gap-3 border-b border-ink text-left font-extrabold hover:bg-[var(--hover)]"
+              >
+                <span>
+                  See what is in it <span className="font-normal tabular-nums">({chosen.buys.length} products)</span>
+                </span>
+                <span aria-hidden="true" className="text-xl leading-none">
+                  &rarr;
+                </span>
+              </button>
+            </div>
             <AmazonBasketButton
               items={chosen.buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
-              className="mt-4"
+              className="mt-4 min-[900px]:mt-0"
               note={NOTE}
             >
               {basketLabel(chosen.buys.length)}
             </AmazonBasketButton>
           </>
         ) : (
-          <p className="text-[0.9375rem]">
+          <p className="text-[0.9375rem] min-[900px]:col-span-2">
             You have ticked off everything a basket would hold.{" "}
             <Link href={kitHref(people, days, tier)} className="font-bold">
               See what is left

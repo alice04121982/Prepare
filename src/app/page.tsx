@@ -48,13 +48,13 @@ const steps = [
 export default function Home() {
   return (
     <main>
-      {/* Opening: what the site is on the left, the ready-made kit beside it */}
+      {/* Opening: the title beside what the site is, the ready-made kit across the width under both */}
       <section
         id="hero"
         aria-labelledby="hero-h"
-        className="wrap grid gap-x-16 pb-16 pt-9 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] min-[900px]:items-start min-[900px]:pb-26 min-[900px]:pt-16"
+        className="wrap pb-16 pt-9 min-[900px]:pb-26 min-[900px]:pt-16"
       >
-        <div>
+        <div className="min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] min-[900px]:items-start min-[900px]:gap-x-16">
           <h1
             id="hero-h"
             className="display max-w-[14ch] text-[clamp(2.6rem,11.5vw,4.75rem)]"
@@ -62,24 +62,26 @@ export default function Home() {
           >
             a practical guide to being ready at home
           </h1>
-          <p className="mt-6 max-w-[40ch] text-[1.1875rem] leading-normal min-[900px]:mt-9 min-[900px]:text-[1.375rem]">
-            What to keep, how much and what to do first when the power, water
-            or shops stop, for a day or for months.
-          </p>
-          <p className="mt-6 border-t-[3px] border-ink pt-4 text-lg font-semibold">
-            Frightened by the news?{" "}
-            <Link href="/worried" className="inline-flex min-h-11 items-center">
-              Start here instead.
-            </Link>
-          </p>
-          <p className="text-lg font-semibold">
-            Not ready to buy anything?{" "}
-            <Link href="/what-you-can-do-now" className="inline-flex min-h-11 items-center">
-              What you can do now, for free.
-            </Link>
-          </p>
+          <div>
+            <p className="mt-6 max-w-[40ch] text-[1.1875rem] leading-normal min-[900px]:mt-0 min-[900px]:text-[1.375rem]">
+              What to keep, how much and what to do first when the power, water
+              or shops stop, for a day or for months.
+            </p>
+            <p className="mt-6 border-t-[3px] border-ink pt-4 text-lg font-semibold">
+              Frightened by the news?{" "}
+              <Link href="/worried" className="inline-flex min-h-11 items-center">
+                Start here instead.
+              </Link>
+            </p>
+            <p className="text-lg font-semibold">
+              Not ready to buy anything?{" "}
+              <Link href="/what-you-can-do-now" className="inline-flex min-h-11 items-center">
+                What you can do now, for free.
+              </Link>
+            </p>
+          </div>
         </div>
-        <div className="mt-10 min-[900px]:mt-2">
+        <div className="mt-10 min-[900px]:mt-14">
           <StarterBaskets />
         </div>
       </section>
