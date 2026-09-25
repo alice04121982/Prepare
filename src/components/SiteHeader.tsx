@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
+import Mark from "@/components/Mark";
 
 export const nav = [
   { href: "/what-you-can-do-now", label: "do it now" },
@@ -48,9 +49,10 @@ export default function SiteHeader() {
       <div className="wrap flex min-h-16 flex-wrap items-center justify-between gap-x-4 min-[900px]:min-h-20">
         <Link
           href="/"
-          className="display inline-flex min-h-11 items-center text-2xl no-underline min-[900px]:text-[1.75rem]"
+          className="display inline-flex min-h-11 items-center gap-2.5 text-2xl no-underline min-[900px]:text-[1.75rem]"
           style={{ fontVariationSettings: '"wdth" 118' }}
         >
+          <Mark className="size-[0.85em] flex-none" />
           stay prepared
         </Link>
 
