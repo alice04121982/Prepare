@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Diagram from "@/components/Diagram";
 import ChecklistTracker from "@/components/ChecklistTracker";
+import BasketBar from "@/components/checklist/BasketBar";
 import { catFor, catForTitle, Swatch } from "@/components/checklist/cats";
 import PrintButton from "@/components/PrintButton";
 import Arrow from "@/components/home/Arrow";
@@ -101,7 +102,9 @@ export default function ChecklistPage() {
         </ul>
       </nav>
 
-      <ChecklistTracker />
+      <div id="checklist-items">
+        <ChecklistTracker />
+      </div>
 
       <div className="wrap">
         <p className="measure -mt-4 text-[0.9375rem] text-ink-2 min-[900px]:-mt-8">
@@ -157,6 +160,7 @@ export default function ChecklistPage() {
           </a>
         </div>
       </section>
+      <BasketBar watch="checklist-items" />
     </main>
   );
 }
