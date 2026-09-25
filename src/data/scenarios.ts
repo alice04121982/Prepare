@@ -29,8 +29,6 @@ export type Scenario = {
     /** Category colour for the row's swatch, where the scenario is one. */
     cat?: "water" | "food" | "power";
   };
-  /** A line printed under the chart instead of a bar, for the worst case. */
-  chartNote?: string;
 };
 
 // Durations and quantities are deliberately conservative and drawn from
@@ -164,7 +162,6 @@ export const scenarios: Scenario[] = [
   },
   {
     slug: "armed-conflict",
-    chartNote: "Armed conflict: months, lived as repeated cuts of a few hours.",
     title: "Armed conflict",
     summary:
       "War or sustained attacks on infrastructure in a modern, connected country, as Ukraine has experienced since 2022.",
