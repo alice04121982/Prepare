@@ -282,7 +282,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
             item: "Dried lentils, beans or split peas",
             quantity: ceil(0.05 * peopleWhoDrink * oneTinDays),
             unit: "kg",
-            basis: `About 50 g per person per day for the ${daysLabel(oneTinDays)} past 14, to replace the protein the second tin gave. A site planning figure. Red lentils need no soaking and cook fastest, which saves gas.`,
+            basis: `About 50 g per person per day for the ${daysLabel(oneTinDays)} past 14, to replace the protein the second tin gave. This is our own planning figure, not an official one. Red lentils need no soaking and cook fastest, which saves gas.`,
             products: [{ name: "Own-brand red lentils or dried beans, 500 g to 2 kg", tier: "budget", priceBand: "£1 to £4" }],
           } satisfies KitLine,
           {
@@ -292,7 +292,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
             item: "Cooking oil",
             quantity: ceil(0.03 * peopleWhoDrink * oneTinDays),
             unit: ceil(0.03 * peopleWhoDrink * oneTinDays) === 1 ? "litre" : "litres",
-            basis: `About two tablespoons (30 ml) per person per day for the ${daysLabel(oneTinDays)} past 14. Rice, pasta and lentils on their own are low in fat; oil adds energy and makes them easier to eat. A site planning figure.`,
+            basis: `About two tablespoons (30 ml) per person per day for the ${daysLabel(oneTinDays)} past 14. Rice, pasta and lentils on their own are low in fat; oil adds energy and makes them easier to eat. This is our own planning figure, not an official one.`,
             freeOption: "Check the cupboard: most kitchens already have a bottle open.",
             products: [{ name: "Own-brand vegetable or rapeseed oil, 1 litre", tier: "budget", priceBand: "£1.50 to £3" }],
           } satisfies KitLine,
@@ -534,7 +534,7 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       quantity: people,
       unit: "",
       basis: "One per person, for a cold cut. Plus hats, gloves and a hot-water bottle.",
-      freeOption: "Most homes already have enough bedding. Count it.",
+      freeOption: "Most homes already have enough bedding. Count what you have before you buy more.",
     },
     {
       id: "cash",

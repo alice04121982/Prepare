@@ -62,7 +62,7 @@ const DISCLOSURE =
 const MAKER_FIRST = {
   id: "maker",
   name: "Maker first",
-  note: "Where the maker or a specialist sells it, buy there first. Amazon is the fallback.",
+  note: "Where the maker or a specialist sells it, buy there first. If they do not, use Amazon.",
 } as const;
 
 type ShopId = typeof MAKER_FIRST.id | Retailer["id"];
@@ -255,7 +255,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             {isGrabBag ? (
               <FixedDays label="Packed for" value="3 days" note="Enough to carry. Bottled water covers the first day and the filter bottles the rest." />
             ) : h.list === "72-hours" ? (
-              <FixedDays label="Days of cover" value="3 days" note="The government minimum. For longer, change list." />
+              <FixedDays label="Days of cover" value="3 days" note="This is the government minimum. To plan for longer, choose a longer list above." />
             ) : h.list ? (
               <DaysControl
                 value={h.days}
