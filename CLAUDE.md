@@ -68,7 +68,7 @@ list, 1 to 90 days). Typing a number of days moves to the kit that covers it
 search; if its address names a different kit, or none, it redirects. The old
 `/lists`, `/build-your-kit` and `/basket` redirect here in `next.config.ts`,
 and `/kits` reads the old `p` (people) as adults. The home page kit box
-(`home/StarterBaskets`) is the quick route: people and days, straight to an
+(`home/StarterBaskets`) is the quick route: people, days and price range, straight to an
 Amazon basket, with "what is in it" opening `/kits`.
 
 Under the days box, a price range picker (budget, regular, premium) chooses

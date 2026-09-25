@@ -91,14 +91,19 @@ export function buysFor(lines: KitLine[], people: number, tier: Tier = "regular"
  * The pack for `people` over `days`, leaving out anything the reader has
  * already ticked (`owned` returns true for a line id they have).
  */
-export function buildPack(people: number, days: number, owned: (lineId: string) => boolean = () => false): Pack {
+export function buildPack(
+  people: number,
+  days: number,
+  owned: (lineId: string) => boolean = () => false,
+  tier: Tier = "regular",
+): Pack {
   const household = { ...defaultHousehold, adults: Math.max(1, people), days };
   const { lines } = buildKit(household);
   const bottledDays = Math.min(days, BOTTLED_DAYS);
   const bottled = buildKit({ ...household, days: bottledDays }).lines.find((l) => l.id === "water");
   const adjusted = lines.map((line) => (line.id === "water" && bottled ? bottled : line));
   const needed = adjusted.filter((l) => !owned(l.id));
-  const buys = buysFor(needed, household.adults);
+  const buys = buysFor(needed, household.adults, tier);
   const bought = new Set(buys.map((b) => b.line.id));
   const waterBuy = buys.find((b) => b.line.id === "water");
 
