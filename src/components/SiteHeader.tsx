@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
+import Wordmark from "@/components/Wordmark";
 
 export const nav = [
   { href: "/lists", label: "lists" },
@@ -50,7 +51,7 @@ export default function SiteHeader() {
           className="display inline-flex min-h-11 items-center text-2xl no-underline min-[900px]:text-[1.75rem]"
           style={{ fontVariationSettings: '"wdth" 118' }}
         >
-          stay prepared
+          <Wordmark />
         </Link>
 
         <button

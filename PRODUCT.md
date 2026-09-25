@@ -35,7 +35,7 @@ A practical prepper site for UK households (repositioned 24 September 2026). Ope
 
 ## Brand Commitments
 
-- Name: Stay Prepared. No logo is decided (concepts only, in `public/brand/logo-concepts.html`).
+- Name: Stay Prepared. Logo: the asterisk, set against "stay" as "stay✱ prepared" (chosen 25 September 2026; see DESIGN.md, Logo).
 - Voice: docs/tone-of-voice.md, revised 24 September 2026 to "practical prepper". Prepper, prepping and stockpile are allowed; the reasons (power, water, weather and climate, war, shortages, job loss) are named plainly. Still plain, short, second person, British and dry. Never tactical or conspiratorial.
 - No invented threat levels, dates or likelihoods, no countdown clocks, no fake scarcity.
 - No em dashes or double hyphens in any copy.

@@ -243,8 +243,15 @@ A bold underlined text link ending in the arrow, 44px tall, width 110. Hover thi
 - **Tick box:** a 28px square (2px border, 3px radius) inside a 44px target; checked fills ink with a paper tick. Prints as an empty box to tick by hand.
 - **Segmented tabs:** a 3px bordered strip of 48px cells split by 3px rules; the selected cell is ink.
 
+### Logo
+Adopted 25 September 2026. The mark is an **asterisk of four square-ended bars** (each 14.651 by 71.263, rotated 0, 45, 90 and 135 degrees about one centre), the site's own mark, drawn by the owner (Figma frame "Cross"). It sits against "stay" like a footnote mark: **stay✱ prepared**, at 0.5em, raised 0.42em, 0.06em from the y. It is always one colour, `currentColor`: ink on paper, paper on the ink footer, never a category colour. `components/Wordmark.tsx` holds both the lockup and the bare `Asterisk`.
+
+- **Favicon:** `app/icon.svg`, the bare asterisk in ink, switching to paper when the browser is dark. `app/favicon.ico` (16, 32, 48) is the fallback: ink asterisk on a paper tile, so it shows on any tab.
+- **Home screen:** `app/apple-icon.png`, 180px, ink asterisk on paper.
+- Directions tried and rejected on 25 September 2026: a tick, stacked blocks, drawn tins, flat abstract marks and sp monograms.
+
 ### Navigation
-- **Header:** paper, closed by a 3px ink rule, 64px tall (80px at 900px). Lowercase wordmark "stay prepared" in display type at width 118. At 900px and above, nav links sit inline, bold 1rem, 28px apart; hover and the current page are underlined.
+- **Header:** paper, closed by a 3px ink rule, 64px tall (80px at 900px). The wordmark (see Logo) in display type at width 118. At 900px and above, nav links sit inline, bold 1rem, 28px apart; hover and the current page are underlined.
 - **Mobile:** a square Menu button (2px border, 44px tall, two-bar icon that crosses when open, Yolk Yellow on hover) opens a full-width list closed by a 3px rule, with 24px lowercase display links at 56px tall and hairlines between. Escape closes it and returns focus.
 - **Footer:** a full ink band with paper text. The wordmark at 2.25rem, a one-line description, a two-column link list with 48px rows and Footer Rule Grey hairlines, and small print in Footer Note Grey carrying the affiliate disclosure and sources.
 

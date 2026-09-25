@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Wordmark from "@/components/Wordmark";
 
 const links = [
   { href: "/lists", label: "Ready-made lists" },
@@ -21,7 +22,7 @@ export default function SiteFooter() {
               className="display inline-flex min-h-11 items-center text-4xl text-paper no-underline"
               style={{ fontVariationSettings: '"wdth" 118' }}
             >
-              stay prepared
+              <Wordmark />
             </Link>
             <p className="mt-2.5 text-lg">
               Ready-made prepping lists for UK households.
