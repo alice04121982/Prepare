@@ -225,7 +225,7 @@ export function DaysControl({
         </div>
       </div>
 
-      <div role="group" aria-label="Common lengths" className="mt-3 grid grid-cols-3 gap-2">
+      <div role="group" aria-label="Common lengths" className="mt-3 grid grid-cols-2 gap-2">
         {presets.map((p) => {
           const on = value === p.days;
           return (

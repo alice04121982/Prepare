@@ -13,13 +13,14 @@ import {
   type Retailer,
 } from "@/data/kit-rules";
 import { ExternalLink, ShoppingBasket } from "lucide-react";
-import { amazonImageUrl, amazonProductUrl, productsFor } from "@/data/products";
+import { amazonImageUrl, amazonProductUrl, productsFor, type Tier } from "@/data/products";
 import { Counter, DaysControl, FixedDays, OptionRow, TickBox } from "@/components/kit/Controls";
 import { ListPicker } from "@/components/kit/ListPicker";
+import { TierPicker } from "@/components/kit/TierPicker";
 import { DownArrow, goToBuy, StillToGetBar } from "@/components/kit/StillToGet";
 import { catBgFor } from "@/components/kit/categories";
 import { kitLineKey } from "@/data/have-map";
-import { buysFor } from "@/data/packs";
+import { buysFor, packTotals } from "@/data/packs";
 import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import { useHave } from "@/lib/have";
 import { daysRangeFor, defaultDaysFor, listBySlug, listForDays, type ListSlug } from "@/data/lists";
@@ -121,8 +122,11 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
   const total = lines.length;
   const ticked = total - toBuy.length;
   const remaining = toBuy.length;
+  const tier: Tier = h.tier ?? "regular";
+  // Babies do not change pack sizes; the basket counts adults and children.
+  const basketPeople = h.adults + h.children;
   const picks = toBuy
-    .map((l) => ({ line: l, product: productsFor(l.productsFrom ?? l.id)[0] }))
+    .map((l) => ({ line: l, product: productsFor(l.productsFrom ?? l.id, tier)[0] }))
     .map(({ line, product }) => ({
       line,
       product,
@@ -130,7 +134,12 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
     }));
   // The basket shares its rules with the homepage packs, so a line split
   // across products (tins as beans and soup) buys each part.
-  const basketBuys = buysFor(toBuy, h.adults + h.children);
+  const basketBuys = buysFor(toBuy, basketPeople, tier);
+  // What the same basket would roughly cost in each range, for the picker.
+  const estimates = Object.fromEntries(
+    (["budget", "regular", "premium"] as const).map((t) => [t, packTotals(buysFor(toBuy, basketPeople, t)).estimate]),
+  ) as Record<Tier, number>;
+  const setTier = (t: Tier) => setH((prev) => ({ ...prev, tier: t === "regular" ? undefined : t }));
   const basket = basketBuys.length > 0;
   const asinCount = basketBuys.length;
   const groceriesLeft = toBuy.some((l) => (l.category === "Food" || l.id === "water") && !productsFor(l.id).length);
@@ -204,6 +213,9 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
               ) : (
                 <DaysControl value={h.days} onChange={setDays} min={MIN_DAYS} max={MAX_DAYS} presets={PRESETS} />
               )}
+            </div>
+            <div className="border-x-[3px] border-t-[3px] border-ink">
+              <TierPicker value={tier} onChange={setTier} estimates={estimates} />
             </div>
           </div>
           <aside

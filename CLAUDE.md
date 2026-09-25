@@ -71,6 +71,13 @@ and `/kits` reads the old `p` (people) as adults. The home page kit box
 (`home/StarterBaskets`) is the quick route: people and days, straight to an
 Amazon basket, with "what is in it" opening `/kits`.
 
+Under the days box, a price range picker (budget, regular, premium) chooses
+which products fill the basket, showing each range's rough total for the
+household. It rides in the URL as `t` (absent means regular). Products carry
+an optional `tier` in `products.ts`; `productsFor(line, tier)` falls back to
+the regular pick where a line has nothing in that tier. The budget and
+premium products are unverified: `docs/product-tiers.md` lists them.
+
 `src/data/kit-rules.ts` is the engine. `buildKit(household)` turns a
 `Household` into `KitLine[]` plus `KitTask[]`. `householdFromParams` parses
 the query string, and `KitPlanner` writes state back with

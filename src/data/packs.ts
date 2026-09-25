@@ -1,5 +1,5 @@
 import { buildKit, defaultHousehold, type KitLine } from "@/data/kit-rules";
-import { productsFor, type Product } from "@/data/products";
+import { productsFor, type Product, type Tier } from "@/data/products";
 
 /**
  * Complete packs for the homepage: everything on the planner's list for a
@@ -71,12 +71,13 @@ function packUnits(line: KitLine, product: Product, people: number): number {
 }
 
 /**
- * The products that cover a set of planner lines. A line split across
- * products (share) buys each part; otherwise the first product is the buy.
+ * The products that cover a set of planner lines, in one price tier. A line
+ * split across products (share) buys each part; otherwise the first product
+ * is the buy.
  */
-export function buysFor(lines: KitLine[], people: number): PackBuy[] {
+export function buysFor(lines: KitLine[], people: number, tier: Tier = "regular"): PackBuy[] {
   return lines.flatMap((line) => {
-    const options = productsFor(line.id);
+    const options = productsFor(line.id, tier);
     const shared = options.filter((p) => p.share);
     const chosen = shared.length ? shared : options.slice(0, 1);
     return chosen.map((product) => {
