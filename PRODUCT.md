@@ -8,11 +8,17 @@ web
 
 ## Users
 
-People in the UK who have just read or heard an alarming news story (power cuts, water notices, severe weather, cyber attacks on infrastructure, conflict in Europe) and want a sensible starting point, not a rabbit hole. Most arrive on a phone from a news link or a share. Many are households with limited time and money who want a short, prioritised list, and people who want realistic timeframes ("how long does three days of supplies last a family of four?") rather than a guess. A distinct group feels frightened or helpless and needs perspective before a checklist.
+People in the UK who have just read or heard an alarming news story (power cuts, water notices, severe weather, cyber attacks on infrastructure, a pandemic, conflict in Europe) and want a sensible starting point, not a rabbit hole. Most arrive on a phone from a news link or a share. Many are households with limited time and money who want a short, prioritised list, and people who want realistic timeframes ("how long does three days of supplies last a family of four?") rather than a guess. A distinct group feels frightened or helpless and needs perspective before a checklist.
 
 ## Product Purpose
 
-Help an ordinary household be able to cope on its own for three days if the power, water, shops or networks stop, which is what the UK government and its northern European neighbours now ask. The site turns that advice into something practical: what to keep, how much, how long it lasts, and what to do first. Success is a visitor who checks what they already have, fills the gaps with sensible buys, and leaves calmer than they arrived.
+**Summary (approved by the owner, 25 September 2026):**
+
+> Stay Prepared is a UK guide to getting your household ready for disruption, whether it lasts a day or months. Power cuts, water outages, storms, empty shelves, a pandemic or conflict: it tells you what to keep, how much, and what to do. Check what you already have, then order what's missing as a ready-made kit.
+
+Three days is the UK government's minimum and the planner's first option, not the limit of the site. The kit planner and basket already run from 3 days to 4 weeks. The site turns official advice into something practical: what to keep, how much, how long it lasts, and what to do first. Success is a visitor who checks what they already have, fills the gaps with sensible buys, and leaves calmer than they arrived.
+
+In public copy, kits are "ready-made kits" or "emergency kits", never "survival kits" (the tone rules ban "survive"). Events like COVID and the war in Ukraine are why the site exists; public copy names the hazard ("a pandemic", "conflict in Europe"), never countries or leaders.
 
 ## Positioning
 

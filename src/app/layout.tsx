@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Stay Prepared",
   },
   description:
-    "Calm, practical guidance for households, written in the UK and useful anywhere: what to keep, how much, how long it lasts, and what to do first.",
+    "A UK guide to getting your household ready for disruption, whether it lasts a day or months: what to keep, how much, and what to do first.",
   openGraph: {
     type: "website",
     siteName: "Stay Prepared",
