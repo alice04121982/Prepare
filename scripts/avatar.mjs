@@ -75,6 +75,7 @@ if (process.argv.includes("--explore")) {
   mkdirSync("/tmp/avatar-explore", { recursive: true });
   for (const [name, colour] of Object.entries(C)) {
     await draw({ fg: INK, bg: PAPER, mark: colour, outline: true }, `/tmp/avatar-explore/paper-${name}.png`);
+    await draw({ fg: INK, bg: PAPER, mark: colour }, `/tmp/avatar-explore/plain-${name}.png`);
     await draw({ fg: PAPER, bg: INK, mark: colour }, `/tmp/avatar-explore/ink-${name}.png`);
   }
 }
