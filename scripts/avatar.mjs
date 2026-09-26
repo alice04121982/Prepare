@@ -42,7 +42,7 @@ function badge({ fg, bg, mark = fg, outline = false, shape = "six" }) {
         style="font-variation-settings:'wdth' 112" text-anchor="middle"><textPath href="#${id}" startOffset="50%">stay prepared</textPath></text>`;
   // A coloured mark on paper gets an ink edge: an ink asterisk drawn a little
   // fatter underneath, so the edge runs round the whole shape, not across it.
-  const edge = outline ? `<g fill="${INK}" stroke="${INK}" stroke-width="4.4" stroke-linejoin="miter" transform="translate(500,500) scale(5.4)">${arms}</g>` : "";
+  const edge = outline ? `<g fill="${INK}" stroke="${INK}" stroke-width="4.4" stroke-linejoin="miter" transform="translate(500,500) scale(8)">${arms}</g>` : "";
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" style="--bg:${bg}">
   <defs>
     <path id="top" d="M${500 - R_TOP},500 A${R_TOP},${R_TOP} 0 0,1 ${500 + R_TOP},500"/>
@@ -57,7 +57,7 @@ function badge({ fg, bg, mark = fg, outline = false, shape = "six" }) {
     <g transform="translate(${500 + 356},500) scale(0.6)">${arms}</g>
   </g>
   ${edge}
-  <g fill="${mark}" transform="translate(500,500) scale(5.4)">${arms}</g>
+  <g fill="${mark}" transform="translate(500,500) scale(8)">${arms}</g>
 </svg>`;
 }
 
