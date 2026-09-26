@@ -12,7 +12,7 @@ const C = { water: "#4a9aeb", food: "#f4683a", power: "#ffc425", health: "#5db84
 const tins = [["water", C.water], ["warmth", C.power], ["food", C.food], ["cash", C.money], ["radio", C.news], ["neighbours", C.people], ["medicine", C.health]];
 
 // The site mark, as in public/brand/mark.svg and components/Wordmark.tsx.
-const MARK = `<svg viewBox="-36 -36 72 72" class="mark"><g fill="#141414">${[0, 45, 90, 135].map((r) => `<rect x="-7.3255" y="-35.6315" width="14.651" height="71.263" transform="rotate(${r})"/>`).join("")}</g></svg>`;
+const MARK = `<svg viewBox="-36 -36 72 72" class="mark"><g fill="#141414">${[0, 60, 120].map((r) => `<rect x="-7.3255" y="-35.6315" width="14.651" height="71.263" transform="rotate(${r})"/>`).join("")}</g></svg>`;
 
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:Archivo;font-weight:100 900;font-stretch:62% 125%;src:url(data:font/woff2;base64,${font}) format("woff2")}

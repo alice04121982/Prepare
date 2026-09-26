@@ -66,7 +66,7 @@ const pins = [
 ];
 
 // The site mark, as in components/Wordmark.tsx.
-const MARK = `<svg viewBox="-36 -36 72 72" width="44" height="44" fill="#141414" aria-hidden="true">${[0, 45, 90, 135].map((r) => `<rect x="-7.3255" y="-35.6315" width="14.651" height="71.263" transform="rotate(${r})"/>`).join("")}</svg>`;
+const MARK = `<svg viewBox="-36 -36 72 72" width="44" height="44" fill="#141414" aria-hidden="true">${[0, 60, 120].map((r) => `<rect x="-7.3255" y="-35.6315" width="14.651" height="71.263" transform="rotate(${r})"/>`).join("")}</svg>`;
 
 const css = `
 @font-face{font-family:Archivo;font-weight:100 900;font-stretch:62% 125%;src:url(data:font/woff2;base64,${font}) format("woff2")}

@@ -146,7 +146,7 @@ The canonical is per page on purpose; setting it in the layout would point
 every page at the home page. `metadataBase` in the layout makes these paths
 absolute.
 
-The site mark is `public/brand/mark.svg` (an eight-armed asterisk, ink).
+The site mark is `public/brand/mark.svg` (a six-armed asterisk, ink; six arms since 26 September 2026).
 `scripts/icons.mjs` draws `favicon.ico`, `icon.png` and `apple-icon.png`
 in `src/app/` from it; rerun it after changing the mark.
 

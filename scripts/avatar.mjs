@@ -19,19 +19,31 @@ const INK = "#141414";
 const PAPER = "#ffffff";
 const C = { water: "#4a9aeb", food: "#f4683a", power: "#ffc425", health: "#5db84a", money: "#f7a1c4", news: "#b49af2", people: "#2ec4b6" };
 // The asterisk, as in components/Wordmark.tsx.
-const arms = [0, 45, 90, 135].map((r) => `<rect x="-7.3255" y="-35.6315" width="14.651" height="71.263" transform="rotate(${r})"/>`).join("");
+const arm = (r, len = 71.263, rx = 0, w = 14.651) => `<rect x="${-w / 2}" y="${-len / 2}" width="${w}" height="${len}" rx="${rx}" transform="rotate(${r})"/>`;
+/**
+ * Mark shapes. "six" is the site's asterisk (chosen 26 September 2026); the
+ * others were drawn to compare when choosing it (--explore).
+ */
+const SHAPES = {
+  eight: [0, 45, 90, 135].map((r) => arm(r)).join(""),
+  rounded: [0, 45, 90, 135].map((r) => arm(r, 71.263, 7.3255)).join(""),
+  six: [0, 60, 120].map((r) => arm(r)).join(""),
+  notch: [0, 45, 90, 135].map((r) => arm(r)).join("") + `<circle r="9" fill="var(--bg)"/>`,
+  compass: [0, 90].map((r) => arm(r)).join("") + [45, 135].map((r) => arm(r, 54, 0, 10)).join(""),
+};
 
 const R_TOP = 352;
 const R_BOTTOM = R_TOP + 62;
 
 /** fg: text and ring; bg: background; mark: centre asterisk fill; outline: ink edge on a coloured mark. */
-function badge({ fg, bg, mark = fg, outline = false }) {
+function badge({ fg, bg, mark = fg, outline = false, shape = "six" }) {
+  const arms = SHAPES[shape];
   const text = (id) => `<text id="t-${id}" font-family="Archivo" font-weight="900" font-size="104" fill="${fg}" letter-spacing="6"
         style="font-variation-settings:'wdth' 112" text-anchor="middle"><textPath href="#${id}" startOffset="50%">stay prepared</textPath></text>`;
   // A coloured mark on paper gets an ink edge: an ink asterisk drawn a little
   // fatter underneath, so the edge runs round the whole shape, not across it.
-  const edge = outline ? `<g fill="${INK}" stroke="${INK}" stroke-width="4.4" stroke-linejoin="miter" transform="translate(500,500) scale(5.4)">${arms}</g>` : "";
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  const edge = outline ? `<g fill="${INK}" stroke="${INK}" stroke-width="4.4" stroke-linejoin="miter" transform="translate(500,500) scale(8)">${arms}</g>` : "";
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" style="--bg:${bg}">
   <defs>
     <path id="top" d="M${500 - R_TOP},500 A${R_TOP},${R_TOP} 0 0,1 ${500 + R_TOP},500"/>
     <path id="bottom" d="M${500 - R_BOTTOM},500 A${R_BOTTOM},${R_BOTTOM} 0 0,0 ${500 + R_BOTTOM},500"/>
@@ -45,7 +57,7 @@ function badge({ fg, bg, mark = fg, outline = false }) {
     <g transform="translate(${500 + 356},500) scale(0.6)">${arms}</g>
   </g>
   ${edge}
-  <g fill="${mark}" transform="translate(500,500) scale(5.4)">${arms}</g>
+  <g fill="${mark}" transform="translate(500,500) scale(8)">${arms}</g>
 </svg>`;
 }
 
@@ -68,10 +80,10 @@ async function draw(opts, path) {
   console.log(path);
 }
 
-// The mark is the food orange (chosen by the owner, 26 September 2026): a
+// The mark is the people teal (chosen by the owner, 26 September 2026): a
 // brand exception to the Label Rule, recorded in DESIGN.md.
-await draw({ fg: INK, bg: PAPER, mark: C.food }, "public/brand/avatar.png");
-await draw({ fg: PAPER, bg: INK, mark: C.food }, "public/brand/avatar-ink.png");
+await draw({ fg: INK, bg: PAPER, mark: C.people }, "public/brand/avatar.png");
+await draw({ fg: PAPER, bg: INK, mark: C.people }, "public/brand/avatar-ink.png");
 
 if (process.argv.includes("--explore")) {
   mkdirSync("/tmp/avatar-explore", { recursive: true });
@@ -79,6 +91,9 @@ if (process.argv.includes("--explore")) {
     await draw({ fg: INK, bg: PAPER, mark: colour, outline: true }, `/tmp/avatar-explore/paper-${name}.png`);
     await draw({ fg: INK, bg: PAPER, mark: colour }, `/tmp/avatar-explore/plain-${name}.png`);
     await draw({ fg: PAPER, bg: INK, mark: colour }, `/tmp/avatar-explore/ink-${name}.png`);
+  }
+  for (const shape of Object.keys(SHAPES)) {
+    await draw({ fg: INK, bg: PAPER, mark: C.people, shape }, `/tmp/avatar-explore/shape-${shape}.png`);
   }
 }
 await b.close();
