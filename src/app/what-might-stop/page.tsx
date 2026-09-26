@@ -162,10 +162,7 @@ export default function WhatMightStopPage() {
       <section aria-label="Next steps" className="no-print border-t-[3px] border-ink py-12 min-[900px]:py-16">
         <div className="wrap flex flex-wrap items-center gap-x-7 gap-y-4">
           <Link href="/checklist" className="btn btn-primary btn-lg">
-            see the checklist <Arrow />
-          </Link>
-          <Link href="/kits" className="btn btn-secondary btn-lg">
-            see the kits
+            see what to get <Arrow />
           </Link>
         </div>
       </section>

@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import Diagram from "@/components/Diagram";
-import ChecklistTracker from "@/components/ChecklistTracker";
-import BasketBar from "@/components/checklist/BasketBar";
-import { catFor, catForTitle, Swatch } from "@/components/checklist/cats";
-import PrintButton from "@/components/PrintButton";
+import KitPlanner from "@/components/KitPlanner";
+import { catForTitle, Swatch } from "@/components/checklist/cats";
 import Arrow from "@/components/home/Arrow";
-import { checklist, startingPoint } from "@/data/checklist";
+import { startingPoint } from "@/data/checklist";
 import { faq } from "@/data/faq";
+import { defaultHousehold } from "@/data/kit-rules";
+import { defaultDaysFor } from "@/data/lists";
+import { householdFromKitParams } from "./household";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/checklist" },
-  title: "Essentials checklist",
+  title: "What to get: emergency kit checklist for UK households",
   description:
-    "What to keep on hand, with realistic quantities and how long each item lasts, plus the questions people ask.",
+    "What to keep at home and how much, worked out for your household: a 72 hour kit, 2 weeks to a month, 3 months or a grab bag. Tick what you have and send the rest to one basket.",
 };
 
 /**
@@ -33,16 +33,30 @@ const faqJsonLd = {
     })),
 };
 
-export default function ChecklistPage() {
+/**
+ * The one page for what to get (merged with the kits page, 26 September
+ * 2026): the short "get these first" list, then the planner, where you choose
+ * a kit, say who lives with you, tick what you have and send the rest to a
+ * basket, then the common questions. /kits and /kits/[slug] redirect here.
+ */
+export default async function ChecklistPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const initial = householdFromKitParams(await searchParams) ?? {
+    ...defaultHousehold,
+    list: "72-hours" as const,
+    days: defaultDaysFor("72-hours"),
+  };
+
   return (
     <main>
       <PageIntro
-        title="what to keep on hand"
+        title="what to get"
         aside={<Diagram name="water" />}
-        lede="Realistic quantities for a household to build up gradually, a few pounds a week from the shop you already use. Every figure is a planning number drawn from public emergency guidance, not a worst case."
-      >
-        <PrintButton />
-      </PageIntro>
+        lede="What to keep at home and how much, worked out for your household. Tick what you already have, then send the rest to your basket. Every figure comes from public emergency guidance."
+      />
 
       {/* Start here: the short list */}
       <section aria-labelledby="first-h" className="wrap pb-16 pt-12 min-[900px]:pb-24 min-[900px]:pt-18">
@@ -56,9 +70,9 @@ export default function ChecklistPage() {
               before you buy anything. Then get these first, over a few weeks.
               The rest can follow.
             </p>
-            <Link href="/kits" className="no-print btn btn-primary btn-lg mt-7">
+            <a href="#your-kit" className="no-print btn btn-primary btn-lg mt-7">
               work out my quantities <Arrow />
-            </Link>
+            </a>
           </div>
           <ul className="mt-10 border-b-8 border-t-8 border-ink min-[900px]:mt-2">
             {startingPoint.map((i) => (
@@ -77,40 +91,9 @@ export default function ChecklistPage() {
         </div>
       </section>
 
-      {/* Jump to a category */}
-      <nav aria-label="Categories" className="no-print border-t-[3px] border-ink">
-        <ul className="wrap flex flex-wrap gap-2 py-6">
-          {checklist.map((c) => (
-            <li key={c.slug}>
-              <a
-                href={`#${c.slug}`}
-                className="inline-flex min-h-11 items-center gap-2.5 rounded-[4px] border-2 border-ink px-3 font-bold no-underline hover:bg-(--hover)"
-              >
-                <Swatch cat={catFor(c.slug)} />
-                {c.title}
-              </a>
-            </li>
-          ))}
-          <li>
-            <a
-              href="#questions"
-              className="inline-flex min-h-11 items-center rounded-[4px] border-2 border-ink px-3 font-bold no-underline hover:bg-(--hover)"
-            >
-              Questions
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <div id="checklist-items">
-        <ChecklistTracker />
-      </div>
-
-      <div className="wrap">
-        <p className="measure -mt-4 text-[0.9375rem] text-ink-2 min-[900px]:-mt-8">
-          A few items link to a product so you can see what it looks like and
-          roughly costs. Anything similar does the same job.
-        </p>
+      {/* The planner: choose a kit, say who lives with you, tick, buy */}
+      <div id="your-kit" className="scroll-mt-4 border-t-[3px] border-ink">
+        <KitPlanner initial={initial} />
       </div>
 
       {/* Questions */}
@@ -148,9 +131,9 @@ export default function ChecklistPage() {
         </div>
 
         <div className="no-print mt-12 flex flex-wrap items-center gap-4">
-          <Link href="/kits" className="btn btn-primary btn-lg">
-            see the kits <Arrow />
-          </Link>
+          <a href="#your-kit" className="btn btn-primary btn-lg">
+            back to your kit <Arrow />
+          </a>
           <a
             href="/offline-guide"
             download="Offline guide.html"
@@ -160,7 +143,6 @@ export default function ChecklistPage() {
           </a>
         </div>
       </section>
-      <BasketBar watch="checklist-items" />
     </main>
   );
 }

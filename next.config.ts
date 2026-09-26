@@ -15,12 +15,15 @@ const nextConfig: NextConfig = {
       { source: "/official-guidance", destination: "/what-might-stop", permanent: true },
       { source: "/why", destination: "/what-might-stop", permanent: true },
       { source: "/faq", destination: "/checklist#questions", permanent: true },
-      // Every way to order a kit now lives on one page (25 September 2026).
-      // Query strings pass through, so shared households survive.
-      { source: "/lists", destination: "/kits", permanent: true },
-      { source: "/lists/:slug", destination: "/kits/:slug", permanent: true },
-      { source: "/build-your-kit", destination: "/kits", permanent: true },
-      { source: "/basket", destination: "/kits", permanent: true },
+      // What to get and every way to order a kit live on one page
+      // (26 September 2026). Query strings pass through, so shared
+      // households survive; a kit's own address opens the page on that kit.
+      { source: "/kits", destination: "/checklist", permanent: true },
+      { source: "/kits/:slug", destination: "/checklist?list=:slug", permanent: true },
+      { source: "/lists", destination: "/checklist", permanent: true },
+      { source: "/lists/:slug", destination: "/checklist?list=:slug", permanent: true },
+      { source: "/build-your-kit", destination: "/checklist", permanent: true },
+      { source: "/basket", destination: "/checklist", permanent: true },
       // The offline guide is now generated from the site data.
       { source: "/offline/index.html", destination: "/offline-guide", permanent: true },
     ];

@@ -16,9 +16,9 @@ const MAX_PEOPLE = 12;
 const TIERS: Tier[] = ["budget", "regular", "premium"];
 const NOTE = "Amazon opens and asks you to confirm. We earn a small commission, at no extra cost to you.";
 
-/** The kits page, opened on this many people and days. */
+/** The what to get page, opened on this many people and days. */
 const kitHref = (people: number, days: number, tier: Tier) =>
-  `/kits${householdToQuery({
+  `/checklist${householdToQuery({
     ...defaultHousehold,
     adults: people,
     days,

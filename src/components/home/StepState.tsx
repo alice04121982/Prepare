@@ -1,9 +1,11 @@
 "use client";
 
-import { checklist } from "@/data/checklist";
-import { haveKey, useHave } from "@/lib/have";
+import { kitLineCovers } from "@/data/have-map";
+import { useHave } from "@/lib/have";
 
-const keys = checklist.flatMap((c) => c.items.map((i) => haveKey(c.slug, i.item)));
+// The checklist items a reader can tick, which since the checklist and the
+// kits were merged (26 September 2026) means those the planner's lines cover.
+const keys = [...new Set(Object.values(kitLineCovers))];
 const total = keys.length;
 
 /**
