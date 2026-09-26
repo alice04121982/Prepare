@@ -21,8 +21,8 @@ const C = { water: "#4a9aeb", food: "#f4683a", power: "#ffc425", health: "#5db84
 // The asterisk, as in components/Wordmark.tsx.
 const arm = (r, len = 71.263, rx = 0, w = 14.651) => `<rect x="${-w / 2}" y="${-len / 2}" width="${w}" height="${len}" rx="${rx}" transform="rotate(${r})"/>`;
 /**
- * Mark shapes. "eight" is the site's asterisk; the others were drawn to
- * compare when choosing a more distinctive mark (--explore).
+ * Mark shapes. "six" is the site's asterisk (chosen 26 September 2026); the
+ * others were drawn to compare when choosing it (--explore).
  */
 const SHAPES = {
   eight: [0, 45, 90, 135].map((r) => arm(r)).join(""),
@@ -36,7 +36,7 @@ const R_TOP = 352;
 const R_BOTTOM = R_TOP + 62;
 
 /** fg: text and ring; bg: background; mark: centre asterisk fill; outline: ink edge on a coloured mark. */
-function badge({ fg, bg, mark = fg, outline = false, shape = "eight" }) {
+function badge({ fg, bg, mark = fg, outline = false, shape = "six" }) {
   const arms = SHAPES[shape];
   const text = (id) => `<text id="t-${id}" font-family="Archivo" font-weight="900" font-size="104" fill="${fg}" letter-spacing="6"
         style="font-variation-settings:'wdth' 112" text-anchor="middle"><textPath href="#${id}" startOffset="50%">stay prepared</textPath></text>`;

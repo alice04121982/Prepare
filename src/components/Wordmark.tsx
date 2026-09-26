@@ -1,7 +1,7 @@
-// The logo: four square-ended bars crossed into an asterisk, drawn in
-// currentColor so it takes the ink or the paper of wherever it sits. Our own
-// mark, drawn in Figma as "Cross": bars 14.651 by 71.263, rotated 0, 45, 90
-// and 135 degrees about one centre.
+// The logo: three square-ended bars crossed into a six-armed asterisk, drawn
+// in currentColor so it takes the ink or the paper of wherever it sits. Bars
+// 14.651 by 71.263, rotated 0, 60 and 120 degrees about one centre (six arms
+// chosen on 26 September 2026, replacing the eight-armed "Cross").
 export function Asterisk({ className }: { className?: string }) {
   return (
     <svg
@@ -11,7 +11,7 @@ export function Asterisk({ className }: { className?: string }) {
       className={className}
     >
       <g fill="currentColor">
-        {[0, 45, 90, 135].map((angle) => (
+        {[0, 60, 120].map((angle) => (
           <rect
             key={angle}
             x={-7.3255}
