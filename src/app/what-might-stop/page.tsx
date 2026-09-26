@@ -39,7 +39,7 @@ export default function WhatMightStopPage() {
     <main>
       <PageIntro
         title="what might stop, and for how long"
-        lede="Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked people to keep a few days of supplies. Their reasons are the same: severe weather, attacks on power and water, cyber attacks, and the possibility of conflict in Europe. None of them say anything is imminent."
+        lede="Since 2024 the UK, the EU, Sweden, Finland, Norway and France have all asked people to keep a few days of supplies. Their reasons are the same: severe weather, attacks on power and water, cyber attacks, and the possibility of armed conflict. None of them say anything is imminent."
         aside={<Diagram name="duration" />}
       />
 
@@ -50,8 +50,8 @@ export default function WhatMightStopPage() {
         </h2>
         <p className="measure mt-5 text-lg">
           Severe weather, a fault in the grid, a cyber attack on a water
-          company, or disruption from a conflict elsewhere in Europe can all
-          have the same effect at home.
+          company, or disruption from a conflict abroad can all have the same
+          effect at home.
         </p>
         <ul className="mt-9 max-w-[980px] border-t-[3px] border-ink min-[900px]:grid min-[900px]:grid-cols-2 min-[900px]:gap-x-10">
           {whatStops.map(({ text, cat }) => (
