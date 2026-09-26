@@ -53,7 +53,7 @@ const all: ReadyList[] = [
     title: "3 months",
     description:
       "A pantry built on bulk staples, a filter for long-term water, and food you rotate through as you eat it.",
-    reasons: "Losing income, war in Europe, climate disruption or a longer crisis.",
+    reasons: "Losing income, climate disruption or a longer crisis.",
     days: { kind: "range", min: 31, max: 90, default: 90 },
     order: 3,
   },

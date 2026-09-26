@@ -99,7 +99,7 @@ export default function Home() {
                 The government asks every UK household to be able to manage on
                 its own for three days. Severe weather, a fault in the grid, a
                 cyber attack on a water company, or disruption from a conflict
-                elsewhere in Europe can all have the same effect at home.
+                abroad can all have the same effect at home.
               </p>
               <p>
                 Most of these last hours or days. A pandemic can last months. All are
