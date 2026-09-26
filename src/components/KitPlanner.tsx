@@ -275,7 +275,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             className={`hidden border-x-[3px] border-b-[3px] border-t-[10px] border-ink bg-paper px-6 pb-4 pt-4 min-[900px]:block ${fits ? "" : "min-[900px]:sticky min-[900px]:top-6"}`}
           >
             <p className={`font-extrabold leading-tight ${haveReady ? "" : "invisible"}`}>
-              {remaining ? "still to get" : "nothing left to get"}
+              {remaining ? "on your list" : "nothing on your list"}
             </p>
             <p
               className={`display mt-1 text-[3.5rem] leading-[0.95] tabular-nums ${haveReady ? "" : "invisible"}`}
@@ -284,10 +284,10 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
               {remaining}
             </p>
             <p className={`mt-1.5 text-ink-2 ${haveReady ? "" : "invisible"}`}>
-              <span className="tabular-nums">{ticked}</span> already ticked
+              <span className="tabular-nums">{ticked}</span> taken off
             </p>
             <a href="#buy" onClick={goToBuy} className="arrow-link mt-1">
-              where to buy <DownArrow />
+              send to Amazon <DownArrow />
             </a>
           </div>
         </div>
@@ -303,12 +303,13 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             </h2>
             {haveReady && ticked > 0 ? (
               <p className="mt-3 font-extrabold">
-                You have <span className="tabular-nums">{ticked}</span> of <span className="tabular-nums">{total}</span>.
+                <span className="tabular-nums">{remaining}</span> of <span className="tabular-nums">{total}</span> on
+                your list.
               </p>
             ) : null}
             <p className="mt-3 max-w-[52ch] text-ink-2">
-              Tick what you already have. Ticked lines stay on the list and drop out of what to buy. Ticks are kept
-              in this browser, and the link in your address bar carries your household.
+              Everything your household needs is on the list. Untick anything you already have or do not want, then
+              send the rest to Amazon. Your choices are kept in this browser.
             </p>
             {haveReady && ticked > 0 ? (
               <button
@@ -316,7 +317,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                 onClick={clearHave}
                 className="no-print mt-2 min-h-11 font-bold underline underline-offset-4 hover:decoration-4"
               >
-                clear all ticks
+                put everything back
               </button>
             ) : null}
           </div>
@@ -338,11 +339,11 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
 
         {/* Stage 1 */}
         <h3 id="kit-stage-1" className="h-sub mt-10">
-          check what you have
+          your shopping list
         </h3>
         <div className="mt-5 border-[3px] border-ink">
           <div className="flex justify-between gap-4 border-b-[10px] border-ink px-3 pb-2 pt-3 text-[0.9375rem] font-extrabold min-[900px]:px-5">
-            <span>What to get</span>
+            <span>On the list</span>
             <span>How many</span>
           </div>
           {categories.map((c, gi) => {
@@ -365,7 +366,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                         key={l.id}
                         className={`grid grid-cols-[2.75rem_minmax(0,1fr)_auto] gap-x-2.5 px-1.5 py-3 break-inside-avoid min-[900px]:gap-x-4 min-[900px]:px-3.5 min-[900px]:py-4 ${got ? "bg-hush" : ""}`}
                       >
-                        <TickBox checked={got} onChange={() => toggleHave(key)} label={`Already have ${l.item}`} />
+                        <TickBox checked={!got} onChange={() => toggleHave(key)} label={`${l.item}: on the list`} />
                         <div className={`min-w-0 max-w-[62ch] pt-2 ${got ? "text-ink-2" : ""}`}>
                           <p className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
                             <span className={`text-lg font-extrabold leading-tight ${got ? "line-through" : ""}`}>{l.item}</span>
@@ -412,34 +413,47 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
           })}
         </div>
 
-        <div className="no-print mt-12 border-t-8 border-ink pt-6 min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1fr)_auto] min-[900px]:items-end min-[900px]:gap-10">
-          <div>
-            <h3 className="h-sub">ready to buy what is left?</h3>
-          </div>
-          <a href="#buy" onClick={goToBuy} className="btn btn-primary btn-lg mt-5 min-[900px]:mt-0">
-            where to buy it <DownArrow />
-          </a>
-        </div>
+        {/* Send the list to Amazon */}
+        <section id="kit-send" aria-labelledby="buy" className="no-print mt-12 border-t-8 border-ink pt-6">
+          <h3 id="buy" tabIndex={-1} className="h-sub scroll-mt-6">
+            send your list to Amazon
+          </h3>
+          <p className={`mt-3 max-w-[60ch] ${haveReady ? "" : "invisible"}`}>
+            {basket ? (
+              <>
+                <span className="tabular-nums">{asinCount}</span> {asinCount === 1 ? "product" : "products"}, about{" "}
+                <span className="tabular-nums">&pound;{estimates[tier]}</span> in the {tier} price range.
+                {groceriesLeft ? " Some food is best bought at a supermarket; it is on the list below." : ""}
+              </>
+            ) : remaining ? (
+              <>Nothing on your list is sold as a single Amazon product. See where to buy each thing below.</>
+            ) : (
+              <>You have taken everything off the list. Tick a line to put it back.</>
+            )}
+          </p>
+          {basketBlock}
+          <p className="mt-4 max-w-[60ch] text-[0.9375rem] leading-snug text-ink-2">{DISCLOSURE}</p>
+          {remaining ? (
+            <a href="#more-shops" className="arrow-link mt-3">
+              see each product, or other shops <DownArrow />
+            </a>
+          ) : null}
+        </section>
 
         {/* Stage 2 */}
-        <section id="kit-buy" aria-labelledby="buy" className="no-print mt-16 border-t-[3px] border-ink pt-8">
-          <h3 id="buy" tabIndex={-1} className="h-sub scroll-mt-6">
-            buy what is left
+        <section id="kit-buy" aria-labelledby="more-shops" className="no-print mt-16 border-t-[3px] border-ink pt-8">
+          <h3 id="more-shops" className="h-sub scroll-mt-6">
+            other ways to buy
           </h3>
-          <p className="mt-3 max-w-[60ch] text-[0.9375rem] leading-snug text-ink-2">{DISCLOSURE}</p>
-          <p className={`mt-4 max-w-[60ch] ${haveReady ? "" : "invisible"}`}>
+          <p className={`mt-3 max-w-[60ch] ${haveReady ? "" : "invisible"}`}>
             {remaining ? (
               <>
-                You have ticked <span className="tabular-nums">{ticked}</span> of{" "}
-                <span className="tabular-nums">{total}</span>. Here is where to get the other{" "}
-                <span className="tabular-nums">{remaining}</span>.
+                Where to get each of the <span className="tabular-nums">{remaining}</span> things on your list, one by
+                one, with the free option first.
               </>
             ) : (
-              <>
-                You have ticked all <span className="tabular-nums">{total}</span>. There is nothing left to buy.
-              </>
+              <>There is nothing on your list.</>
             )}
-            {remaining && groceriesLeft ? " Groceries are on your list; buy those at a supermarket." : null}
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -662,7 +676,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
         </div>
       </section>
 
-      <StillToGetBar remaining={remaining} watch="kit-stage-1" hideOver={["kit-household", "kit-buy"]} />
+      <StillToGetBar remaining={remaining} watch="kit-stage-1" hideOver={["kit-household", "kit-send", "kit-buy"]} />
     </div>
   );
 }

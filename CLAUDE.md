@@ -63,9 +63,12 @@ it.
 
 What to get and every way to order a kit live on one page, `/checklist`
 ("what to get"; the checklist and the kits page were merged on 26 September
-2026). It opens with the short "get these first" list, then `KitPlanner`
-(anchor `#your-kit`) opened on a kit from `lists.ts` or on "your own length"
-(no list, 1 to 90 days), then the FAQ with its JSON-LD. Typing a number of
+2026). It is `KitPlanner` (anchor `#your-kit`) opened on a kit from
+`lists.ts` or on "your own length" (no list, 1 to 90 days), then the FAQ
+with its JSON-LD. The list is a shopping list: every line starts ticked (on
+the list); unticking takes it off, and a "send your list to Amazon" block
+(`#kit-send`) follows with one basket button. "Other ways to buy" (maker
+first, supermarkets, each product) sits below it. Typing a number of
 days moves to the kit that covers it (`listForDays`). `/kits` and
 `/kits/[slug]` redirect here in `next.config.ts` (a kit's address becomes
 `?list=<slug>`), as do the older `/lists`, `/build-your-kit` and `/basket`;
@@ -94,8 +97,10 @@ already carried one silent data-loss bug.
 through `useSyncExternalStore` so every component on a page updates
 together without a provider. Two surfaces read it:
 
-- `KitPlanner` on `/checklist` (ticks write the record; ticked lines drop
-  out of the basket and the copied text)
+- `KitPlanner` on `/checklist`. A line in the record is one the reader has
+  taken off the shopping list (unticked, usually because they have it); it
+  drops out of the basket and the copied text. The record's name and keys
+  predate this, so existing choices carry over.
 - `home/StepState` (the counts on the home page's steps, over the checklist
   items the planner covers)
 

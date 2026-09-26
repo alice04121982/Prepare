@@ -25,12 +25,12 @@ export default function StepState({ step }: { step: "check" | "buy" }) {
     step === "check"
       ? ticked === 0
         ? null
-        : `${ticked} of ${total} checked`
+        : `${ticked} taken off`
       : ticked === 0
         ? null
         : left === 0
-          ? "nothing left to get"
-          : `${left} still to get`;
+          ? "nothing on your list"
+          : `${left} on your list`;
   if (!text) return null;
 
   return (

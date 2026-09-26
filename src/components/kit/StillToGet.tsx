@@ -85,14 +85,14 @@ export function StillToGetBar({
               <span className="display text-[2rem] tabular-nums" style={{ fontVariationSettings: '"wdth" 115' }}>
                 {remaining}
               </span>
-              <span>still to get</span>
+              <span>on your list</span>
             </>
           ) : (
-            <span>nothing left to get</span>
+            <span>nothing on your list</span>
           )}
         </p>
         <a href="#buy" onClick={goToBuy} className="btn btn-secondary flex-none">
-          where to buy <DownArrow />
+          send to Amazon <DownArrow />
         </a>
       </div>
     </div>

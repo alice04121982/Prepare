@@ -24,7 +24,7 @@ const tins: Tin[] = [
 const steps = [
   {
     title: "check what you already have",
-    body: "Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Tick them off against the list before you buy anything.",
+    body: "Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Take them off your list before you buy anything.",
     href: "/checklist",
     cta: "see what to get",
     state: "check" as const,
