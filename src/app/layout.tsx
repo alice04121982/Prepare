@@ -27,6 +27,11 @@ export const metadata: Metadata = {
     siteName: "Stay Prepared",
     locale: "en_GB",
   },
+  // Pinterest's website claim (Settings, Claimed accounts). It must stay in
+  // place, or Pinterest drops the claim and pins lose the site's name.
+  verification: {
+    other: { "p:domain_verify": "b0800e7d820a2618c88eac8a8048c55b" },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
