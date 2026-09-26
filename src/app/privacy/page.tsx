@@ -1,3 +1,4 @@
+import { paapiEnabled } from "@/lib/paapi";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
@@ -42,6 +43,11 @@ const sections = [
     body: [
       "Some links go to Amazon and carry our Amazon Associates code, so Amazon knows you came from us. If you buy something, we may earn a small commission.",
       "Once you are on Amazon, Amazon's own privacy notice and cookies apply. Amazon tells us which items were ordered through our links, never who ordered them.",
+      ...(paapiEnabled()
+        ? [
+            "On the shopping list, product photos load from Amazon's image servers, so Amazon sees your IP address when they appear, as with any image. Prices come from Amazon to our server, not from your browser.",
+          ]
+        : []),
     ],
   },
   {

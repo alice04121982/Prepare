@@ -25,3 +25,33 @@ export const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG || "stayp
 export function amazonSearchUrl(query: string, tag: string = AMAZON_TAG) {
   return `https://www.amazon.co.uk/s?k=${encodeURIComponent(query)}&tag=${encodeURIComponent(tag)}`;
 }
+
+/** A live price and photo from Amazon's Product Advertising API (see paapi.ts). */
+export type Offer = {
+  /** "£12.99", as Amazon formats it. */
+  price?: string;
+  /** Amazon's own image URL, allowed because it came from the API. */
+  image?: string;
+  /** ISO time the price was fetched, shown next to it. */
+  fetchedAt: string;
+};
+
+export type Offers = Record<string, Offer>;
+
+/**
+ * Amazon's required wording wherever a live price is shown (Associates
+ * Program Policies). Each price also carries the time it was fetched.
+ */
+export const LIVE_PRICE_NOTE =
+  "Prices and availability are accurate as of the time shown and may change. The price and availability on Amazon.co.uk when you buy will apply.";
+
+/** "26 Sep, 09:00" in UK time, for the "price as of" stamp. */
+export function priceTime(iso: string) {
+  return new Date(iso).toLocaleString("en-GB", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "Europe/London",
+  });
+}

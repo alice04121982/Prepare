@@ -25,7 +25,8 @@ import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton
 import { useHave } from "@/lib/have";
 import { daysRangeFor, defaultDaysFor, listBySlug, listForDays, type ListSlug } from "@/data/lists";
 
-import { AMAZON_TAG as TAG, PRICE_NOTE } from "@/lib/amazon";
+import { AMAZON_TAG as TAG, LIVE_PRICE_NOTE, PRICE_NOTE, priceTime, type Offers } from "@/lib/amazon";
+import { AmazonPick } from "@/components/kit/AmazonPick";
 
 /** Quick picks under the days stepper, per list. Without a list, the original three. */
 /**
@@ -77,7 +78,12 @@ function FreeOption({ text }: { text?: string }) {
   );
 }
 
-export default function KitPlanner({ initial }: { initial?: Household }) {
+/**
+ * `offers` holds live Amazon prices and photos by ASIN, fetched on the server
+ * through the Product Advertising API (src/lib/paapi.ts). Empty until the API
+ * keys are set; until then every line shows its product name and link only.
+ */
+export default function KitPlanner({ initial, offers = {} }: { initial?: Household; offers?: Offers }) {
   const [h, setH] = useState<Household>(initial ?? defaultHousehold);
   // The shared record of what the household has: kept in this browser and
   // ticked from either this page or the checklist.
@@ -140,6 +146,9 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
     (["budget", "regular", "premium"] as const).map((t) => [t, packTotals(buysFor(toBuy, basketPeople, t)).estimate]),
   ) as Record<Tier, number>;
   const setTier = (t: Tier) => setH((prev) => ({ ...prev, tier: t === "regular" ? undefined : t }));
+  const buysByLine = new Map<string, typeof basketBuys>();
+  for (const b of basketBuys) buysByLine.set(b.line.id, [...(buysByLine.get(b.line.id) ?? []), b]);
+  const livePrices = basketBuys.some((b) => offers[b.product.asin]?.price);
   const basket = basketBuys.length > 0;
   const asinCount = basketBuys.length;
   const groceriesLeft = toBuy.some((l) => (l.category === "Food" || l.id === "water") && !productsFor(l.id).length);
@@ -341,6 +350,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
         <h3 id="kit-stage-1" className="h-sub mt-10">
           your shopping list
         </h3>
+        {livePrices ? <p className="no-print mt-3 max-w-[60ch] text-[0.9375rem] leading-snug text-ink-2">{LIVE_PRICE_NOTE}</p> : null}
         <div className="mt-5 border-[3px] border-ink">
           <div className="flex justify-between gap-4 border-b-[10px] border-ink px-3 pb-2 pt-3 text-[0.9375rem] font-extrabold min-[900px]:px-5">
             <span>On the list</span>
@@ -397,6 +407,13 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                                 ))}
                             </ul>
                           ) : null}
+                          {!got
+                            ? buysByLine.get(l.id)?.map((b) => (
+                                <div key={b.product.asin} className="no-print">
+                                  <AmazonPick product={b.product} quantity={b.quantity} offer={offers[b.product.asin]} />
+                                </div>
+                              ))
+                            : null}
                         </div>
                         <span
                           className={`display min-w-[2.5ch] pt-1 text-right text-[2rem] tabular-nums min-[900px]:text-[2.75rem] ${got ? "text-ink-2 line-through decoration-[3px]" : ""}`}
@@ -434,6 +451,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
           {basketBlock}
           <p className="mt-4 max-w-[60ch] text-[0.9375rem] leading-snug text-ink-2">
             {DISCLOSURE} {PRICE_NOTE}
+            {livePrices ? ` ${LIVE_PRICE_NOTE}` : ""}
           </p>
           {remaining ? (
             <a href="#more-shops" className="arrow-link mt-3">
@@ -553,7 +571,11 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                         <>
                           <p className="mt-1 text-lg font-extrabold leading-snug">{product.name}</p>
                           <p className="mt-1 text-ink-2 tabular-nums">
-                            Buy {buyQty}{product.verified ? " · checked by hand" : ""}
+                            Buy {buyQty}
+                            {offers[product.asin]?.price
+                              ? ` · ${offers[product.asin].price} each, price as of ${priceTime(offers[product.asin].fetchedAt)}`
+                              : ""}
+                            {product.verified ? " · checked by hand" : ""}
                           </p>
                           <a
                             href={amazonProductUrl(product.asin, TAG)}
@@ -561,7 +583,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                             rel="noopener noreferrer sponsored"
                             className={externalLink}
                           >
-                            View on Amazon <ExternalLink size={14} strokeWidth={2.5} />
+                            {offers[product.asin]?.price ? "View on Amazon" : "Check price on Amazon"}{" "}
+                            <ExternalLink size={14} strokeWidth={2.5} />
                           </a>
                         </>
                       ) : (

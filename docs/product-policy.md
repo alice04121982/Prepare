@@ -93,6 +93,10 @@ sign-off is a person's.
   live. Price bands feed our basket totals, which are labelled as our own
   rough guide, not Amazon's prices. Bands next to maker or supermarket
   products stay.
+- Once the API keys are set (`src/lib/paapi.ts`), live prices and photos
+  from the API may show, each price with the time it was fetched and
+  Amazon's "accurate as of" wording. Fetched hourly; Amazon's limit is 24
+  hours.
 
 ## 6. Paid placement
 
