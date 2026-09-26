@@ -7,6 +7,14 @@
  * link, so it falls back to the site's own when the environment variable is
  * not set, rather than breaking the basket.
  */
+/**
+ * Shown wherever the site gives a basket total. The totals are worked out
+ * from our own price bands, not from Amazon: the Associates agreement only
+ * allows Amazon prices fetched live through its Product Advertising API.
+ */
+export const PRICE_NOTE =
+  "Totals are our own rough guide from typical UK prices, not Amazon's prices. Amazon shows the current price before you pay.";
+
 export const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG || "stayprepared2-21";
 
 /**

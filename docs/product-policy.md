@@ -36,7 +36,7 @@ A product must pass every one of these before it goes in `products.ts`:
 2. **Sold in the UK by a UK seller or Amazon itself**, with UK delivery.
    No marketplace listings shipped from abroad.
 3. **In stock** on the day it is checked.
-4. **Inside the price band** we print. If the price moves out of the
+4. **Inside the price band** we use for totals. If the price moves out of the
    band, the band or the product changes.
 5. **Well reviewed**: 4 stars or more from at least 100 reviews, or an
    established maker's own-brand line (Amazon Basics, by Amazon).
@@ -87,9 +87,12 @@ sign-off is a person's.
   disappears, or a price leaves its band.
 - **After any Amazon Associates or Awin policy change** that affects what
   we can show.
-- Photos come from Amazon's own image links (the Associates rules allow
-  showing them, not storing them). If a photo stops loading, the product
-  needs rechecking.
+- No Amazon photos and no per-product Amazon prices (26 September 2026).
+  The Associates agreement allows product images and prices only through
+  the Product Advertising API or SiteStripe, and prices only when fetched
+  live. Price bands feed our basket totals, which are labelled as our own
+  rough guide, not Amazon's prices. Bands next to maker or supermarket
+  products stay.
 
 ## 6. Paid placement
 
