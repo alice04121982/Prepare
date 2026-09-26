@@ -19,7 +19,7 @@ const rules = [
   { title: "It is on the list", body: "We only link to things on the checklist or in the kit planner. Nothing is added for the commission." },
   { title: "It does the job", body: "The right size, quantity and type for its line. A 12 litre container is not a 10 litre one." },
   { title: "It is sold in the UK", body: "By Amazon or a UK seller, with UK delivery, and in stock on the day we check." },
-  { title: "The price is fair", body: "Inside the price band we show. If the price moves out of the band, the product changes." },
+  { title: "The price is fair", body: "Inside the price band we use for our rough totals. If the price moves out of the band, the product changes." },
   { title: "It is well reviewed", body: "4 stars or more from at least 100 reviews, or a supermarket or Amazon own-brand line." },
   { title: "It is plain and safe", body: "No products sold with fear. No weapons or unregulated medicines. Electrical goods carry a UK plug and safety marking." },
   { title: "Our name matches", body: "The name on our site matches the listing: brand, model, size and pack count." },

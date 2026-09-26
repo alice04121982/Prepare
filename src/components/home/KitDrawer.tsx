@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingBasket, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { PRICE_NOTE } from "@/lib/amazon";
 import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import type { PackBuy } from "@/data/packs";
-import { amazonImageUrl } from "@/data/products";
 
 /**
  * Everything in a kit before it goes to Amazon: a drawer from the right on
@@ -88,26 +88,12 @@ export default function KitDrawer({
           {buys.map((b) => (
             <li
               key={`${b.line.id}-${b.product.asin}`}
-              className="grid grid-cols-[3.5rem_minmax(0,1fr)] items-center gap-3.5 border-b border-ink py-3 last:border-b-0"
+              className="border-b border-ink py-3 last:border-b-0"
             >
-              {b.product.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={amazonImageUrl(b.product.image, 112)}
-                  alt=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  className="aspect-square w-14 border border-ink bg-paper object-contain p-1"
-                />
-              ) : (
-                <span aria-hidden="true" className="grid aspect-square w-14 place-items-center border border-ink bg-hush text-ink-2">
-                  <ShoppingBasket size={22} strokeWidth={1.5} />
-                </span>
-              )}
-              <span className="min-w-0 leading-snug">
+              <span className="block min-w-0 leading-snug">
                 <span className="block font-bold">{b.product.name}</span>
                 <span className="mt-0.5 block text-[0.9375rem] text-ink-2 tabular-nums">
-                  Buy {b.quantity} &middot; {b.product.priceBand} each
+                  Buy {b.quantity}
                 </span>
               </span>
             </li>
@@ -125,6 +111,7 @@ export default function KitDrawer({
               <dd className="whitespace-nowrap font-extrabold">about &pound;{kitOnce}</dd>
             </div>
           </dl>
+          <p className="mt-2 text-sm leading-snug text-ink-2">{PRICE_NOTE}</p>
           <AmazonBasketButton
             items={buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
             className="mt-3.5"

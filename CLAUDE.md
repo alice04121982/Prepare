@@ -42,7 +42,10 @@ markup. `checklist.ts` (what to keep, with amounts and sourcing notes),
 answer first, sources listed, `verified: false` until checked by hand).
 Guides name kinds of things, never brands: each "what to have ready" item
 links to a tagged Amazon search (`amazonSearchUrl`). Specific products stay
-in the one-click basket and on `/checklist`, whose Amazon tab shows their photos.
+in the one-click basket and on `/checklist`'s Amazon tab, named without
+photos or Amazon prices: the Associates agreement allows those only through
+its API. Basket totals come from our own price bands and carry `PRICE_NOTE`
+(`src/lib/amazon.ts`).
 
 The offline guide (`/offline-guide`, `src/app/offline-guide/route.ts`) is
 one self-contained HTML file built at build time from the same data files,

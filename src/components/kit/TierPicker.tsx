@@ -1,5 +1,6 @@
 import { OptionRow } from "@/components/kit/Controls";
 import type { Tier } from "@/data/products";
+import { PRICE_NOTE } from "@/lib/amazon";
 
 const TIERS: { id: Tier; label: string }[] = [
   { id: "budget", label: "budget" },
@@ -39,6 +40,7 @@ export function TierPicker({
           </OptionRow>
         ))}
       </div>
+      <p className="mt-2.5 text-sm leading-snug text-ink-2">{PRICE_NOTE}</p>
     </fieldset>
   );
 }

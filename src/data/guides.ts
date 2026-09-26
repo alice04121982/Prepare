@@ -18,7 +18,7 @@ export type GuideSource = { label: string; publisher: string; url: string };
 /**
  * A kind of thing to have, not a brand: what it is, what to look for, and
  * the Amazon search that finds it. Specific products live in products.ts,
- * for the one-click basket, and are shown with their photos on /basket.
+ * for the one-click basket and the Amazon tab on /checklist.
  */
 export type ReadyItem = { item: string; tip: string; search: string };
 

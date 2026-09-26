@@ -12,8 +12,8 @@ import {
   type Household,
   type Retailer,
 } from "@/data/kit-rules";
-import { ExternalLink, ShoppingBasket } from "lucide-react";
-import { amazonImageUrl, amazonProductUrl, productsFor, type Tier } from "@/data/products";
+import { ExternalLink } from "lucide-react";
+import { amazonProductUrl, productsFor, type Tier } from "@/data/products";
 import { Counter, DaysControl, FixedDays, OptionRow, TickBox } from "@/components/kit/Controls";
 import { ListPicker } from "@/components/kit/ListPicker";
 import { TierPicker } from "@/components/kit/TierPicker";
@@ -25,7 +25,7 @@ import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton
 import { useHave } from "@/lib/have";
 import { daysRangeFor, defaultDaysFor, listBySlug, listForDays, type ListSlug } from "@/data/lists";
 
-import { AMAZON_TAG as TAG } from "@/lib/amazon";
+import { AMAZON_TAG as TAG, PRICE_NOTE } from "@/lib/amazon";
 
 /** Quick picks under the days stepper, per list. Without a list, the original three. */
 /**
@@ -432,7 +432,9 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
             )}
           </p>
           {basketBlock}
-          <p className="mt-4 max-w-[60ch] text-[0.9375rem] leading-snug text-ink-2">{DISCLOSURE}</p>
+          <p className="mt-4 max-w-[60ch] text-[0.9375rem] leading-snug text-ink-2">
+            {DISCLOSURE} {PRICE_NOTE}
+          </p>
           {remaining ? (
             <a href="#more-shops" className="arrow-link mt-3">
               see each product, or other shops <DownArrow />
@@ -500,7 +502,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                         <p className="mt-1.5 flex flex-wrap items-center gap-x-2 leading-snug">
                           <span className="font-extrabold">{makers.length ? "Or on Amazon:" : "On Amazon:"}</span>
                           <span>
-                            {product.name}, <span className="tabular-nums">{buyQty}</span> ×, {product.priceBand}
+                            {product.name}, <span className="tabular-nums">{buyQty}</span> ×
                           </span>
                           <a
                             href={amazonProductUrl(product.asin, TAG)}
@@ -539,29 +541,8 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                 {picks.map(({ line, product, buyQty }) => (
                   <li
                     key={line.id}
-                    className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-x-4 border-b border-ink py-4 min-[900px]:grid-cols-[7.5rem_minmax(0,1fr)] min-[900px]:gap-x-6"
+                    className="border-b border-ink py-4"
                   >
-                    {product?.image ? (
-                      <a
-                        href={amazonProductUrl(product.asin, TAG)}
-                        target="_blank"
-                        rel="noopener noreferrer sponsored"
-                        className="flex aspect-square items-center justify-center border border-ink bg-paper p-2"
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={amazonImageUrl(product.image, 400)}
-                          alt={product.name}
-                          loading="lazy"
-                          referrerPolicy="no-referrer"
-                          className="max-h-full max-w-full object-contain"
-                        />
-                      </a>
-                    ) : (
-                      <div aria-hidden className="flex aspect-square items-center justify-center border border-ink bg-hush text-ink-2">
-                        <ShoppingBasket size={32} strokeWidth={1.5} />
-                      </div>
-                    )}
                     <div className="min-w-0">
                       <p className="flex items-start gap-2 text-[0.9375rem] font-bold leading-snug text-ink-2">
                         <Swatch category={line.category} />
@@ -572,8 +553,7 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                         <>
                           <p className="mt-1 text-lg font-extrabold leading-snug">{product.name}</p>
                           <p className="mt-1 text-ink-2 tabular-nums">
-                            {buyQty} × · {product.priceBand}
-                            {product.verified ? " · checked by hand" : ""}
+                            Buy {buyQty}{product.verified ? " · checked by hand" : ""}
                           </p>
                           <a
                             href={amazonProductUrl(product.asin, TAG)}
@@ -606,7 +586,6 @@ export default function KitPlanner({ initial }: { initial?: Household }) {
                 ))}
               </ul>
               {basketBlock}
-              <p className="mt-5 text-sm text-ink-2">Product photos are shown from Amazon and belong to their sellers.</p>
             </>
           ) : retailer ? (
             <>

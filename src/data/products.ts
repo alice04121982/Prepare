@@ -9,11 +9,12 @@
  * the one-click basket (policy decision A, 24 September 2026); verify them
  * rather than filter them.
  *
- * `image` is the id of the product's main photo on Amazon's image host
- * (the part before the first dot in the /images/I/ path). We link to
- * Amazon's copy rather than storing one: the Associates agreement lets
- * affiliates show product images fetched from Amazon, not redistribute
- * them, so the files never live in this repo.
+ * `image` is the id of the product's main photo on Amazon's image host.
+ * It is not shown: the Associates agreement allows Amazon photos only
+ * through the Product Advertising API or SiteStripe, so the site shows none.
+ * `priceBand` is our own rough range, used for basket totals. It is never
+ * shown next to an Amazon product, because the agreement allows Amazon
+ * prices only when fetched live through that API.
  */
 /**
  * Price tier. Products with no tier are "regular", the mid-range pick the
@@ -35,7 +36,11 @@ export type Product = {
   checked?: string;
   /** How many of this product cover one planner unit, e.g. a 24-pack covers 6 "packs of 4". */
   unitsPerProduct?: number;
-  /** Amazon image id for the main product photo; see amazonImageUrl(). */
+  /**
+   * Amazon image id, kept for reference only. The site does not show Amazon
+   * photos: the Associates agreement allows them only through the Product
+   * Advertising API or SiteStripe, never hotlinked from Amazon's image host.
+   */
   image?: string;
   /**
    * Share of the line's quantity this product covers, when a line is split
@@ -115,30 +120,7 @@ export function productsFor(lineId: string, tier: Tier = "regular"): Product[] {
   return inTier.length ? inTier : forLine.filter((p) => !p.tier);
 }
 
-/** Main product photo from Amazon's image host, sized by width in pixels. */
-export function amazonImageUrl(image: string, width = 400) {
-  return `https://m.media-amazon.com/images/I/${image}._AC_SX${width}_.jpg`;
-}
 
-/**
- * The product's main photo by ASIN alone, through the Associates image
- * link (the "Image" option in Amazon's SiteStripe). Used for products with no
- * `image` id recorded. It redirects to the same m.media-amazon.com photo.
- */
-export function amazonImageByAsin(asin: string, tag: string) {
-  const q = new URLSearchParams({
-    _encoding: "UTF8",
-    ASIN: asin,
-    Format: "_SL250_",
-    ID: "AsinImage",
-    MarketPlace: "GB",
-    ServiceVersion: "20070822",
-    WS: "1",
-    tag,
-    language: "en_GB",
-  });
-  return `https://ws-eu.amazon-adsystem.com/widgets/q?${q.toString()}`;
-}
 
 export function amazonProductUrl(asin: string, tag?: string) {
   return `https://www.amazon.co.uk/dp/${asin}${tag ? `?tag=${encodeURIComponent(tag)}` : ""}`;

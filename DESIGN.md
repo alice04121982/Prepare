@@ -310,6 +310,6 @@ Every interactive target is at least 44px tall; option rows and footer links are
 - **Don't** put eyebrows (small uppercase kickers) above headings.
 - **Don't** use pill shapes or circles for buttons, radios or other large controls.
 - **Don't** use colour for decoration, emphasis or state, other than the Yolk Exception.
-- **Don't** add photographs, illustrations, icon tiles or stock imagery; retailer product thumbnails in the kit planner's shop tab are the only images.
+- **Don't** add photographs, illustrations, icon tiles or stock imagery, including retailer product photos (the Amazon Associates agreement rules them out outside its API).
 - **Don't** add a dark theme or navy hero panels.
 - **Don't** add motion beyond the reach bar and short state changes, and never anything that raises alarm.
