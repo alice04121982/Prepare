@@ -85,25 +85,26 @@ export default function KitDrawer({
           </button>
         </div>
 
-        <ul className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4.5 min-[900px]:px-6">
-          {buys.map((b) => (
-            <li
-              key={`${b.line.id}-${b.product.asin}`}
-              className="grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-3.5 border-b border-ink py-3 last:border-b-0"
-            >
-              <Pictogram lineId={b.product.lineId} className="h-11 w-11" />
-              <span className="block min-w-0 leading-snug">
-                <span className="block font-bold">{b.product.name}</span>
-                <span className="mt-0.5 block text-[0.9375rem] text-ink-2 tabular-nums">
-                  Buy {b.quantity}
+        {/* Products, totals and the edit link scroll together; only the
+            basket button, with its disclosure, stays pinned below. */}
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4.5 min-[900px]:px-6">
+          <ul>
+            {buys.map((b) => (
+              <li
+                key={`${b.line.id}-${b.product.asin}`}
+                className="grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-3.5 border-b border-ink py-3"
+              >
+                <Pictogram lineId={b.product.lineId} className="h-11 w-11" />
+                <span className="block min-w-0 leading-snug">
+                  <span className="block font-bold">{b.product.name}</span>
+                  <span className="mt-0.5 block text-[0.9375rem] text-ink-2 tabular-nums">
+                    Buy {b.quantity}
+                  </span>
                 </span>
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="border-t-[3px] border-ink px-4.5 pb-4.5 pt-3.5 min-[900px]:px-6">
-          <dl className="grid gap-1 text-[0.9375rem] tabular-nums">
+              </li>
+            ))}
+          </ul>
+          <dl className="mt-3.5 grid gap-1 text-[0.9375rem] tabular-nums">
             <div className="flex justify-between gap-3">
               <dt>Food, water and supplies</dt>
               <dd className="whitespace-nowrap font-extrabold">about &pound;{supplies}</dd>
@@ -114,16 +115,18 @@ export default function KitDrawer({
             </div>
           </dl>
           <p className="mt-2 text-sm leading-snug text-ink-2">{PRICE_NOTE}</p>
+          <Link href={editHref} className="mb-2 mt-1 inline-flex min-h-11 items-center text-sm font-extrabold">
+            change quantities or products on your list
+          </Link>
+        </div>
+
+        <div className="border-t-[3px] border-ink px-4.5 pb-4 pt-3 min-[900px]:px-6">
           <AmazonBasketButton
             items={buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }))}
-            className="mt-3.5"
             note={note}
           >
             {basketLabel(buys.length)}
           </AmazonBasketButton>
-          <Link href={editHref} className="mt-2 inline-flex min-h-11 items-center text-sm font-extrabold">
-            change quantities or products on your list
-          </Link>
         </div>
       </div>
     </dialog>
