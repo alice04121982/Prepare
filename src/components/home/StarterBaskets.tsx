@@ -16,9 +16,9 @@ const MAX_PEOPLE = 12;
 const TIERS: Tier[] = ["budget", "regular", "premium"];
 const NOTE = "Amazon opens and asks you to confirm. We earn a small commission, at no extra cost to you.";
 
-/** The kits page, opened on this many people and days. */
+/** The what to get page, opened on this many people and days. */
 const kitHref = (people: number, days: number, tier: Tier) =>
-  `/kits${householdToQuery({
+  `/checklist${householdToQuery({
     ...defaultHousehold,
     adults: people,
     days,
@@ -229,7 +229,7 @@ export default function StarterBaskets() {
           </>
         ) : (
           <p className="text-[0.9375rem] min-[900px]:col-span-2">
-            You have ticked off everything a basket would hold.{" "}
+            You have taken everything off the list.{" "}
             <Link href={kitHref(people, days, tier)} className="font-bold">
               See what is left
             </Link>
@@ -241,7 +241,7 @@ export default function StarterBaskets() {
         open={drawer}
         onClose={() => setDrawer(false)}
         title={`${DURATIONS.find((d) => d.days === days)?.label ?? `${days} days`} for ${people} ${people === 1 ? "person" : "people"}`}
-        detail={`${chosen.buys.length} products, ${tier} price range. Anything ticked on the checklist is left out.`}
+        detail={`${chosen.buys.length} products, ${tier} price range. Anything you took off your list is left out.`}
         buys={chosen.buys}
         supplies={chosen.supplies}
         kitOnce={chosen.kitOnce}

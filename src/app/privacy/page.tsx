@@ -18,7 +18,7 @@ const sections = [
     id: "device",
     title: "what stays on your device",
     body: [
-      "When you tick things off on the checklist or plan a kit, the ticks are saved in your browser, on your device. They are never sent to us or anyone else.",
+      "When you plan a kit and take things off your list, your choices are saved in your browser, on your device. They are never sent to us or anyone else.",
       "To remove them, clear this site's data in your browser settings.",
     ],
   },

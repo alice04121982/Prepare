@@ -95,7 +95,7 @@ export default function DoNowPage() {
             when you are ready to buy
           </h2>
           <p className="mt-4 text-[1.125rem] leading-relaxed">
-            Tick off what you already have, then buy only what is missing, in one basket if you like.
+            Take off your list what you already have, then buy only what is missing, in one basket if you like.
           </p>
           <div className="mt-7 flex flex-wrap gap-4">
             <Link href="/checklist" className="btn btn-primary btn-lg">

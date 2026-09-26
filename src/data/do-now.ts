@@ -129,7 +129,7 @@ export const doNow: NowGroup[] = [
       {
         id: "checklist",
         title: "Go through the checklist",
-        body: "Most homes already hold a few days of what is needed. Tick off what you have first, so you only buy the gaps.",
+        body: "Most homes already hold a few days of what is needed. Take off your list what you already have, so you only buy the gaps.",
         link: { label: "Open the checklist", url: "/checklist" },
       },
       {

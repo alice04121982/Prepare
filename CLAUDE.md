@@ -42,7 +42,7 @@ markup. `checklist.ts` (what to keep, with amounts and sourcing notes),
 answer first, sources listed, `verified: false` until checked by hand).
 Guides name kinds of things, never brands: each "what to have ready" item
 links to a tagged Amazon search (`amazonSearchUrl`). Specific products stay
-in the one-click basket and on `/kits`, whose Amazon tab shows their photos.
+in the one-click basket and on `/checklist`, whose Amazon tab shows their photos.
 
 The offline guide (`/offline-guide`, `src/app/offline-guide/route.ts`) is
 one self-contained HTML file built at build time from the same data files,
@@ -61,15 +61,21 @@ it.
 
 ### The planner is a pure function over a URL
 
-Every way to order a kit lives on `/kits` (merged 25 September 2026). It is
-`KitPlanner` opened on a kit from `lists.ts`, or on "your own length" (no
-list, 1 to 90 days). Typing a number of days moves to the kit that covers it
-(`listForDays`). `/kits/[slug]` is the same page opened on one kit, kept for
-search; if its address names a different kit, or none, it redirects. The old
-`/lists`, `/build-your-kit` and `/basket` redirect here in `next.config.ts`,
-and `/kits` reads the old `p` (people) as adults. The home page kit box
-(`home/StarterBaskets`) is the quick route: people, days and price range, straight to an
-Amazon basket, with "what is in it" opening `/kits`.
+What to get and every way to order a kit live on one page, `/checklist`
+("what to get"; the checklist and the kits page were merged on 26 September
+2026). It is `KitPlanner` (anchor `#your-kit`) opened on a kit from
+`lists.ts` or on "your own length" (no list, 1 to 90 days), then the FAQ
+with its JSON-LD. The list is a shopping list: every line starts ticked (on
+the list); unticking takes it off, and a "send your list to Amazon" block
+(`#kit-send`) follows with one basket button. "Other ways to buy" (maker
+first, supermarkets, each product) sits below it. Typing a number of
+days moves to the kit that covers it (`listForDays`). `/kits` and
+`/kits/[slug]` redirect here in `next.config.ts` (a kit's address becomes
+`?list=<slug>`), as do the older `/lists`, `/build-your-kit` and `/basket`;
+`checklist/household.ts` reads the old `p` (people) as adults. The home page
+kit box (`home/StarterBaskets`) is the quick route: people, days and price
+range, straight to an Amazon basket, with "what is in it" opening
+`/checklist`.
 
 Under the days box, a price range picker (budget, regular, premium) chooses
 which products fill the basket, showing each range's rough total for the
@@ -89,12 +95,14 @@ already carried one silent data-loss bug.
 
 `src/lib/have.ts` holds it: a `Set` of keys in `localStorage`, exposed
 through `useSyncExternalStore` so every component on a page updates
-together without a provider. Three surfaces read it, and a tick in any of
-them counts once:
+together without a provider. Two surfaces read it:
 
-- `ChecklistTracker` (the record itself, on `/checklist`)
-- `KitPlanner` (drops ticked lines from the basket and the copied text)
-- `home/StepState` (the counts on the home page's three steps)
+- `KitPlanner` on `/checklist`. A line in the record is one the reader has
+  taken off the shopping list (unticked, usually because they have it); it
+  drops out of the basket and the copied text. The record's name and keys
+  predate this, so existing choices carry over.
+- `home/StepState` (the counts on the home page's steps, over the checklist
+  items the planner covers)
 
 `src/data/have-map.ts` maps each planner line id to the checklist item it
 covers. Several lines share one item on purpose, so they move together; the
@@ -111,8 +119,8 @@ been read, so counts wait rather than flashing a zero through hydration.
 
 ### Server components by default
 
-The client islands are `ChecklistTracker`, `KitPlanner` (with
-`kit/StillToGet` and `kit/ListPicker`), `PrintButton`, the homepage's
+The client islands are `KitPlanner` (with
+`kit/StillToGet` and `kit/ListPicker`), the homepage's
 `home/ReachBar`, `home/StarterBaskets` and `home/StepState`, and `SaferWorld` on `/worried`.
 Everything else is a server component,
 including `Diagram.tsx`, which is inline SVG. The site has no photographs

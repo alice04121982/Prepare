@@ -80,10 +80,7 @@ export default function CommunityPage() {
 
           <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-3">
             <Link href="/checklist" className="btn btn-primary btn-lg">
-              see the checklist <Arrow />
-            </Link>
-            <Link href="/kits" className="arrow-link text-lg">
-              see the kits <Arrow size={18} />
+              see what to get <Arrow />
             </Link>
           </div>
         </div>

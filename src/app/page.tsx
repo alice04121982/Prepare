@@ -24,16 +24,16 @@ const tins: Tin[] = [
 const steps = [
   {
     title: "check what you already have",
-    body: "Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Tick them off against the list before you buy anything.",
+    body: "Most cupboards hold a few days. Tins, a torch, the medicine cabinet. Take them off your list before you buy anything.",
     href: "/checklist",
-    cta: "see the checklist",
+    cta: "see what to get",
     state: "check" as const,
   },
   {
     title: "buy what is missing",
     body: "Say who lives with you and the quantities are worked out for you. The free option comes first on every line.",
-    href: "/kits",
-    cta: "see the kits",
+    href: "/checklist#your-kit",
+    cta: "build your kit",
     state: "buy" as const,
   },
   {
