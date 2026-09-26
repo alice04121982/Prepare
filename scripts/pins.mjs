@@ -23,7 +23,7 @@ const ticks = (items) => `<ul class="list">${items.map((t) => `<li><span class="
 const big = (n, sub, colour) => `<div class="big"${colour ? ` style="--c:${colour}"` : ""}><span class="num">${esc(n)}</span><span class="sub">${esc(sub)}</span></div>`;
 
 const pins = [
-  { file: "01-checklist", title: "what to keep at home", lede: "A UK checklist for power cuts, water outages and storms. Tick off what you have first.",
+  { file: "01-checklist", title: "what to keep at home", lede: "A UK checklist for power cuts, water outages and storms. Take off what you already have.",
     body: tins([["water", C.water], ["food", C.food], ["light", C.power], ["first aid", C.health], ["cash", C.money], ["radio", C.news]]), source: "Amounts from gov.uk and the WHO" },
   { file: "02-water", title: "how much water to store", lede: "",
     body: big("3 litres", "per person, per day. For 3 days, that is 9 litres each.", C.water), source: "gov.uk, from the World Health Organisation" },
