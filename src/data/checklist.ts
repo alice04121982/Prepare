@@ -137,7 +137,7 @@ export const checklist: ChecklistCategory[] = [
         item: "Portable power station and solar panel",
         amount: "Optional: one small station, one folding panel",
         notes:
-          "A step up from a power bank for anyone who needs to run a router, a CPAP machine, a fridge for medication, or keep several phones going through a long cut. A folding panel recharges it over a day or two of daylight. These became the standard household answer to rolling power cuts in Ukraine.",
+          "A step up from a power bank for anyone who needs to run a router, a CPAP machine, a fridge for medication, or keep several phones going through a long cut. A folding panel recharges it over a day or two of daylight. These became the standard household answer to rolling power cuts during the conflict in Europe.",
         products: [
           {
             name: "Jackery Explorer (portable power station)",

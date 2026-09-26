@@ -191,13 +191,13 @@ export const scenarios: Scenario[] = [
     slug: "armed-conflict",
     title: "Armed conflict",
     summary:
-      "War or sustained attacks on infrastructure in a modern, connected country, as Ukraine has experienced since 2022.",
+      "War or sustained attacks on infrastructure in a modern, connected country, as a country in Europe has experienced since 2022.",
     typicalDuration:
       "Months or longer in affected regions, lived as repeated short disruptions: alerts lasting hours, power cuts of several hours a day, intermittent water and heating",
     description:
-      "Ukraine has shown, in unusual detail, what conflict looks like for ordinary civilians in a country with a modern grid, supermarkets, card payments and mobile data. For most people most of the time, it looks like life continuing with recurring interruptions. Strikes on the energy system brought scheduled power cuts of four to twelve hours a day through the winter of 2022 to 2023, and with them lost heating, water pumping, lifts, and mobile signal. People adapted fast, and what they adapted with is a longer version of the same kit as every other scenario on this site, plus a plan for where to shelter and where to go.",
+      "The war in Europe since 2022 has shown, in unusual detail, what conflict looks like for ordinary civilians in a country with a modern grid, supermarkets, card payments and mobile data. For most people most of the time, it looks like life continuing with recurring interruptions. Strikes on the energy system brought scheduled power cuts of four to twelve hours a day through the winter of 2022 to 2023, and with them lost heating, water pumping, lifts, and mobile signal. People adapted fast, and what they adapted with is a longer version of the same kit as every other scenario on this site, plus a plan for where to shelter and where to go.",
     whatHelps: [
-      "A safe place in your home: an interior room or corridor away from windows, below ground if you have it. The rule Ukrainians teach is two walls between you and the outside. Know the nearest public shelter too, such as a basement, underground car park, or metro station.",
+      "A safe place in your home: an interior room or corridor away from windows, below ground if you have it. The rule taught there is two walls between you and the outside. Know the nearest public shelter too, such as a basement, underground car park, or metro station.",
       "A bag by the door: documents, cash in small notes, medication, chargers, a torch, water, a change of clothes, and a paper list of contacts. Electronic copies of documents on a phone as well.",
       "Power that does not depend on the grid: several power banks, and if you can afford it a portable power station with a folding solar panel. Rolling cuts mean charging everything the moment power returns. A battery or wind-up radio for when mobile data drops.",
       "More stored water than usual, because pumping stations run on electricity. Filling the bath and every large container when a cut is announced became routine.",
@@ -209,11 +209,11 @@ export const scenarios: Scenario[] = [
     worthKnowing: [
       "Mass panic did not happen. Shops reopened within days, banks and card payments largely kept working, and people went to work. The thing that made life hard was infrastructure damage and the cold that followed, not disorder.",
       "Candles caused a wave of house fires during the blackouts. Battery lanterns and head torches are safer.",
-      "Sleep, routine, and limiting news intake are health measures, not luxuries. Ukrainian doctors and teachers treated them as such, especially for children.",
+      "Sleep, routine, and limiting news intake are health measures, not luxuries. Doctors and teachers there treated them as such, especially for children.",
       "In the UK this is far less likely than a storm or a power cut. What helps is the same kit as every other scenario, kept for longer.",
     ],
     community:
-      "In Ukraine, the response that worked was neighbourhood and volunteer networks: delivering food and medicine to older people who could not reach a shop, boarding up windows for neighbours, sharing generators and internet access, running warming and charging points in schools, churches, and cafés. Cities formalised this as thousands of public 'Points of Invincibility' with heat, power, hot drinks, and connectivity, but most of the work was done by people who already knew each other. Sort your household first. Then you can help the people around you.",
+      "In the conflict in Europe, the response that worked was neighbourhood and volunteer networks: delivering food and medicine to older people who could not reach a shop, boarding up windows for neighbours, sharing generators and internet access, running warming and charging points in schools, churches, and cafés. Cities formalised this as thousands of public warming points with heat, power, hot drinks, and connectivity, but most of the work was done by people who already knew each other. Sort your household first. Then you can help the people around you.",
   },
 ];
 
