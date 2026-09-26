@@ -333,7 +333,7 @@ export default function WorriedPage() {
             </h2>
             <p className="mt-5 text-[1.125rem] leading-relaxed text-ink-2">
               Collected from NHS, Mental Health Foundation and clinical advice
-              written during the pandemic and the war in Ukraine. You do not
+              written during the pandemic and the conflict in Europe. You do not
               need to do all of them. Start with one or two that suit you.
             </p>
           </div>
