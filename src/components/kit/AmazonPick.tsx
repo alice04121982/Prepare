@@ -1,17 +1,20 @@
 import { ExternalLink } from "lucide-react";
 import { amazonProductUrl, type Product } from "@/data/products";
 import { AMAZON_TAG, priceTime, type Offer } from "@/lib/amazon";
+import { hasPictogram, Pictogram } from "@/components/kit/Pictogram";
 
 /**
  * One Amazon product on a shopping list line: its name, how many, and a
  * link to the listing. A live price and photo show only when they came from
  * the Product Advertising API (`offer`), with the time they were fetched;
- * otherwise the link invites the reader to check the price on Amazon.
+ * otherwise the link invites the reader to check the price on Amazon, and a
+ * pictogram of the kind of thing stands where the photo would be.
  */
 export function AmazonPick({ product, quantity, offer }: { product: Product; quantity: number; offer?: Offer }) {
   const url = amazonProductUrl(product.asin, AMAZON_TAG);
+  const picture = Boolean(offer?.image) || hasPictogram(product.lineId);
   return (
-    <div className={`mt-2.5 border border-ink p-2.5 ${offer?.image ? "grid grid-cols-[3.5rem_minmax(0,1fr)] gap-2.5" : ""}`}>
+    <div className={`mt-2.5 border border-ink p-2.5 ${picture ? "grid grid-cols-[3.5rem_minmax(0,1fr)] gap-2.5" : ""}`}>
       {offer?.image ? (
         <a href={url} target="_blank" rel="noopener noreferrer sponsored" className="flex aspect-square items-center justify-center bg-paper">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -23,6 +26,10 @@ export function AmazonPick({ product, quantity, offer }: { product: Product; qua
             className="max-h-full max-w-full object-contain"
           />
         </a>
+      ) : picture ? (
+        <div className="flex aspect-square items-center justify-center">
+          <Pictogram lineId={product.lineId} className="h-12 w-12" />
+        </div>
       ) : null}
       <div className="min-w-0">
         <p className="text-[0.9375rem] leading-snug">

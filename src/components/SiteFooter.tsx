@@ -24,7 +24,7 @@ export default function SiteFooter() {
           <div>
             <Link
               href="/"
-              className="display inline-flex min-h-11 items-center text-4xl text-paper no-underline"
+              className="display inline-flex min-h-11 items-center text-[clamp(1.75rem,9.5vw,2.25rem)] text-paper no-underline"
               style={{ fontVariationSettings: '"wdth" 118' }}
             >
               <Wordmark />

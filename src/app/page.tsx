@@ -60,7 +60,7 @@ export default function Home() {
             className="display max-w-[14ch] text-[clamp(2.6rem,11.5vw,4.75rem)]"
             style={{ fontVariationSettings: '"wdth" 108' }}
           >
-            a practical guide to being ready at home
+            a practical guide for when everyday life is disrupted
           </h1>
           <div>
             <p className="mt-6 max-w-[40ch] text-[1.1875rem] leading-normal min-[900px]:mt-0 min-[900px]:text-[1.375rem]">
