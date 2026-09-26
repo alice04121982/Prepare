@@ -112,7 +112,7 @@ export const guides: Guide[] = [
     ],
     checked: "2026-09-24",
     verified: false,
-    related: ["how-much-water-to-store", "before-a-storm", "no-water"],
+    related: ["how-much-water-to-store", "no-water", "medical-equipment-and-outages"],
   },
   {
     slug: "how-much-water-to-store",
@@ -578,7 +578,7 @@ export const guides: Guide[] = [
     ],
     checked: "2026-09-24",
     verified: false,
-    related: ["power-cut", "no-water", "keep-warm-without-heating"],
+    related: ["medical-equipment-and-outages", "power-cut", "no-water"],
   },
   {
     slug: "cook-without-electricity",

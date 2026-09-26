@@ -19,7 +19,7 @@ export default function MedicalDisclaimerPage() {
       />
 
       <div className="wrap pb-20 min-[900px]:pb-26">
-        <section className="border-t-[3px] border-ink py-10 min-[900px]:py-14">
+        <section className="py-10 min-[900px]:py-14">
           <h2 className="h-sub">what this site does</h2>
           <div className="prose-plain measure mt-4 text-lg">
             <p>

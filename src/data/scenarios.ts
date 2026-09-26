@@ -161,6 +161,33 @@ export const scenarios: Scenario[] = [
       "As with every scenario here, the answer is to check in with neighbours rather than isolate. Communities that know each other are markedly calmer and safer through short periods of unrest, and rumours spread less when people can ask someone they trust.",
   },
   {
+    slug: "pandemic",
+    chart: { label: "pandemic", from: 7, to: 12.5, openEnded: true, range: "1 to 2 weeks at home, in waves" },
+    title: "Pandemic",
+    summary:
+      "A new illness spreading widely, as COVID-19 did from 2020, with periods at home and gaps on the shelves.",
+    typicalDuration:
+      "Months or longer, lived as waves: 1 to 2 weeks at home when someone is ill, and a few weeks of thin shelves at the start",
+    description:
+      "A pandemic is the one scenario on this list where the power, water and shops usually keep working. What changes is how you use them. In the UK in 2020, people were asked to stay home, and anyone with symptoms to isolate for up to 14 days. Supermarkets set limits on pasta, flour, toilet roll and paracetamol for a few weeks while buying settled, and online delivery slots were booked up for longer. After that first rush, shops kept working. The hard part was being stuck at home while ill, or caring for someone who was.",
+    whatHelps: [
+      "2 weeks of food, built up gradually from what you already eat, so an illness at home does not mean a trip to the shops.",
+      "Medicines in hand: your repeat prescriptions ordered early, plus paracetamol or ibuprofen, a thermometer, and rehydration sachets.",
+      "Soap, hand sanitiser, and tissues, bought a little at a time before they are needed.",
+      "A plan for anyone who depends on you: who would do their shopping, collect their medicines, or look after a pet if you were ill.",
+      "A way to work, learn and keep in touch from home: a charged phone, a working internet connection, and your contacts written down.",
+      "Following official public health advice from gov.uk and the NHS, which changes as more is known.",
+    ],
+    worthKnowing: [
+      "The empty shelves in March 2020 came from everyone buying at once, not from a lack of food. Buying a little extra each week, well ahead, is what avoids it.",
+      "NHS 111 online is the first place to check symptoms. Call 999 for severe breathing difficulty or chest pain.",
+      "Loneliness was one of the biggest harms of lockdown, especially for people living alone. A regular call matters as much as any supplies.",
+      "What you need is the same kit as a long power cut, kept for 2 weeks instead of 3 days.",
+    ],
+    community:
+      "In 2020, street WhatsApp groups and mutual aid groups sprang up in days: collecting shopping and prescriptions for people isolating, checking on older neighbours, and sharing spare food. The groups that worked best were built on people who already knew each other. Exchange numbers with two or three neighbours now, so you can help each other when it counts.",
+  },
+  {
     slug: "armed-conflict",
     title: "Armed conflict",
     summary:

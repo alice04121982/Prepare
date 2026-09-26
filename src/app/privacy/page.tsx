@@ -61,7 +61,7 @@ export default function PrivacyPage() {
 
       <div className="wrap pb-20 min-[900px]:pb-26">
         {sections.map((s) => (
-          <section key={s.id} aria-labelledby={`${s.id}-h`} className="border-t-[3px] border-ink py-10 min-[900px]:py-14">
+          <section key={s.id} aria-labelledby={`${s.id}-h`} className="border-t-[3px] border-ink py-10 first:border-t-0 min-[900px]:py-14">
             <h2 id={`${s.id}-h`} className="h-sub">
               {s.title}
             </h2>
