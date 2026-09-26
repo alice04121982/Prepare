@@ -68,10 +68,10 @@ async function draw(opts, path) {
   console.log(path);
 }
 
-// The mark is the food orange (chosen by the owner, 26 September 2026): a
+// The mark is the people teal (chosen by the owner, 26 September 2026): a
 // brand exception to the Label Rule, recorded in DESIGN.md.
-await draw({ fg: INK, bg: PAPER, mark: C.food }, "public/brand/avatar.png");
-await draw({ fg: PAPER, bg: INK, mark: C.food }, "public/brand/avatar-ink.png");
+await draw({ fg: INK, bg: PAPER, mark: C.people }, "public/brand/avatar.png");
+await draw({ fg: PAPER, bg: INK, mark: C.people }, "public/brand/avatar-ink.png");
 
 if (process.argv.includes("--explore")) {
   mkdirSync("/tmp/avatar-explore", { recursive: true });
