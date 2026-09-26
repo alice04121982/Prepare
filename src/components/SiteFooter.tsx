@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Wordmark from "@/components/Wordmark";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 const links = [
   { href: "/what-you-can-do-now", label: "What you can do now" },
@@ -53,6 +54,13 @@ export default function SiteFooter() {
           <p>
             Figures from gov.uk, the WHO, the Met Office and the NHS. Check
             official guidance for your region too.
+          </p>
+          <p>
+            Questions, or a link that has stopped working? Email{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="font-bold text-paper underline underline-offset-4 hover:decoration-4">
+              {CONTACT_EMAIL}
+            </a>
+            .
           </p>
         </div>
       </div>

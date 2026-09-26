@@ -6,6 +6,7 @@ import Arrow from "@/components/home/Arrow";
 import { faq } from "@/data/faq";
 import { defaultHousehold } from "@/data/kit-rules";
 import { defaultDaysFor } from "@/data/lists";
+import { getOffers } from "@/lib/paapi";
 import { householdFromKitParams } from "./household";
 
 export const metadata: Metadata = {
@@ -47,6 +48,8 @@ export default async function ChecklistPage({
     list: "72-hours" as const,
     days: defaultDaysFor("72-hours"),
   };
+  // Live Amazon prices and photos; empty until the API keys are set.
+  const offers = await getOffers();
 
   return (
     <main>
@@ -58,7 +61,7 @@ export default async function ChecklistPage({
 
       {/* The planner: choose a kit, say who lives with you, tick, buy */}
       <div id="your-kit" className="scroll-mt-4">
-        <KitPlanner initial={initial} />
+        <KitPlanner initial={initial} offers={offers} />
       </div>
 
       {/* Questions */}

@@ -45,7 +45,13 @@ links to a tagged Amazon search (`amazonSearchUrl`). Specific products stay
 in the one-click basket and on `/checklist`'s Amazon tab, named without
 photos or Amazon prices: the Associates agreement allows those only through
 its API. Basket totals come from our own price bands and carry `PRICE_NOTE`
-(`src/lib/amazon.ts`).
+(`src/lib/amazon.ts`). Each line of the shopping list names its Amazon pick
+(`kit/AmazonPick`) with a "check price" link. `src/lib/paapi.ts` is the
+Product Advertising API connection: off until `AMAZON_PAAPI_ACCESS_KEY` and
+`AMAZON_PAAPI_SECRET_KEY` are set in Vercel (server only). With them, the
+checklist page fetches live prices and photos for the ASINs in `products.ts`,
+cached for an hour, and shows each price with its time and
+`LIVE_PRICE_NOTE`. Any failure falls back to names and links.
 
 The offline guide (`/offline-guide`, `src/app/offline-guide/route.ts`) is
 one self-contained HTML file built at build time from the same data files,
@@ -231,7 +237,8 @@ chart reads its rows from the `chart` fields in `scenarios.ts`.
 ## Environment note
 
 `.env.local` holds the Unsplash key and, optionally,
-`NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG`. Neither is committed. The affiliate tag
+`NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` and the two Product Advertising API keys
+(`.env.example` lists them). None is committed. The affiliate tag
 falls back to the site's own (`stayprepared2-21`, in `src/lib/amazon.ts`)
 because Amazon's add-to-basket form opens an empty basket without one.
 
