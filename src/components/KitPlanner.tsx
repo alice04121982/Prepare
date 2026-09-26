@@ -27,6 +27,7 @@ import { daysRangeFor, defaultDaysFor, listBySlug, listForDays, type ListSlug } 
 
 import { AMAZON_TAG as TAG, LIVE_PRICE_NOTE, PRICE_NOTE, priceTime, type Offers } from "@/lib/amazon";
 import { AmazonPick } from "@/components/kit/AmazonPick";
+import { Pictogram } from "@/components/kit/Pictogram";
 
 /** Quick picks under the days stepper, per list. Without a list, the original three. */
 /**
@@ -559,8 +560,16 @@ export default function KitPlanner({ initial, offers = {} }: { initial?: Househo
                 {picks.map(({ line, product, buyQty }) => (
                   <li
                     key={line.id}
-                    className="border-b border-ink py-4"
+                    className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-x-4 border-b border-ink py-4 min-[900px]:gap-x-6"
                   >
+                    <div className="pt-1">
+                      {product && offers[product.asin]?.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={offers[product.asin].image} alt="" loading="lazy" referrerPolicy="no-referrer" className="h-14 w-14 object-contain" />
+                      ) : product ? (
+                        <Pictogram lineId={product.lineId} className="h-12 w-12" />
+                      ) : null}
+                    </div>
                     <div className="min-w-0">
                       <p className="flex items-start gap-2 text-[0.9375rem] font-bold leading-snug text-ink-2">
                         <Swatch category={line.category} />

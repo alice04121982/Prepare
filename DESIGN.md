@@ -310,6 +310,6 @@ Every interactive target is at least 44px tall; option rows and footer links are
 - **Don't** put eyebrows (small uppercase kickers) above headings.
 - **Don't** use pill shapes or circles for buttons, radios or other large controls.
 - **Don't** use colour for decoration, emphasis or state, other than the Yolk Exception.
-- **Don't** add photographs, illustrations, icon tiles or stock imagery, including retailer product photos (the Amazon Associates agreement rules them out outside its API).
+- **Don't** add photographs, illustrations, icon tiles or stock imagery, including retailer product photos (the Amazon Associates agreement rules them out outside its API). The one exception is the kit pictograms (`kit/Pictogram.tsx`, 26 September 2026): one flat ink drawing per product line, in the diagram pictogram style (ink, or paper with a 2.6px ink outline, on a 48 unit grid), standing where a product photo would be on the shopping list, the Amazon tab and the home kit drawer. No tile, no background, no colour. A live API photo replaces it when there is one.
 - **Don't** add a dark theme or navy hero panels.
 - **Don't** add motion beyond the reach bar and short state changes, and never anything that raises alarm.

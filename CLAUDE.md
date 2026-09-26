@@ -46,7 +46,9 @@ in the one-click basket and on `/checklist`'s Amazon tab, named without
 photos or Amazon prices: the Associates agreement allows those only through
 its API. Basket totals come from our own price bands and carry `PRICE_NOTE`
 (`src/lib/amazon.ts`). Each line of the shopping list names its Amazon pick
-(`kit/AmazonPick`) with a "check price" link. `src/lib/paapi.ts` is the
+(`kit/AmazonPick`) with a "check price" link and a pictogram of the kind of
+thing (`kit/Pictogram.tsx`, keyed by the product's `lineId`; a new product
+line needs a drawing there). `src/lib/paapi.ts` is the
 Product Advertising API connection: off until `AMAZON_PAAPI_ACCESS_KEY` and
 `AMAZON_PAAPI_SECRET_KEY` are set in Vercel (server only). With them, the
 checklist page fetches live prices and photos for the ASINs in `products.ts`,

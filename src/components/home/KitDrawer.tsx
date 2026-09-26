@@ -4,6 +4,7 @@ import Link from "next/link";
 import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { PRICE_NOTE } from "@/lib/amazon";
+import { Pictogram } from "@/components/kit/Pictogram";
 import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
 import type { PackBuy } from "@/data/packs";
 
@@ -88,8 +89,9 @@ export default function KitDrawer({
           {buys.map((b) => (
             <li
               key={`${b.line.id}-${b.product.asin}`}
-              className="border-b border-ink py-3 last:border-b-0"
+              className="grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-3.5 border-b border-ink py-3 last:border-b-0"
             >
+              <Pictogram lineId={b.product.lineId} className="h-11 w-11" />
               <span className="block min-w-0 leading-snug">
                 <span className="block font-bold">{b.product.name}</span>
                 <span className="mt-0.5 block text-[0.9375rem] text-ink-2 tabular-nums">
@@ -120,7 +122,7 @@ export default function KitDrawer({
             {basketLabel(buys.length)}
           </AmazonBasketButton>
           <Link href={editHref} className="mt-2 inline-flex min-h-11 items-center text-sm font-extrabold">
-            change quantities or products on the kits page
+            change quantities or products on your list
           </Link>
         </div>
       </div>
