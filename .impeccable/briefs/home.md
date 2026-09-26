@@ -14,7 +14,7 @@ OWN-WORLD: Bright white ground, near-black ink, category colours owning full-wid
 
 STORY: The visitor recognises their own cupboard, sees each thing that could stop and the one thing that helps, and checks what they already have before buying.
 
-FIRST VIEWPORT: The heading introduces the site ("a practical guide to being ready at home", pinned by the owner on 23 September 2026, replacing the question) with one ink button "check your cupboard". The question leads the shelf of tin labels: beside the heading on desktop, directly after it on a 390px phone with the first label at the fold. Each tin leads with the remedy and amount; the hazard is the small print.
+FIRST VIEWPORT: The heading introduces the site ("a practical guide for when everyday life is disrupted", pinned by the owner on 26 September 2026, replacing "a practical guide to being ready at home", which replaced the question) with one ink button "check your cupboard". The question leads the shelf of tin labels: beside the heading on desktop, directly after it on a 390px phone with the first label at the fold. Each tin leads with the remedy and amount; the hazard is the small print.
 
 FORM: Own-label larder, position 1 of 7 on the ranked list. Seed key: none (concept-seed not run; the skill's binary was declined, directions were ranked by hand and chosen by the owner from built mocks).
 
