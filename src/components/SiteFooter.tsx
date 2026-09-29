@@ -52,6 +52,10 @@ export default function SiteFooter() {
             you. As an Amazon Associate we earn from qualifying purchases.
           </p>
           <p>
+            Stay Prepared is an independent guide. It is not a government
+            service and is not connected to any of the organisations it cites.
+          </p>
+          <p>
             Figures from gov.uk, the WHO, the Met Office and the NHS. Check
             official guidance for your region too.
           </p>

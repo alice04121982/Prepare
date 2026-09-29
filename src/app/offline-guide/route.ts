@@ -180,7 +180,7 @@ ${kit}
 ${questions}
 
 <footer>
-<p>Stay Prepared. Figures come from gov.uk, the NHS, the Met Office and the World Health Organisation, as named on the site. This file has no tracking and makes no requests. Save, print or share it freely.</p>
+<p>Stay Prepared is an independent guide. It is not a government service and is not connected to any of the organisations it cites. Figures come from gov.uk, the NHS, the Met Office and the World Health Organisation, as named on the site. This file has no tracking and makes no requests. Save, print or share it freely.</p>
 </footer>
 </div>
 </body>
