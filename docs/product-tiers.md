@@ -56,7 +56,8 @@ reviews and that our name matches, then set `verified: true` and `checked`.
   are in the box, so the quantity could not be worked out.
 - **Budget lantern:** the cheapest from a known brand (Amazon Basics) runs
   on D batteries that are not included; the kit only stocks AA.
-- **Budget and premium water container:** nothing cheaper than the Trintion
+- **Budget and premium water container:** nothing cheaper than the
+  regular pick (the Trintion, replaced by the FALEIZHI on 12 October 2026)
   passed the review threshold, and the "premium" results were unbranded
   containers at a higher price, or a cool box sold as a water carrier.
 - **Premium milk:** no branded long-life milk had more than a handful of

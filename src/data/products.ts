@@ -53,14 +53,17 @@ export type Product = {
 };
 
 export const products: Product[] = [
+  // The radio, water container, purification tablets and water were
+  // replaced on 12 October 2026, when the earlier picks went unavailable.
+  // Price bands were converted from euros on amazon.co.uk and are approximate.
   { lineId: "powerbank", retailer: "amazon", name: "Anker 10,000 mAh power bank, USB-C", asin: "B0D4MDHB21", priceBand: "£15 to £25", verified: false, image: "61ucpwm6obL", short: ["power bank", "power banks"] },
-  { lineId: "radio", retailer: "amazon", name: "iRonsnow wind-up and solar AM/FM radio with torch and USB charger", asin: "B0BHL1MQB2", priceBand: "£20 to £30", verified: false, image: "61Ls7RzrmBL", short: ["wind-up radio", "wind-up radios"] },
+  { lineId: "radio", retailer: "amazon", name: "Rychi wind-up and solar AM/FM radio with torch and USB charger, 2000 mAh", asin: "B0F59RL588", priceBand: "£20 to £30", verified: false, image: "71OHrRH+GCL", short: ["wind-up radio", "wind-up radios"] },
   { lineId: "masks", retailer: "amazon", name: "Omnitex FFP2 masks, box of 20, individually wrapped", asin: "B094PHG3KV", priceBand: "£8 to £14", verified: true, checked: "2026-09-25", unitsPerProduct: 2, image: "619wGwtKLfL", short: ["box of 20 masks", "boxes of 20 masks"] },
   { lineId: "firstaid", retailer: "amazon", name: "St John Ambulance Universal First Aid Kit", asin: "B008XI72FC", priceBand: "£12 to £20", verified: true, checked: "2026-09-25", image: "91-waJqLnFL", short: ["first aid kit", "first aid kits"] },
   { lineId: "torch", retailer: "amazon", name: "Energizer Universal Plus LED head torch, batteries included", asin: "B07Y8S3YVM", priceBand: "£8 to £14", verified: true, checked: "2026-09-25", image: "71bwAiRBJdL", short: ["head torch", "head torches"] },
   { lineId: "lantern", retailer: "amazon", name: "Energizer PRO rechargeable LED camping lantern", asin: "B0B6KVSDB4", priceBand: "£20 to £30", verified: false, image: "71oYJx2ckvL", short: ["lantern", "lanterns"] },
-  { lineId: "water-extra", retailer: "amazon", name: "Trintion 12 litre camping water container with tap, BPA free", asin: "B08X727JL9", priceBand: "£14 to £18", verified: false, image: "61xVUBbIxrL", short: ["water container (12 litres)", "water containers (12 litres)"] },
-  { lineId: "purify", retailer: "amazon", name: "Lifesystems chlorine dioxide purification tablets, treats 30 litres", asin: "B002VPP45S", priceBand: "£8 to £12", verified: false, image: "71n60YzjJxL", short: ["pack of purification tablets", "packs of purification tablets"] },
+  { lineId: "water-extra", retailer: "amazon", name: "FALEIZHI 10 litre collapsible water container with tap, BPA free", asin: "B09F9S3GN9", priceBand: "£12 to £16", verified: false, image: "517Ut6zfgyL", short: ["water container (10 litres)", "water containers (10 litres)"] },
+  { lineId: "purify", retailer: "amazon", name: "Highlander Aquaclear water purification tablets, 50 tablets, treats 50 litres", asin: "B0098O9CUS", priceBand: "£4 to £7", verified: false, image: "71cOufZsJEL", short: ["pack of purification tablets", "packs of purification tablets"] },
   { lineId: "gel", retailer: "amazon", name: "Carex Complete hand sanitiser gel, 50 ml pocket size", asin: "B08QNFN7VP", priceBand: "£1 to £2", verified: false, image: "61ZJmg0PToL", short: ["hand gel", "hand gels"] },
 
   // Long-life food, water and toilet roll, all sold in Amazon's main store so
@@ -71,7 +74,7 @@ export const products: Product[] = [
   // 2026; price bands are estimates until someone opens each page.
   { lineId: "tin-opener", retailer: "amazon", name: "Amazon Basics stainless steel manual tin opener", asin: "B087MSWH65", priceBand: "£5 to £8", verified: false, image: "71gyjjBo6OL", short: ["tin opener", "tin openers"] },
   { lineId: "batteries", retailer: "amazon", name: "Amazon Basics AA alkaline batteries, pack of 20", asin: "B00NTCH52W", priceBand: "£8 to £12", verified: false, unitsPerProduct: 5, short: ["pack of 20 AA batteries", "packs of 20 AA batteries"] },
-  { lineId: "water", retailer: "amazon", name: "by Amazon still spring water, 4 x 2 litres", asin: "B0C7RR1F3V", priceBand: "£2 to £3", verified: false, unitsPerProduct: 8 / 9, image: "417xwONwKNL", short: ["four-pack of 2 litre water", "four-packs of 2 litre water"] },
+  { lineId: "water", retailer: "amazon", name: "by Amazon still spring water, 6 x 2 litres", asin: "B0FFN6DQXM", priceBand: "£2.50 to £4", verified: false, unitsPerProduct: 12 / 9, image: "61cGrN1hfQL", short: ["six-pack of 2 litre water", "six-packs of 2 litre water"] },
   { lineId: "tins", retailer: "amazon", name: "by Amazon baked beans in tomato sauce, 6 x 420 g", asin: "B0DV9ZQP1R", priceBand: "£3 to £5", verified: false, unitsPerProduct: 6, share: 0.5, image: "61nelJzfPpL", short: ["pack of 6 tins of beans", "packs of 6 tins of beans"] },
   { lineId: "tins", retailer: "amazon", name: "by Amazon Italian chopped tomatoes, 12 x 400 g", asin: "B09L1H978W", priceBand: "£6 to £9", verified: false, unitsPerProduct: 12, share: 0.25, image: "716pcGifSFL", short: ["pack of 12 tins of tomatoes", "packs of 12 tins of tomatoes"] },
   { lineId: "tins", retailer: "amazon", name: "by Amazon skipjack tuna chunks in spring water, 4 x 145 g", asin: "B0CB1SHQPG", priceBand: "£2.50 to £3.50", verified: false, unitsPerProduct: 4, share: 0.25, image: "71dGvAxonLL", short: ["pack of 4 tins of tuna", "packs of 4 tins of tuna"] },
