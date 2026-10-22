@@ -197,7 +197,14 @@ export const checklist: ChecklistCategory[] = [
         item: "Battery or wind-up radio",
         amount: "One per household",
         notes:
-          "Local radio is the most reliable source of updates when data is down. Test it occasionally. Many models also charge a phone.",
+          "Pick one with FM, as the government's Be Ready checklist advises. Local radio is the most reliable source of updates when data is down. Test it occasionally. Many models also charge a phone.",
+        priority: true,
+      },
+      {
+        item: "Radio frequencies, written down",
+        amount: "On your paper list of contacts",
+        notes:
+          "The FM frequencies of the national and local stations you use for news, so you can tune in without looking them up.",
         priority: true,
       },
       {
@@ -275,7 +282,7 @@ export const checklist: ChecklistCategory[] = [
         item: "Small amount of cash",
         amount: "Enough for a couple of days' essentials",
         notes:
-          "Small notes and some coins. Keep it with your documents rather than in a wallet you use daily.",
+          "A mix of small notes and coins, as the Be Ready checklist advises. Keep it with your documents rather than in a wallet you use daily.",
         priority: true,
       },
     ],
