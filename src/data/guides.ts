@@ -153,7 +153,7 @@ export const guides: Guide[] = [
       {
         label: "Prepare: get prepared for emergencies (3 litres per person per day)",
         publisher: "UK Government (Cabinet Office)",
-        url: "https://prepare.campaign.gov.uk/get-prepared-for-emergencies/",
+        url: "https://beready.campaign.gov.uk/be-ready-for-emergencies/",
       },
       { label: "Priority Services Register", publisher: "Energy networks and water companies", url: "https://www.thepsr.co.uk/" },
       { label: "Consumer Council for Water", publisher: "CCW", url: "https://www.ccwater.org.uk/" },
@@ -338,7 +338,7 @@ export const guides: Guide[] = [
       {
         label: "Prepare: get prepared for emergencies (3 litres per person per day)",
         publisher: "UK Government (Cabinet Office)",
-        url: "https://prepare.campaign.gov.uk/get-prepared-for-emergencies/",
+        url: "https://beready.campaign.gov.uk/be-ready-for-emergencies/",
       },
     ],
     checked: "2026-09-24",
@@ -375,14 +375,85 @@ export const guides: Guide[] = [
       {
         label: "Prepare: get prepared for emergencies",
         publisher: "UK Government (Cabinet Office)",
-        url: "https://prepare.campaign.gov.uk/get-prepared-for-emergencies/",
+        url: "https://beready.campaign.gov.uk/be-ready-for-emergencies/",
       },
       { label: "Preparing for emergencies (reference collection)", publisher: "UK Government", url: "https://www.gov.uk/government/publications/preparing-for-emergencies" },
       { label: "National Risk Register 2025", publisher: "UK Government (Cabinet Office)", url: "https://www.gov.uk/government/publications/national-risk-register-2025" },
     ],
     checked: "2026-09-24",
     verified: false,
-    related: ["how-much-water-to-store", "power-cut", "before-a-storm"],
+    related: ["be-ready-campaign", "how-much-water-to-store", "power-cut"],
+  },
+  {
+    slug: "be-ready-campaign",
+    title: "what the Be Ready campaign asks you to keep",
+    metaTitle: "Be Ready campaign: the government's 3-day checklist",
+    description:
+      "Be Ready is the UK government's campaign asking every household to be ready for 3 days. Its checklist, line by line, and how to build it up.",
+    answer: [
+      "Be Ready asks every household to keep 3 days of supplies at home. That means water, food that needs no cooking, light, a radio, cash and medicines.",
+      "The Cabinet Office launched it on 22 October 2026. It does not say anything is about to happen.",
+      "It names power cuts, loss of water, flooding and severe weather. Help goes first to those who need it most, so being ready lets you manage meanwhile.",
+    ],
+    stepsTitle: "the checklist, line by line",
+    steps: [
+      {
+        title: "Water",
+        body: "3 litres per person per day for drinking, for 3 days. That is 9 litres each, with more for cooking and washing.",
+      },
+      {
+        title: "Food",
+        body: "Food that keeps and needs no fridge or cooking: tinned meat, fish or vegetables, dried fruit and nuts. Buy what you already eat.",
+      },
+      { title: "Hygiene", body: "Hand sanitiser, wet wipes and the bathroom products your household uses." },
+      {
+        title: "Light and warmth",
+        body: "A torch with spare batteries, which is safer than candles. Blankets, sleeping bags and warm clothes.",
+      },
+      {
+        title: "An FM radio and a power bank",
+        body: "A battery or wind-up FM radio, and a charged power bank. Write down the frequencies of the stations you listen to.",
+      },
+      {
+        title: "Cash, cards and documents",
+        body: "A mix of coins and notes, in case card payments or cash machines stop. Copies of your ID, and key numbers on paper.",
+      },
+      {
+        title: "Medicines and first aid",
+        body: "A first aid kit and your essential medicines. Order repeat prescriptions up to 5 working days before you need them.",
+      },
+      {
+        title: "Babies and pets",
+        body: "Ready-to-feed formula, as you may not be able to boil water safely. Nappies, wipes, pet food and water.",
+      },
+      {
+        title: "Build it up over time",
+        body: "You do not need to buy it all at once. Add an item or two to your usual shop, and check dates every 6 months.",
+      },
+    ],
+    ready: [
+      { item: "Bottled water", tip: "9 litres per person covers the 3 days.", search: "still water 2 litre bottles" },
+      { item: "Wind-up FM radio", tip: "Check it says FM. Wind-up or battery means it works in a power cut.", search: "wind up radio FM" },
+      { item: "Head torch", tip: "Keeps both hands free. Pick one that takes AA batteries.", search: "LED head torch AA batteries" },
+      { item: "Power bank", tip: "10,000 mAh charges most phones about twice. Keep it topped up.", search: "power bank 10000mAh USB-C" },
+      { item: "First aid kit", tip: "Plasters, bandages, a thermometer, antiseptic and gloves, as the checklist lists.", search: "home first aid kit" },
+    ],
+    sources: [
+      { label: "Be Ready", publisher: "UK Government (Cabinet Office)", url: "https://beready.campaign.gov.uk/" },
+      {
+        label: "Be ready for emergencies",
+        publisher: "UK Government (Cabinet Office)",
+        url: "https://beready.campaign.gov.uk/be-ready-for-emergencies/",
+      },
+      {
+        label: "Be Ready checklist (PDF)",
+        publisher: "UK Government (Cabinet Office)",
+        url: "https://beready.campaign.gov.uk/wp-content/uploads/sites/252/2026/10/Be-Ready-Checklist_English.pdf",
+      },
+    ],
+    checked: "2026-10-22",
+    verified: false,
+    related: ["ready-for-3-days", "how-much-water-to-store", "food-that-needs-no-cooking"],
   },
   {
     slug: "heatwave",
@@ -543,7 +614,7 @@ export const guides: Guide[] = [
       {
         label: "Prepare: get prepared for emergencies",
         publisher: "UK Government (Cabinet Office)",
-        url: "https://prepare.campaign.gov.uk/get-prepared-for-emergencies/",
+        url: "https://beready.campaign.gov.uk/be-ready-for-emergencies/",
       },
       { label: "Types of formula", publisher: "NHS", url: "https://www.nhs.uk/conditions/baby/breastfeeding-and-bottle-feeding/bottle-feeding/types-of-formula/" },
     ],
