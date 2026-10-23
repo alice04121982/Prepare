@@ -409,15 +409,15 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
       : []),
     {
       id: "radio",
-      search: "wind up radio",
+      search: "wind up FM radio",
       category: "Communication",
       item: "Battery or wind-up radio",
       quantity: 1,
       unit: "",
-      basis: "Local radio is where the updates are when data is down. Many models also charge a phone.",
+      basis: "With FM, as gov.uk's Be Ready checklist advises. Write down your news stations' frequencies. Many models also charge a phone.",
       priority: true,
       products: [
-        { name: "Wind-up and solar radio with torch", tier: "budget", priceBand: "£15 to £30" },
+        { name: "Wind-up and solar FM radio with torch", tier: "budget", priceBand: "£15 to £30" },
         { name: "DAB and FM battery radio", tier: "standard", priceBand: "£30 to £60" },
       ],
     },
@@ -541,10 +541,10 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
     {
       id: "cash",
       category: "Cash and documents",
-      item: "Cash in small notes",
+      item: "Cash in small notes and coins",
       quantity: 40 + 20 * (people - 1),
       unit: "pounds, roughly",
-      basis: "Enough for a couple of days of essentials if card machines and cash points are down.",
+      basis: "A mix of notes and coins, for a couple of days of essentials if card payments and cash machines are down.",
       priority: true,
     },
     {

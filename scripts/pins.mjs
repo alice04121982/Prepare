@@ -63,6 +63,9 @@ const pins = [
   { file: "10-flood-warning", title: "if you get a flood warning", lede: "Flooding is expected. Act now.",
     body: big("0345 988 1188", "Floodline, for warnings where you live.", null, 86) + ticks(["Move people, pets and medicines upstairs", "Put a bag by the door", "Turn off gas, power and water, if safe"]),
     go: "What each warning level means", source: "Check warnings on gov.uk: check for flooding" },
+  { file: "11-be-ready", title: "the Be Ready checklist", lede: "What the government asks every home to keep for 3 days.",
+    body: tins([["water", C.water], ["food", C.food], ["torch", C.power], ["FM radio", C.news], ["first aid", C.health], ["cash", C.money]]),
+    go: "Every line, and how to build it up over time", source: "From the Be Ready checklist, gov.uk/BeReady" },
 ];
 
 // The site mark, as in components/Wordmark.tsx.
