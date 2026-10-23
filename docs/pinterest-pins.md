@@ -1,6 +1,6 @@
 # Pinterest pins: titles, descriptions and links
 
-Copy for the 10 pins in `public/pins/`, drawn by `scripts/pins.mjs`.
+Copy for the 11 pins in `public/pins/`, drawn by `scripts/pins.mjs`.
 Profile: pinterest.co.uk/staypreparedsite. Written 23 October 2026.
 
 Rules, from `docs/tone-of-voice.md` and `docs/monetisation-plan.md`:
@@ -16,14 +16,15 @@ Rules, from `docs/tone-of-voice.md` and `docs/monetisation-plan.md`:
 
 ## Boards
 
-1. **Emergency kit checklists UK**: pins 1, 6 and 9
+1. **Emergency kit checklists UK**: pins 1, 6, 9 and 11
 2. **Power cuts, storms and floods**: pins 3, 5, 7, 8 and 10
 3. **Emergency water and food storage**: pins 2 and 4
 
 ## Posting order
 
 Post 1 or 2 a day rather than all at once. Start with the pins that
-match this week's Be Ready campaign news: 1, 2, 9, 3, 4, then the rest.
+match this week's Be Ready campaign news: 11, 1, 2, 9, 3, 4, then the
+rest. Pin 11 links to a page that goes live only when PR #59 is merged.
 
 ---
 
@@ -169,3 +170,18 @@ match this week's Be Ready campaign news: 1, 2, 9, 3, 4, then the rest.
 - **Alt text:** "If you get a flood warning", Floodline 0345 988 1188,
   with 3 steps: move people, pets and medicines upstairs, put a bag by
   the door, turn off gas, power and water if safe.
+
+### 11. The Be Ready checklist
+
+- **Image:** `11-be-ready.png`
+- **Board:** Emergency kit checklists UK
+- **Link:** https://stayprepared.co.uk/guides/be-ready-campaign
+- **Title:** Be Ready checklist UK: what the government asks every home to keep
+- **Description:** The UK government's Be Ready campaign asks every
+  household to keep 3 days of supplies: water, food that needs no
+  cooking, a torch, an FM radio, a first aid kit and cash in coins and
+  notes. You do not need to buy it all at once. Our guide goes through
+  the checklist line by line, with amounts, and how to build it up over
+  time.
+- **Alt text:** "The Be Ready checklist", with 6 coloured labels: water,
+  food, torch, FM radio, first aid and cash.
