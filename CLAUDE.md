@@ -40,6 +40,8 @@ markup. `checklist.ts` (what to keep, with amounts and sourcing notes),
 `official-guidance.ts` (dated links), `products.ts` (Amazon ASINs),
 `guides.ts` (the short answer pages at `/guides/[slug]`, one question each,
 answer first, sources listed, `verified: false` until checked by hand).
+`household-kits.ts` (the 72 hour kit for six common households, one search
+page each at `/72-hour-kit/[slug]`, built by the planner's own engine).
 Guides name kinds of things, never brands: each "what to have ready" item
 links to a tagged Amazon search (`amazonSearchUrl`). Specific products stay
 in the one-click basket and on `/checklist`'s Amazon tab, named without
