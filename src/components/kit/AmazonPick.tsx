@@ -2,6 +2,7 @@ import { ExternalLink } from "lucide-react";
 import { amazonProductUrl, type Product } from "@/data/products";
 import { AMAZON_TAG, priceTime, type Offer } from "@/lib/amazon";
 import { hasPictogram, Pictogram } from "@/components/kit/Pictogram";
+import { AddToBasketButton } from "@/components/AmazonBasketButton";
 
 /**
  * One Amazon product on a shopping list line: its name, how many, and a
@@ -45,6 +46,9 @@ export function AmazonPick({ product, quantity, offer }: { product: Product; qua
             </>
           ) : null}
         </p>
+      </div>
+      <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 ${picture ? "col-span-2" : "mt-1.5"}`}>
+        <AddToBasketButton asin={product.asin} quantity={quantity}  name={product.name} />
         <a
           href={url}
           target="_blank"

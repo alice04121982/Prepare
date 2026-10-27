@@ -42,11 +42,14 @@ markup. `checklist.ts` (what to keep, with amounts and sourcing notes),
 answer first, sources listed, `verified: false` until checked by hand).
 `household-kits.ts` (the 72 hour kit for six common households, one search
 page each at `/72-hour-kit/[slug]`, built by the planner's own engine).
-Guides name kinds of things, never brands: each "what to have ready" item
-links to a tagged Amazon search (`amazonSearchUrl`). Specific products stay
-in the one-click basket and on `/checklist`'s Amazon tab, named without
-photos or Amazon prices: the Associates agreement allows those only through
-its API. Basket totals come from our own price bands and carry `PRICE_NOTE`
+Every suggested item that has a product carries an "add to basket" button
+(`AddToBasketButton`, one ASIN, Amazon's add-to-cart form), as Alice asked on
+27 October 2026: guide "what to have ready" items name "our pick" through
+their `lineId` and keep a tagged search (`amazonSearchUrl`) as "choose
+another"; planner lines, the home kit drawer and `/72-hour-kit` pages do the
+same per line. A suggestion with no product in `products.ts` shows the search
+only. Products are named without photos or Amazon prices: the Associates
+agreement allows those only through its API. Basket totals come from our own price bands and carry `PRICE_NOTE`
 (`src/lib/amazon.ts`). Each line of the shopping list names its Amazon pick
 (`kit/AmazonPick`) with a "check price" link and a pictogram of the kind of
 thing (`kit/Pictogram.tsx`, keyed by the product's `lineId`; a new product

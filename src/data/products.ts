@@ -125,6 +125,15 @@ export function productsFor(lineId: string, tier: Tier = "regular"): Product[] {
 
 
 
+/**
+ * The regular product for a suggestion: the line's first, or the one whose
+ * name contains `pick` when a line has several (tins as beans, tuna...).
+ */
+export function productForPick(lineId: string, pick?: string): Product | undefined {
+  const forLine = productsFor(lineId);
+  return pick ? forLine.find((p) => p.name.toLowerCase().includes(pick.toLowerCase())) : forLine[0];
+}
+
 export function amazonProductUrl(asin: string, tag?: string) {
   return `https://www.amazon.co.uk/dp/${asin}${tag ? `?tag=${encodeURIComponent(tag)}` : ""}`;
 }

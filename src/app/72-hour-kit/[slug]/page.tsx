@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageIntro from "@/components/PageIntro";
 import Arrow from "@/components/home/Arrow";
-import AmazonBasketButton, { basketLabel, BASKET_NOTE } from "@/components/AmazonBasketButton";
+import AmazonBasketButton, { AddToBasketButton, basketLabel, BASKET_NOTE } from "@/components/AmazonBasketButton";
 import { catBgFor } from "@/components/kit/categories";
 import { bottledWaterLitres, buildKit, householdToQuery } from "@/data/kit-rules";
 import { buysFor, packTotals } from "@/data/packs";
@@ -47,6 +47,8 @@ export default async function HouseholdKitPage(props: PageProps<"/72-hour-kit/[s
   const buys = buysFor(lines, h.adults + h.children, "regular");
   const { estimate } = packTotals(buys);
   const items = buys.map((b) => ({ asin: b.product.asin, quantity: b.quantity }));
+  const buysByLine = new Map<string, typeof buys>();
+  for (const b of buys) buysByLine.set(b.line.id, [...(buysByLine.get(b.line.id) ?? []), b]);
   const free = lines.filter((l) => l.freeOption).length;
   const planner = `/checklist${householdToQuery(h)}#your-kit`;
   const guides = kit.guides.map(getGuide).filter((g): g is NonNullable<typeof g> => Boolean(g));
@@ -105,6 +107,20 @@ export default async function HouseholdKitPage(props: PageProps<"/72-hour-kit/[s
                               <span className="font-extrabold">Free option:</span> {l.freeOption}
                             </p>
                           ) : null}
+                          {buysByLine.get(l.id)?.map((b) => (
+                            <div key={b.product.asin} className="mt-2.5 border border-ink p-2.5">
+                              <p className="text-[0.9375rem] leading-snug">
+                                <span className="font-extrabold">On Amazon:</span> {b.product.name}
+                              </p>
+                              <p className="mt-0.5 text-[0.9375rem] text-ink-2 tabular-nums">Buy {b.quantity}</p>
+                              <AddToBasketButton
+                                asin={b.product.asin}
+                                quantity={b.quantity}
+                                name={b.product.name}
+                                className="mt-1.5"
+                              />
+                            </div>
+                          ))}
                         </div>
                       </li>
                     ))}

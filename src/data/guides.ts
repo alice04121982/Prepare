@@ -20,7 +20,18 @@ export type GuideSource = { label: string; publisher: string; url: string };
  * the Amazon search that finds it. Specific products live in products.ts,
  * for the one-click basket and the Amazon tab on /checklist.
  */
-export type ReadyItem = { item: string; tip: string; search: string };
+export type ReadyItem = {
+  item: string;
+  tip: string;
+  search: string;
+  /**
+   * The planner line whose product (src/data/products.ts) fits this
+   * suggestion, for its add-to-basket button. `pick` narrows a line with
+   * several products to the one whose name contains it.
+   */
+  lineId?: string;
+  pick?: string;
+};
 
 export type Guide = {
   slug: string;
@@ -94,11 +105,11 @@ export const guides: Guide[] = [
       body: "Barbecues, camping stoves and generators give off carbon monoxide, which you cannot see or smell. Use them outside only. If anyone feels dizzy, sick or sleepy, get into fresh air and call 999.",
     },
     ready: [
-      { item: "Head torch", tip: "Keeps both hands free. Pick one that takes AA batteries, so spares fit everything.", search: "LED head torch AA batteries" },
-      { item: "Battery lantern", tip: "Lights a whole room, and is far safer than candles.", search: "battery LED lantern" },
-      { item: "AA batteries", tip: "A pack of 20 covers a torch, a lantern and a radio, with spares.", search: "AA batteries pack of 20" },
-      { item: "Power bank", tip: "10,000 mAh charges most phones about twice. Keep it topped up monthly.", search: "power bank 10000mAh USB-C" },
-      { item: "Wind-up or battery radio", tip: "Local radio keeps working when mobile data drops.", search: "wind up radio FM" },
+      { item: "Head torch", tip: "Keeps both hands free. Pick one that takes AA batteries, so spares fit everything.", search: "LED head torch AA batteries", lineId: "torch" },
+      { item: "Battery lantern", tip: "Lights a whole room, and is far safer than candles.", search: "battery LED lantern", lineId: "lantern" },
+      { item: "AA batteries", tip: "A pack of 20 covers a torch, a lantern and a radio, with spares.", search: "AA batteries pack of 20", lineId: "batteries" },
+      { item: "Power bank", tip: "10,000 mAh charges most phones about twice. Keep it topped up monthly.", search: "power bank 10000mAh USB-C", lineId: "powerbank" },
+      { item: "Wind-up or battery radio", tip: "Local radio keeps working when mobile data drops.", search: "wind up radio FM", lineId: "radio" },
     ],
     sources: [
       { label: "105: the power cut number", publisher: "Energy Networks Association", url: "https://www.powercut105.com/" },
@@ -145,9 +156,9 @@ export const guides: Guide[] = [
       },
     ],
     ready: [
-      { item: "Bottled water", tip: "Sealed bottles keep for years. Check the dates and use the oldest first.", search: "still water 2 litre bottles" },
-      { item: "10-litre water container with a tap", tip: "Easier to store and pour than bottles. Fill it from your tap.", search: "10 litre water container with tap" },
-      { item: "Water purification tablets", tip: "For water from another source, if your stored water runs out.", search: "water purification tablets" },
+      { item: "Bottled water", tip: "Sealed bottles keep for years. Check the dates and use the oldest first.", search: "still water 2 litre bottles", lineId: "water" },
+      { item: "10-litre water container with a tap", tip: "Easier to store and pour than bottles. Fill it from your tap.", search: "10 litre water container with tap", lineId: "water-extra" },
+      { item: "Water purification tablets", tip: "For water from another source, if your stored water runs out.", search: "water purification tablets", lineId: "purify" },
     ],
     sources: [
       {
@@ -208,10 +219,10 @@ export const guides: Guide[] = [
       body: "Stay well back and call 105. If someone is in danger, call 999. Lines can be live even when they look dead.",
     },
     ready: [
-      { item: "Power bank", tip: "10,000 mAh charges most phones about twice. Charge it the day before.", search: "power bank 10000mAh USB-C" },
-      { item: "Head torch", tip: "Keeps both hands free if the power goes at night.", search: "LED head torch AA batteries" },
-      { item: "Wind-up or battery radio", tip: "For local news and warnings when the mobile network is down.", search: "wind up radio FM" },
-      { item: "AA batteries", tip: "Check the sizes your torch and radio take before the storm.", search: "AA batteries pack of 20" },
+      { item: "Power bank", tip: "10,000 mAh charges most phones about twice. Charge it the day before.", search: "power bank 10000mAh USB-C", lineId: "powerbank" },
+      { item: "Head torch", tip: "Keeps both hands free if the power goes at night.", search: "LED head torch AA batteries", lineId: "torch" },
+      { item: "Wind-up or battery radio", tip: "For local news and warnings when the mobile network is down.", search: "wind up radio FM", lineId: "radio" },
+      { item: "AA batteries", tip: "Check the sizes your torch and radio take before the storm.", search: "AA batteries pack of 20", lineId: "batteries" },
     ],
     sources: [
       {
@@ -273,9 +284,9 @@ export const guides: Guide[] = [
     },
     ready: [
       { item: "Waterproof document wallet", tip: "Keeps passports, insurance papers and prescriptions dry in one place.", search: "waterproof document wallet" },
-      { item: "Head torch", tip: "Keeps both hands free if the power goes at night.", search: "LED head torch AA batteries" },
-      { item: "Power bank", tip: "10,000 mAh charges most phones about twice.", search: "power bank 10000mAh USB-C" },
-      { item: "Wind-up or battery radio", tip: "For local news and warnings when the mobile network is down.", search: "wind up radio FM" },
+      { item: "Head torch", tip: "Keeps both hands free if the power goes at night.", search: "LED head torch AA batteries", lineId: "torch" },
+      { item: "Power bank", tip: "10,000 mAh charges most phones about twice.", search: "power bank 10000mAh USB-C", lineId: "powerbank" },
+      { item: "Wind-up or battery radio", tip: "For local news and warnings when the mobile network is down.", search: "wind up radio FM", lineId: "radio" },
     ],
     sources: [
       { label: "What to do before, during and after a flood", publisher: "UK Government (Environment Agency)", url: "https://www.gov.uk/help-during-flood" },
@@ -328,9 +339,9 @@ export const guides: Guide[] = [
       },
     ],
     ready: [
-      { item: "Bottled water", tip: "3 litres per person per day, for at least 3 days. Sealed bottles keep for years.", search: "still water 2 litre bottles" },
-      { item: "10-litre water container with a tap", tip: "Fill it from your tap before a planned cut.", search: "10 litre water container with tap" },
-      { item: "Hand sanitiser and wet wipes", tip: "For clean hands when you cannot use the taps.", search: "hand sanitiser gel" },
+      { item: "Bottled water", tip: "3 litres per person per day, for at least 3 days. Sealed bottles keep for years.", search: "still water 2 litre bottles", lineId: "water" },
+      { item: "10-litre water container with a tap", tip: "Fill it from your tap before a planned cut.", search: "10 litre water container with tap", lineId: "water-extra" },
+      { item: "Hand sanitiser and wet wipes", tip: "For clean hands when you cannot use the taps.", search: "hand sanitiser gel", lineId: "gel" },
     ],
     sources: [
       { label: "Consumer Council for Water (your rights when the water goes off)", publisher: "CCW", url: "https://www.ccwater.org.uk/" },
@@ -366,10 +377,10 @@ export const guides: Guide[] = [
       { title: "A plan", body: "Who you would call, where you would meet, and the numbers written on paper." },
     ],
     ready: [
-      { item: "Bottled water", tip: "9 litres per person covers the 3 days.", search: "still water 2 litre bottles" },
-      { item: "Head torch", tip: "Keeps both hands free. Pick one that takes AA batteries.", search: "LED head torch AA batteries" },
-      { item: "Wind-up or battery radio", tip: "Local radio keeps working when mobile data drops.", search: "wind up radio FM" },
-      { item: "First aid kit", tip: "A basic home kit, and learn what is in it.", search: "home first aid kit" },
+      { item: "Bottled water", tip: "9 litres per person covers the 3 days.", search: "still water 2 litre bottles", lineId: "water" },
+      { item: "Head torch", tip: "Keeps both hands free. Pick one that takes AA batteries.", search: "LED head torch AA batteries", lineId: "torch" },
+      { item: "Wind-up or battery radio", tip: "Local radio keeps working when mobile data drops.", search: "wind up radio FM", lineId: "radio" },
+      { item: "First aid kit", tip: "A basic home kit, and learn what is in it.", search: "home first aid kit", lineId: "firstaid" },
     ],
     sources: [
       {
@@ -432,11 +443,11 @@ export const guides: Guide[] = [
       },
     ],
     ready: [
-      { item: "Bottled water", tip: "9 litres per person covers the 3 days.", search: "still water 2 litre bottles" },
-      { item: "Wind-up FM radio", tip: "Check it says FM. Wind-up or battery means it works in a power cut.", search: "wind up radio FM" },
-      { item: "Head torch", tip: "Keeps both hands free. Pick one that takes AA batteries.", search: "LED head torch AA batteries" },
-      { item: "Power bank", tip: "10,000 mAh charges most phones about twice. Keep it topped up.", search: "power bank 10000mAh USB-C" },
-      { item: "First aid kit", tip: "Plasters, bandages, a thermometer, antiseptic and gloves, as the checklist lists.", search: "home first aid kit" },
+      { item: "Bottled water", tip: "9 litres per person covers the 3 days.", search: "still water 2 litre bottles", lineId: "water" },
+      { item: "Wind-up FM radio", tip: "Check it says FM. Wind-up or battery means it works in a power cut.", search: "wind up radio FM", lineId: "radio" },
+      { item: "Head torch", tip: "Keeps both hands free. Pick one that takes AA batteries.", search: "LED head torch AA batteries", lineId: "torch" },
+      { item: "Power bank", tip: "10,000 mAh charges most phones about twice. Keep it topped up.", search: "power bank 10000mAh USB-C", lineId: "powerbank" },
+      { item: "First aid kit", tip: "Plasters, bandages, a thermometer, antiseptic and gloves, as the checklist lists.", search: "home first aid kit", lineId: "firstaid" },
     ],
     sources: [
       { label: "Be Ready", publisher: "UK Government (Cabinet Office)", url: "https://beready.campaign.gov.uk/" },
@@ -573,8 +584,8 @@ export const guides: Guide[] = [
       { title: "Check local radio for updates", body: "A battery or wind-up radio keeps working if mobile networks are busy." },
     ],
     ready: [
-      { item: "Wind-up or battery radio", tip: "For updates when the mobile network is busy or down.", search: "wind up radio FM" },
-      { item: "Power bank", tip: "Keeps your phone on if the power goes.", search: "power bank 10000mAh USB-C" },
+      { item: "Wind-up or battery radio", tip: "For updates when the mobile network is busy or down.", search: "wind up radio FM", lineId: "radio" },
+      { item: "Power bank", tip: "Keeps your phone on if the power goes.", search: "power bank 10000mAh USB-C", lineId: "powerbank" },
     ],
     sources: [
       { label: "Emergency Alerts", publisher: "UK Government", url: "https://www.gov.uk/alerts" },
@@ -605,10 +616,10 @@ export const guides: Guide[] = [
       { title: "For babies, ready-to-feed formula", body: "It comes in cartons and needs no water or boiling. Keep a few days of it." },
     ],
     ready: [
-      { item: "Manual tin opener", tip: "Does not need power. Keep it with the tins.", search: "manual tin opener" },
+      { item: "Manual tin opener", tip: "Does not need power. Keep it with the tins.", search: "manual tin opener", lineId: "tin-opener" },
       { item: "Oatcakes", tip: "A box keeps for months and needs no cooking.", search: "oatcakes" },
-      { item: "Long-life milk", tip: "UHT cartons keep for months unopened.", search: "UHT semi skimmed milk" },
-      { item: "Tinned fish", tip: "Protein that is cooked in the tin and eaten cold.", search: "tinned tuna multipack" },
+      { item: "Long-life milk", tip: "UHT cartons keep for months unopened.", search: "UHT semi skimmed milk", lineId: "milk" },
+      { item: "Tinned fish", tip: "Protein that is cooked in the tin and eaten cold.", search: "tinned tuna multipack", lineId: "tins", pick: "tuna" },
     ],
     sources: [
       {
