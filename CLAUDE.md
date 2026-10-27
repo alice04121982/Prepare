@@ -200,9 +200,12 @@ chart reads its rows from the `chart` fields in `scenarios.ts`.
   and "stockpile" are allowed, the reasons are named plainly, but never
   tactical, conspiratorial or fear-invented. Plain, short, second person.
   Numbers specific and sourced. Its revision section wins over the rest.
-- **`docs/monetisation-plan.md`** (revised 24 September 2026): the product
-  is the ready-made list and the one-click basket. Disclosure, Amazon's
-  wording, price bands and no fake urgency are binding.
+- **`docs/monetisation-plan.md`** (revised 27 October 2026): the product
+  is the ready-made list and the one-click basket. Sponsored posts (labelled
+  "Ad", never in a list or guide) and own-brand kits (not before the
+  plan's conditions are met) are allowed; display ads, courses and pop-ups
+  are not. Disclosure, Amazon's wording, price bands and no fake urgency
+  are binding.
 - **Marketing skills yield to these docs.** `.claude/skills/` holds
   Corey Haines' marketing skills (`skills-lock.json`, update with
   `npx skills update -p`). Use them for structure and SEO; never take

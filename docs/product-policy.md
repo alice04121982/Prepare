@@ -100,10 +100,14 @@ sign-off is a person's.
 
 ## 6. Paid placement
 
-- No product is listed because a brand paid for it.
-- If a brand later sponsors the site, its product is labelled
-  "Sponsored" wherever it appears, still has to pass section 2, and never
-  replaces the free option.
+- No product is added to a list, a guide or the planner because a brand
+  paid for it.
+- Sponsored posts are allowed (27 October 2026, see
+  `docs/monetisation-plan.md`). A sponsored post is labelled "Ad" at the
+  top, in words, kept apart from the lists and guides, still has to pass
+  section 2, and never replaces the free option.
+- A Stay Prepared own-brand kit, if one is sold, is held to this policy
+  and the conditions in the monetisation plan before it ships.
 - Affiliate links are marked `rel="sponsored"`, and every page with them
   carries the disclosure sentence Amazon requires.
 

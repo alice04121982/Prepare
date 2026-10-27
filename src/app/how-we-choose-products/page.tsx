@@ -83,7 +83,11 @@ export default function HowWeChooseProductsPage() {
           </h2>
           <p className="mt-5">
             Some links earn us a small commission when you buy. It never changes what we recommend, and nobody pays to
-            be listed. As an Amazon Associate we earn from qualifying purchases.
+            be in our lists or guides. As an Amazon Associate we earn from qualifying purchases.
+          </p>
+          <p>
+            If a brand ever pays for a post, it is marked &ldquo;Ad&rdquo; at the top and kept apart from our lists
+            and guides.
           </p>
           <p>
             Your data: see <Link href="/privacy">privacy and cookies</Link>.
