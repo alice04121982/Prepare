@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
   title: "Privacy and cookies",
   description:
-    "Stay Prepared sets no cookies and asks for no personal details. What is kept on your device, how visits are counted, and what happens when you follow a link to Amazon.",
+    "Stay Prepared sets no cookies and asks for no personal details. What stays on your device, how visits are counted, and what Amazon links do.",
 };
 
 /** The date this page last changed. Update it with any change to what is collected. */

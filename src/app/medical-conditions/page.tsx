@@ -5,7 +5,7 @@ import Arrow from "@/components/home/Arrow";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/medical-conditions" },
-  title: "Preparing for outages if you have a medical condition",
+  title: "Outages and medical conditions: what to prepare",
   description:
     "If someone at home has a chronic illness or medical condition, a power cut or water outage affects treatment. What to prepare, and which guides help.",
 };

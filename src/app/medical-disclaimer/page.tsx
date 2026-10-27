@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/medical-disclaimer" },
   title: "Medical disclaimer",
   description:
-    "Stay Prepared gives preparedness guidance, not medical advice. If someone at home has a medical condition, talk to your healthcare team now about what happens in a power cut or water outage.",
+    "Stay Prepared gives preparedness guidance, not medical advice. If someone at home has a medical condition, talk to your healthcare team now.",
 };
 
 export default function MedicalDisclaimerPage() {
