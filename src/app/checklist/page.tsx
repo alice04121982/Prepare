@@ -11,9 +11,9 @@ import { householdFromKitParams } from "./household";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/checklist" },
-  title: "What to get: emergency kit checklist for UK households",
+  title: "What to get: UK emergency kit checklist",
   description:
-    "What to keep at home and how much, worked out for your household: a 72 hour kit, 2 weeks to a month, 3 months or a grab bag. Take off what you already have and send the rest to one basket.",
+    "What to keep at home and how much, for your household: a 72 hour kit, 2 weeks to a month, 3 months or a grab bag. Send what you need to one basket.",
 };
 
 /**

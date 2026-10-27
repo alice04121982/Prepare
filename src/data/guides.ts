@@ -348,7 +348,7 @@ export const guides: Guide[] = [
   {
     slug: "ready-for-3-days",
     title: "the government's advice to be ready for 3 days",
-    metaTitle: "Why the government asks households to be ready for 3 days",
+    metaTitle: "Why the government says be ready for 3 days",
     description:
       "The UK government asks every household to be able to cope on its own for at least 3 days. What that means, and what it asks you to keep.",
     answer: [
@@ -387,7 +387,7 @@ export const guides: Guide[] = [
   {
     slug: "be-ready-campaign",
     title: "what the Be Ready campaign asks you to keep",
-    metaTitle: "Be Ready campaign: the government's 3-day checklist",
+    metaTitle: "Be Ready campaign: the 3-day checklist",
     description:
       "Be Ready is the UK government's campaign asking every household to be ready for 3 days. Its checklist, line by line, and how to build it up.",
     answer: [
@@ -625,7 +625,7 @@ export const guides: Guide[] = [
   {
     slug: "priority-services-register",
     title: "the Priority Services Register explained",
-    metaTitle: "The Priority Services Register: who can join and what you get",
+    metaTitle: "Priority Services Register: who can join",
     description:
       "A free register that gets you extra help from your energy network and water company in a power cut or water outage. Who can join and how.",
     answer: [
@@ -697,9 +697,9 @@ export const guides: Guide[] = [
   {
     slug: "medical-equipment-and-outages",
     title: "if someone at home depends on medical equipment or medications",
-    metaTitle: "Preparing for outages when you depend on medical equipment",
+    metaTitle: "Power cuts and medical equipment: make a plan",
     description:
-      "Make a plan now for power cuts and water outages if someone at home needs powered medical equipment or refrigerated medications. Know your backup options and safe timeframes.",
+      "Plan now for power cuts and water outages if someone at home needs powered medical equipment or refrigerated medications. Backup options and safe timeframes.",
     answer: [
       "This is preparedness guidance, not medical advice. Talk to your healthcare team now about what happens in a power cut or water outage. See the medical disclaimer for what this means.",
       "If someone at home relies on powered medical equipment (home dialysis, oxygen, a ventilator, a feeding pump) or medicine kept in a fridge (insulin, some injections), a power cut or water outage can become urgent within hours or days.",

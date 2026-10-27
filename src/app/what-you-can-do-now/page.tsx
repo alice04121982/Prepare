@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/what-you-can-do-now" },
   title: "What you can do now",
   description:
-    "Free things to do today to be ready at home: check Emergency Alerts, save the 105 power cut number, find your stopcock, make a household plan. No shopping needed.",
+    "Free things to do today: check Emergency Alerts, save the 105 power cut number, find your stopcock and make a household plan. No shopping needed.",
 };
 
 function StepLink({ link }: { link: NonNullable<NowStep["link"]> }) {
