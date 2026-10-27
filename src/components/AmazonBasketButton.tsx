@@ -60,3 +60,37 @@ export default function AmazonBasketButton({
     </form>
   );
 }
+
+/**
+ * One product straight into the Amazon basket, for a single line or
+ * suggestion. The same documented form as the whole-list button above, so
+ * it behaves the same in the Amazon app; compact, to sit beside a link.
+ */
+export function AddToBasketButton({
+  asin,
+  quantity = 1,
+  name,
+  className = "",
+}: {
+  asin: string;
+  quantity?: number;
+  /** The product, for screen readers. */
+  name: string;
+  className?: string;
+}) {
+  return (
+    <form action="https://www.amazon.co.uk/gp/aws/cart/add.html" method="get" className={className}>
+      {TAG ? <input type="hidden" name="AssociateTag" value={TAG} /> : null}
+      <input type="hidden" name="ASIN.1" value={asin} />
+      <input type="hidden" name="Quantity.1" value={Math.max(1, quantity)} />
+      <button
+        type="submit"
+        className="btn btn-secondary whitespace-nowrap"
+        aria-label={`Add ${quantity > 1 ? `${quantity} of ` : ""}${name} to my Amazon basket. ${BASKET_NOTE}`}
+      >
+        <ShoppingBasket size={18} strokeWidth={2.25} aria-hidden="true" />
+        add to basket
+      </button>
+    </form>
+  );
+}

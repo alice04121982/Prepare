@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { PRICE_NOTE } from "@/lib/amazon";
 import { Pictogram } from "@/components/kit/Pictogram";
-import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
+import AmazonBasketButton, { AddToBasketButton, basketLabel } from "@/components/AmazonBasketButton";
 import type { PackBuy } from "@/data/packs";
 
 /**
@@ -95,12 +95,18 @@ export default function KitDrawer({
                 className="grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-3.5 border-b border-ink py-3"
               >
                 <Pictogram lineId={b.product.lineId} className="h-11 w-11" />
-                <span className="block min-w-0 leading-snug">
+                <div className="min-w-0 leading-snug">
                   <span className="block font-bold">{b.product.name}</span>
                   <span className="mt-0.5 block text-[0.9375rem] text-ink-2 tabular-nums">
                     Buy {b.quantity}
                   </span>
-                </span>
+                  <AddToBasketButton
+                    asin={b.product.asin}
+                    quantity={b.quantity}
+                    name={b.product.name}
+                    className="mt-1.5"
+                  />
+                </div>
               </li>
             ))}
           </ul>

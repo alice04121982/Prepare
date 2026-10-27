@@ -21,7 +21,7 @@ import { DownArrow, goToBuy, StillToGetBar } from "@/components/kit/StillToGet";
 import { catBgFor } from "@/components/kit/categories";
 import { kitLineKey } from "@/data/have-map";
 import { buysFor, packTotals } from "@/data/packs";
-import AmazonBasketButton, { basketLabel } from "@/components/AmazonBasketButton";
+import AmazonBasketButton, { AddToBasketButton, basketLabel } from "@/components/AmazonBasketButton";
 import { useHave } from "@/lib/have";
 import { daysRangeFor, defaultDaysFor, listBySlug, listForDays, type ListSlug } from "@/data/lists";
 
@@ -518,7 +518,7 @@ export default function KitPlanner({ initial, offers = {} }: { initial?: Househo
                         </p>
                       ))}
                       {product ? (
-                        <p className="mt-1.5 flex flex-wrap items-center gap-x-2 leading-snug">
+                        <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-2 leading-snug">
                           <span className="font-extrabold">{makers.length ? "Or on Amazon:" : "On Amazon:"}</span>
                           <span>
                             {product.name}, <span className="tabular-nums">{buyQty}</span> ×
@@ -531,7 +531,8 @@ export default function KitPlanner({ initial, offers = {} }: { initial?: Househo
                           >
                             View on Amazon <ExternalLink size={14} strokeWidth={2.5} />
                           </a>
-                        </p>
+                          <AddToBasketButton asin={product.asin} quantity={buyQty} name={product.name} className="no-print" />
+                        </div>
                       ) : line.search ? (
                         <p className="mt-1.5 flex flex-wrap items-center gap-x-2 leading-snug">
                           <span className="font-extrabold">{makers.length ? "Or on Amazon:" : "On Amazon:"}</span>
@@ -595,6 +596,7 @@ export default function KitPlanner({ initial, offers = {} }: { initial?: Househo
                             {offers[product.asin]?.price ? "View on Amazon" : "Check price on Amazon"}{" "}
                             <ExternalLink size={14} strokeWidth={2.5} />
                           </a>
+                          <AddToBasketButton asin={product.asin} quantity={buyQty} name={product.name} className="no-print mt-2" />
                         </>
                       ) : (
                         <>

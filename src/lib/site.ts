@@ -1,4 +1,5 @@
 import { guides } from "@/data/guides";
+import { householdKits } from "@/data/household-kits";
 
 /** The one public address. www redirects here (next.config.ts). */
 export const SITE_URL = "https://stayprepared.co.uk";
@@ -16,6 +17,8 @@ export const CONTACT_EMAIL = "hello@stayprepared.co.uk";
 export const PAGES = [
   "/",
   "/checklist",
+  "/72-hour-kit",
+  ...householdKits.map((k) => `/72-hour-kit/${k.slug}`),
   "/what-you-can-do-now",
   "/what-might-stop",
   "/worried",

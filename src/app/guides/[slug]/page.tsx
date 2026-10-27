@@ -7,6 +7,8 @@ import Callout from "@/components/Callout";
 import Arrow from "@/components/home/Arrow";
 import { getGuide, guides } from "@/data/guides";
 import { amazonSearchUrl } from "@/lib/amazon";
+import { productForPick } from "@/data/products";
+import { AddToBasketButton } from "@/components/AmazonBasketButton";
 
 export const dynamicParams = false;
 
@@ -96,20 +98,32 @@ export default async function GuidePage(props: PageProps<"/guides/[slug]">) {
           </p>
           {guide.ready.length ? (
           <ul className="mt-8 grid gap-3 min-[700px]:grid-cols-2 min-[1100px]:grid-cols-3">
-            {guide.ready.map((r) => (
-              <li key={r.item} className="flex flex-col border-[3px] border-ink bg-paper px-4 py-3.5">
-                <p className="text-lg font-extrabold leading-snug">{r.item}</p>
-                <p className="mt-1 leading-snug">{r.tip}</p>
-                <a
-                  href={amazonSearchUrl(r.search)}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="mt-auto inline-flex min-h-11 items-center pt-2 font-bold"
-                >
-                  Choose one on Amazon<span className="sr-only">: {r.item} (opens in a new tab)</span>
-                </a>
-              </li>
-            ))}
+            {guide.ready.map((r) => {
+              const product = r.lineId ? productForPick(r.lineId, r.pick) : undefined;
+              return (
+                <li key={r.item} className="flex flex-col border-[3px] border-ink bg-paper px-4 py-3.5">
+                  <p className="text-lg font-extrabold leading-snug">{r.item}</p>
+                  <p className="mt-1 leading-snug">{r.tip}</p>
+                  {product ? (
+                    <p className="mt-2 text-[0.9375rem] leading-snug">
+                      <span className="font-extrabold">Our pick:</span> {product.name}
+                    </p>
+                  ) : null}
+                  <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-3">
+                    {product ? <AddToBasketButton asin={product.asin} name={product.name} /> : null}
+                    <a
+                      href={amazonSearchUrl(r.search)}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      className="inline-flex min-h-11 items-center font-bold"
+                    >
+                      {product ? "Choose another" : "Choose one on Amazon"}
+                      <span className="sr-only">: {r.item} (opens in a new tab)</span>
+                    </a>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
           ) : null}
           <div className="mt-8 flex flex-wrap gap-4">

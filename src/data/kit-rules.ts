@@ -119,6 +119,16 @@ export function daysLabel(n: number): string {
   return `${n} ${n === 1 ? "day" : "days"}`;
 }
 
+/** Drinking water a day: 3 litres per person, plus 2 for each baby's feeds. */
+function waterPerDayFor(h: Household): number {
+  return 3 * (h.adults + h.children) + (h.babies > 0 ? 2 * h.babies : 0);
+}
+
+/** Bottled drinking water for the kit, in litres: the first 14 days at most. */
+export function bottledWaterLitres(h: Household): number {
+  return waterPerDayFor(h) * Math.min(daysFor(h), BOTTLED_WATER_DAYS);
+}
+
 export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
   if (h.list === "grab-bag") return buildGrabBag(h);
 
@@ -128,9 +138,9 @@ export function buildKit(h: Household): { lines: KitLine[]; tasks: KitTask[] } {
   const drinkers = `${peopleWhoDrink} ${peopleWhoDrink === 1 ? "person" : "people"}`;
 
   // Water: bottled for the first 14 days, a filter after that.
-  const waterPerDay = 3 * peopleWhoDrink + (h.babies > 0 ? 2 * h.babies : 0);
+  const waterPerDay = waterPerDayFor(h);
   const filtering = d > BOTTLED_WATER_DAYS;
-  const water = waterPerDay * Math.min(d, BOTTLED_WATER_DAYS);
+  const water = bottledWaterLitres(h);
   const waterWholeStay = waterPerDay * d;
   const waterPacks = ceil(water / 9); // six 1.5 litre bottles
 
