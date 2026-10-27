@@ -1,5 +1,41 @@
 # Stay Prepared: monetisation plan
 
+## Revision, 27 October 2026: sponsored posts and own-brand kits allowed
+
+Alice wants reach, and decided on 27 October 2026 to allow two things the
+original plan ruled out. Where this section conflicts with anything below,
+this section wins, including "6. Not doing".
+
+- **Sponsored posts are allowed.** A brand may pay for a post or a placement.
+  Each one is labelled "Ad" at the top, in words, before any of its content
+  (UK CAP Code: advertising must be obviously identifiable). It never goes
+  in a scenario, a checklist, a kit list or a guide's steps, and it never
+  replaces or pushes down the free or already-owned option. The product
+  must still pass section 2 of `docs/product-policy.md`. A fee never buys a
+  better word, a "best" label or a place in a ready-made list. No reviews
+  written to order (the Digital Markets, Competition and Consumers Act bans
+  undisclosed or fake endorsements).
+- **Own-brand kits are allowed in principle.** Alice may sell a kit under
+  the Stay Prepared name. It does not ship until the conditions below are
+  met, because it turns the site from a guide into a shop.
+  - Consumer law for online sales: 14-day cancellation, clear delivery
+    terms and the seller's name and address on the site.
+  - Product safety and, for any food or battery, labelling and storage rules.
+  - `/privacy` rewritten for what a checkout collects (name, address,
+    payment), and a payment provider chosen. The site sets no cookies today
+    and takes no personal details.
+  - A written product policy for the kit itself, so it is held to the same
+    standard as the links: contents sourced, free option stated, no urgency.
+  - Alice's decision on who is the seller (herself, or a company).
+- **Still not allowed:** courses (unchanged, revisit when there is something
+  to teach), pop-ups, and display advertising. Display ads wait until the
+  site passes about 10,000 visits a month: they need a cookie consent
+  banner, a rewritten `/privacy` and slower pages, and pay almost nothing at
+  low traffic.
+- **Still binding:** the disclosure sentence, the Amazon Associates wording,
+  price bands, no fake scarcity or urgency, a free option wherever one
+  exists, and the tone of voice.
+
 ## Revision, 24 September 2026: shopping lists first
 
 Alice repositioned the site as a practical prepper shopping tool and wants
@@ -88,8 +124,8 @@ and a natural gift or parish-council bulk order.
 Monthly, one useful thing, one product pick with a link, one piece of
 official news. Builds the returning audience that makes 1 to 3 work.
 
-**6. Not doing.** Courses, own-brand kits, sponsored posts, display ads,
-pop-ups. Each one either changes the voice or makes the site look like
+**6. Not doing.** Courses, display ads, pop-ups (sponsored posts and
+own-brand kits were allowed on 27 October 2026; see the revision at the top). Each one either changes the voice or makes the site look like
 the ones it is positioned against.
 
 ## Rules that keep it honest
